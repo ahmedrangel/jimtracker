@@ -33,7 +33,7 @@ const getRankColor = (rank: string) => {
 </script>
 
 <template>
-  <div>
+  <div class="md:place-items-center">
     <div class="text-center mb-5">
       <div class="flex justify-center gap-4 mb-5">
         <NuxtLink external target="_blank" to="https://www.twitch.tv/jimrsng">
