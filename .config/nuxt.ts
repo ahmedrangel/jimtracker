@@ -104,9 +104,9 @@ export default defineNuxtConfig({
   },
 
   hub: {
-    cache: true,
-    workers: false,
-    database: true
+    // cache: true,
+    // workers: false,
+    // database: true
   },
 
   compatibilityDate: "2025-07-22"
