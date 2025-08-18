@@ -287,11 +287,11 @@ const chartOptions = ref({
   scales: {
     x: {
       grid: {
-        color: "rgba(148, 163, 184, 0.1)",
+        color: "rgba(148, 163, 184, 0.2)",
         borderDash: [2, 2]
       },
       ticks: {
-        color: "#64748B",
+        color: "#fff",
         font: {
           size: 12
         }
@@ -301,11 +301,11 @@ const chartOptions = ref({
       min: Math.floor(visibleRange.min / 100) * 100, // Redondear al múltiplo de 100 más cercano
       max: Math.ceil(visibleRange.max / 100) * 100, // Redondear al múltiplo de 100 más cercano
       grid: {
-        color: "rgba(148, 163, 184, 0.1)",
+        color: "rgba(148, 163, 184, 0.2)",
         borderDash: [2, 2]
       },
       ticks: {
-        color: "#64748B",
+        color: "#fff",
         font: {
           size: 12
         },
