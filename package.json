@@ -1,0 +1,48 @@
+{
+  "private": true,
+  "name": "my-nuxt-starter",
+  "version": "1.0.0",
+  "description": "Yizack nuxt template",
+  "type": "module",
+  "license": "MIT",
+  "author": {
+    "name": "Yizack Rangel",
+    "email": "yizackr@gmail.com",
+    "url": "https://yizack.com"
+  },
+  "homepage": "https://github.com/Yizack/my-nuxt-starter",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yizack/my-nuxt-starter.git"
+  },
+  "bugs": "https://github.com/Yizack/my-nuxt-starter/issues",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev --port=5173 --host",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "analyze": "nuxt analyze",
+    "lint": "pnpm lint:eslint && pnpm lint:stylelint",
+    "lint:fix": "pnpm lint:eslint --fix && pnpm lint:stylelint --fix",
+    "lint:eslint": "eslint --config .config/eslint.mjs",
+    "lint:eslint:inspect": "pnpx @eslint/config-inspector --config .config/eslint.mjs",
+    "lint:stylelint": "stylelint \"**/*.{css}\" --config .config/stylelint.json",
+    "test:types": "vue-tsc -b --noEmit"
+  },
+  "devDependencies": {
+    "@nuxt/eslint": "^1.8.0",
+    "@nuxt/ui": "^3.3.2",
+    "@nuxthub/core": "^0.9.0",
+    "@nuxtjs/sitemap": "^7.4.3",
+    "chart.js": "^4.5.0",
+    "date-fns": "^4.1.0",
+    "eslint": "^9.33.0",
+    "nuxt": "^4.0.3",
+    "stylelint": "^16.23.1",
+    "typescript": "^5.9.2",
+    "vue-chartjs": "^5.3.2",
+    "vue-tsc": "^3.0.5"
+  },
+  "packageManager": "pnpm@10.14.0"
+}

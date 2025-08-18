@@ -1,0 +1,29 @@
+name: autofix.ci
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+      - run: corepack enable
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: pnpm
+
+      - name: 📦 Install dependencies
+        run: pnpm install
+
+      - name: 🔎 Lint (code)
+        run: pnpm lint:fix
+
+      - name: ⚙️ Auto-fix
+        uses: autofix-ci/action@635ffb0c9798bd160680f18fd73371e355b85f27
