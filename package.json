@@ -1,21 +1,21 @@
 {
   "private": true,
-  "name": "my-nuxt-starter",
+  "name": "jimtracker",
   "version": "1.0.0",
-  "description": "Yizack nuxt template",
+  "description": "Jim Rising LoL Elo Tracker",
   "type": "module",
   "license": "MIT",
   "author": {
-    "name": "Yizack Rangel",
-    "email": "yizackr@gmail.com",
-    "url": "https://yizack.com"
+    "name": "Ahmed Rangel",
+    "email": "ahmedrangel@outlook.com",
+    "url": "https://ahmedrangel.com"
   },
-  "homepage": "https://github.com/Yizack/my-nuxt-starter",
+  "homepage": "https://github.com/ahmedrangel/jimtracker",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Yizack/my-nuxt-starter.git"
+    "url": "git+https://github.com/ahmedrangel/jimtracker.git"
   },
-  "bugs": "https://github.com/Yizack/my-nuxt-starter/issues",
+  "bugs": "https://github.com/ahmedrangel/jimtracker/issues",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev --port=5173 --host",
