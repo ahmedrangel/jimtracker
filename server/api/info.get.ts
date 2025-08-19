@@ -1,11 +1,11 @@
-import { PlatformId, RiotAPITypes } from "@fightmegg/riot-api";
+import { PlatformId, RiotAPI, RiotAPITypes } from "@fightmegg/riot-api";
 
 export default defineEventHandler(async (event): Promise<{ user?: UserInfo, stats?: { [key: string]: any } }> => {
   const config = useRuntimeConfig(event);
   const storage = useStorage("cache");
   let info = (await storage.getItem<UserInfo>("info")) || undefined;
   if (!info) {
-    const riot = riotAPI(config.riot.apiKey);
+    const riot = new RiotAPI(config.riot.apiKey);
     const accountData = await riot.account.getByPUUID({
       region: PlatformId.AMERICAS,
       puuid: config.riot.jimPuuid
