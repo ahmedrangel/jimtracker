@@ -1,28 +1,23 @@
-import { PlatformId, RiotAPI, RiotAPITypes } from "@fightmegg/riot-api";
+import { Constants, LolApi, RiotApi } from "twisted";
 
 export default defineEventHandler(async (event): Promise<{ user?: UserInfo, stats?: { [key: string]: any } }> => {
   const config = useRuntimeConfig(event);
   const storage = useStorage("cache");
   let info = (await storage.getItem<UserInfo>("info")) || undefined;
   if (!info) {
-    const riot = new RiotAPI(config.riot.apiKey);
-    const accountData = await riot.account.getByPUUID({
-      region: PlatformId.AMERICAS,
-      puuid: config.riot.jimPuuid
-    });
-    const leagueData = await riot.league.getEntriesByPUUID({
-      region: PlatformId.LA1,
-      puuid: config.riot.jimPuuid
-    });
-    const rankedData = leagueData.find(entry => entry.queueType === RiotAPITypes.QUEUE.RANKED_SOLO_5x5);
+    const riot = new RiotApi(config.riot.apiKey);
+    const lol = new LolApi(config.riot.apiKey);
+    const accountData = await riot.Account.getByPUUID(config.riot.jimPuuid, Constants.RegionGroups.AMERICAS);
+    const leagueData = await lol.League.byPUUID(config.riot.jimPuuid, Constants.Regions.LAT_NORTH);
+    const rankedData = leagueData.response.find(entry => entry.queueType === Constants.Queues.RANKED_SOLO_5x5);
     if (rankedData) {
       const user: UserInfo = {
         wins: rankedData.wins,
         losses: rankedData.losses,
-        gameName: accountData.gameName,
-        tagLine: accountData.tagLine,
-        division: rankedData.rank as RiotAPITypes.DIVISION,
-        tier: rankedData.tier as RiotAPITypes.TIER,
+        gameName: accountData.response.gameName,
+        tagLine: accountData.response.tagLine,
+        division: rankedData.rank,
+        tier: rankedData.tier,
         lp: rankedData.leaguePoints
       };
       // await storage.setItem("info", user);
