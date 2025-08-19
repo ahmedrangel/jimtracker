@@ -42,7 +42,12 @@ export default defineNuxtConfig({
     }
   },
 
-  runtimeConfig: {},
+  runtimeConfig: {
+    riot: {
+      apiKey: "",
+      jimPuuid: ""
+    }
+  },
 
   colorMode: {
     preference: "dark",
@@ -104,8 +109,8 @@ export default defineNuxtConfig({
   },
 
   hub: {
-    // cache: true,
-    // workers: false,
+    cache: true,
+    workers: false
     // database: true
   },
 

@@ -1,14 +1,8 @@
 <script setup lang="ts">
-// Datos de ejemplo del usuario
-const userStats = ref({
-  currentElo: 90,
-  highestElo: 20,
-  lowestElo: 98,
-  gamesPlayed: 147,
-  winRate: 64.2,
-  winStreak: 3,
-  rank: "Oro II"
-});
+defineProps<{
+  user?: UserInfo;
+  stats?: any;
+}>();
 
 const socials = [
   {
@@ -57,59 +51,51 @@ const socials = [
     <div class="mb-5 text-center bg-neutral-950/85 border border-slate-400/40 flex flex-col items-center w-[fit-content] place-self-center px-10 py-5 rounded">
       <p class="md:text-xl font-semibold">ELO ACTUAL</p>
       <p class="text-lg md:text-2xl font-bold flex items-center justify-center">
-        <img src="/images/lol/gold.png" class="w-12 h-12 md:w-16 md:h-16">
-        II · 12 LP
+        <img :src="`/images/lol/${user?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
+        <span v-if="user">
+          {{ user.division }}· {{ user.lp }} LP
+        </span>
       </p>
     </div>
     <div class="space-y-4 mb-5">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
         <div class="bg-neutral-950/85 border border-emerald-300/40 rounded-lg py-4 px-10 text-center flex flex-col items-center justify-center">
-          <p class="md:text-lg text-emerald-200 font-semibold mb-1">ELO MÁXIMO</p>
+          <p class="md:text-lg text-emerald-200 font-semibold mb-1">ELO MÁS ALTO</p>
           <p class="md:text-xl text-emerald-200 font-bold flex items-center justify-center">
-            <img src="/images/lol/platinum.png" class="w-12 h-12 md:w-16 md:h-16">
-            IV · {{ userStats.highestElo }} LP
+            <img :src="`/images/lol/${stats?.highest?.rank?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
+            <span v-if="stats?.highest?.rank">{{ stats.highest.rank }} · {{ stats.highest.lp }} LP</span>
           </p>
         </div>
         <div class="flex flex-col gap-2">
           <div class="bg-neutral-950/85 border border-purple-300/40 rounded-lg p-4 text-center flex flex-col items-center justify-center">
             <p class="md:text-lg text-purple-200 font-semibold mb-1">WINRATE</p>
             <p class="md:text-xl text-purple-200 font-bold flex items-center justify-center">
-              64.2%
+              {{ (user && user.wins && user.losses ? (user.wins / (user.wins + user.losses) * 100).toFixed(2) : "0.00") }}%
             </p>
           </div>
           <div class="flex items-center justify-center gap-2">
             <div class="bg-neutral-950/85 border border-emerald-300/40 rounded-lg p-4 text-center flex flex-col items-center justify-center w-full">
               <p class="md:text-lg text-emerald-200 font-semibold mb-1">VICTORIAS</p>
               <p class="md:text-xl text-emerald-200 font-bold flex items-center justify-center">
-                100
+                {{ user?.wins || 0 }}
               </p>
             </div>
             <div class="bg-neutral-950/85 border border-rose-300/40 rounded-lg p-4 text-center flex flex-col items-center justify-center w-full">
               <p class="md:text-lg text-rose-200 font-semibold mb-1">DERROTAS</p>
               <p class="md:text-xl text-rose-200 font-bold flex items-center justify-center">
-                100
+                {{ user?.losses || 0 }}
               </p>
             </div>
           </div>
         </div>
         <div class="bg-neutral-950/85 border border-rose-300/40 rounded-lg py-4 px-10 text-center flex flex-col items-center justify-center">
-          <p class="md:text-lg text-rose-200 font-semibold mb-1">ELO MÍNIMO</p>
+          <p class="md:text-lg text-rose-200 font-semibold mb-1">ELO MÁS BAJO</p>
           <p class="md:text-xl text-rose-200 font-bold flex items-center justify-center">
-            <img src="/images/lol/silver.png" class="w-12 h-12 md:w-16 md:h-16">
-            IV · {{ userStats.lowestElo }} LP
+            <img :src="`/images/lol/${stats?.lowest?.rank || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
+            <span v-if="stats?.lowest?.rank">{{ stats.lowest.rank }} · {{ stats.lowest.lp }} LP</span>
           </p>
         </div>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-.bg-gradient-to-br {
-  background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
-}
-
-.bg-gradient-to-r {
-  background-image: linear-gradient(to right, var(--tw-gradient-stops));
-}
-</style>
