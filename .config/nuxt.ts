@@ -1,3 +1,5 @@
+import { SITE } from "../shared/utils/site";
+
 export default defineNuxtConfig({
   // future: { compatibilityVersion: 4 },
   devtools: { enabled: true },
@@ -6,9 +8,9 @@ export default defineNuxtConfig({
     head: {
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
-      title: "",
+      title: SITE.title,
       htmlAttrs: {
-        lang: "en"
+        lang: "es"
       },
       link: [],
       meta: [
@@ -54,7 +56,7 @@ export default defineNuxtConfig({
     fallback: "dark"
   },
 
-  site: { url: "" },
+  site: { url: SITE.url },
 
   nitro: {
     prerender: {
@@ -76,6 +78,9 @@ export default defineNuxtConfig({
 
   sitemap: {
     discoverImages: false,
+    urls: [
+      { loc: "/", priority: 1 }
+    ],
     defaults: { priority: 0.8, lastmod: new Date().toISOString() },
     xslColumns: [
       { label: "URL", width: "65%" },
@@ -85,8 +90,6 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    // @ts-expect-error remove once fixed sitemap module
-    "/": { sitemap: { priority: 1 } },
     "/api/_nuxt_icon/**": { cache: { maxAge: 1.577e+7 } }
   },
 
