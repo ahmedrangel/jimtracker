@@ -53,7 +53,7 @@ const socials = [
       <p class="text-lg md:text-2xl font-bold flex items-center justify-center">
         <img :src="`/images/lol/${user?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
         <span v-if="user">
-          {{ user.division }}· {{ user.lp }} LP
+          {{ user.division }} · {{ user.lp }} LP
         </span>
       </p>
     </div>
