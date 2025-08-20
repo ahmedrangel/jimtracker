@@ -15,7 +15,14 @@
       "id": "fafc939c148344d08d30633a14d4e7ca"
     }
   ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "jimtracker",
+      "database_id": "75c837f6-0eb0-4028-8d3b-f1303ab5c7c2"
+    }
+  ],
   "triggers": {
-    // "crons": ["*/10 * * * *"]
+    "crons": ["*/10 * * * *"]
   }
 }

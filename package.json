@@ -28,7 +28,8 @@
     "lint:eslint": "eslint --config .config/eslint.mjs",
     "lint:eslint:inspect": "pnpx @eslint/config-inspector --config .config/eslint.mjs",
     "lint:stylelint": "stylelint \"**/*.{css,scss}\" --config .config/stylelint.json",
-    "test:types": "vue-tsc -b --noEmit"
+    "test:types": "vue-tsc -b --noEmit",
+    "db:migrate": "drizzle-kit generate --config=.config/drizzle.ts"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.9.0",

@@ -11,16 +11,17 @@ export default defineEventHandler(async (event): Promise<{ user?: UserInfo, stat
     const leagueData = await lol.League.byPUUID(config.riot.jimPuuid, Constants.Regions.LAT_NORTH);
     const rankedData = leagueData.response.find(entry => entry.queueType === Constants.Queues.RANKED_SOLO_5x5);
     if (rankedData) {
-      const user: UserInfo = {
+      const user = {
         wins: rankedData.wins,
         losses: rankedData.losses,
         gameName: accountData.response.gameName,
         tagLine: accountData.response.tagLine,
         division: rankedData.rank,
         tier: rankedData.tier,
-        lp: rankedData.leaguePoints
+        lp: rankedData.leaguePoints,
+        updatedAt: Date.now()
       };
-      // await storage.setItem("info", user);
+      await storage.setItem<UserInfo>("info", user);
       info = user;
     }
   }
