@@ -53,8 +53,8 @@ export default defineTask({
           result: participant?.win ? 1 : 0,
           champion_id: participant!.championId,
           is_surrender: participant?.gameEndedInSurrender || participant?.gameEndedInEarlySurrender ? 1 : 0,
-          date: matchResponse.info.gameStartTimestamp + matchResponse.info.gameDuration,
-          duration: matchResponse.info.gameDuration
+          date: matchResponse.info.gameStartTimestamp + (matchResponse.info.gameDuration * 1000),
+          duration: matchResponse.info.gameDuration * 1000
         });
       }
       if (dataToInsert.length) {
