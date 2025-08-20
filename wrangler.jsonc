@@ -13,5 +13,8 @@
       "binding": "CACHE",
       "id": "fafc939c148344d08d30633a14d4e7ca"
     }
-  ]
+  ],
+  "triggers": {
+    "crons": ["*/10 * * * *"]
+  }
 }

@@ -1,9 +1,9 @@
 import { SITE } from "../shared/utils/site";
 
 export default defineNuxtConfig({
+  compatibilityDate: "2025-08-19",
   // future: { compatibilityVersion: 4 },
   devtools: { enabled: true },
-
   app: {
     head: {
       charset: "utf-8",
@@ -73,6 +73,9 @@ export default defineNuxtConfig({
     },
     experimental: {
       tasks: true
+    },
+    scheduledTasks: {
+      "*/10 * * * *": ["riotPolling"]
     }
   },
 
@@ -115,7 +118,5 @@ export default defineNuxtConfig({
     cache: true,
     workers: true
     // database: true
-  },
-
-  compatibilityDate: "2025-07-22"
+  }
 });
