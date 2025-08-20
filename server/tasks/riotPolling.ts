@@ -22,14 +22,14 @@ export default defineTask({
     }).from(tables.history).orderBy(desc(tables.history.date)).limit(1).all();
 
     const latestMatchId = latestSavedMatch[0]?.match_id || null;
-    const endTime = latestSavedMatch[0]?.date || null;
+    const startTime = latestSavedMatch[0]?.date || null;
     const lol = new LolApi(config.riot.apiKey);
     const riot = new RiotApi(config.riot.apiKey);
 
     const lastMatchData = await lol.MatchV5.list(config.riot.jimPuuid, Constants.RegionGroups.AMERICAS, {
       queue: 420,
-      ...endTime ? { count: 5 } : { count: 1 },
-      ...endTime && { endTime }
+      ...startTime ? { count: 5 } : { count: 1 },
+      ...startTime && { startTime: Math.round(startTime / 1000) }
     });
 
     const dataToInsert = [];
