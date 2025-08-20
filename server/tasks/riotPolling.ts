@@ -5,7 +5,6 @@ export default defineTask({
   },
   run ({ payload, context }) {
     const config = useRuntimeConfig();
-    console.info(config.riot.apiKey, config.riot.jimPuuid);
     return { result: { success: true } };
   }
 });
