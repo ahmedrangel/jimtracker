@@ -4,6 +4,7 @@
   "compatibility_date": "2025-08-19",
   "main": "dist/server/index.mjs",
   "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true},
   "assets": {
     "binding": "ASSETS",
     "directory": "dist/public"
