@@ -36,10 +36,10 @@ export default defineTask({
     const snapshot = [];
 
     if (lastMatchData.response.length) {
-      if (latestMatchId && lastMatchData.response.includes(latestMatchId)) {
-        return { result: { success: false } };
-      }
       for (const match of lastMatchData.response) {
+        if (latestMatchId && match === latestMatchId) {
+          continue;
+        }
         const matchData = await lol.MatchV5.get(match, Constants.RegionGroups.AMERICAS);
         const matchResponse = matchData.response;
         const participant = matchResponse.info.participants.find(p => p.puuid === config.riot.jimPuuid);
