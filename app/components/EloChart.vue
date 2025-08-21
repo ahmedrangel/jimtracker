@@ -106,8 +106,8 @@ const processRealStats = (stats: typeof props.history) => {
   }
 
   // Ordenar stats por fecha para encontrar la primera partida
-  const sortedStats = [...stats].sort((a, b) => a.date - b.date);
-  const firstMatch = sortedStats[0]!;
+  const sortedStats = [...stats].sort((a, b) => b.date - a.date);
+  const firstMatch = sortedStats[sortedStats.length - 1]!;
 
   // Agrupar stats por día
   const statsByDay = new Map<string, typeof stats>();
