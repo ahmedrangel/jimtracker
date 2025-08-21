@@ -326,7 +326,6 @@ const chartOptions = ref({
   <div class="chart-container" style="position:relative;">
     <Line :data="chartData" :options="chartOptions" />
     <TooltipChart
-      v-if="tooltipState.visible && tooltipState.content"
       :visible="tooltipState.visible"
       :x="tooltipState.x"
       :y="tooltipState.y"
