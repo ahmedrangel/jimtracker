@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data } = await useFetch<InfoResponse>("/api/info");
+const { data } = await useFetch<InfoResponse>("https://jimtracker.pages.dev/api/info");
 </script>
 
 <template>
