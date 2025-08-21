@@ -2,11 +2,11 @@
 @import "@nuxt/ui";
 
 :root {
-  background-color: var(--ui-color-slate-100);
+  background-color: var(--ui-color-neutral-100);
 }
 
 .dark {
-  background-color: var(--ui-color-slate-950);
+  background-color: var(--ui-color-neutral-950);
 }
 
 body {

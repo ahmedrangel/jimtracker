@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const { data } = await useFetch<InfoResponse>("/api/info");
+const apiURL = import.meta.dev ? `${SITE.url}/api/info` : "/api/info";
+const { data } = await useFetch<InfoResponse>(apiURL);
 </script>
 
 <template>

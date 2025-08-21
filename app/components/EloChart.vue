@@ -3,6 +3,7 @@ import { CategoryScale, Chart as ChartJS, Filler, Legend, LineElement, LinearSca
 import { Line } from "vue-chartjs";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
+import { tooltipChart } from "../utils/tooltipChart";
 
 const { data: champions } = await useFetch("/api/champions");
 
@@ -20,32 +21,6 @@ ChartJS.register(
   Legend,
   Filler
 );
-
-const normalizeTier = {
-  IRON: "Hierro",
-  BRONZE: "Bronce",
-  SILVER: "Plata",
-  GOLD: "Oro",
-  PLATINUM: "Platino",
-  EMERALD: "Esmeralda",
-  DIAMOND: "Diamante",
-  MASTER: "Maestro",
-  GRANDMASTER: "Gran Maestro",
-  CHALLENGER: "Retador"
-};
-
-const LEAGUE_TIERS = [
-  { name: "Hierro", divisions: ["IV", "III", "II", "I"], color: "#6B4E24" },
-  { name: "Bronce", divisions: ["IV", "III", "II", "I"], color: "#A0522D" },
-  { name: "Plata", divisions: ["IV", "III", "II", "I"], color: "#C0C0C0" },
-  { name: "Oro", divisions: ["IV", "III", "II", "I"], color: "#FFD700" },
-  { name: "Platino", divisions: ["IV", "III", "II", "I"], color: "#40E0D0" },
-  { name: "Esmeralda", divisions: ["IV", "III", "II", "I"], color: "#50C878" },
-  { name: "Diamante", divisions: ["IV", "III", "II", "I"], color: "#B9F2FF" },
-  { name: "Maestro", divisions: [""], color: "#9932CC" },
-  { name: "Gran Maestro", divisions: [""], color: "#DC143C" },
-  { name: "Retador", divisions: [""], color: "#F7931E" }
-];
 
 // Convertir rango y LP a valor numérico para el gráfico
 const rankToValue = (tier: string, division: string, lp: number): number => {
@@ -174,6 +149,7 @@ const processRealStats = (stats: typeof props.history) => {
         const championName = champions.value?.find(c => c.id === String(stat.champion_id))?.name;
         return {
           champion: championName,
+          championId: stat.champion_id,
           score: {
             kills: stat.kills,
             deaths: stat.deaths,
@@ -184,7 +160,8 @@ const processRealStats = (stats: typeof props.history) => {
           value: value,
           time: format(matchDate, "HH:mm"),
           isRemake: stat.is_remake === 1,
-          isSurrender: stat.is_surrender === 1
+          isSurrender: stat.is_surrender === 1,
+          tier: stat.tier
         };
       });
 
@@ -242,22 +219,41 @@ const chartData = ref({
       data: data.map(d => d.value),
       borderColor: "#3B82F6",
       backgroundColor: "rgba(59, 130, 246, 0.1)",
-      borderWidth: 3,
+      borderWidth: 2,
       fill: true,
-      tension: 0.4,
+      tension: 0.15,
       pointBackgroundColor: data.map((d) => {
         const rank = valueToRank(d.value);
         const tier = LEAGUE_TIERS.find(t => t.name === rank.tier);
         return tier?.color || "#3B82F6";
       }),
       pointBorderColor: "#ffffff",
-      pointBorderWidth: 2,
+      pointBorderWidth: 1,
       pointRadius: 5,
-      pointHoverRadius: 8,
+      pointHoverRadius: 12,
       pointHoverBorderColor: "#ffffff",
-      pointHoverBorderWidth: 3
+      pointHoverBorderWidth: 2
     }
   ]
+});
+
+const tooltipState = ref<{
+  visible: boolean;
+  x: any;
+  y: any;
+  transform: string;
+  content?: {
+    label: string;
+    rankDisplay: string;
+    changeText: string;
+    changeIcon: string;
+    matches: any[];
+  }; }>({
+  visible: false,
+  x: 0,
+  y: 0,
+  transform: "translate(-50%, -50%)",
+  content: undefined
 });
 
 const chartOptions = ref({
@@ -273,140 +269,10 @@ const chartOptions = ref({
     },
     tooltip: {
       position: "nearest",
-      enabled: false, // Desactivar el tooltip por defecto
+      enabled: false,
       external: (context: any) => {
-        const { chart, tooltip } = context;
-        let tooltipEl = chart.canvas.parentNode?.querySelector("#chartjs-tooltip");
-
-        if (!tooltipEl) {
-          tooltipEl = document.createElement("div");
-          tooltipEl.id = "chartjs-tooltip";
-          tooltipEl.innerHTML = "<table></table>";
-          tooltipEl.style.opacity = 1;
-          tooltipEl.style.position = "absolute";
-          tooltipEl.style.transform = "translate(-50%, 0)";
-          tooltipEl.style.transition = "all .3s ease";
-          chart.canvas.parentNode?.appendChild(tooltipEl);
-        }
-
-        // Ocultar tooltip si no hay datos
-        if (tooltip.opacity === 0) {
-          tooltipEl.style.opacity = "0";
-          return;
-        }
-
-        // Obtener los datos del punto
-        if (tooltip.dataPoints && tooltip.dataPoints.length > 0) {
-          const dataIndex = tooltip.dataPoints[0].dataIndex;
-          const dayData = data[dataIndex];
-
-          if (dayData && dayData.matches) {
-            const currentRank = valueToRank(dayData.value);
-            let rankDisplay = currentRank.tier;
-            if (currentRank.division) {
-              rankDisplay += ` ${currentRank.division}`;
-            }
-            rankDisplay += ` (${currentRank.lp} LP)`;
-
-            // Calcular LP total ganado/perdido
-            let totalChange = 0;
-            if (dataIndex > 0 && dayData.matches.length > 0) {
-              const previousDayFinalValue = data[dataIndex - 1]!.value;
-              const currentDayFinalValue = dayData.value;
-              totalChange = currentDayFinalValue - previousDayFinalValue;
-            }
-
-            const changeText = totalChange > 0 ? `+${Math.round(totalChange)}` : totalChange === 0 ? "0" : `${Math.round(totalChange)}`;
-            const changeEmoji = totalChange > 0 ? "🟢" : totalChange < 0 ? "🔴" : "⚪";
-
-            let innerHtml = `
-              <div style="
-                background: rgba(15, 23, 42, 0.95);
-                border: 1px solid #3B82F6;
-                border-radius: 8px;
-                padding: 6px 0px;
-                color: white;
-                font-family: system-ui, -apple-system, sans-serif;
-                font-size: 13px;
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-                width: 300px;
-                overflow: hidden;
-              ">
-                <div style="font-size: 16px; font-weight: bold; margin-bottom: 6px; padding: 0 12px;">
-                  Fecha: ${tooltip.dataPoints[0].label}
-                </div>
-                <div style="margin-bottom: 4px; padding: 0 12px;">Rango final: ${rankDisplay}</div>
-                <div style="margin-bottom: 6px; padding: 0 12px;">Cambio: ${changeText} LP ${changeEmoji}</div>
-                <div style="margin-bottom: 6px; padding: 0 12px;">Partidas: ${dayData.matches.length}</div>
-            `;
-
-            // Agregar partidas con iconos de campeones
-            dayData.matches.toReversed().forEach((match: any) => {
-              const championIconUrl = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${match.championId}.png`;
-              innerHtml += `
-                <div class="${match.isRemake ? "bg-neutral-900" : match.win ? "bg-green-900" : "bg-red-900"}">
-                <span style="display: flex; align-items: center; padding: 6px 12px; gap: 4px;">
-                  <img 
-                    src="${championIconUrl}" 
-                    alt="${match.champion}" 
-                    style="
-                      width: 24px; 
-                      height: 24px; 
-                      border-radius: 4px; 
-                      border: 1px solid #374151;
-                    "
-                    onerror="this.style.display='none'"
-                  />
-                  <span>${match.champion}: ${match.score.kills}/${match.score.deaths}/${match.score.assists} · ${match.time}</span>
-                  </span>
-                </div>
-              `;
-            });
-
-            innerHtml += "</div>";
-            tooltipEl.querySelector("table")!.innerHTML = innerHtml;
-          }
-        }
-
-        // Posicionar el tooltip de manera más simple y responsiva
-        const { offsetLeft: positionX, offsetTop: positionY } = chart.canvas;
-        const tooltipWidth = 300;
-        const margin = 15;
-
-        // Obtener dimensiones del contenedor del gráfico
-        const chartContainer = chart.canvas.parentNode;
-        const containerRect = chartContainer.getBoundingClientRect();
-        const viewportWidth = window.innerWidth;
-
-        // Calcular posición absoluta del punto en la pantalla
-        const pointX = containerRect.left + tooltip.caretX;
-
-        let leftPos, transformX;
-
-        // Si está muy cerca del borde derecho, alinear a la izquierda del punto
-        if (pointX + tooltipWidth / 2 > viewportWidth - margin) {
-          leftPos = positionX + tooltip.caretX - margin;
-          transformX = "-100%";
-        }
-        // Si está muy cerca del borde izquierdo, alinear a la derecha del punto
-        else {
-          leftPos = positionX + tooltip.caretX + margin;
-          transformX = "0%";
-        }
-
-        // Posición vertical: siempre centrado respecto al punto
-        const topPos = positionY + tooltip.caretY;
-        const transformY = "-50%"; // Siempre centrado verticalmente
-
-        // Aplicar estilos de posicionamiento mejorados
-        tooltipEl.style.opacity = "1";
-        tooltipEl.style.left = leftPos + "px";
-        tooltipEl.style.top = topPos + "px";
-        tooltipEl.style.transform = `translate(${transformX}, ${transformY})`;
-        tooltipEl.style.zIndex = "9999";
-        tooltipEl.style.width = "300px";
-        tooltipEl.style.maxHeight = "400px";
-        tooltipEl.style.overflow = "auto";
+        const tooltipData = tooltipChart(context, data);
+        tooltipState.value = tooltipData;
       }
     }
   },
@@ -452,19 +318,20 @@ const chartOptions = ref({
         maxTicksLimit: 15
       }
     }
-  },
-  elements: {
-    line: {
-      borderJoinStyle: "round" as const,
-      borderCapStyle: "round" as const
-    }
   }
 } as const);
 </script>
 
 <template>
-  <div class="chart-container">
+  <div class="chart-container" style="position:relative;">
     <Line :data="chartData" :options="chartOptions" />
+    <TooltipChart
+      :visible="tooltipState.visible"
+      :x="tooltipState.x"
+      :y="tooltipState.y"
+      :transform="tooltipState.transform"
+      :content="tooltipState.content"
+    />
   </div>
 </template>
 
