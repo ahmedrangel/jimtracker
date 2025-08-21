@@ -1,14 +1,7 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "jimtracker",
   "compatibility_date": "2025-08-19",
-  "main": "dist/server/index.mjs",
   "compatibility_flags": ["nodejs_compat"],
-  "observability": { "enabled": true},
-  "assets": {
-    "binding": "ASSETS",
-    "directory": "dist/public"
-  },
   "kv_namespaces": [
     {
       "binding": "CACHE",
@@ -21,8 +14,5 @@
       "database_name": "jimtracker",
       "database_id": "75c837f6-0eb0-4028-8d3b-f1303ab5c7c2"
     }
-  ],
-  "triggers": {
-    "crons": ["*/10 * * * *"]
-  }
+  ]
 }

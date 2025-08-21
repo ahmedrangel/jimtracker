@@ -73,9 +73,6 @@ export default defineNuxtConfig({
     },
     experimental: {
       tasks: true
-    },
-    scheduledTasks: {
-      "*/10 * * * *": ["riotPolling"]
     }
   },
 
@@ -116,7 +113,7 @@ export default defineNuxtConfig({
 
   hub: {
     cache: true,
-    workers: true,
+    workers: false,
     database: true
   }
 });
