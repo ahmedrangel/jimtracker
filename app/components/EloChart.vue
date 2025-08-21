@@ -327,7 +327,7 @@ const chartOptions = ref({
             `📋 Partidas: ${dayData.matches.length}`
           ];
 
-          dayData.matches.forEach((match: any) => {
+          dayData.matches.toReversed().forEach((match: any) => {
             const winIcon = match.win ? "✅" : "❌";
             const remakeText = match.isRemake ? " (Remake)" : "";
             const surrenderText = match.isSurrender ? " (Surrender)" : "";
