@@ -342,7 +342,7 @@ const chartOptions = ref({
 
             // Agregar partidas con iconos de campeones
             dayData.matches.toReversed().forEach((match: any) => {
-              const championIconUrl = `https://ddragon.leagueoflegends.com/cdn/15.16.1/img/champion/${match.champion}.png`;
+              const championIconUrl = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${match.championId}.png`;
               innerHtml += `
                 <div class="${match.isRemake ? "bg-neutral-900" : match.win ? "bg-green-900" : "bg-red-900"}">
                 <span style="display: flex; align-items: center; padding: 6px 12px; gap: 4px;">
@@ -409,10 +409,6 @@ const chartOptions = ref({
         tooltipEl.style.overflow = "auto";
       }
     }
-  },
-  interaction: {
-    intersect: false,
-    mode: "index" as const
   },
   scales: {
     x: {
