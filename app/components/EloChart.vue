@@ -158,7 +158,9 @@ const processRealStats = (stats: typeof props.history) => {
 
     // Si hay stats para este día, usar el último LP/tier del día
     if (dayStats.length > 0) {
-      const lastStat = dayStats[dayStats.length - 1]!;
+      // IMPORTANTE: Ordenar las partidas del día por fecha para obtener la última partida real
+      const sortedDayStats = dayStats.sort((a, b) => a.date - b.date);
+      const lastStat = sortedDayStats[sortedDayStats.length - 1]!;
       const tier = lastStat.tier ? normalizeTier[lastStat.tier.toUpperCase() as keyof typeof normalizeTier] : "Hierro";
       const division = lastStat.division || "IV";
       const lp = lastStat.lp || 0;
@@ -166,8 +168,8 @@ const processRealStats = (stats: typeof props.history) => {
       const value = rankToValue(tier, division, lp);
       previousValue = value; // Actualizar el valor anterior
 
-      // Convertir stats a formato de matches
-      const matches = dayStats.map((stat) => {
+      // Convertir stats a formato de matches (también ordenados)
+      const matches = sortedDayStats.map((stat) => {
         const matchDate = new Date(stat.date);
         const championName = Object.values(champions.value || {}).find(c => c.key === String(stat.champion_id))?.name;
         return {
@@ -302,10 +304,20 @@ const chartOptions = ref({
           }
           rankDisplay += ` (${currentRank.lp} LP)`;
 
-          // Calcular LP total ganado/perdido comparado con el día anterior
-          const previousDayValue = dataIndex > 0 ? data[dataIndex - 1]!.value : dayData.value;
-          const totalChange = dayData.value - previousDayValue;
-          const changeText = totalChange > 0 ? `+${Math.round(totalChange)}` : `${Math.round(totalChange)}`;
+          // Calcular LP total ganado/perdido considerando todas las partidas del día
+          let totalChange = 0;
+          if (dataIndex > 0 && dayData.matches.length > 0) {
+            // Obtener el valor final del día anterior
+            const previousDayFinalValue = data[dataIndex - 1]!.value;
+
+            // Obtener el valor final del día actual
+            const currentDayFinalValue = dayData.value;
+
+            // Calcular la diferencia total considerando promociones/degradaciones
+            totalChange = currentDayFinalValue - previousDayFinalValue;
+          }
+
+          const changeText = totalChange > 0 ? `+${Math.round(totalChange)}` : totalChange === 0 ? "0" : `${Math.round(totalChange)}`;
           const changeEmoji = totalChange > 0 ? "🟢" : totalChange < 0 ? "🔴" : "⚪";
 
           const result = [
