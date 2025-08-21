@@ -43,36 +43,6 @@ const rankToValue = (tier: string, division: string, lp: number): number => {
   return baseValue;
 };
 
-// Convertir valor numérico de vuelta a rango
-const valueToRank = (value: number): { tier: string, division: string, lp: number } => {
-  const tierIndex = Math.floor(value / 400);
-  const remainder = value % 400;
-
-  if (tierIndex >= LEAGUE_TIERS.length) {
-    return { tier: "Retador", division: "", lp: Math.min(remainder, 9999) };
-  }
-
-  const tier = LEAGUE_TIERS[tierIndex];
-
-  if (!tier) {
-    return { tier: "Hierro", division: "IV", lp: 0 };
-  }
-
-  if (tier.name === "Maestro" || tier.name === "Gran Maestro" || tier.name === "Retador") {
-    return { tier: tier.name, division: "", lp: Math.min(remainder, 9999) };
-  }
-
-  const divisionIndex = Math.floor(remainder / 100);
-  const lp = remainder % 100;
-  const divisions = ["IV", "III", "II", "I"];
-
-  return {
-    tier: tier.name,
-    division: divisions[divisionIndex] || "IV",
-    lp: Math.min(lp, 100)
-  };
-};
-
 // Función para procesar los datos reales de stats
 const processRealStats = (stats: typeof props.history) => {
   if (!stats || stats.length === 0) {
@@ -217,8 +187,6 @@ const chartData = ref({
     {
       label: "Rango de LoL",
       data: data.map(d => d.value),
-      borderColor: "#3B82F6",
-      backgroundColor: "rgba(59, 130, 246, 0.1)",
       borderWidth: 2,
       fill: true,
       tension: 0.15,
@@ -227,12 +195,26 @@ const chartData = ref({
         const tier = LEAGUE_TIERS.find(t => t.name === rank.tier);
         return tier?.color || "#3B82F6";
       }),
-      pointBorderColor: "#ffffff",
+      pointBorderColor: "#ffffffaa",
       pointBorderWidth: 1,
       pointRadius: 5,
       pointHoverRadius: 12,
-      pointHoverBorderColor: "#ffffff",
-      pointHoverBorderWidth: 2
+      pointHoverBorderColor: "#ffffffaa",
+      pointHoverBorderWidth: 2,
+      segment: {
+        borderColor: (ctx: any) => {
+          const value = ctx.p0.raw;
+          const rank = valueToRank(value);
+          const tier = LEAGUE_TIERS.find(t => t.name === rank.tier);
+          return tier?.color || "#3B82F6";
+        },
+        backgroundColor: (ctx: any) => {
+          const value = ctx.p0.raw;
+          const rank = valueToRank(value);
+          const tier = LEAGUE_TIERS.find(t => t.name === rank.tier);
+          return tier?.color ? `${tier.color}0d` : "#3B82F6";
+        }
+      }
     }
   ]
 });

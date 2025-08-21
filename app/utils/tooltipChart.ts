@@ -49,7 +49,7 @@ export const tooltipChart = (context: any, data: any) => {
         changeText,
         changeIcon,
         changeColor,
-        dayTier: dayData.matches.toReversed()[0]?.tier,
+        dayTier: currentRank.id,
         matches: dayData.matches.toReversed().map((match: any) => ({
           ...match,
           championIconUrl: `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${match.championId}.png`

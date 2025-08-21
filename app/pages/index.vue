@@ -1,12 +1,11 @@
 <script setup lang="ts">
-const apiURL = import.meta.dev ? `${SITE.url}/api/info` : "/api/info";
-const { data } = await useFetch<InfoResponse>(apiURL);
+const { data } = await useFetch<InfoResponse>("/api/info");
 </script>
 
 <template>
   <main>
     <div class="flex items-center justify-center">
-      <div class="mb-5 p-4 bg-red-800 rounded aspect-square flex items-center justify-center w-30 h-30 md:w-36 md:h-36">
+      <div class="mb-5 p-4 bg-slate-900 border border-slate-800 rounded aspect-square flex items-center justify-center w-30 h-30 md:w-36 md:h-36">
         <img src="/images/jimrsng.png" class="max-w-full max-h-full object-contain">
       </div>
     </div>
