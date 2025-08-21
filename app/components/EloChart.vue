@@ -302,15 +302,15 @@ const chartOptions = ref({
           }
           rankDisplay += ` (${currentRank.lp} LP)`;
 
-          // Calcular LP total ganado/perdido del día
-          const dayStartValue = dataIndex > 0 && data[dataIndex - 1] ? data[dataIndex - 1]!.value : dayData.value;
-          const totalChange = dayData.value - dayStartValue;
+          // Calcular LP total ganado/perdido comparado con el día anterior
+          const previousDayValue = dataIndex > 0 ? data[dataIndex - 1]!.value : dayData.value;
+          const totalChange = dayData.value - previousDayValue;
           const changeText = totalChange > 0 ? `+${Math.round(totalChange)}` : `${Math.round(totalChange)}`;
           const changeEmoji = totalChange > 0 ? "🟢" : totalChange < 0 ? "🔴" : "⚪";
 
           const result = [
             `Rango final: ${rankDisplay}`,
-            `Cambio total: ${changeText} LP ${changeEmoji}`,
+            `Cambio: ${changeText} LP ${changeEmoji}`,
             "",
             `📋 Partidas: ${dayData.matches.length}`
           ];
