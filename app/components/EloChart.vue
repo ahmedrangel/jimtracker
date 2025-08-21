@@ -160,7 +160,8 @@ const processRealStats = (stats: typeof props.history) => {
           value: value,
           time: format(matchDate, "HH:mm"),
           isRemake: stat.is_remake === 1,
-          isSurrender: stat.is_surrender === 1
+          isSurrender: stat.is_surrender === 1,
+          tier: stat.tier
         };
       });
 
@@ -236,6 +237,25 @@ const chartData = ref({
   ]
 });
 
+const tooltipState = ref<{
+  visible: boolean;
+  x: any;
+  y: any;
+  transform: string;
+  content?: {
+    label: string;
+    rankDisplay: string;
+    changeText: string;
+    changeIcon: string;
+    matches: any[];
+  }; }>({
+  visible: false,
+  x: 0,
+  y: 0,
+  transform: "translate(-50%, -50%)",
+  content: undefined
+});
+
 const chartOptions = ref({
   responsive: true,
   maintainAspectRatio: false,
@@ -250,7 +270,10 @@ const chartOptions = ref({
     tooltip: {
       position: "nearest",
       enabled: false,
-      external: (context: any) => tooltipChart(context, data)
+      external: (context: any) => {
+        const tooltipData = tooltipChart(context, data);
+        tooltipState.value = tooltipData;
+      }
     }
   },
   scales: {
@@ -300,8 +323,16 @@ const chartOptions = ref({
 </script>
 
 <template>
-  <div class="chart-container">
+  <div class="chart-container" style="position:relative;">
     <Line :data="chartData" :options="chartOptions" />
+    <TooltipChart
+      v-if="tooltipState.visible && tooltipState.content"
+      :visible="tooltipState.visible"
+      :x="tooltipState.x"
+      :y="tooltipState.y"
+      :transform="tooltipState.transform"
+      :content="tooltipState.content"
+    />
   </div>
 </template>
 
