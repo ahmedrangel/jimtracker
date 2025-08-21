@@ -171,7 +171,7 @@ const processRealStats = (stats: typeof props.history) => {
       // Convertir stats a formato de matches (también ordenados)
       const matches = sortedDayStats.map((stat) => {
         const matchDate = new Date(stat.date);
-        const championName = Object.values(champions.value || {}).find(c => c.key === String(stat.champion_id))?.name;
+        const championName = champions.value?.find(c => c.id === String(stat.champion_id))?.name;
         return {
           champion: championName,
           score: {
