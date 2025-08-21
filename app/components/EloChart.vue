@@ -263,80 +263,150 @@ const chartData = ref({
 const chartOptions = ref({
   responsive: true,
   maintainAspectRatio: false,
+  interaction: {
+    mode: "nearest",
+    intersect: false
+  },
   plugins: {
     legend: {
       display: false
     },
     tooltip: {
-      titleFont: {
-        size: 16,
-        weight: "bold" as const
-      },
-      bodyFont: {
-        size: 13
-      },
-      backgroundColor: "rgba(15, 23, 42, 0.95)",
-      titleColor: "#ffffff",
-      bodyColor: "#ffffff",
-      borderColor: "#3B82F6",
-      borderWidth: 1,
-      cornerRadius: 8,
-      displayColors: false,
-      padding: 12,
-      boxPadding: 6,
-      callbacks: {
-        title: function (context: unknown[]) {
-          return (context as any)?.[0]?.label ? `Fecha: ${(context as any)[0].label}` : "";
-        },
-        label: function (context: unknown) {
-          const ctx = context as any;
-          const dataIndex = ctx.dataIndex;
+      position: "nearest",
+      enabled: false, // Desactivar el tooltip por defecto
+      external: (context: any) => {
+        const { chart, tooltip } = context;
+        let tooltipEl = chart.canvas.parentNode?.querySelector("#chartjs-tooltip");
+
+        if (!tooltipEl) {
+          tooltipEl = document.createElement("div");
+          tooltipEl.id = "chartjs-tooltip";
+          tooltipEl.innerHTML = "<table></table>";
+          tooltipEl.style.opacity = 1;
+          tooltipEl.style.position = "absolute";
+          tooltipEl.style.transform = "translate(-50%, 0)";
+          tooltipEl.style.transition = "all .3s ease";
+          chart.canvas.parentNode?.appendChild(tooltipEl);
+        }
+
+        // Ocultar tooltip si no hay datos
+        if (tooltip.opacity === 0) {
+          tooltipEl.style.opacity = "0";
+          return;
+        }
+
+        // Obtener los datos del punto
+        if (tooltip.dataPoints && tooltip.dataPoints.length > 0) {
+          const dataIndex = tooltip.dataPoints[0].dataIndex;
           const dayData = data[dataIndex];
 
-          if (!dayData || !dayData.matches) {
-            return "No hay datos de partidas";
+          if (dayData && dayData.matches) {
+            const currentRank = valueToRank(dayData.value);
+            let rankDisplay = currentRank.tier;
+            if (currentRank.division) {
+              rankDisplay += ` ${currentRank.division}`;
+            }
+            rankDisplay += ` (${currentRank.lp} LP)`;
+
+            // Calcular LP total ganado/perdido
+            let totalChange = 0;
+            if (dataIndex > 0 && dayData.matches.length > 0) {
+              const previousDayFinalValue = data[dataIndex - 1]!.value;
+              const currentDayFinalValue = dayData.value;
+              totalChange = currentDayFinalValue - previousDayFinalValue;
+            }
+
+            const changeText = totalChange > 0 ? `+${Math.round(totalChange)}` : totalChange === 0 ? "0" : `${Math.round(totalChange)}`;
+            const changeEmoji = totalChange > 0 ? "🟢" : totalChange < 0 ? "🔴" : "⚪";
+
+            let innerHtml = `
+              <div style="
+                background: rgba(15, 23, 42, 0.95);
+                border: 1px solid #3B82F6;
+                border-radius: 8px;
+                padding: 6px 0px;
+                color: white;
+                font-family: system-ui, -apple-system, sans-serif;
+                font-size: 13px;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                width: 300px;
+                overflow: hidden;
+              ">
+                <div style="font-size: 16px; font-weight: bold; margin-bottom: 6px; padding: 0 12px;">
+                  Fecha: ${tooltip.dataPoints[0].label}
+                </div>
+                <div style="margin-bottom: 4px; padding: 0 12px;">Rango final: ${rankDisplay}</div>
+                <div style="margin-bottom: 6px; padding: 0 12px;">Cambio: ${changeText} LP ${changeEmoji}</div>
+                <div style="margin-bottom: 6px; padding: 0 12px;">Partidas: ${dayData.matches.length}</div>
+            `;
+
+            // Agregar partidas con iconos de campeones
+            dayData.matches.toReversed().forEach((match: any) => {
+              const championIconUrl = `https://ddragon.leagueoflegends.com/cdn/15.16.1/img/champion/${match.champion}.png`;
+              innerHtml += `
+                <div class="${match.isRemake ? "bg-neutral-900" : match.win ? "bg-green-900" : "bg-red-900"}">
+                <span style="display: flex; align-items: center; padding: 6px 12px; gap: 4px;">
+                  <img 
+                    src="${championIconUrl}" 
+                    alt="${match.champion}" 
+                    style="
+                      width: 24px; 
+                      height: 24px; 
+                      border-radius: 4px; 
+                      border: 1px solid #374151;
+                    "
+                    onerror="this.style.display='none'"
+                  />
+                  <span>${match.champion}: ${match.score.kills}/${match.score.deaths}/${match.score.assists} · ${match.time}</span>
+                  </span>
+                </div>
+              `;
+            });
+
+            innerHtml += "</div>";
+            tooltipEl.querySelector("table")!.innerHTML = innerHtml;
           }
-
-          const currentRank = valueToRank(dayData.value);
-          let rankDisplay = currentRank.tier;
-          if (currentRank.division) {
-            rankDisplay += ` ${currentRank.division}`;
-          }
-          rankDisplay += ` (${currentRank.lp} LP)`;
-
-          // Calcular LP total ganado/perdido considerando todas las partidas del día
-          let totalChange = 0;
-          if (dataIndex > 0 && dayData.matches.length > 0) {
-            // Obtener el valor final del día anterior
-            const previousDayFinalValue = data[dataIndex - 1]!.value;
-
-            // Obtener el valor final del día actual
-            const currentDayFinalValue = dayData.value;
-
-            // Calcular la diferencia total considerando promociones/degradaciones
-            totalChange = currentDayFinalValue - previousDayFinalValue;
-          }
-
-          const changeText = totalChange > 0 ? `+${Math.round(totalChange)}` : totalChange === 0 ? "0" : `${Math.round(totalChange)}`;
-          const changeEmoji = totalChange > 0 ? "🟢" : totalChange < 0 ? "🔴" : "⚪";
-
-          const result = [
-            `Rango final: ${rankDisplay}`,
-            `Cambio: ${changeText} LP ${changeEmoji}`,
-            "",
-            `📋 Partidas: ${dayData.matches.length}`
-          ];
-
-          dayData.matches.toReversed().forEach((match: any) => {
-            const winIcon = match.isRemake ? "⬜" : match.win ? "✅" : "❌";
-            const remakeText = match.isRemake ? " (Remake)" : "";
-            result.push(
-              `${match.time} - ${winIcon} ${match.champion}: ${match.score.kills}/${match.score.deaths}/${match.score.assists}${remakeText}`
-            );
-          });
-
-          return result;
         }
+
+        // Posicionar el tooltip de manera más simple y responsiva
+        const { offsetLeft: positionX, offsetTop: positionY } = chart.canvas;
+        const tooltipWidth = 300;
+        const margin = 15;
+
+        // Obtener dimensiones del contenedor del gráfico
+        const chartContainer = chart.canvas.parentNode;
+        const containerRect = chartContainer.getBoundingClientRect();
+        const viewportWidth = window.innerWidth;
+
+        // Calcular posición absoluta del punto en la pantalla
+        const pointX = containerRect.left + tooltip.caretX;
+
+        let leftPos, transformX;
+
+        // Si está muy cerca del borde derecho, alinear a la izquierda del punto
+        if (pointX + tooltipWidth / 2 > viewportWidth - margin) {
+          leftPos = positionX + tooltip.caretX - margin;
+          transformX = "-100%";
+        }
+        // Si está muy cerca del borde izquierdo, alinear a la derecha del punto
+        else {
+          leftPos = positionX + tooltip.caretX + margin;
+          transformX = "0%";
+        }
+
+        // Posición vertical: siempre centrado respecto al punto
+        const topPos = positionY + tooltip.caretY;
+        const transformY = "-50%"; // Siempre centrado verticalmente
+
+        // Aplicar estilos de posicionamiento mejorados
+        tooltipEl.style.opacity = "1";
+        tooltipEl.style.left = leftPos + "px";
+        tooltipEl.style.top = topPos + "px";
+        tooltipEl.style.transform = `translate(${transformX}, ${transformY})`;
+        tooltipEl.style.zIndex = "9999";
+        tooltipEl.style.width = "300px";
+        tooltipEl.style.maxHeight = "400px";
+        tooltipEl.style.overflow = "auto";
       }
     }
   },
