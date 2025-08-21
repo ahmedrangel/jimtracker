@@ -328,11 +328,10 @@ const chartOptions = ref({
           ];
 
           dayData.matches.toReversed().forEach((match: any) => {
-            const winIcon = match.win ? "✅" : "❌";
+            const winIcon = match.isRemake ? "⬜" : match.win ? "✅" : "❌";
             const remakeText = match.isRemake ? " (Remake)" : "";
-            const surrenderText = match.isSurrender ? " (Surrender)" : "";
             result.push(
-              `${match.time} - ${winIcon} ${match.champion}: ${match.score.kills}/${match.score.deaths}/${match.score.assists}${remakeText}${surrenderText}`
+              `${match.time} - ${winIcon} ${match.champion}: ${match.score.kills}/${match.score.deaths}/${match.score.assists}${remakeText}`
             );
           });
 
