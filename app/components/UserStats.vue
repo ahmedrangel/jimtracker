@@ -64,7 +64,7 @@ const socials = [
           <p class="md:text-lg text-emerald-200 font-semibold mb-1">ELO MÁS ALTO</p>
           <p class="md:text-xl text-emerald-200 font-bold flex items-center justify-center">
             <img :src="`/images/lol/${highest?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
-            <span v-if="highest?.tier">{{ highest.tier }} · {{ highest.lp }} LP</span>
+            <span v-if="highest?.tier">{{ highest.division }} · {{ highest.lp }} LP</span>
           </p>
         </div>
         <div class="flex flex-col gap-2">
@@ -93,7 +93,7 @@ const socials = [
           <p class="md:text-lg text-rose-200 font-semibold mb-1">ELO MÁS BAJO</p>
           <p class="md:text-xl text-rose-200 font-bold flex items-center justify-center">
             <img :src="`/images/lol/${lowest?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
-            <span v-if="lowest?.tier">{{ lowest.tier }} · {{ lowest.lp }} LP</span>
+            <span v-if="lowest?.tier">{{ lowest.division }} · {{ lowest.lp }} LP</span>
           </p>
         </div>
       </div>
