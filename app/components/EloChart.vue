@@ -174,6 +174,7 @@ const processRealStats = (stats: typeof props.history) => {
         const championName = champions.value?.find(c => c.id === String(stat.champion_id))?.name;
         return {
           champion: championName,
+          championId: stat.champion_id,
           score: {
             kills: stat.kills,
             deaths: stat.deaths,
