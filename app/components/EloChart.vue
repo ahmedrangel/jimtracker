@@ -1,8 +1,14 @@
 <script setup lang="ts">
 import { CategoryScale, Chart as ChartJS, Filler, Legend, LineElement, LinearScale, PointElement, Title, Tooltip } from "chart.js";
 import { Line } from "vue-chartjs";
-import { format, subDays } from "date-fns";
+import { format } from "date-fns";
 import { es } from "date-fns/locale";
+
+const { data: champions } = await useFetch("/api/champions");
+
+const props = defineProps<{
+  history?: History[];
+}>();
 
 ChartJS.register(
   CategoryScale,
@@ -15,7 +21,19 @@ ChartJS.register(
   Filler
 );
 
-// Definir los rangos de League of Legends con sus divisiones
+const normalizeTier = {
+  IRON: "Hierro",
+  BRONZE: "Bronce",
+  SILVER: "Plata",
+  GOLD: "Oro",
+  PLATINUM: "Platino",
+  EMERALD: "Esmeralda",
+  DIAMOND: "Diamante",
+  MASTER: "Maestro",
+  GRANDMASTER: "Gran Maestro",
+  CHALLENGER: "Retador"
+};
+
 const LEAGUE_TIERS = [
   { name: "Hierro", divisions: ["IV", "III", "II", "I"], color: "#6B4E24" },
   { name: "Bronce", divisions: ["IV", "III", "II", "I"], color: "#A0522D" },
@@ -80,84 +98,104 @@ const valueToRank = (value: number): { tier: string, division: string, lp: numbe
   };
 };
 
-// Lista de campeones populares
-const CHAMPIONS = [
-  "Aatrox", "Ahri", "Amumu", "Annie", "Ashe", "Azir", "Blitzcrank", "Braum",
-  "Caitlyn", "Darius", "Diana", "Draven", "Ezreal", "Garen", "Graves", "Irelia",
-  "Janna", "Jax", "Jinx", "Karma", "Katarina", "Kayn", "LeBlanc", "Lee Sin",
-  "Leona", "Lux", "Malphite", "Master Yi", "Miss Fortune", "Morgana", "Nami",
-  "Nautilus", "Orianna", "Pyke", "Riven", "Senna", "Seraphine", "Sona",
-  "Soraka", "Thresh", "Tristana", "Twisted Fate", "Vayne", "Vi", "Yasuo", "Zed"
-];
-
-// Generar score aleatorio realista
-const generateScore = () => {
-  const kills = Math.floor(Math.random() * 15) + 1;
-  const deaths = Math.floor(Math.random() * 10) + 1;
-  const assists = Math.floor(Math.random() * 20) + 1;
-  return { kills, deaths, assists };
-};
-
-// Generar partidas para un día
-const generateDayMatches = (baseValue: number) => {
-  const numMatches = Math.floor(Math.random() * 4) + 1; // 1-4 partidas por día
-  const matches = [];
-  let currentValue = baseValue;
-
-  // Generar horas aleatorias para las partidas (entre 10:00 y 23:59)
-  const startHour = 10; // 10:00 AM
-  const endHour = 23; // 11:59 PM
-  const gameHours = [];
-
-  for (let i = 0; i < numMatches; i++) {
-    const hour = Math.floor(Math.random() * (endHour - startHour + 1)) + startHour;
-    const minute = Math.floor(Math.random() * 60);
-    gameHours.push({ hour, minute, totalMinutes: hour * 60 + minute });
+// Función para procesar los datos reales de stats
+const processRealStats = (stats: typeof props.history) => {
+  if (!stats || stats.length === 0) {
+    // No hay datos disponibles
+    return { labels: [], data: [] };
   }
 
-  // Ordenar por hora (más temprano primero)
-  gameHours.sort((a, b) => b.totalMinutes - a.totalMinutes);
+  // Ordenar stats por fecha para encontrar la primera partida
+  const sortedStats = [...stats].sort((a, b) => a.date - b.date);
+  const firstMatch = sortedStats[0]!;
 
-  for (let i = 0; i < numMatches; i++) {
-    const champion = CHAMPIONS[Math.floor(Math.random() * CHAMPIONS.length)];
-    const score = generateScore();
-    const lpChange = Math.floor(Math.random() * 50) - 25; // -25 a +25 LP por partida
-    const win = lpChange >= 0;
-    const gameTime = gameHours[i]!; // Sabemos que existe porque creamos el array con la misma longitud
+  // Agrupar stats por día
+  const statsByDay = new Map<string, typeof stats>();
 
-    currentValue += lpChange;
-    currentValue = Math.max(0, Math.min(3999, currentValue));
+  stats.forEach((stat) => {
+    const date = new Date(stat.date);
+    const dateKey = format(date, "yyyy-MM-dd");
 
-    matches.push({
-      champion,
-      score,
-      lpChange,
-      win,
-      value: currentValue,
-      time: `${gameTime.hour.toString().padStart(2, "0")}:${gameTime.minute.toString().padStart(2, "0")}`
-    });
+    if (!statsByDay.has(dateKey)) {
+      statsByDay.set(dateKey, []);
+    }
+    statsByDay.get(dateKey)!.push(stat);
+  });
+
+  // Encontrar el primer y último día con datos
+  const daysWithData = Array.from(statsByDay.keys()).sort();
+  if (daysWithData.length === 0) {
+    return { labels: [], data: [] };
   }
 
-  return { matches, finalValue: currentValue };
-};
+  // Usar la fecha y hora exacta de la primera partida
+  const firstMatchDate = new Date(firstMatch.date);
+  const today = new Date();
+  today.setHours(23, 59, 59, 999); // Asegurar que incluya todo el día de hoy
 
-// Generar datos de ejemplo para los últimos 30 días con rangos de LoL
-const generateRankData = () => {
-  const gameData = [];
-  const chartLabels = [];
-  let currentValue = rankToValue("Oro", "II", 20); // Empezar en Gold II 20LP
+  // Generar solo los días desde el primer día con datos hasta hoy
+  const chartLabels: string[] = [];
+  const gameData: Array<{ value: number, matches: any[] }> = [];
 
-  for (let i = 29; i >= 0; i--) {
-    const date = subDays(new Date(), i);
-    chartLabels.push(format(date, "dd MMM", { locale: es }));
+  // Empezar desde la fecha de la primera partida, pero mantener la lógica de días completos
+  let currentDate = new Date(firstMatchDate);
+  currentDate.setHours(0, 0, 0, 0); // Empezar desde medianoche del día de la primera partida
 
-    const dayResult = generateDayMatches(currentValue);
-    currentValue = dayResult.finalValue;
+  // Usar los datos de la primera partida como punto de referencia
+  // Si la primera partida no tiene tier/division/lp, usar valores por defecto
+  const firstTier = firstMatch.tier ? normalizeTier[firstMatch.tier.toUpperCase() as keyof typeof normalizeTier] : "Hierro";
+  const firstDivision = firstMatch.division || "IV";
+  const firstLp = firstMatch.lp || 0;
+  let previousValue = rankToValue(firstTier, firstDivision, firstLp);
 
-    gameData.push({
-      value: currentValue,
-      matches: dayResult.matches
-    });
+  while (currentDate <= today) {
+    const dateKey = format(currentDate, "yyyy-MM-dd");
+    const dayLabel = format(currentDate, "dd MMM", { locale: es });
+
+    chartLabels.push(dayLabel);
+
+    const dayStats = statsByDay.get(dateKey) || [];
+
+    // Si hay stats para este día, usar el último LP/tier del día
+    if (dayStats.length > 0) {
+      const lastStat = dayStats[dayStats.length - 1]!;
+      const tier = lastStat.tier ? normalizeTier[lastStat.tier.toUpperCase() as keyof typeof normalizeTier] : "Hierro";
+      const division = lastStat.division || "IV";
+      const lp = lastStat.lp || 0;
+
+      const value = rankToValue(tier, division, lp);
+      previousValue = value; // Actualizar el valor anterior
+
+      // Convertir stats a formato de matches
+      const matches = dayStats.map((stat) => {
+        const matchDate = new Date(stat.date);
+        const championName = Object.values(champions.value || {}).find(c => c.key === String(stat.champion_id))?.name;
+        return {
+          champion: championName,
+          score: {
+            kills: stat.kills,
+            deaths: stat.deaths,
+            assists: stat.assists
+          },
+          lpChange: 0, // No tenemos el cambio exacto de LP por partida
+          win: stat.result === 1,
+          value: value,
+          time: format(matchDate, "HH:mm"),
+          isRemake: stat.is_remake === 1,
+          isSurrender: stat.is_surrender === 1
+        };
+      });
+
+      gameData.push({ value, matches });
+    }
+    else {
+      // Si no hay datos para este día, usar el valor del día anterior
+      gameData.push({ value: previousValue, matches: [] });
+    }
+
+    // Avanzar al siguiente día
+    currentDate = new Date(currentDate);
+    currentDate.setDate(currentDate.getDate() + 1);
   }
 
   return { labels: chartLabels, data: gameData };
@@ -165,6 +203,15 @@ const generateRankData = () => {
 
 // Calcular el rango visible basado en los datos
 const calculateVisibleRange = (data: { value: number, matches: any[] }[]) => {
+  // Si no hay datos, usar valores por defecto
+  if (!data || data.length === 0) {
+    return {
+      min: 0,
+      max: 400,
+      tiers: LEAGUE_TIERS.slice(0, 1) // Solo mostrar Hierro
+    };
+  }
+
   const minValue = Math.min(...data.map(d => d.value));
   const maxValue = Math.max(...data.map(d => d.value));
 
@@ -182,7 +229,7 @@ const calculateVisibleRange = (data: { value: number, matches: any[] }[]) => {
   };
 };
 
-const { labels, data } = generateRankData();
+const { labels, data } = processRealStats(props.history);
 const visibleRange = calculateVisibleRange(data);
 
 const chartData = ref({
@@ -265,13 +312,15 @@ const chartOptions = ref({
             `Rango final: ${rankDisplay}`,
             `Cambio total: ${changeText} LP ${changeEmoji}`,
             "",
-            `📋 Partidas del día (${dayData.matches.length}):`
+            `📋 Partidas: ${dayData.matches.length}`
           ];
 
-          dayData.matches.forEach((match) => {
+          dayData.matches.forEach((match: any) => {
             const winIcon = match.win ? "✅" : "❌";
+            const remakeText = match.isRemake ? " (Remake)" : "";
+            const surrenderText = match.isSurrender ? " (Surrender)" : "";
             result.push(
-              `${match.time} - ${winIcon} ${match.champion}: ${match.score.kills}/${match.score.deaths}/${match.score.assists}`
+              `${match.time} - ${winIcon} ${match.champion}: ${match.score.kills}/${match.score.deaths}/${match.score.assists}${remakeText}${surrenderText}`
             );
           });
 

@@ -3,14 +3,11 @@ import type { ErrorCode } from "~~/server/utils/errors";
 declare global {
   type ErrorCode = typeof ErrorCode;
 
-  interface UserInfo {
+  interface UserInfo extends RankInfo {
     wins: number;
     losses: number;
     gameName?: string;
     tagLine?: string;
-    division?: string;
-    tier?: string;
-    lp?: number;
     updatedAt: number;
   }
 
@@ -28,10 +25,19 @@ declare global {
     duration: number;
   }
 
-  interface SnapshotData {
-    division: string;
-    tier: string;
-    lp: number;
+  interface History extends Omit<MatchData, "puuid">, RankInfo {}
+
+  interface RankInfo {
+    tier?: string | null;
+    division?: string | null;
+    lp?: number | null;
+  }
+
+  interface InfoResponse {
+    user?: UserInfo;
+    history?: History[];
+    highest?: RankInfo;
+    lowest?: RankInfo;
   }
 }
 

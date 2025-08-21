@@ -1,7 +1,8 @@
 <script setup lang="ts">
 defineProps<{
   user?: UserInfo;
-  stats?: any;
+  highest?: RankInfo;
+  lowest?: RankInfo;
 }>();
 
 const socials = [
@@ -62,8 +63,8 @@ const socials = [
         <div class="bg-neutral-950/85 border border-emerald-300/40 rounded-lg py-4 px-10 text-center flex flex-col items-center justify-center">
           <p class="md:text-lg text-emerald-200 font-semibold mb-1">ELO MÁS ALTO</p>
           <p class="md:text-xl text-emerald-200 font-bold flex items-center justify-center">
-            <img :src="`/images/lol/${stats?.highest?.rank?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
-            <span v-if="stats?.highest?.rank">{{ stats.highest.rank }} · {{ stats.highest.lp }} LP</span>
+            <img :src="`/images/lol/${highest?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
+            <span v-if="highest?.tier">{{ highest.tier }} · {{ highest.lp }} LP</span>
           </p>
         </div>
         <div class="flex flex-col gap-2">
@@ -91,8 +92,8 @@ const socials = [
         <div class="bg-neutral-950/85 border border-rose-300/40 rounded-lg py-4 px-10 text-center flex flex-col items-center justify-center">
           <p class="md:text-lg text-rose-200 font-semibold mb-1">ELO MÁS BAJO</p>
           <p class="md:text-xl text-rose-200 font-bold flex items-center justify-center">
-            <img :src="`/images/lol/${stats?.lowest?.rank || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
-            <span v-if="stats?.lowest?.rank">{{ stats.lowest.rank }} · {{ stats.lowest.lp }} LP</span>
+            <img :src="`/images/lol/${lowest?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
+            <span v-if="lowest?.tier">{{ lowest.tier }} · {{ lowest.lp }} LP</span>
           </p>
         </div>
       </div>

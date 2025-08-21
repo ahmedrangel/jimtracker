@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data: data } = await useFetch("/api/info");
+const { data } = await useFetch<InfoResponse>("/api/info");
 </script>
 
 <template>
@@ -9,7 +9,7 @@ const { data: data } = await useFetch("/api/info");
         <img src="/images/jimrsng.png" class="max-w-full max-h-full object-contain">
       </div>
     </div>
-    <UserStats :user="data?.user" :stats="data?.stats" />
-    <EloChart />
+    <UserStats :user="data?.user" :highest="data?.highest" :lowest="data?.lowest" />
+    <EloChart :history="data?.history" />
   </main>
 </template>

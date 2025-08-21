@@ -9,7 +9,7 @@ export default defineTask({
     result: {
       success: boolean;
       data?: MatchData[];
-      snapshot?: SnapshotData;
+      snapshot?: RankInfo;
     };
   }> {
     const config = useRuntimeConfig();
