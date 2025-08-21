@@ -30,26 +30,26 @@ function formatTimeToAMPM (time: string) {
 </script>
 
 <template>
-  <div :style="style" class="text-xs md:text-base absolute bg-slate-900/95 border border-blue-500 rounded-lg w-max overflow-hidden pt-1.5 px-0 pointer-events-none z-100">
+  <div :style="style" class="text-center text-xs md:text-base absolute bg-slate-900/95 border border-blue-500 rounded-lg w-max overflow-hidden pt-1.5 px-0 pointer-events-none z-100">
     <template v-if="content">
-      <div class="text-base md:text-lg font-bold mb-1.5 px-3">Fecha: {{ content.label }}</div>
-      <div class="mb-1 px-3 flex items-center">
+      <div class="text-base font-bold px-3">{{ content.label }}</div>
+      <div class="px-3 flex items-center justify-center font-semibold">
         <img :src="`/images/lol/${content.dayTier.toLowerCase()}.png`" class="w-10 h-10">
         <span>{{ content.rankDisplay }}</span>
       </div>
-      <div class="mb-1.5 px-3">
-        <span class="flex items-center gap-1">
+      <div class=" px-3 font-semibold mb-1.5">
+        <span class="flex items-center gap-1 justify-center">
           <span>
             {{ content.changeText }} LP
           </span>
-          <Icon :name="content.changeIcon" :class="content.changeColor" size="24" />
+          <Icon :name="content.changeIcon" :class="content.changeColor" size="26" />
         </span>
       </div>
-      <div class="mb-1.5 px-3">Partidas: {{ content.matches.length }}</div>
+      <div class="text-sm px-3 font-semibold bg-neutral-950 py-1">Partidas: {{ content.matches.length }}</div>
       <div v-for="match in content.matches" :key="match.championId + match.time" :class="match.isRemake ? 'bg-neutral-900' : match.win ? 'bg-green-900' : 'bg-red-900'">
         <span class="flex items-center px-3 py-1.5 gap-1.5">
           <img :src="match.championIconUrl" :alt="match.champion" class="w-6 h-6 rounded border border-slate-700" style="object-fit: cover;">
-          <span>{{ match.champion }}: {{ match.score.kills }}/{{ match.score.deaths }}/{{ match.score.assists }} · {{ formatTimeToAMPM(match.time) }}</span>
+          <span>{{ match.score.kills }}/{{ match.score.deaths }}/{{ match.score.assists }} · {{ formatTimeToAMPM(match.time) }}</span>
         </span>
       </div>
     </template>
