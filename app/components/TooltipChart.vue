@@ -30,9 +30,9 @@ function formatTimeToAMPM (time: string) {
 </script>
 
 <template>
-  <div :style="style" class="absolute bg-slate-900/95 border border-blue-500 rounded-lg w-max overflow-hidden pt-1.5 px-0 pointer-events-none z-100">
+  <div :style="style" class="text-xs md:text-base absolute bg-slate-900/95 border border-blue-500 rounded-lg w-max overflow-hidden pt-1.5 px-0 pointer-events-none z-100">
     <template v-if="content">
-      <div class="text-base font-bold mb-1.5 px-3">Fecha: {{ content.label }}</div>
+      <div class="text-base md:text-lg font-bold mb-1.5 px-3">Fecha: {{ content.label }}</div>
       <div class="mb-1 px-3 flex items-center">
         <img :src="`/images/lol/${content.dayTier.toLowerCase()}.png`" class="w-10 h-10">
         <span>{{ content.rankDisplay }}</span>
