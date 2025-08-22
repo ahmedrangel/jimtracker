@@ -38,7 +38,7 @@ const style = computed(() => ({
           </span>
         </div>
         <div class="text-sm px-3 font-semibold bg-neutral-950 py-1">Partidas: {{ content.matches.length }}</div>
-        <div v-for="match in content.matches" :key="match.championId + match.time" :class="match.isRemake ? 'bg-neutral-900' : match.win ? 'bg-green-900' : 'bg-red-900'">
+        <div v-for="match in content.matches" :key="match.championId + match.time" :class="match.isRemake ? 'bg-neutral-800' : match.win ? 'bg-green-900' : 'bg-red-900'">
           <span class="flex items-center px-3 py-1.5 gap-1.5">
             <img :src="match.championIconUrl" :alt="match.champion" class="w-6 h-6 rounded border border-slate-700" style="object-fit: cover;">
             <span>{{ match.score.kills }}/{{ match.score.deaths }}/{{ match.score.assists }} · {{ timeToAMPM(match.time) }}</span>
@@ -59,7 +59,7 @@ const style = computed(() => ({
             <Icon :name="content.changeIcon" :class="content.changeColor" size="26" />
           </span>
         </div>
-        <div class="flex items-center justify-center px-3 py-1.5 gap-1.5">
+        <div class="flex items-center justify-center px-3 py-1.5 gap-1.5" :class="content.match.isRemake ? 'bg-neutral-800' : content.match.win ? 'bg-green-900' : 'bg-red-900'">
           <img :src="content.match.championIconUrl" :alt="content.match.champion" class="w-12 h-12 rounded border border-slate-700" style="object-fit: cover;">
           <span>{{ content.match.score.kills }}/{{ content.match.score.deaths }}/{{ content.match.score.assists }}</span>
         </div>
