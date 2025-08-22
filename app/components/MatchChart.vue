@@ -232,17 +232,3 @@ const chartOptions = ref({
     />
   </div>
 </template>
-
-<style scoped>
-.chart-container {
-  position: relative;
-  height: 400px;
-  width: 100%;
-}
-
-@media (max-width: 768px) {
-  .chart-container {
-    height: 300px;
-  }
-}
-</style>
