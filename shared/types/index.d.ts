@@ -36,6 +36,7 @@ declare global {
   interface InfoResponse {
     user?: UserInfo;
     history?: History[];
+    recent?: History[];
     highest?: RankInfo;
     lowest?: RankInfo;
   }

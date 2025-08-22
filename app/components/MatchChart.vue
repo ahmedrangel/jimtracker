@@ -8,7 +8,7 @@ import { tooltipChart } from "../utils/tooltipChart";
 const { data: champions } = await useFetch("/api/champions");
 
 const props = defineProps<{
-  history?: History[];
+  matches?: History[];
 }>();
 
 ChartJS.register(
@@ -23,114 +23,49 @@ ChartJS.register(
 );
 
 // Función para procesar los datos reales de stats
-const processRealStats = (stats: typeof props.history) => {
+// Nueva función para procesar los datos: cada punto es una partida
+const processRealStats = (stats: typeof props.matches) => {
   if (!stats || stats.length === 0) {
-    // No hay datos disponibles
     return { labels: [], data: [] };
   }
-
-  // Ordenar stats por fecha para encontrar la primera partida
+  // Ordenar las partidas por fecha
   const sortedStats = [...stats].sort((a, b) => a.date - b.date);
-  const firstMatch = sortedStats[0]!;
-
-  // Agrupar stats por día
-  const statsByDay = new Map<string, typeof stats>();
-
-  stats.forEach((stat) => {
-    const date = new Date(stat.date);
-    const dateKey = format(date, "yyyy-MM-dd");
-
-    if (!statsByDay.has(dateKey)) {
-      statsByDay.set(dateKey, []);
-    }
-    statsByDay.get(dateKey)!.push(stat);
-  });
-
-  // Encontrar el primer y último día con datos
-  const daysWithData = Array.from(statsByDay.keys()).sort();
-  if (daysWithData.length === 0) {
-    return { labels: [], data: [] };
-  }
-
-  // Usar la fecha y hora exacta de la primera partida
-  const firstMatchDate = new Date(firstMatch.date);
-  const today = new Date();
-  today.setHours(23, 59, 59, 999); // Asegurar que incluya todo el día de hoy
-
-  // Generar solo los días desde el primer día con datos hasta hoy
   const chartLabels: string[] = [];
-  const gameData: Array<{ value: number, matches: any[] }> = [];
-
-  // Empezar desde la fecha de la primera partida, pero mantener la lógica de días completos
-  let currentDate = new Date(firstMatchDate);
-  currentDate.setHours(0, 0, 0, 0); // Empezar desde medianoche del día de la primera partida
-
-  // Usar los datos de la primera partida como punto de referencia
-  // Si la primera partida no tiene tier/division/lp, usar valores por defecto
-  const firstTier = firstMatch.tier ? normalizeTier[firstMatch.tier.toUpperCase() as keyof typeof normalizeTier] : "Hierro";
-  const firstDivision = firstMatch.division || "IV";
-  const firstLp = firstMatch.lp || 0;
-  let previousValue = rankToValue(firstTier, firstDivision, firstLp);
-
-  while (currentDate <= today) {
-    const dateKey = format(currentDate, "yyyy-MM-dd");
-    const dayLabel = format(currentDate, "dd MMM", { locale: es });
-
-    chartLabels.push(dayLabel);
-
-    const dayStats = statsByDay.get(dateKey) || [];
-
-    // Si hay stats para este día, usar el último LP/tier del día
-    if (dayStats.length > 0) {
-      // IMPORTANTE: Ordenar las partidas del día por fecha para obtener la última partida real
-      const sortedDayStats = dayStats.sort((a, b) => a.date - b.date);
-      const lastStat = sortedDayStats[sortedDayStats.length - 1]!;
-      const tier = lastStat.tier ? normalizeTier[lastStat.tier.toUpperCase() as keyof typeof normalizeTier] : "Hierro";
-      const division = lastStat.division || "IV";
-      const lp = lastStat.lp || 0;
-
-      const value = rankToValue(tier, division, lp);
-      previousValue = value; // Actualizar el valor anterior
-
-      // Convertir stats a formato de matches (también ordenados)
-      const matches = sortedDayStats.map((stat) => {
-        const matchDate = new Date(stat.date);
-        const championName = champions.value?.find(c => c.id === String(stat.champion_id))?.name;
-        return {
-          champion: championName,
-          championId: stat.champion_id,
-          score: {
-            kills: stat.kills,
-            deaths: stat.deaths,
-            assists: stat.assists
-          },
-          lpChange: 0, // No tenemos el cambio exacto de LP por partida
-          win: stat.result === 1,
-          value: value,
-          time: format(matchDate, "HH:mm"),
-          isRemake: stat.is_remake === 1,
-          isSurrender: stat.is_surrender === 1,
-          tier: stat.tier
-        };
-      });
-
-      gameData.push({ value, matches });
-    }
-    else {
-      // Si no hay datos para este día, usar el valor del día anterior
-      gameData.push({ value: previousValue, matches: [] });
-    }
-
-    // Avanzar al siguiente día
-    currentDate = new Date(currentDate);
-    currentDate.setDate(currentDate.getDate() + 1);
-  }
-
+  const gameData: Array<{ value: number, match: any }> = [];
+  sortedStats.forEach((stat) => {
+    const matchDate = new Date(stat.date);
+    // Etiqueta: fecha y hora de la partida
+    const label = format(matchDate, "dd MMM HH:mm", { locale: es });
+    chartLabels.push(label);
+    const tier = stat.tier ? normalizeTier[stat.tier.toUpperCase() as keyof typeof normalizeTier] : "Hierro";
+    const division = stat.division || "IV";
+    const lp = stat.lp || 0;
+    const value = rankToValue(tier, division, lp);
+    const championName = champions.value?.find(c => c.id === String(stat.champion_id))?.name;
+    const match = {
+      champion: championName,
+      championId: stat.champion_id,
+      score: {
+        kills: stat.kills,
+        deaths: stat.deaths,
+        assists: stat.assists
+      },
+      lpChange: 0,
+      win: stat.result === 1,
+      value: value,
+      time: format(matchDate, "HH:mm"),
+      isRemake: stat.is_remake === 1,
+      isSurrender: stat.is_surrender === 1,
+      tier: stat.tier,
+      date: matchDate
+    };
+    gameData.push({ value, match });
+  });
   return { labels: chartLabels, data: gameData };
 };
 
 // Calcular el rango visible basado en los datos
-const calculateVisibleRange = (data: { value: number, matches: any[] }[]) => {
+const calculateVisibleRange = (data: { value: number, match: any }[]) => {
   // Si no hay datos, usar valores por defecto
   if (!data || data.length === 0) {
     return {
@@ -157,7 +92,7 @@ const calculateVisibleRange = (data: { value: number, matches: any[] }[]) => {
   };
 };
 
-const { labels, data } = processRealStats(props.history);
+const { labels, data } = processRealStats(props.matches);
 const visibleRange = calculateVisibleRange(data);
 
 const chartData = ref({
@@ -208,7 +143,7 @@ const tooltipState = ref<{
     rankDisplay: string;
     changeText: string;
     changeIcon: string;
-    matches?: any[];
+    match?: any;
   }; }>({
   visible: false,
   x: 0,
@@ -232,7 +167,7 @@ const chartOptions = ref({
       position: "nearest",
       enabled: false,
       external: (context: any) => {
-        const tooltipData = tooltipChart(context, data, "daily");
+        const tooltipData = tooltipChart(context, data, "match");
         tooltipState.value = tooltipData;
       }
     }
@@ -244,6 +179,7 @@ const chartOptions = ref({
         borderDash: [2, 2]
       },
       ticks: {
+        display: false, // Oculta los labels del eje X
         color: "#fff",
         font: {
           size: 12
@@ -287,7 +223,7 @@ const chartOptions = ref({
   <div class="chart-container" style="position:relative;">
     <Line :data="chartData" :options="chartOptions" />
     <TooltipChart
-      type="daily"
+      type="match"
       :visible="tooltipState.visible"
       :x="tooltipState.x"
       :y="tooltipState.y"
@@ -296,3 +232,17 @@ const chartOptions = ref({
     />
   </div>
 </template>
+
+<style scoped>
+.chart-container {
+  position: relative;
+  height: 400px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .chart-container {
+    height: 300px;
+  }
+}
+</style>

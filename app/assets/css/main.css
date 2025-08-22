@@ -10,7 +10,7 @@
 }
 
 body {
-  background: linear-gradient(rgb(0 0 0 / 95%), rgb(31 8 8 / 80%), rgb(0 0 0 / 195%)), url("/images/background.jpg");
+  background: linear-gradient(rgb(0 0 0 / 95%), rgb(8 14 31 / 70%), rgb(0 0 0 / 195%)), url("/images/background.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -19,4 +19,16 @@ body {
 
 img {
   object-fit: contain;
+}
+
+.chart-container {
+  position: relative;
+  height: 400px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .chart-container {
+    height: 300px;
+  }
 }
