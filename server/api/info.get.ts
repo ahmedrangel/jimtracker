@@ -27,8 +27,9 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
     }
   }
 
-  const [history, highest, lowest] = await Promise.all([
-    await DB.select({
+  const [history, highest, lowest, recentMatches] = await Promise.all([
+    // History (últimos 30 días)
+    DB.select({
       match_id: tables.history.match_id,
       assists: tables.history.assists,
       kills: tables.history.kills,
@@ -50,6 +51,7 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
         )
       ).orderBy(desc(tables.history.date)).all(),
 
+    // Highest
     DB.select({
       tier: tables.history.snapshot_tier,
       division: tables.history.snapshot_division,
@@ -119,7 +121,28 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
           ELSE 4
         END`,
         asc(tables.history.snapshot_lp)
-      ).limit(1).get()
+      ).limit(1).get(),
+
+    // Recent Matches (últimas 100 partidas)
+    DB.select({
+      match_id: tables.history.match_id,
+      assists: tables.history.assists,
+      kills: tables.history.kills,
+      deaths: tables.history.deaths,
+      champion_id: tables.history.champion_id,
+      date: tables.history.date,
+      result: tables.history.result,
+      is_remake: tables.history.is_remake,
+      is_surrender: tables.history.is_surrender,
+      division: tables.history.snapshot_division,
+      tier: tables.history.snapshot_tier,
+      lp: tables.history.snapshot_lp,
+      duration: tables.history.duration
+    }).from(tables.history)
+      .where(eq(tables.history.puuid, config.riot.jimPuuid))
+      .orderBy(desc(tables.history.date))
+      .limit(100)
+      .all()
   ]);
 
   return {
@@ -131,6 +154,12 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
       lp: h.lp || undefined
     })),
     highest,
-    lowest
+    lowest,
+    recent: recentMatches.map(h => ({
+      ...h,
+      division: h.division || undefined,
+      tier: h.tier || undefined,
+      lp: h.lp || undefined
+    }))
   };
 });

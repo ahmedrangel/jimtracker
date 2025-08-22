@@ -1,4 +1,4 @@
-export const tooltipChart = (context: any, data: any) => {
+export const tooltipChart = (context: any, data: any, type: "daily" | "match") => {
   const { chart, tooltip } = context;
 
   if (tooltip.opacity === 0) {
@@ -25,7 +25,40 @@ export const tooltipChart = (context: any, data: any) => {
       }
     }
 
-    if (dayData && dayData.matches) {
+    if (type === "match" && dayData && dayData.match) {
+      const matchRank = valueToRank(dayData.match.value);
+      let rankDisplay = "";
+      if (matchRank.division) {
+        rankDisplay += ` ${matchRank.division}`;
+      }
+      rankDisplay += ` · ${matchRank.lp} LP`;
+
+      let totalChange = 0;
+
+      if (dataIndex > 0 && dayData.match) {
+        const previousMatch = data[dataIndex - 1]?.match;
+        if (previousMatch) {
+          totalChange = dayData.match.value - previousMatch.value;
+        }
+      }
+
+      const changeText = totalChange > 0 ? `+${Math.round(totalChange)}` : totalChange === 0 ? "0" : `${Math.round(totalChange)}`;
+      const changeIcon = totalChange > 0 ? "tabler:caret-up-filled" : totalChange < 0 ? "tabler:caret-down-filled" : "tabler:caret-up-down-filled";
+      const changeColor = totalChange > 0 ? "text-green-500" : totalChange < 0 ? "text-red-500" : "text-yellow-500";
+      tooltipContent = {
+        label: tooltip.dataPoints[0].label,
+        rankDisplay,
+        changeText,
+        changeIcon,
+        changeColor,
+        matchTier: matchRank.id,
+        match: {
+          ...dayData.match,
+          championIconUrl: `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${dayData.match.championId}.png`
+        }
+      };
+    }
+    else if (dayData && dayData.matches) {
       const currentRank = valueToRank(dayData.value);
       let rankDisplay = "";
       if (currentRank.division) {

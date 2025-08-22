@@ -25,6 +25,27 @@ export const normalizeTier = {
   CHALLENGER: "Retador"
 };
 
+// Convertir rango y LP a valor numérico para el gráfico
+export const rankToValue = (tier: string, division: string, lp: number): number => {
+  const tierIndex = LEAGUE_TIERS.findIndex(t => t.name.toLowerCase() === tier.toLowerCase());
+  if (tierIndex === -1) return 0;
+
+  let baseValue = tierIndex * 400; // 400 puntos por tier
+
+  if (tier.toLowerCase() === "maestro" || tier.toLowerCase() === "gran maestro" || tier.toLowerCase() === "retador") {
+    // Para rangos sin divisiones, usar directamente los LP
+    baseValue += lp;
+  }
+  else {
+    // Para rangos con divisiones
+    const divisionValues = { IV: 0, III: 100, II: 200, I: 300 };
+    baseValue += divisionValues[division as keyof typeof divisionValues] || 0;
+    baseValue += lp; // Añadir LP dentro de la división
+  }
+
+  return baseValue;
+};
+
 export const valueToRank = (value: number): { id: string, tier: string, division: string, lp: number } => {
   const tierIndex = Math.floor(value / 400);
   const remainder = value % 400;
