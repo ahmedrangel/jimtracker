@@ -27,6 +27,10 @@ img {
   width: 100%;
 }
 
+.iconify {
+  flex-shrink: 0;
+}
+
 @media (max-width: 768px) {
   .chart-container {
     height: 300px;

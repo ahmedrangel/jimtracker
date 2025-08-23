@@ -220,7 +220,7 @@ const chartOptions = ref({
 </script>
 
 <template>
-  <div class="chart-container" style="position:relative;">
+  <div class="chart-container">
     <Line :data="chartData" :options="chartOptions" />
     <TooltipChart
       type="match"
