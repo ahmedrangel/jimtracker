@@ -1,4 +1,4 @@
 export const SITE = {
-  title: "JimRising | Elo Tracker",
+  title: "JimRising Tracker",
   url: "https://jimtracker.pages.dev"
 };
