@@ -33,6 +33,7 @@ export default defineTask({
 
     const dataToInsert = [];
     const snapshot = [];
+    let userData;
 
     if (lastMatchData.response.length) {
       for (const match of lastMatchData.response) {
@@ -58,8 +59,8 @@ export default defineTask({
       }
       if (dataToInsert.length) {
         const user = await fetchUserData(config);
-        if (user) {
-          await storage.setItem<UserInfo>("info", user);
+        userData = user;
+        if (user.division && user.tier && user.lp) {
           for (const entry of dataToInsert) {
             snapshot.push({
               division: user.division,
@@ -74,6 +75,19 @@ export default defineTask({
             }).run();
           }
         }
+      }
+    }
+
+    const currentInfo = await storage.getItem<UserInfo>("info");
+    if (currentInfo) {
+      const liveData = await fetchLiveData(config);
+      if (!userData || liveData.isIngame !== currentInfo.isIngame || liveData.isLiveTwitch !== currentInfo.isLiveTwitch) {
+        const user = { ...currentInfo, ...liveData };
+        await storage.setItem<UserInfo>("info", user);
+      }
+      else if (userData) {
+        const user = { ...userData, ...liveData };
+        await storage.setItem<UserInfo>("info", user);
       }
     }
 

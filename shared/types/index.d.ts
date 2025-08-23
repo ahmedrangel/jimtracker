@@ -3,15 +3,20 @@ import type { ErrorCode } from "~~/server/utils/errors";
 declare global {
   type ErrorCode = typeof ErrorCode;
 
-  interface UserInfo extends RankInfo {
+  interface UserLeague extends RankInfo {
     wins: number;
     losses: number;
     gameName?: string;
     tagLine?: string;
+  }
+
+  interface LiveInfo {
     updatedAt: number;
     isLiveTwitch: boolean;
     isIngame: boolean;
   }
+
+  interface UserInfo extends UserLeague, LiveInfo {}
 
   interface MatchData {
     match_id: string;
