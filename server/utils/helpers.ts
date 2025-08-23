@@ -1,7 +1,6 @@
 import { Constants, LolApi, RiotApi } from "twisted";
-import { AppTokenAuthProvider } from "@twurple/auth";
-import { ApiClient } from "@twurple/api";
 import type { NitroRuntimeConfig } from "nitropack/types";
+import twitchApi from "./twitch";
 
 export const constants = {
   riotPuuid: "TCnuihsZ4HD4MLHJuV6Y_jccewxkjw62TAL_p905wJvysMBwyeVNmLLtqhiIkSYmec3_1xA9la8pJw",
@@ -30,16 +29,15 @@ export const fetchUserData = async (config: NitroRuntimeConfig): Promise<UserLea
 
 export const fetchLiveData = async (config: NitroRuntimeConfig): Promise<LiveInfo> => {
   const lol = new LolApi(config.riot.apiKey);
-  const twitchAuth = new AppTokenAuthProvider(config.twitch.clientId, config.twitch.clientSecret);
-  const twitch = new ApiClient({ authProvider: twitchAuth });
+  const twitch = new twitchApi(config.twitch.clientId, config.twitch.clientSecret);
   const [spectatorData, twitchStream] = await Promise.all([
-    lol.SpectatorV5.activeGame(constants.riotPuuid, Constants.Regions.LAT_NORTH),
-    twitch.streams.getStreamByUserId(constants.twitchId)
+    lol.SpectatorV5.activeGame(constants.riotPuuid, Constants.Regions.LAT_NORTH).catch(() => null),
+    twitch.getStreamByUserId(constants.twitchId).catch(() => null)
   ]);
 
   return {
     updatedAt: Date.now(),
-    isLiveTwitch: Boolean(twitchStream?.startDate),
+    isLiveTwitch: Boolean(twitchStream?.started_at),
     isIngame: Boolean(spectatorData?.response?.gameQueueConfigId === 420)
   };
 };

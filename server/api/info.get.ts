@@ -1,5 +1,5 @@
 export default defineEventHandler(async (event): Promise<InfoResponse> => {
-  if (import.meta.dev) return $fetch<InfoResponse>(`${SITE.url}/api/info`);
+  // if (import.meta.dev) return $fetch<InfoResponse>(`${SITE.url}/api/info`);
   const config = useRuntimeConfig(event);
   const storage = useStorage("cache");
   const DB = useDB();
