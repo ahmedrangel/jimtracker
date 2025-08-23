@@ -23,7 +23,7 @@ const twitch = socials.find(s => s.id === "twitch")!;
       <NuxtLink :to="`https://op.gg/es/lol/summoners/lan/${data?.user?.gameName}-${data?.user?.tagLine}/ingame`" target="_blank" external>
         <span class="px-3 py-2 rounded font-bold flex items-center gap-1 shadow-lg" :class="isIngame ? 'bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 text-white animate-pulse' : 'bg-neutral-400 text-black/70'">
           <Icon name="simple-icons:leagueoflegends" size="22" />
-          <span>{{ isIngame ? 'En partida' : 'Offline' }}</span>
+          <span>{{ isIngame ? 'En partida' : 'Fuera de partida' }}</span>
         </span>
       </NuxtLink>
     </div>
