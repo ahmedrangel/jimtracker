@@ -7,6 +7,12 @@ export const socials = [
     url: "https://www.twitch.tv/jimrsng"
   },
   {
+    id: "kick",
+    title: "Kick",
+    icon: "simple-icons:kick",
+    url: "https://kick.com/jimrisingtv"
+  },
+  {
     id: "x",
     title: "X",
     icon: "simple-icons:x",

@@ -13,6 +13,7 @@ declare global {
   interface LiveInfo {
     updatedAt: number;
     isLiveTwitch: boolean;
+    isLiveKick: boolean;
     isIngame: boolean;
   }
 

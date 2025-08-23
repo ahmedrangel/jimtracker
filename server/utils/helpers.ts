@@ -1,10 +1,12 @@
 import { Constants, LolApi, RiotApi } from "twisted";
 import type { NitroRuntimeConfig } from "nitropack/types";
+import { Kient, KientAppTokenAuthentication } from "kient";
 import twitchApi from "./twitch";
 
 export const constants = {
   riotPuuid: "TCnuihsZ4HD4MLHJuV6Y_jccewxkjw62TAL_p905wJvysMBwyeVNmLLtqhiIkSYmec3_1xA9la8pJw",
-  twitchId: "24534372"
+  twitchId: 24534372,
+  kickId: 32273811
 };
 
 export const fetchUserData = async (config: NitroRuntimeConfig): Promise<UserLeague> => {
@@ -30,14 +32,20 @@ export const fetchUserData = async (config: NitroRuntimeConfig): Promise<UserLea
 export const fetchLiveData = async (config: NitroRuntimeConfig): Promise<LiveInfo> => {
   const lol = new LolApi(config.riot.apiKey);
   const twitch = new twitchApi(config.twitch.clientId, config.twitch.clientSecret);
-  const [spectatorData, twitchStream] = await Promise.all([
+  const kient = new Kient();
+  const kientAuth = new KientAppTokenAuthentication({ clientId: config.kick.clientId, clientSecret: config.kick.clientSecret });
+  const kientToken = await kientAuth.generateToken();
+  kient.setAuthToken(kientToken.accessToken);
+  const [spectatorData, twitchStream, kickStream] = await Promise.all([
     lol.SpectatorV5.activeGame(constants.riotPuuid, Constants.Regions.LAT_NORTH).catch(() => null),
-    twitch.getStreamByUserId(constants.twitchId).catch(() => null)
+    twitch.getStreamByUserId(constants.twitchId).catch(() => null),
+    kient.api.channel.getById(constants.kickId).catch(() => null)
   ]);
 
   return {
     updatedAt: Date.now(),
     isLiveTwitch: Boolean(twitchStream?.started_at),
+    isLiveKick: Boolean(kickStream?.stream?.isLive),
     isIngame: Boolean(spectatorData?.response?.gameQueueConfigId === 420)
   };
 };
