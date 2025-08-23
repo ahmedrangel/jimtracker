@@ -34,7 +34,11 @@ export const fetchLiveData = async (config: NitroRuntimeConfig): Promise<LiveInf
   const twitch = new twitchApi(config.twitch.clientId, config.twitch.clientSecret);
   const kient = new Kient();
   const kientAuth = new KientAppTokenAuthentication({ clientId: config.kick.clientId, clientSecret: config.kick.clientSecret });
-  const kientToken = await kientAuth.generateToken();
+  const [twitchToken, kientToken] = await Promise.all([
+    twitch.generateToken(),
+    kientAuth.generateToken()
+  ]);
+  twitch.setAuthToken(twitchToken.access_token);
   kient.setAuthToken(kientToken.accessToken);
   const [spectatorData, twitchStream, kickStream] = await Promise.all([
     lol.SpectatorV5.activeGame(constants.riotPuuid, Constants.Regions.LAT_NORTH).catch(() => null),
