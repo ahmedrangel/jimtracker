@@ -46,8 +46,11 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     riot: {
-      apiKey: "",
-      jimPuuid: ""
+      apiKey: ""
+    },
+    twitch: {
+      clientId: "",
+      clientSecret: ""
     }
   },
 

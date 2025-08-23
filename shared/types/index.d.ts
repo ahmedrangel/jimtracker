@@ -9,6 +9,8 @@ declare global {
     gameName?: string;
     tagLine?: string;
     updatedAt: number;
+    isLiveTwitch: boolean;
+    isIngame: boolean;
   }
 
   interface MatchData {

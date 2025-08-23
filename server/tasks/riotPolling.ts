@@ -1,4 +1,4 @@
-import { Constants, LolApi, RiotApi } from "twisted";
+import { Constants, LolApi } from "twisted";
 
 export default defineTask({
   meta: {
@@ -24,9 +24,8 @@ export default defineTask({
     const latestMatchId = latestSavedMatch[0]?.match_id || null;
     const startTime = latestSavedMatch[0]?.date || null;
     const lol = new LolApi(config.riot.apiKey);
-    const riot = new RiotApi(config.riot.apiKey);
 
-    const lastMatchData = await lol.MatchV5.list(config.riot.jimPuuid, Constants.RegionGroups.AMERICAS, {
+    const lastMatchData = await lol.MatchV5.list(constants.riotPuuid, Constants.RegionGroups.AMERICAS, {
       queue: 420,
       ...startTime ? { count: 5 } : { count: 1 },
       ...startTime && { startTime: Math.round(startTime / 1000) }
@@ -42,10 +41,10 @@ export default defineTask({
         }
         const matchData = await lol.MatchV5.get(match, Constants.RegionGroups.AMERICAS);
         const matchResponse = matchData.response;
-        const participant = matchResponse.info.participants.find(p => p.puuid === config.riot.jimPuuid);
+        const participant = matchResponse.info.participants.find(p => p.puuid === constants.riotPuuid);
         dataToInsert.push({
           match_id: matchResponse.metadata.matchId,
-          puuid: config.riot.jimPuuid,
+          puuid: constants.riotPuuid,
           kills: participant?.kills || 0,
           deaths: participant?.deaths || 0,
           assists: participant?.assists || 0,
@@ -58,34 +57,20 @@ export default defineTask({
         });
       }
       if (dataToInsert.length) {
-        const [leagueSnapshot, accountData] = await Promise.all([
-          lol.League.byPUUID(config.riot.jimPuuid, Constants.Regions.LAT_NORTH),
-          riot.Account.getByPUUID(config.riot.jimPuuid, Constants.RegionGroups.AMERICAS)
-        ]);
-        const rankedData = leagueSnapshot.response.find(entry => entry.queueType === Constants.Queues.RANKED_SOLO_5x5);
-        if (rankedData) {
-          const user = {
-            wins: rankedData.wins,
-            losses: rankedData.losses,
-            gameName: accountData.response.gameName,
-            tagLine: accountData.response.tagLine,
-            division: rankedData.rank,
-            tier: rankedData.tier,
-            lp: rankedData.leaguePoints,
-            updatedAt: Date.now()
-          };
+        const user = await fetchUserData(config);
+        if (user) {
           await storage.setItem<UserInfo>("info", user);
           for (const entry of dataToInsert) {
             snapshot.push({
-              division: rankedData.rank,
-              tier: rankedData.tier,
-              lp: rankedData.leaguePoints
+              division: user.division,
+              tier: user.tier,
+              lp: user.lp
             });
             await DB.insert(tables.history).values({
               ...entry,
-              snapshot_division: rankedData.rank,
-              snapshot_tier: rankedData.tier,
-              snapshot_lp: rankedData.leaguePoints
+              snapshot_division: user.division,
+              snapshot_tier: user.tier,
+              snapshot_lp: user.lp
             }).run();
           }
         }

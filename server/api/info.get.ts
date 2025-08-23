@@ -1,5 +1,3 @@
-import { Constants, LolApi, RiotApi } from "twisted";
-
 export default defineEventHandler(async (event): Promise<InfoResponse> => {
   if (import.meta.dev) return $fetch<InfoResponse>(`${SITE.url}/api/info`);
   const config = useRuntimeConfig(event);
@@ -7,25 +5,8 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
   const DB = useDB();
   let info = (await storage.getItem<UserInfo>("info")) || undefined;
   if (!info) {
-    const riot = new RiotApi(config.riot.apiKey);
-    const lol = new LolApi(config.riot.apiKey);
-    const accountData = await riot.Account.getByPUUID(config.riot.jimPuuid, Constants.RegionGroups.AMERICAS);
-    const leagueData = await lol.League.byPUUID(config.riot.jimPuuid, Constants.Regions.LAT_NORTH);
-    const rankedData = leagueData.response.find(entry => entry.queueType === Constants.Queues.RANKED_SOLO_5x5);
-    if (rankedData) {
-      const user = {
-        wins: rankedData.wins,
-        losses: rankedData.losses,
-        gameName: accountData.response.gameName,
-        tagLine: accountData.response.tagLine,
-        division: rankedData.rank,
-        tier: rankedData.tier,
-        lp: rankedData.leaguePoints,
-        updatedAt: Date.now()
-      };
-      await storage.setItem<UserInfo>("info", user);
-      info = user;
-    }
+    info = await fetchUserData(config);
+    if (info) await storage.setItem<UserInfo>("info", info);
   }
 
   const [history, highest, lowest, recentMatches] = await Promise.all([
@@ -48,7 +29,7 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
       .where(
         and(
           gte(tables.history.date, Date.now() - 30 * 24 * 60 * 60 * 1000),
-          eq(tables.history.puuid, config.riot.jimPuuid)
+          eq(tables.history.puuid, constants.riotPuuid)
         )
       ).orderBy(desc(tables.history.date)).all(),
 
@@ -60,7 +41,7 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
     }).from(tables.history)
       .where(
         and(
-          eq(tables.history.puuid, config.riot.jimPuuid),
+          eq(tables.history.puuid, constants.riotPuuid),
           sql`${tables.history.snapshot_tier} IS NOT NULL`
         )
       )
@@ -96,7 +77,7 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
     }).from(tables.history)
       .where(
         and(
-          eq(tables.history.puuid, config.riot.jimPuuid),
+          eq(tables.history.puuid, constants.riotPuuid),
           sql`${tables.history.snapshot_tier} IS NOT NULL`
         )
       )
@@ -140,7 +121,7 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
       lp: tables.history.snapshot_lp,
       duration: tables.history.duration
     }).from(tables.history)
-      .where(eq(tables.history.puuid, config.riot.jimPuuid))
+      .where(eq(tables.history.puuid, constants.riotPuuid))
       .orderBy(desc(tables.history.date))
       .limit(100)
       .all()

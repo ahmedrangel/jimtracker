@@ -4,39 +4,6 @@ defineProps<{
   highest?: RankInfo;
   lowest?: RankInfo;
 }>();
-
-const socials = [
-  {
-    title: "Twitch",
-    icon: "simple-icons:twitch",
-    url: "https://www.twitch.tv/jimrsng"
-  },
-  {
-    title: "X",
-    icon: "simple-icons:x",
-    url: "https://x.com/JimRisingSC"
-  },
-  {
-    title: "Instagram",
-    icon: "simple-icons:instagram",
-    url: "https://www.instagram.com/Jimrising12"
-  },
-  {
-    title: "TikTok",
-    icon: "simple-icons:tiktok",
-    url: "https://www.tiktok.com/@jimrising"
-  },
-  {
-    title: "Facebook",
-    icon: "simple-icons:facebook",
-    url: "https://www.facebook.com/JimRisingSC2"
-  },
-  {
-    title: "YouTube",
-    icon: "simple-icons:youtube",
-    url: "https://www.youtube.com/channel/UCyLusY-ST8KxpXe1A67r37A"
-  }
-];
 </script>
 
 <template>
