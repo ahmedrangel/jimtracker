@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "jimtracker-worker",
+  "name": "jimtracker",
   "compatibility_date": "2025-08-19",
   "main": "dist/server/index.mjs",
   "compatibility_flags": ["nodejs_compat"],
