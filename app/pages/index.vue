@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { formatDistanceToNowStrict } from "date-fns";
+import { es } from "date-fns/locale";
+
 const { data } = await useFetch<InfoResponse>("/api/info");
 const tab = ref("");
 const isLiveTwitch = data.value?.user?.isLiveTwitch;
@@ -63,5 +66,8 @@ onMounted(() => {
     </div>
     <EloChart v-show="tab === 'elo'" :history="data?.history" />
     <MatchChart v-show="tab === 'match'" :matches="data?.recent" />
+    <div v-if="data?.user?.updatedAt" class="text-end text-xs mt-5">
+      <span>Actualizado: {{ formatDistanceToNowStrict(new Date(data?.user?.updatedAt), { addSuffix: true, locale: es }) }}</span>
+    </div>
   </main>
 </template>
