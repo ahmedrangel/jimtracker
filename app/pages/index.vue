@@ -4,7 +4,7 @@ import { es } from "date-fns/locale";
 
 const { data } = await useFetch<InfoResponse>("/api/info");
 console.info(data.value);
-const tab = ref("");
+const tab = ref("elo");
 const isLiveTwitch = data.value?.user?.isLiveTwitch;
 const isLiveKick = data.value?.user?.isLiveKick;
 const isIngame = data.value?.user?.isIngame;
