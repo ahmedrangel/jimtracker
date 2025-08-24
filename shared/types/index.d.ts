@@ -47,6 +47,8 @@ declare global {
     recent?: History[];
     highest?: RankInfo;
     lowest?: RankInfo;
+    mostPlayed?: any;
+    highestWinRate?: any;
   }
 }
 

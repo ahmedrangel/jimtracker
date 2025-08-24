@@ -3,6 +3,7 @@ import { formatDistanceToNowStrict } from "date-fns";
 import { es } from "date-fns/locale";
 
 const { data } = await useFetch<InfoResponse>("/api/info");
+console.info(data.value);
 const tab = ref("");
 const isLiveTwitch = data.value?.user?.isLiveTwitch;
 const isLiveKick = data.value?.user?.isLiveKick;
