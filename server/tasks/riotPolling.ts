@@ -60,7 +60,7 @@ export default defineTask({
       if (dataToInsert.length) {
         const user = await fetchUserData(config);
         userData = user;
-        if (user.division && user.tier && user.lp) {
+        if (user.division && user.tier) {
           for (const entry of dataToInsert) {
             snapshot.push({
               division: user.division,
