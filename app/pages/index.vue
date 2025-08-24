@@ -19,6 +19,33 @@ onMounted(() => {
   const savedTab = localStorage.getItem("preferred-tab") || "elo";
   if (savedTab === "match" || savedTab === "elo") tab.value = savedTab;
 });
+
+useSeoMeta({
+  title: SITE.title,
+  ogTitle: SITE.title,
+  description: SITE.description,
+  ogDescription: SITE.description,
+  ogImage: undefined,
+  twitterImage: undefined,
+  twitterCard: "summary_large_image",
+  twitterTitle: SITE.title,
+  twitterDescription: SITE.description
+});
+
+useHead({
+  link: [
+    { rel: "canonical", href: SITE.url }
+  ],
+  script: [{
+    type: "application/ld+json",
+    innerHTML: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": SITE.name,
+      "url": SITE.url
+    })
+  }]
+});
 </script>
 
 <template>

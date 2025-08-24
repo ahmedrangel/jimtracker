@@ -14,7 +14,8 @@ export default defineNuxtConfig({
       },
       link: [],
       meta: [
-        { name: "robots", content: "index, follow" }
+        { name: "robots", content: "index, follow" },
+        { property: "og:site_name", content: SITE.name }
       ]
     }
   },
