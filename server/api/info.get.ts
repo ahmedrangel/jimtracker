@@ -13,7 +13,7 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
     await storage.setItem<UserInfo>("info", info);
   }
 
-  const [history, highest, lowest, recentMatches] = await Promise.all([
+  const [history, highest, lowest, recent] = await Promise.all([
     // History (últimos 30 días)
     DB.select({
       match_id: tables.history.match_id,
@@ -133,19 +133,9 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
 
   return {
     user: info,
-    history: history.map(h => ({
-      ...h,
-      division: h.division || undefined,
-      tier: h.tier || undefined,
-      lp: h.lp || undefined
-    })),
+    history,
     highest,
     lowest,
-    recent: recentMatches.map(h => ({
-      ...h,
-      division: h.division || undefined,
-      tier: h.tier || undefined,
-      lp: h.lp || undefined
-    }))
+    recent
   };
 });
