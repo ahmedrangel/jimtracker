@@ -68,7 +68,7 @@ useHead({
           <span>{{ isLiveKick ? 'En vivo' : 'Offline' }}</span>
         </span>
       </NuxtLink>
-      <NuxtLink :to="`https://op.gg/es/lol/summoners/lan/${data?.user?.gameName}-${data?.user?.tagLine}/ingame`" target="_blank" external>
+      <NuxtLink :to="`https://op.gg/es/lol/summoners/lan/${data?.user?.gameName}-${data?.user?.tagLine}/ingame`" target="_blank" external :class="{ 'pointer-events-none': !isIngame }">
         <span class="text-sm px-3 py-2 rounded font-bold flex items-center justify-center gap-1 shadow-lg" :class="isIngame ? 'bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 text-white animate-pulse' : 'bg-blue-100/70 text-black/70'">
           <Icon name="simple-icons:leagueoflegends" size="22" />
           <span>{{ isIngame ? 'En partida' : 'Fuera de partida' }}</span>
