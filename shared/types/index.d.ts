@@ -50,6 +50,31 @@ declare global {
     mostPlayed?: any;
     highestWinRate?: any;
   }
+
+  interface ChartMatchData extends History {
+    value: number;
+    champion: string;
+  }
+
+  interface ChartXData {
+    value: number;
+    data: ChartMatchData | ChartMatchData[];
+  }
+
+  interface ChartLabelsAndData {
+    labels: string[];
+    data: ChartXData[];
+  }
+
+  interface TooltipContent {
+    label: string;
+    rankDisplay: string;
+    changeText: string;
+    changeIcon: string;
+    changeColor: string;
+    dataTier: string;
+    data: any;
+  }
 }
 
 export {};

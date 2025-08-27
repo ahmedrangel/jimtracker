@@ -16,7 +16,7 @@ defineProps<{
       </div>
       <h2 class="text-2xl font-semibold">EST JimRising <span class="text-slate-400">#LANNN</span></h2>
     </div>
-    <div class="mb-5 text-center bg-neutral-950/85 border border-slate-400/40 flex flex-col items-center w-[fit-content] place-self-center px-6 py-3 sm:px-10 sm:py-5 rounded">
+    <div class="mb-2 text-center bg-neutral-950/85 border border-slate-400/40 flex flex-col items-center w-[fit-content] place-self-center px-6 py-3 sm:px-10 sm:py-5 rounded">
       <p class="md:text-xl font-semibold">ELO ACTUAL</p>
       <p class="text-lg md:text-2xl font-bold flex flex-wrap items-center justify-center">
         <img :src="`/images/lol/${user?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">

@@ -3,7 +3,8 @@ import { formatDistanceToNowStrict } from "date-fns";
 import { es } from "date-fns/locale";
 
 const { data } = await useFetch<InfoResponse>("/api/info");
-console.info(data.value);
+const { data: champions } = await useFetch("/api/champions");
+
 const tab = ref("elo");
 const isLiveTwitch = data.value?.user?.isLiveTwitch;
 const isLiveKick = data.value?.user?.isLiveKick;
@@ -92,8 +93,7 @@ useHead({
         Últimos 30 días
       </button>
     </div>
-    <EloChart v-show="tab === 'elo'" :history="data?.history" />
-    <MatchChart v-show="tab === 'match'" :matches="data?.recent" />
+    <EloChart :history="tab === 'elo' ? data?.history : data?.recent" :champions="champions" :type="tab === 'elo' ? 'daily' : 'match'" />
     <div v-if="data?.user?.updatedAt" class="text-end text-xs mt-5">
       <span>Actualizado: {{ formatDistanceToNowStrict(new Date(data?.user?.updatedAt), { addSuffix: true, locale: es }) }}</span>
     </div>

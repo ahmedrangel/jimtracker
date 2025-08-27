@@ -1,20 +1,24 @@
-export const tooltipChart = (context: any, data: any, type: "daily" | "match") => {
+import type { Chart, TooltipModel } from "chart.js";
+
+export const tooltipChart = (context: { chart: Chart, tooltip: TooltipModel<"line"> }, data: ChartXData[], type: "daily" | "match") => {
   const { chart, tooltip } = context;
-
-  if (tooltip.opacity === 0) {
-    return {
-      visible: false,
-      x: 0,
-      y: 0,
-      transform: "translate(-50%, -50%)"
-    };
-  }
-
   let tooltipTransform = "translate(-50%, -50%)";
   let tooltipContent;
 
-  if (tooltip.dataPoints && tooltip.dataPoints.length > 0) {
-    const dataIndex = tooltip.dataPoints[0].dataIndex;
+  if (tooltip.opacity === 0) {
+    return {
+      style: {
+        opacity: 0,
+        left: "50%",
+        top: "50%",
+        transform: tooltipTransform
+      }
+    };
+  }
+
+  if (tooltip?.dataPoints?.length) {
+    const label = tooltip.dataPoints[0]!.label;
+    const dataIndex = tooltip?.dataPoints[0]!.dataIndex;
     const dayData = data[dataIndex];
     if (data.length > 1) {
       if (dataIndex <= Math.floor((data.length - 1) / 2)) {
@@ -25,8 +29,9 @@ export const tooltipChart = (context: any, data: any, type: "daily" | "match") =
       }
     }
 
-    if (type === "match" && dayData && dayData.match) {
-      const matchRank = valueToRank(dayData.match.value);
+    if (type === "match" && dayData && dayData.data) {
+      const matchData = dayData.data as ChartMatchData;
+      const matchRank = valueToTier(matchData.value);
       let rankDisplay = "";
       if (matchRank.division) {
         rankDisplay += ` ${matchRank.division}`;
@@ -35,10 +40,10 @@ export const tooltipChart = (context: any, data: any, type: "daily" | "match") =
 
       let totalChange = 0;
 
-      if (dataIndex > 0 && dayData.match) {
-        const previousMatch = data[dataIndex - 1]?.match;
+      if (dataIndex && dayData.data) {
+        const previousMatch = data[dataIndex - 1]?.data as ChartMatchData;
         if (previousMatch) {
-          totalChange = dayData.match.value - previousMatch.value;
+          totalChange = matchData.value - previousMatch.value;
         }
       }
 
@@ -46,20 +51,18 @@ export const tooltipChart = (context: any, data: any, type: "daily" | "match") =
       const changeIcon = totalChange > 0 ? "tabler:caret-up-filled" : totalChange < 0 ? "tabler:caret-down-filled" : "tabler:caret-up-down-filled";
       const changeColor = totalChange > 0 ? "text-green-500" : totalChange < 0 ? "text-red-500" : "text-yellow-500";
       tooltipContent = {
-        label: tooltip.dataPoints[0].label,
+        label,
         rankDisplay,
         changeText,
         changeIcon,
         changeColor,
-        matchTier: matchRank.id,
-        match: {
-          ...dayData.match,
-          championIconUrl: `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${dayData.match.championId}.png`
-        }
+        dataTier: matchRank.id,
+        data: { ...dayData.data }
       };
     }
-    else if (dayData && dayData.matches) {
-      const currentRank = valueToRank(dayData.value);
+    else if (type === "daily" && dayData && dayData.data) {
+      const matchesData = dayData.data as ChartMatchData[];
+      const currentRank = valueToTier(dayData.value);
       let rankDisplay = "";
       if (currentRank.division) {
         rankDisplay += ` ${currentRank.division}`;
@@ -67,7 +70,7 @@ export const tooltipChart = (context: any, data: any, type: "daily" | "match") =
       rankDisplay += ` · ${currentRank.lp} LP`;
 
       let totalChange = 0;
-      if (dataIndex > 0 && dayData.matches.length > 0) {
+      if (dataIndex && matchesData?.length) {
         const previousDayFinalValue = data[dataIndex - 1]!.value;
         const currentDayFinalValue = dayData.value;
         totalChange = currentDayFinalValue - previousDayFinalValue;
@@ -77,26 +80,27 @@ export const tooltipChart = (context: any, data: any, type: "daily" | "match") =
       const changeIcon = totalChange > 0 ? "tabler:caret-up-filled" : totalChange < 0 ? "tabler:caret-down-filled" : "tabler:caret-up-down-filled";
       const changeColor = totalChange > 0 ? "text-green-500" : totalChange < 0 ? "text-red-500" : "text-yellow-500";
       tooltipContent = {
-        label: tooltip.dataPoints[0].label,
+        label,
         rankDisplay,
         changeText,
         changeIcon,
         changeColor,
-        dayTier: currentRank.id,
-        matches: dayData.matches.toReversed().map((match: any) => ({
-          ...match,
-          championIconUrl: `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${match.championId}.png`
-        }))
+        dataTier: currentRank.id,
+        data: matchesData.toReversed().map(match => ({ ...match }))
       };
     }
   }
 
   const { offsetLeft: positionX, offsetTop: positionY } = chart.canvas;
+  const x = positionX + tooltip.caretX;
+  const y = positionY + tooltip.caretY;
   return {
-    visible: true,
-    x: positionX + tooltip.caretX,
-    y: positionY + tooltip.caretY,
-    transform: tooltipTransform,
+    style: {
+      opacity: 1,
+      left: `${x}px`,
+      top: `${y}px`,
+      transform: tooltipTransform
+    },
     content: tooltipContent
   };
 };
