@@ -73,7 +73,7 @@ declare global {
     changeIcon: string;
     changeColor: string;
     dataTier: string;
-    data: any;
+    data: ChartMatchData | ChartMatchData[];
   }
 }
 
