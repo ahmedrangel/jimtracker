@@ -1,5 +1,5 @@
 import { Constants, LolApi, RiotApi } from "twisted";
-import type { NitroRuntimeConfig } from "nitropack/types";
+import type { RuntimeConfig } from "nuxt/schema";
 import { Kient, KientAppTokenAuthentication } from "kient";
 import twitchApi from "./twitch";
 
@@ -9,7 +9,7 @@ export const constants = {
   kickId: 32273811
 };
 
-export const fetchUserData = async (config: NitroRuntimeConfig): Promise<UserLeague> => {
+export const fetchUserData = async (config: RuntimeConfig): Promise<UserLeague> => {
   const riot = new RiotApi(config.riot.apiKey);
   const lol = new LolApi(config.riot.apiKey);
   const [accountData, leagueData] = await Promise.all([
@@ -29,7 +29,7 @@ export const fetchUserData = async (config: NitroRuntimeConfig): Promise<UserLea
   };
 };
 
-export const fetchLiveData = async (config: NitroRuntimeConfig): Promise<LiveInfo> => {
+export const fetchLiveData = async (config: RuntimeConfig): Promise<LiveInfo> => {
   const lol = new LolApi(config.riot.apiKey);
   const twitch = new twitchApi(config.twitch.clientId, config.twitch.clientSecret);
   const kient = new Kient();

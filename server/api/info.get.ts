@@ -35,7 +35,7 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
           gte(tables.history.date, Date.now() - 30 * 24 * 60 * 60 * 1000),
           eq(tables.history.puuid, constants.riotPuuid)
         )
-      ).orderBy(desc(tables.history.date)).all(),
+      ).orderBy(desc(tables.history.date)).all() as Promise<History[]>,
 
     // Highest
     DB.select({
@@ -128,7 +128,7 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
       .where(eq(tables.history.puuid, constants.riotPuuid))
       .orderBy(desc(tables.history.date))
       .limit(100)
-      .all(),
+      .all() as Promise<History[]>,
 
     // Most Played champion and calculated KDA average
     DB.select({
