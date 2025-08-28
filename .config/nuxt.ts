@@ -66,6 +66,11 @@ export default defineNuxtConfig({
     twitch: {
       clientId: "",
       clientSecret: ""
+    },
+    webhook: {
+      twitch: {
+        secretKey: ""
+      }
     }
   },
 

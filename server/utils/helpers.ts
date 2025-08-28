@@ -1,6 +1,5 @@
 import { Constants, LolApi, RiotApi } from "twisted";
 import type { RuntimeConfig } from "nuxt/schema";
-import twitchApi from "./twitch";
 
 export const fetchUserData = async (config: RuntimeConfig): Promise<UserLeague> => {
   const riot = new RiotApi(config.riot.apiKey);
@@ -24,19 +23,12 @@ export const fetchUserData = async (config: RuntimeConfig): Promise<UserLeague> 
 
 export const fetchLiveData = async (config: RuntimeConfig): Promise<LiveInfo> => {
   const lol = new LolApi(config.riot.apiKey);
-  const twitch = new twitchApi(config.twitch.clientId, config.twitch.clientSecret);
-  const [twitchToken] = await Promise.all([
-    twitch.generateToken()
-  ]);
-  twitch.setAuthToken(twitchToken.access_token);
-  const [spectatorData, twitchStream] = await Promise.all([
-    lol.SpectatorV5.activeGame(constants.riotPuuid, Constants.Regions.LAT_NORTH).catch(() => null),
-    twitch.getStreamByUserId(constants.twitchId).catch(() => null)
+  const [spectatorData] = await Promise.all([
+    lol.SpectatorV5.activeGame(constants.riotPuuid, Constants.Regions.LAT_NORTH).catch(() => null)
   ]);
 
   return {
     updatedAt: Date.now(),
-    isLiveTwitch: Boolean(twitchStream?.started_at),
     isIngame: Boolean(spectatorData?.response?.gameQueueConfigId === 420)
   };
 };

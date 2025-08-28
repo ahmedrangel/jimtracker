@@ -29,7 +29,9 @@
     "lint:eslint:inspect": "pnpx @eslint/config-inspector --config .config/eslint.mjs",
     "lint:stylelint": "stylelint \"**/*.{css,scss}\" --config .config/stylelint.json",
     "test:types": "vue-tsc -b --noEmit",
-    "db:migrate": "drizzle-kit generate --config=.config/drizzle.ts"
+    "db:migrate": "drizzle-kit generate --config=.config/drizzle.ts",
+    "kick:subscribe": "node scripts/subscribe/kick.ts",
+    "twitch:subscribe": "node scripts/subscribe/twitch.ts"
   },
   "devDependencies": {
     "@iconify-json/simple-icons": "^1.2.49",
@@ -38,11 +40,14 @@
     "@nuxt/ui": "^3.3.2",
     "@nuxthub/core": "^0.9.0",
     "@nuxtjs/sitemap": "^7.4.3",
+    "@twurple/api": "^7.4.0",
+    "@twurple/auth": "^7.4.0",
     "chart.js": "^4.5.0",
     "date-fns": "^4.1.0",
     "drizzle-kit": "^0.31.4",
     "drizzle-orm": "^0.44.5",
     "eslint": "^9.34.0",
+    "kient": "^2.3.0",
     "nuxt": "^4.0.3",
     "nuxt-webhook-validators": "^0.2.3",
     "sass-embedded": "^1.91.0",
