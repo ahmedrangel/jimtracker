@@ -39,9 +39,9 @@ const chartData = computed((): ChartData<"line"> => ({
         const tier = LEAGUE_TIERS.find(t => t.name === rank.tier);
         return tier?.color || "#3B82F6";
       }),
-      pointBorderColor: "#ffffffaa",
+      pointBorderColor: "#ffffff77",
       pointBorderWidth: 1,
-      pointRadius: 5,
+      pointRadius: 3,
       pointHoverRadius: 12,
       pointHoverBorderColor: "#ffffffaa",
       pointHoverBorderWidth: 2,
