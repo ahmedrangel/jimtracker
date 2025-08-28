@@ -94,8 +94,15 @@ useHead({
       </button>
     </div>
     <EloChart :history="tab === 'elo' ? data?.history : data?.recent" :champions="champions" :type="tab === 'elo' ? 'daily' : 'match'" />
-    <div v-if="data?.user?.updatedAt" class="text-end text-xs mt-5">
-      <span>Actualizado: {{ formatDistanceToNowStrict(new Date(data?.user?.updatedAt), { addSuffix: true, locale: es }) }}</span>
+    <div v-if="data?.user?.updatedAt" class="text-xs my-5 flex flex-col">
+      <span class="text-end mb-5">Última actualización: <span class="text-yellow-300">{{ formatDistanceToNowStrict(new Date(data?.user?.updatedAt), { addSuffix: true, locale: es }) }}</span></span>
+      <div class="flex items-center justify-center gap-1">
+        <Icon name="ph:info-bold" size="20" class="text-blue-400" />
+        <span>Los datos históricos de elo exceptuando el elo actual, solo considera las partidas registradas a partir del 19 de agosto de 2025, fecha en la que se inició la recopilación de datos.</span>
+      </div>
+    </div>
+    <div class="text-center text-sm">
+      <span>Creado por <NuxtLink href="https://github.com/ahmedrangel" target="_blank" external class="text-emerald-300 font-semibold hover:underline">Ahmed Rangel</NuxtLink> con ❤️</span>
     </div>
   </main>
 </template>
