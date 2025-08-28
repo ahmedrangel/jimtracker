@@ -66,10 +66,6 @@ export default defineNuxtConfig({
     twitch: {
       clientId: "",
       clientSecret: ""
-    },
-    kick: {
-      clientId: "",
-      clientSecret: ""
     }
   },
 
