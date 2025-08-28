@@ -98,10 +98,10 @@ useHead({
       <span class="text-end mb-5">Última actualización: <span class="text-yellow-300">{{ formatDistanceToNowStrict(new Date(data?.user?.updatedAt), { addSuffix: true, locale: es }) }}</span></span>
       <div class="flex items-center justify-center gap-1">
         <Icon name="ph:info-bold" size="20" class="text-blue-400" />
-        <span>Los datos históricos de elo exceptuando el elo actual, solo considera las partidas registradas a partir del 19 de agosto de 2025, fecha en la que se inició la recopilación de información de las partidas.</span>
+        <span class="text-slate-300">Los datos históricos de elo solo considera las partidas registradas a partir del 19 de agosto de 2025, fecha en la que se inició la recopilación de información de las partidas.</span>
       </div>
     </div>
-    <div class="text-center text-sm">
+    <div class="text-center text-sm text-slate-300">
       <span>Creado por <NuxtLink href="https://github.com/ahmedrangel" target="_blank" external class="text-emerald-300 font-semibold hover:underline">Ahmed Rangel</NuxtLink> con ❤️</span>
     </div>
   </main>
