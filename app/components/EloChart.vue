@@ -93,7 +93,8 @@ const chartOptions = computed((): ChartOptions<"line"> => ({
       ticks: {
         color: "#fff",
         font: {
-          size: 12
+          size: 12,
+          family: "Arial, sans-serif"
         }
       }
     },
@@ -106,7 +107,8 @@ const chartOptions = computed((): ChartOptions<"line"> => ({
       ticks: {
         color: "#fff",
         font: {
-          size: 12
+          size: 12,
+          family: "Arial, sans-serif"
         },
         callback: function (value: string | number) {
           const numValue = Number(value);
@@ -115,7 +117,7 @@ const chartOptions = computed((): ChartOptions<"line"> => ({
           const rank = valueToTier(numValue);
           let display = rank.tier;
           if (rank.division) {
-            display += ` ${rank.division}`;
+            display += `${romanNumerals[rank.division]}`;
           }
           return display;
         },

@@ -2,17 +2,24 @@ import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
 export const LEAGUE_TIERS = [
-  { id: "IRON", name: "Hierro", divisions: ["IV", "III", "II", "I"], color: "#6B4E24" },
-  { id: "BRONZE", name: "Bronce", divisions: ["IV", "III", "II", "I"], color: "#A0522D" },
-  { id: "SILVER", name: "Plata", divisions: ["IV", "III", "II", "I"], color: "#C0C0C0" },
-  { id: "GOLD", name: "Oro", divisions: ["IV", "III", "II", "I"], color: "#FFD700" },
-  { id: "PLATINUM", name: "Platino", divisions: ["IV", "III", "II", "I"], color: "#40E0D0" },
-  { id: "EMERALD", name: "Esmeralda", divisions: ["IV", "III", "II", "I"], color: "#50C878" },
-  { id: "DIAMOND", name: "Diamante", divisions: ["IV", "III", "II", "I"], color: "#B9F2FF" },
-  { id: "MASTER", name: "Maestro", divisions: [""], color: "#9932CC" },
-  { id: "GRANDMASTER", name: "Gran Maestro", divisions: [""], color: "#DC143C" },
-  { id: "CHALLENGER", name: "Retador", divisions: [""], color: "#F7931E" }
+  { id: "IRON", name: "I", divisions: ["IV", "III", "II", "I"], color: "#6B4E24" },
+  { id: "BRONZE", name: "B", divisions: ["IV", "III", "II", "I"], color: "#A0522D" },
+  { id: "SILVER", name: "S", divisions: ["IV", "III", "II", "I"], color: "#C0C0C0" },
+  { id: "GOLD", name: "G", divisions: ["IV", "III", "II", "I"], color: "#FFD700" },
+  { id: "PLATINUM", name: "P", divisions: ["IV", "III", "II", "I"], color: "#40E0D0" },
+  { id: "EMERALD", name: "E", divisions: ["IV", "III", "II", "I"], color: "#50C878" },
+  { id: "DIAMOND", name: "D", divisions: ["IV", "III", "II", "I"], color: "#B9F2FF" },
+  { id: "MASTER", name: "M", divisions: [""], color: "#9932CC" },
+  { id: "GRANDMASTER", name: "GM", divisions: [""], color: "#DC143C" },
+  { id: "CHALLENGER", name: "CH", divisions: [""], color: "#F7931E" }
 ];
+
+export const romanNumerals: { [key: string]: number } = {
+  I: 1,
+  II: 2,
+  III: 3,
+  IV: 4
+};
 
 const divisionValues = { IV: 0, III: 100, II: 200, I: 300 };
 
@@ -27,7 +34,7 @@ export const tierToValue = (tier: string, division: string, lp: number): number 
 
   const baseValue = tierIndex * 400; // 400 puntos por tier
 
-  if (tier.toLowerCase() === "maestro" || tier.toLowerCase() === "gran maestro" || tier.toLowerCase() === "retador") {
+  if (tier.toLowerCase() === "m" || tier.toLowerCase() === "gm" || tier.toLowerCase() === "ch") {
     return baseValue + lp;
   }
 
@@ -40,16 +47,16 @@ export const valueToTier = (value: number): { id: string, tier: string, division
   const remainder = value % 400;
 
   if (tierIndex >= LEAGUE_TIERS.length) {
-    return { id: "CHALLENGER", tier: "Retador", division: "", lp: Math.min(remainder, 9999) };
+    return { id: "CHALLENGER", tier: "CH", division: "", lp: Math.min(remainder, 9999) };
   }
 
   const tier = LEAGUE_TIERS[tierIndex];
 
   if (!tier) {
-    return { id: "IRON", tier: "Hierro", division: "IV", lp: 0 };
+    return { id: "IRON", tier: "I", division: "IV", lp: 0 };
   }
 
-  if (tier.name === "Maestro" || tier.name === "Gran Maestro" || tier.name === "Retador") {
+  if (tier.name === "M" || tier.name === "GM" || tier.name === "CH") {
     return { id: tier.id, tier: tier.name, division: "", lp: Math.min(remainder, 9999) };
   }
 
@@ -120,7 +127,7 @@ export const processChartData = (data: History[], champions: { id: string, name:
       const dayMatches = matchPerDay.get(dateKey)?.sort((a, b) => a.date - b.date) || [];
       if (dayMatches.length) {
         const lastMatch = dayMatches[dayMatches.length - 1]!;
-        const tier = lastMatch.tier ? getTierName(lastMatch.tier) : "Hierro";
+        const tier = lastMatch.tier ? getTierName(lastMatch.tier) : "I";
         const division = lastMatch.division || "IV";
         const lp = lastMatch.lp || 0;
 
@@ -139,7 +146,7 @@ export const processChartData = (data: History[], champions: { id: string, name:
       }
       else {
       // Si no hay datos para este día, usar el valor del día anterior
-        const previousValue = dayData.length ? dayData[dayData.length - 1]!.value : tierToValue("Hierro", "IV", 0);
+        const previousValue = dayData.length ? dayData[dayData.length - 1]!.value : tierToValue("I", "IV", 0);
         dayData.push({ value: previousValue, data: [] });
       }
     }
@@ -152,7 +159,7 @@ export const processChartData = (data: History[], champions: { id: string, name:
     for (const stat of matchesData) {
       const label = "";
       chartLabels.push(label);
-      const tier = stat.tier ? getTierName(stat.tier) : "Hierro";
+      const tier = stat.tier ? getTierName(stat.tier) : "I";
       const division = stat.division || "IV";
       const lp = stat.lp || 0;
       const value = tierToValue(tier, division, lp);
