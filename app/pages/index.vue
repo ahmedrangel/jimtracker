@@ -26,8 +26,8 @@ useSeoMeta({
   ogTitle: SITE.title,
   description: SITE.description,
   ogDescription: SITE.description,
-  ogImage: undefined,
-  twitterImage: undefined,
+  ogImage: `${SITE.url}/images/og-image.jpg`,
+  twitterImage: `${SITE.url}/images/og-image.jpg`,
   twitterCard: "summary_large_image",
   twitterTitle: SITE.title,
   twitterDescription: SITE.description
