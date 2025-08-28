@@ -86,7 +86,7 @@ export default defineTask({
         await storage.setItem<UserInfo>("info", user);
       }
       else if (userData) {
-        const user = { ...userData, ...liveData };
+        const user = { ...currentInfo, ...userData, ...liveData };
         await storage.setItem<UserInfo>("info", user);
       }
     }
