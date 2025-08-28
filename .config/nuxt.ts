@@ -43,7 +43,8 @@ export default defineNuxtConfig({
     "@nuxt/eslint",
     "@nuxt/icon",
     "@nuxtjs/sitemap",
-    "@nuxthub/core"
+    "@nuxthub/core",
+    "nuxt-webhook-validators"
   ],
 
   icon: {

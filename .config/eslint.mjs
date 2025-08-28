@@ -3,7 +3,7 @@ import withNuxt from "../.nuxt/eslint.config.mjs";
 export default withNuxt([{
   files: ["**/*.vue", "**/*.js", "**/*.ts", "**/*.mjs"],
   rules: {
-    "camelcase": ["error", { properties: "never", ignoreDestructuring: true }],
+    "camelcase": ["off"],
     "no-console": ["error", { allow: ["info", "warn"] }],
     "sort-imports": ["error", { ignoreDeclarationSort: true }],
     "@stylistic/indent": ["error", 2, { SwitchCase: 1 }],
