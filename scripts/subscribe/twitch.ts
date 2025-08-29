@@ -31,4 +31,7 @@ const subscriptions = await client.eventSub.getSubscriptions();
 
 for (const sub of subscriptions.data) {
   console.info(sub.id, sub.type, sub.status);
+  if (sub.status === "webhook_callback_verification_failed") {
+    await client.eventSub.deleteSubscription(sub.id);
+  }
 }
