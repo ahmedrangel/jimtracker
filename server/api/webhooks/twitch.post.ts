@@ -3,7 +3,8 @@ export default defineEventHandler(async (event) => {
   if (!isValidWebhook) throw createError({ statusCode: 401, message: "Unauthorized: webhook is not valid" });
   const body = await readBody(event);
   const handleTwitchWebhook = async () => {
-    const { type, condition } = body;
+    const { subscription } = body;
+    const { type, condition } = subscription;
     if (["stream.online", "stream.offline"].includes(type) && condition?.broadcaster_user_id === constants.twitchId.toString()) {
       const storage = useStorage("cache");
       const info = await storage.getItem<UserInfo>("info");
