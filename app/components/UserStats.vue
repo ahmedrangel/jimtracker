@@ -21,7 +21,7 @@ defineProps<{
     <div class="space-y-4 mb-5">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
         <!-- ELO ACTUAL -->
-        <div class="text-center bg-neutral-950/85 border border-slate-400/40 flex flex-col items-center justify-center px-6 py-3 sm:px-10 sm:py-5 rounded-lg">
+        <div class="text-center bg-neutral-950/85 border border-slate-400/40 flex flex-col items-center justify-center px-2 py-2 sm:px-5 sm:py-5 rounded-lg">
           <p class="md:text-xl font-semibold">ELO ACTUAL</p>
           <p class="text-lg md:text-2xl font-bold flex flex-wrap items-center justify-center">
             <img :src="`/images/lol/${user?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
@@ -31,9 +31,9 @@ defineProps<{
           </p>
         </div>
         <!-- MÁS JUGADO -->
-        <div v-if="mostPlayed?.length" class="bg-neutral-950/85 border border-slate-400/40 rounded-lg px-2 py-2 sm:px-6 sm:py-2 text-center md:col-span-2">
+        <div v-if="mostPlayed?.length" class="bg-neutral-950/85 border border-slate-400/40 rounded-lg px-2 py-2 sm:px-5 sm:py-2 text-center md:col-span-2">
           <p class="md:text-xl font-semibold mb-2">MÁS JUGADO</p>
-          <div class="flex items-center gap-4">
+          <div class="flex items-center justify-center gap-4">
             <div v-for="champ in mostPlayed" :key="champ.champion_id" class="flex flex-col items-center gap-1 ">
               <img :src="getChampionIcon(champ.champion_id)" class="w-12 h-12" :alt="String(champ.champion_id)" :title="champions?.find(c => c.id === String(champ.champion_id))!.name">
               <span class="text-sm text-slate-400 font-semibold">
@@ -47,7 +47,7 @@ defineProps<{
           </div>
         </div>
         <!-- ELO MÁS ALTO -->
-        <div class="bg-neutral-950/85 border border-emerald-300/40 rounded-lg px-6 py-2 sm:px-10 sm:py-4 text-center flex flex-col items-center justify-center">
+        <div class="bg-neutral-950/85 border border-emerald-300/40 rounded-lg px-2 py-2 sm:px-5 sm:py-5 text-center flex flex-col items-center justify-center">
           <p class="md:text-lg text-emerald-200 font-semibold mb-1">ELO MÁS ALTO</p>
           <p class="md:text-xl text-emerald-200 font-bold flex flex-wrap items-center justify-center">
             <img :src="`/images/lol/${highest?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
@@ -81,7 +81,7 @@ defineProps<{
           </div>
         </div>
         <!-- ELO MÁS BAJO -->
-        <div class="bg-neutral-950/85 border border-rose-300/40 rounded-lg px-6 py-2 sm:px-10 sm:py-4 text-center flex flex-col items-center justify-center">
+        <div class="bg-neutral-950/85 border border-rose-300/40 rounded-lg px-2 py-2 sm:px-5 sm:py-5 text-center flex flex-col items-center justify-center">
           <p class="md:text-lg text-rose-200 font-semibold mb-1">ELO MÁS BAJO</p>
           <p class="md:text-xl text-rose-200 font-bold flex flex-wrap items-center justify-center">
             <img :src="`/images/lol/${lowest?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
