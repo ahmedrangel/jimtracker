@@ -32,7 +32,7 @@ defineProps<{
         </div>
         <!-- MÁS JUGADO -->
         <div v-if="mostPlayed?.length" class="bg-neutral-950/85 border border-slate-400/40 rounded-lg px-2 py-2 sm:px-5 sm:py-2 text-center md:col-span-2">
-          <p class="md:text-xl font-semibold mb-2">MÁS JUGADO</p>
+          <p class="md:text-xl font-semibold mb-1">MÁS JUGADO</p>
           <div class="flex items-center justify-center gap-4">
             <div v-for="champ in mostPlayed" :key="champ.champion_id" class="flex flex-col items-center gap-1 ">
               <img :src="getChampionIcon(champ.champion_id)" class="w-12 h-12" :alt="String(champ.champion_id)" :title="champions?.find(c => c.id === String(champ.champion_id))!.name">
