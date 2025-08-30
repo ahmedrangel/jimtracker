@@ -18,7 +18,7 @@ defineProps<{
       </div>
       <h2 class="text-2xl font-semibold">EST JimRising <span class="text-slate-400">#LANNN</span></h2>
     </div>
-    <div class="flex gap-2 mb-2">
+    <div class="flex flex-wrap gap-2 mb-2 justify-center">
       <div class="text-center bg-neutral-950/85 border border-slate-400/40 flex flex-col items-center justify-center px-6 py-3 sm:px-10 sm:py-5 rounded-lg">
         <p class="md:text-xl font-semibold">ELO ACTUAL</p>
         <p class="text-lg md:text-2xl font-bold flex flex-wrap items-center justify-center">
@@ -29,16 +29,19 @@ defineProps<{
         </p>
       </div>
       <!-- MOST PLAYED -->
-      <div v-if="mostPlayed?.length" class="bg-neutral-950/85 border border-slate-400/40 rounded-lg px-3 py-3 sm:px-6 sm:py-5 text-center flex items-center gap-4">
-        <div v-for="champ in mostPlayed" :key="champ.champion_id" class="flex flex-col items-center gap-1 ">
-          <img :src="getChampionIcon(champ.champion_id)" class="w-12 h-12 mb-1" :alt="String(champ.champion_id)" :title="champions?.find(c => c.id === String(champ.champion_id))!.name">
-          <span class="text-sm text-slate-400 font-semibold">
-            <span class="text-emerald-300">{{ champ.wins }}</span>V · <span class="text-rose-300">{{ champ.losses }}</span>D (<span class="text-slate-100">{{ champ.count }}</span>)
-          </span>
-          <span class="text-sm text-slate-100 font-semibold">{{ ((champ.wins / champ.count) * 100).toFixed(2) }}% WR</span>
-          <span class="text-xs text-slate-400 font-semibold">
-            <span class="text-emerald-300">{{ champ.kills.toFixed(0) }}</span> / <span class="text-rose-300">{{ champ.deaths.toFixed(0) }}</span> / <span class="text-yellow-200">{{ champ.assists.toFixed(0) }}</span> (<span class="text-slate-100">{{ ((champ.kills + champ.assists) / (champ.deaths || 1)).toFixed(2) }}</span> KDA)
-          </span>
+      <div v-if="mostPlayed?.length" class="bg-neutral-950/85 border border-slate-400/40 rounded-lg px-3 py-3 sm:px-6 sm:py-5 text-center">
+        <p class="md:text-xl font-semibold mb-2">MÁS JUGADO</p>
+        <div class="flex items-center gap-4">
+          <div v-for="champ in mostPlayed" :key="champ.champion_id" class="flex flex-col items-center gap-1 ">
+            <img :src="getChampionIcon(champ.champion_id)" class="w-12 h-12 mb-1" :alt="String(champ.champion_id)" :title="champions?.find(c => c.id === String(champ.champion_id))!.name">
+            <span class="text-sm text-slate-400 font-semibold">
+              <span class="text-emerald-300">{{ champ.wins }}</span>V · <span class="text-rose-300">{{ champ.losses }}</span>D (<span class="text-slate-100">{{ champ.count }}</span>)
+            </span>
+            <span class="text-sm text-slate-100 font-semibold">{{ ((champ.wins / champ.count) * 100).toFixed(2) }}% WR</span>
+            <span class="text-xs text-slate-400 font-semibold">
+              <span class="text-emerald-300">{{ champ.kills.toFixed(0) }}</span> / <span class="text-rose-300">{{ champ.deaths.toFixed(0) }}</span> / <span class="text-yellow-200">{{ champ.assists.toFixed(0) }}</span> (<span class="text-slate-100">{{ ((champ.kills + champ.assists) / (champ.deaths || 1)).toFixed(2) }}</span> KDA)
+            </span>
+          </div>
         </div>
       </div>
     </div>
