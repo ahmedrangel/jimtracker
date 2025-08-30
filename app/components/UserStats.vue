@@ -29,7 +29,7 @@ defineProps<{
         </p>
       </div>
       <!-- MOST PLAYED -->
-      <div v-if="mostPlayed?.length" class="bg-neutral-950/85 border border-slate-400/40 rounded-lg px-3 py-3 sm:px-6 sm:py-5 text-center">
+      <div v-if="mostPlayed?.length" class="bg-neutral-950/85 border border-slate-400/40 rounded-lg px-2 py-2 sm:px-6 sm:py-2 text-center">
         <p class="md:text-xl font-semibold mb-2">MÁS JUGADO</p>
         <div class="flex items-center gap-4">
           <div v-for="champ in mostPlayed" :key="champ.champion_id" class="flex flex-col items-center gap-1 ">
