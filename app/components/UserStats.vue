@@ -41,7 +41,7 @@ defineProps<{
               </span>
               <span class="text-sm text-slate-100 font-semibold">{{ ((champ.wins / champ.count) * 100).toFixed(2) }}% WR</span>
               <span class="text-xs text-slate-400 font-semibold">
-                <span class="text-emerald-300">{{ champ.kills.toFixed(1) }}</span> / <span class="text-rose-300">{{ champ.deaths.toFixed(1) }}</span> / <span class="text-yellow-200">{{ champ.assists.toFixed(1) }}</span> (<span class="text-slate-100">{{ ((champ.kills + champ.assists) / (champ.deaths || 1)).toFixed(2) }}</span> KDA)
+                <span class="text-emerald-300">{{ champ.kills.toFixed(0) }}</span> / <span class="text-rose-300">{{ champ.deaths.toFixed(0) }}</span> / <span class="text-yellow-200">{{ champ.assists.toFixed(0) }}</span> (<span class="text-slate-100">{{ champ.deaths > 0 ? ((champ.kills + champ.assists) / (champ.deaths)).toFixed(2) : "Perfect" }}</span> KDA)
               </span>
             </div>
           </div>
