@@ -41,13 +41,23 @@ declare global {
     lp?: number | null;
   }
 
+  interface MostPlayed {
+    champion_id: number;
+    count: number;
+    wins: number;
+    losses: number;
+    kills: number;
+    deaths: number;
+    assists: number;
+  }
+
   interface InfoResponse {
     user?: UserInfo;
     history?: History[];
     recent?: History[];
     highest?: RankInfo;
     lowest?: RankInfo;
-    mostPlayed?: any;
+    mostPlayed?: MostPlayed[];
     highestWinRate?: any;
   }
 

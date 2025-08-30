@@ -13,7 +13,7 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
     await storage.setItem<UserInfo>("info", info);
   }
 
-  const [history, highest, lowest, recent, mostPlayed, highestWinRate] = await Promise.all([
+  const [history, highest, lowest, recent, mostPlayed] = await Promise.all([
     // History (últimos 30 días)
     DB.select({
       match_id: tables.history.match_id,
@@ -143,37 +143,19 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
     // Most Played champion and calculated KDA average
     DB.select({
       champion_id: tables.history.champion_id,
-      count: sql`COUNT(${tables.history.match_id}) as count`,
-      wins: sql`SUM(CASE WHEN ${tables.history.result} = 1 THEN 1 ELSE 0 END)`,
-      losses: sql`SUM(CASE WHEN ${tables.history.result} = 0 THEN 1 ELSE 0 END)`,
-      kills: sql`SUM(${tables.history.kills})`,
-      deaths: sql`SUM(${tables.history.deaths})`,
-      assists: sql`SUM(${tables.history.assists})`
+      count: sql<number>`COUNT(${tables.history.match_id}) as count`,
+      wins: sql<number>`SUM(CASE WHEN ${tables.history.result} = 1 THEN 1 ELSE 0 END)`,
+      losses: sql<number>`SUM(CASE WHEN ${tables.history.result} = 0 THEN 1 ELSE 0 END)`,
+      kills: sql<number>`AVG(${tables.history.kills})`,
+      deaths: sql<number>`AVG(${tables.history.deaths})`,
+      assists: sql<number>`AVG(${tables.history.assists})`
     }).from(tables.history)
       .where(and(eq(tables.history.puuid, constants.riotPuuid), eq(tables.history.is_remake, 0)))
       .groupBy(tables.history.champion_id)
       .having(gte(sql`count`, 5)) // Al menos 5 partidas jugadas con el campeón
       .orderBy(desc(sql`count`))
-      .limit(1)
-      .get(),
-
-    // Highest Win Rate champion and calculated KDA average
-    DB.select({
-      champion_id: tables.history.champion_id,
-      count: sql`COUNT(${tables.history.match_id}) as count`,
-      wins: sql`SUM(CASE WHEN ${tables.history.result} = 1 THEN 1 ELSE 0 END)`,
-      losses: sql`SUM(CASE WHEN ${tables.history.result} = 0 THEN 1 ELSE 0 END)`,
-      winrate: sql`SUM(CASE WHEN ${tables.history.result} = 1 THEN 1 ELSE 0 END) / NULLIF(COUNT(${tables.history.match_id}), 0) AS winrate`,
-      kills: sql`SUM(${tables.history.kills})`,
-      deaths: sql`SUM(${tables.history.deaths})`,
-      assists: sql`SUM(${tables.history.assists})`
-    }).from(tables.history)
-      .where(and(eq(tables.history.puuid, constants.riotPuuid), eq(tables.history.is_remake, 0)))
-      .having(gte(sql`count`, 5)) // Al menos 5 partidas jugadas con el campeón
-      .groupBy(tables.history.champion_id)
-      .orderBy(desc(sql`winrate`))
-      .limit(1)
-      .get()
+      .limit(4)
+      .all()
   ]);
 
   return {
@@ -182,7 +164,6 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
     highest,
     lowest,
     recent,
-    mostPlayed,
-    highestWinRate
+    mostPlayed
   };
 });
