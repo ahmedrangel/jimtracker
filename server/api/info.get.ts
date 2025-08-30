@@ -1,5 +1,5 @@
 export default defineEventHandler(async (event): Promise<InfoResponse> => {
-  if (import.meta.dev) return $fetch<InfoResponse>(`${SITE.url}/api/info`);
+  // if (import.meta.dev) return $fetch<InfoResponse>(`${SITE.url}/api/info`);
   const config = useRuntimeConfig(event);
   const storage = useStorage("cache");
   const DB = useDB();
@@ -33,7 +33,9 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
       .where(
         and(
           gte(tables.history.date, Date.now() - 30 * 24 * 60 * 60 * 1000),
-          eq(tables.history.puuid, constants.riotPuuid)
+          eq(tables.history.puuid, constants.riotPuuid),
+          isNotNull(tables.history.snapshot_division),
+          isNotNull(tables.history.snapshot_tier)
         )
       ).orderBy(desc(tables.history.date)).all() as Promise<History[]>,
 
@@ -46,7 +48,8 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
       .where(
         and(
           eq(tables.history.puuid, constants.riotPuuid),
-          sql`${tables.history.snapshot_tier} IS NOT NULL`
+          isNotNull(tables.history.snapshot_division),
+          isNotNull(tables.history.snapshot_tier)
         )
       )
       .orderBy(
@@ -82,7 +85,8 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
       .where(
         and(
           eq(tables.history.puuid, constants.riotPuuid),
-          sql`${tables.history.snapshot_tier} IS NOT NULL`
+          isNotNull(tables.history.snapshot_division),
+          isNotNull(tables.history.snapshot_tier)
         )
       )
       .orderBy(
@@ -125,7 +129,13 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
       lp: tables.history.snapshot_lp,
       duration: tables.history.duration
     }).from(tables.history)
-      .where(eq(tables.history.puuid, constants.riotPuuid))
+      .where(
+        and(
+          eq(tables.history.puuid, constants.riotPuuid),
+          isNotNull(tables.history.snapshot_division),
+          isNotNull(tables.history.snapshot_tier)
+        )
+      )
       .orderBy(desc(tables.history.date))
       .limit(100)
       .all() as Promise<History[]>,
