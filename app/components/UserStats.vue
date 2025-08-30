@@ -35,7 +35,7 @@ defineProps<{
           <p class="md:text-xl font-semibold mb-2">MÁS JUGADO</p>
           <div class="flex items-center gap-4">
             <div v-for="champ in mostPlayed" :key="champ.champion_id" class="flex flex-col items-center gap-1 ">
-              <img :src="getChampionIcon(champ.champion_id)" class="w-12 h-12 mb-1" :alt="String(champ.champion_id)" :title="champions?.find(c => c.id === String(champ.champion_id))!.name">
+              <img :src="getChampionIcon(champ.champion_id)" class="w-12 h-12" :alt="String(champ.champion_id)" :title="champions?.find(c => c.id === String(champ.champion_id))!.name">
               <span class="text-sm text-slate-400 font-semibold">
                 <span class="text-emerald-300">{{ champ.wins }}</span>V · <span class="text-rose-300">{{ champ.losses }}</span>D (<span class="text-slate-100">{{ champ.count }}</span>)
               </span>
