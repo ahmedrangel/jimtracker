@@ -29,13 +29,13 @@ defineProps<{
         </p>
       </div>
       <!-- MOST PLAYED -->
-      <div v-if="mostPlayed?.length" class="bg-neutral-950/85 border border-yellow-300/40 rounded-lg px-3 py-3 sm:px-6 sm:py-5 text-center flex items-center gap-4">
+      <div v-if="mostPlayed?.length" class="bg-neutral-950/85 border border-slate-400/40 rounded-lg px-3 py-3 sm:px-6 sm:py-5 text-center flex items-center gap-4">
         <div v-for="champ in mostPlayed" :key="champ.champion_id" class="flex flex-col items-center gap-1 ">
           <img :src="getChampionIcon(champ.champion_id)" class="w-12 h-12 mb-1" :alt="String(champ.champion_id)" :title="champions?.find(c => c.id === String(champ.champion_id))!.name">
           <span class="text-sm text-slate-400 font-semibold">
             <span class="text-emerald-300">{{ champ.wins }}</span>V · <span class="text-rose-300">{{ champ.losses }}</span>D (<span class="text-slate-100">{{ champ.count }}</span>)
           </span>
-          <span class="text-sm text-slate-100 font-semibold"><span class="text-purple-300">{{ ((champ.wins / champ.count) * 100).toFixed(2) }}%</span> WR</span>
+          <span class="text-sm text-slate-100 font-semibold">{{ ((champ.wins / champ.count) * 100).toFixed(2) }}% WR</span>
           <span class="text-xs text-slate-400 font-semibold">
             <span class="text-emerald-300">{{ champ.kills.toFixed(0) }}</span> / <span class="text-rose-300">{{ champ.deaths.toFixed(0) }}</span> / <span class="text-yellow-200">{{ champ.assists.toFixed(0) }}</span> (<span class="text-slate-100">{{ ((champ.kills + champ.assists) / (champ.deaths || 1)).toFixed(2) }}</span> KDA)
           </span>
