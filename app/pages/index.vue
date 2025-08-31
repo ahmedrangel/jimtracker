@@ -58,19 +58,22 @@ useHead({
     </div>
     <div class="text-center flex flex-wrap items-center justify-center my-5 gap-2">
       <NuxtLink :to="twitch.url" target="_blank" external>
-        <span class="text-sm px-3 py-2 rounded font-bold flex items-center justify-center gap-1 shadow-lg" :class="isLiveTwitch ? 'bg-gradient-to-r from-purple-600 via-purple-500 to-purple-600 text-white animate-pulse' : 'bg-purple-100/70 text-black/70'">
+        <span class="relative text-sm px-3 py-2 rounded font-bold flex items-center justify-center gap-1" :class="isLiveTwitch ? 'text-white' : 'text-black/70'">
+          <div class="absolute -z-10 inset-0 rounded shadow-lg" :class="isLiveTwitch ? 'bg-gradient-to-r from-purple-600 via-purple-500 to-purple-600 animate-pulse shadow-purple-500/50' : 'bg-purple-100/70'" />
           <Icon name="simple-icons:twitch" size="22" />
           <span>{{ isLiveTwitch ? 'En vivo' : 'Offline' }}</span>
         </span>
       </NuxtLink>
       <NuxtLink :to="kick.url" target="_blank" external>
-        <span class="text-sm px-3 py-2 rounded font-bold flex items-center justify-center gap-1 shadow-lg" :class="isLiveKick ? 'bg-gradient-to-r from-green-700 via-green-600 to-green-700 text-white animate-pulse' : 'bg-green-100/70 text-black/70'">
+        <span class="relative text-sm px-3 py-2 rounded font-bold flex items-center justify-center gap-1" :class="isLiveKick ? 'text-white' : 'text-black/70'">
+          <div class="absolute -z-10 inset-0 rounded shadow-lg" :class="isLiveKick ? 'bg-gradient-to-r from-green-700 via-green-600 to-green-700 animate-pulse shadow-green-500/50' : 'bg-green-100/70'" />
           <Icon name="simple-icons:kick" size="22" />
           <span>{{ isLiveKick ? 'En vivo' : 'Offline' }}</span>
         </span>
       </NuxtLink>
       <NuxtLink :to="`https://op.gg/es/lol/summoners/lan/${data?.user?.gameName}-${data?.user?.tagLine}/ingame`" target="_blank" external :class="{ 'pointer-events-none': !isIngame }">
-        <span class="text-sm px-3 py-2 rounded font-bold flex items-center justify-center gap-1 shadow-lg" :class="isIngame ? 'bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 text-white animate-pulse' : 'bg-blue-100/70 text-black/70'">
+        <span class="relative text-sm px-3 py-2 rounded font-bold flex items-center justify-center gap-1" :class="isIngame ? 'text-white' : 'text-black/70'">
+          <div class="absolute -z-10 inset-0 rounded shadow-lg" :class="isIngame ? 'bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 animate-pulse shadow-blue-500/50' : 'bg-blue-100/70'" />
           <Icon name="simple-icons:leagueoflegends" size="22" />
           <span>{{ isIngame ? 'En partida' : 'Fuera de partida' }}</span>
         </span>
