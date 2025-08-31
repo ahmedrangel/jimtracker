@@ -72,7 +72,7 @@ export default defineTask({
               snapshot_division: user.division,
               snapshot_tier: user.tier,
               snapshot_lp: user.lp
-            }).run();
+            }).onConflictDoNothing().run();
           }
         }
       }
