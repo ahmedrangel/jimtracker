@@ -49,7 +49,7 @@ export const tooltipChart = (context: { chart: Chart, tooltip: TooltipModel<"lin
 
       const changeText = totalChange > 0 ? `+${Math.round(totalChange)}` : totalChange === 0 ? "0" : `${Math.round(totalChange)}`;
       const changeIcon = totalChange > 0 ? "tabler:caret-up-filled" : totalChange < 0 ? "tabler:caret-down-filled" : "tabler:caret-up-down-filled";
-      const changeColor = totalChange > 0 ? "text-green-500" : totalChange < 0 ? "text-red-500" : "text-yellow-500";
+      const changeColor = totalChange > 0 ? "text-blue-500" : totalChange < 0 ? "text-red-500" : "text-neutral-500";
       tooltipContent = {
         label,
         rankDisplay,
@@ -78,7 +78,7 @@ export const tooltipChart = (context: { chart: Chart, tooltip: TooltipModel<"lin
 
       const changeText = totalChange > 0 ? `+${Math.round(totalChange)}` : totalChange === 0 ? "0" : `${Math.round(totalChange)}`;
       const changeIcon = totalChange > 0 ? "tabler:caret-up-filled" : totalChange < 0 ? "tabler:caret-down-filled" : "tabler:caret-up-down-filled";
-      const changeColor = totalChange > 0 ? "text-green-500" : totalChange < 0 ? "text-red-500" : "text-yellow-500";
+      const changeColor = totalChange > 0 ? "text-blue-500" : totalChange < 0 ? "text-red-500" : "text-neutral-500";
       tooltipContent = {
         label,
         rankDisplay,
