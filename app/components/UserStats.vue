@@ -34,22 +34,22 @@ defineProps<{
         <div v-if="mostPlayed?.length" class="bg-neutral-950/85 border border-slate-400/40 rounded-lg px-2 py-2 sm:px-5 sm:py-2 text-center md:col-span-2">
           <p class="md:text-xl font-semibold mb-0.5">MÁS JUGADO</p>
           <div class="flex items-center justify-center gap-4">
-            <div v-for="champ in mostPlayed" :key="champ.champion_id" class="flex flex-col items-center gap-1 ">
+            <div v-for="champ in mostPlayed" :key="champ.champion_id" class="flex flex-col items-center gap-2">
               <img :src="getChampionIcon(champ.champion_id)" class="w-12 h-12" :alt="String(champ.champion_id)" :title="champions?.find(c => c.id === String(champ.champion_id))!.name">
-              <span class="text-sm text-slate-400 font-semibold">
-                <span class="text-emerald-300">{{ champ.wins }}</span>V · <span class="text-rose-300">{{ champ.losses }}</span>D (<span class="text-slate-100">{{ champ.count }}</span>)
+              <span class="text-base text-slate-400 font-semibold leading-none">
+                <span class="text-blue-400">{{ champ.wins }}</span>V · <span class="text-rose-400">{{ champ.losses }}</span>D (<span class="text-slate-100">{{ champ.count }}</span>)
               </span>
-              <span class="text-sm text-slate-100 font-semibold">{{ ((champ.wins / champ.count) * 100).toFixed(1) }}% WR</span>
-              <span class="text-xs text-slate-400 font-semibold">
-                <span class="text-emerald-300">{{ champ.kills.toFixed(0) }}</span> / <span class="text-rose-300">{{ champ.deaths.toFixed(0) }}</span> / <span class="text-yellow-200">{{ champ.assists.toFixed(0) }}</span> (<span class="text-slate-100">{{ champ.deaths > 0 ? ((Number(champ.kills.toFixed(0)) + Number(champ.assists.toFixed(0))) / (Number(champ.deaths.toFixed(0)))).toFixed(2) : "Perfect" }}</span> KDA)
+              <span class="text-base text-slate-100 font-semibold leading-none">{{ ((champ.wins / champ.count) * 100).toFixed(1) }}% WR</span>
+              <span class="text-xs text-slate-400 font-semibold leading-none">
+                <span class="text-blue-400">{{ champ.kills.toFixed(0) }}</span> / <span class="text-rose-400">{{ champ.deaths.toFixed(0) }}</span> / <span class="text-yellow-200">{{ champ.assists.toFixed(0) }}</span> (<span class="text-slate-100">{{ champ.deaths > 0 ? ((Number(champ.kills.toFixed(0)) + Number(champ.assists.toFixed(0))) / (Number(champ.deaths.toFixed(0)))).toFixed(2) : "Perfect" }}</span> KDA)
               </span>
             </div>
           </div>
         </div>
         <!-- ELO MÁS ALTO -->
-        <div class="bg-neutral-950/85 border border-emerald-300/40 rounded-lg px-2 py-2 sm:px-5 sm:py-5 text-center flex flex-col items-center justify-center">
-          <p class="md:text-xl text-emerald-200 font-semibold mb-1">ELO MÁS ALTO</p>
-          <p class="text-lg md:text-2xl text-emerald-200 font-bold flex flex-wrap items-center justify-center">
+        <div class="bg-neutral-950/85 border border-blue-300/40 rounded-lg px-2 py-2 sm:px-5 sm:py-5 text-center flex flex-col items-center justify-center">
+          <p class="md:text-xl text-blue-200 font-semibold mb-1">ELO MÁS ALTO</p>
+          <p class="text-lg md:text-2xl text-blue-200 font-bold flex flex-wrap items-center justify-center">
             <img :src="`/images/lol/${highest?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
             <span v-if="highest?.tier">{{ highest.division }} · {{ highest.lp }} LP</span>
           </p>
@@ -65,9 +65,9 @@ defineProps<{
           </div>
           <!-- VICTORIAS -->
           <div class="flex items-center justify-center gap-2">
-            <div class="bg-neutral-950/85 border border-emerald-300/40 rounded-lg p-2 sm:p-2 text-center flex flex-col items-center justify-center w-full">
-              <p class="md:text-lg text-emerald-200 font-semibold mb-1">VICTORIAS</p>
-              <p class="md:text-xl text-emerald-200 font-bold flex items-center justify-center">
+            <div class="bg-neutral-950/85 border border-blue-300/40 rounded-lg p-2 sm:p-2 text-center flex flex-col items-center justify-center w-full">
+              <p class="md:text-lg text-blue-200 font-semibold mb-1">VICTORIAS</p>
+              <p class="md:text-xl text-blue-200 font-bold flex items-center justify-center">
                 {{ user?.wins || 0 }}
               </p>
             </div>
