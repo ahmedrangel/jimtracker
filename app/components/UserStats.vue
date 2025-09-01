@@ -32,7 +32,7 @@ defineProps<{
         </div>
         <!-- MÁS JUGADO -->
         <div v-if="mostPlayed?.length" class="bg-neutral-950/85 border border-slate-400/40 rounded-lg px-2 py-2 sm:px-5 sm:py-2 text-center md:col-span-2">
-          <p class="md:text-xl font-semibold mb-1">MÁS JUGADO</p>
+          <p class="md:text-xl font-semibold mb-0.5">MÁS JUGADO</p>
           <div class="flex items-center justify-center gap-4">
             <div v-for="champ in mostPlayed" :key="champ.champion_id" class="flex flex-col items-center gap-1 ">
               <img :src="getChampionIcon(champ.champion_id)" class="w-12 h-12" :alt="String(champ.champion_id)" :title="champions?.find(c => c.id === String(champ.champion_id))!.name">
@@ -48,8 +48,8 @@ defineProps<{
         </div>
         <!-- ELO MÁS ALTO -->
         <div class="bg-neutral-950/85 border border-emerald-300/40 rounded-lg px-2 py-2 sm:px-5 sm:py-5 text-center flex flex-col items-center justify-center">
-          <p class="md:text-lg text-emerald-200 font-semibold mb-1">ELO MÁS ALTO</p>
-          <p class="md:text-xl text-emerald-200 font-bold flex flex-wrap items-center justify-center">
+          <p class="md:text-xl text-emerald-200 font-semibold mb-1">ELO MÁS ALTO</p>
+          <p class="text-lg md:text-2xl text-emerald-200 font-bold flex flex-wrap items-center justify-center">
             <img :src="`/images/lol/${highest?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
             <span v-if="highest?.tier">{{ highest.division }} · {{ highest.lp }} LP</span>
           </p>
@@ -82,8 +82,8 @@ defineProps<{
         </div>
         <!-- ELO MÁS BAJO -->
         <div class="bg-neutral-950/85 border border-rose-300/40 rounded-lg px-2 py-2 sm:px-5 sm:py-5 text-center flex flex-col items-center justify-center">
-          <p class="md:text-lg text-rose-200 font-semibold mb-1">ELO MÁS BAJO</p>
-          <p class="md:text-xl text-rose-200 font-bold flex flex-wrap items-center justify-center">
+          <p class="md:text-xl text-rose-200 font-semibold mb-1">ELO MÁS BAJO</p>
+          <p class="text-lg md:text-2xl text-rose-200 font-bold flex flex-wrap items-center justify-center">
             <img :src="`/images/lol/${lowest?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
             <span v-if="lowest?.tier">{{ lowest.division }} · {{ lowest.lp }} LP</span>
           </p>
