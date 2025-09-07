@@ -34,10 +34,10 @@
     "twitch:subscribe": "node scripts/subscribe/twitch.ts"
   },
   "devDependencies": {
-    "@iconify-json/simple-icons": "^1.2.49",
+    "@iconify-json/simple-icons": "^1.2.50",
     "@iconify-json/tabler": "^1.2.22",
     "@nuxt/eslint": "^1.9.0",
-    "@nuxt/ui": "^3.3.2",
+    "@nuxt/ui": "^3.3.3",
     "@nuxthub/core": "^0.9.0",
     "@nuxtjs/sitemap": "^7.4.3",
     "@twurple/api": "^7.4.0",
@@ -46,18 +46,18 @@
     "date-fns": "^4.1.0",
     "drizzle-kit": "^0.31.4",
     "drizzle-orm": "^0.44.5",
-    "eslint": "^9.34.0",
+    "eslint": "^9.35.0",
     "kient": "^2.3.0",
-    "nuxt": "^4.0.3",
+    "nuxt": "^4.1.1",
     "nuxt-webhook-validators": "^0.2.3",
-    "sass-embedded": "^1.91.0",
-    "stylelint": "^16.23.1",
+    "sass-embedded": "^1.92.1",
+    "stylelint": "^16.24.0",
     "stylelint-config-standard-scss": "^15.0.1",
-    "twisted": "^1.69.0",
+    "twisted": "^1.70.0",
     "typescript": "^5.9.2",
     "vue-chartjs": "^5.3.2",
     "vue-tsc": "^3.0.6",
-    "wrangler": "^4.33.0"
+    "wrangler": "^4.34.0"
   },
-  "packageManager": "pnpm@10.15.0"
+  "packageManager": "pnpm@10.15.1"
 }

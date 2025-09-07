@@ -1,11 +1,57 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   user?: UserInfo;
   highest?: RankInfo;
   lowest?: RankInfo;
   mostPlayed?: MostPlayed[];
   champions?: { id: string, name: string }[];
+  history?: History[];
 }>();
+// Sacar la racha positiva o negativa del history, contando desde el final del array
+const streak = computed(() => {
+  if (!props.history || !props.history?.length) return 0;
+  let count = 0;
+  const lastResult = props.history?.[props.history?.length - 1]?.result;
+  for (let i = props.history.length - 1; i >= 0; i--) {
+    if (props.history?.[i]?.result === lastResult) {
+      count++;
+    }
+    else {
+      break;
+    }
+  }
+  return lastResult ? count : -count;
+});
+
+const endOfSeasonDate = "2025-12-10T23:59:59-06:00";
+const endOfSeasonTimestamp = new Date(endOfSeasonDate).getTime();
+
+const countdown = ref({
+  days: 0,
+  hours: 0,
+  minutes: 0,
+  seconds: 0
+});
+let intervalId: number | undefined;
+
+const updateCountdown = () => {
+  const now = Date.now();
+  let diff = endOfSeasonTimestamp - now;
+  if (diff < 0) diff = 0;
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+  countdown.value = { days, hours, minutes, seconds };
+};
+
+onMounted(() => {
+  updateCountdown();
+  intervalId = window.setInterval(updateCountdown, 500);
+});
+onUnmounted(() => {
+  if (intervalId) clearInterval(intervalId);
+});
 </script>
 
 <template>
@@ -21,7 +67,7 @@ defineProps<{
     <div class="space-y-4 mb-5">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
         <!-- ELO ACTUAL -->
-        <div class="text-center bg-neutral-950/85 border border-slate-400/40 flex flex-col items-center justify-center px-2 py-2 sm:px-5 sm:py-5 rounded-lg">
+        <div class="text-center bg-neutral-950/85 border border-slate-400/40 flex flex-col items-center justify-center px-2 py-2 sm:px-4 sm:py-4 rounded-lg">
           <p class="md:text-xl font-semibold">ELO ACTUAL</p>
           <p class="text-lg md:text-2xl font-bold flex flex-wrap items-center justify-center">
             <img :src="`/images/lol/${user?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
@@ -47,7 +93,7 @@ defineProps<{
           </div>
         </div>
         <!-- ELO MÁS ALTO -->
-        <div class="bg-neutral-950/85 border border-blue-300/40 rounded-lg px-2 py-2 sm:px-5 sm:py-5 text-center flex flex-col items-center justify-center">
+        <div class="bg-neutral-950/85 border border-blue-300/40 rounded-lg px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center">
           <p class="md:text-xl text-blue-200 font-semibold mb-1">ELO MÁS ALTO</p>
           <p class="text-lg md:text-2xl text-blue-200 font-bold flex flex-wrap items-center justify-center">
             <img :src="`/images/lol/${highest?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
@@ -81,11 +127,30 @@ defineProps<{
           </div>
         </div>
         <!-- ELO MÁS BAJO -->
-        <div class="bg-neutral-950/85 border border-rose-300/40 rounded-lg px-2 py-2 sm:px-5 sm:py-5 text-center flex flex-col items-center justify-center">
+        <div class="bg-neutral-950/85 border border-rose-300/40 rounded-lg px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center">
           <p class="md:text-xl text-rose-200 font-semibold mb-1">ELO MÁS BAJO</p>
           <p class="text-lg md:text-2xl text-rose-200 font-bold flex flex-wrap items-center justify-center">
             <img :src="`/images/lol/${lowest?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
             <span v-if="lowest?.tier">{{ lowest.division }} · {{ lowest.lp }} LP</span>
+          </p>
+        </div>
+        <!-- RACHA -->
+        <div class="bg-neutral-950/85 border border-slate-400/40 rounded-lg px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center">
+          <p class="md:text-xl font-semibold mb-1">RACHA</p>
+          <p class="text-lg md:text-2xl font-bold flex flex-wrap items-center justify-center">
+            <span :class="streak < 0 ? 'text-rose-400' : 'text-green-400'">{{ streak < 0 ? `-${Math.abs(streak)}` : `+${streak}` }}</span>
+          </p>
+        </div>
+        <!-- COUNTDOWN FIN DE TEMPORADA -->
+        <div class="bg-neutral-950/85 border border-slate-400/40 rounded-lg px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center md:col-span-2">
+          <p class="md:text-xl text-emerald-100 font-semibold mb-1">FIN DE TEMPORADA</p>
+          <p class="text-lg md:text-2xl text-green-300/50 font-bold flex flex-wrap items-center justify-center">
+            <span v-if="countdown">
+              <span class="text-emerald-300">{{ countdown.days }}</span>d
+              <span class="text-emerald-300">{{ countdown.hours }}</span>h
+              <span class="text-emerald-300">{{ countdown.minutes }}</span>m
+              <span class="text-emerald-300">{{ countdown.seconds }}</span>s
+            </span>
           </p>
         </div>
       </div>

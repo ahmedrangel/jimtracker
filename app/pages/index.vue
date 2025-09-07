@@ -79,7 +79,7 @@ useHead({
         </span>
       </NuxtLink>
     </div>
-    <UserStats :user="data?.user" :highest="data?.highest" :lowest="data?.lowest" :champions="champions" :most-played="data?.mostPlayed" />
+    <UserStats :user="data?.user" :highest="data?.highest" :lowest="data?.lowest" :champions="champions" :most-played="data?.mostPlayed" :history="data?.recent" />
     <div class="tabs flex gap-2 justify-center sm:justify-end mb-2">
       <button
         class="px-4 py-2 rounded text-white font-semibold border-2"
