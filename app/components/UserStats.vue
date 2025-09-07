@@ -67,7 +67,7 @@ onUnmounted(() => {
     <div class="space-y-4 mb-5">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
         <!-- ELO ACTUAL -->
-        <div class="text-center bg-neutral-950/75 border border-slate-400/40 flex flex-col items-center justify-center px-2 py-2 sm:px-4 sm:py-4 rounded-lg">
+        <div class="text-center bg-neutral-950/75 border border-slate-400/40 flex flex-col items-center justify-center px-2 py-2 sm:px-4 sm:py-4 rounded">
           <p class="md:text-xl font-semibold">ELO ACTUAL</p>
           <p class="text-lg md:text-2xl font-bold flex flex-wrap items-center justify-center">
             <img :src="`/images/lol/${user?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
@@ -77,7 +77,7 @@ onUnmounted(() => {
           </p>
         </div>
         <!-- MÁS JUGADO -->
-        <div v-if="mostPlayed?.length" class="bg-neutral-950/75 border border-slate-400/40 rounded-lg px-2 py-2 sm:px-5 sm:py-2 text-center md:col-span-2">
+        <div v-if="mostPlayed?.length" class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-5 sm:py-2 text-center md:col-span-2">
           <p class="md:text-xl font-semibold mb-0.5">MÁS JUGADO</p>
           <div class="flex items-center justify-center gap-4">
             <div v-for="champ in mostPlayed" :key="champ.champion_id" class="flex flex-col items-center gap-2">
@@ -93,7 +93,7 @@ onUnmounted(() => {
           </div>
         </div>
         <!-- ELO MÁS ALTO -->
-        <div class="bg-neutral-950/75 border border-blue-300/40 rounded-lg px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center">
+        <div class="bg-neutral-950/75 border border-blue-300/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center">
           <p class="md:text-xl text-blue-200 font-semibold mb-1">ELO MÁS ALTO</p>
           <p class="text-lg md:text-2xl text-blue-200 font-bold flex flex-wrap items-center justify-center">
             <img :src="`/images/lol/${highest?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
@@ -103,7 +103,7 @@ onUnmounted(() => {
         <!-- WINRATE, VICTORIAS, DERROTAS -->
         <div class="flex flex-col gap-2">
           <!-- WINRATE -->
-          <div class="bg-neutral-950/75 border border-purple-300/40 rounded-lg p-2 sm:p-2 text-center flex flex-col items-center justify-center">
+          <div class="bg-neutral-950/75 border border-purple-300/40 rounded p-2 sm:p-2 text-center flex flex-col items-center justify-center">
             <p class="md:text-lg text-purple-200 font-semibold mb-1">WINRATE</p>
             <p class="md:text-xl text-purple-200 font-bold flex flex-wrap items-center justify-center">
               {{ (user && user.wins && user.losses ? (user.wins / (user.wins + user.losses) * 100).toFixed(2) : "0.00") }}%
@@ -111,14 +111,14 @@ onUnmounted(() => {
           </div>
           <!-- VICTORIAS -->
           <div class="flex items-center justify-center gap-2">
-            <div class="bg-neutral-950/75 border border-blue-300/40 rounded-lg p-2 sm:p-2 text-center flex flex-col items-center justify-center w-full">
+            <div class="bg-neutral-950/75 border border-blue-300/40 rounded p-2 sm:p-2 text-center flex flex-col items-center justify-center w-full">
               <p class="md:text-lg text-blue-200 font-semibold mb-1">VICTORIAS</p>
               <p class="md:text-xl text-blue-200 font-bold flex items-center justify-center">
                 {{ user?.wins || 0 }}
               </p>
             </div>
             <!-- DERROTAS -->
-            <div class="bg-neutral-950/75 border border-rose-300/40 rounded-lg p-2 sm:p-2 text-center flex flex-col items-center justify-center w-full">
+            <div class="bg-neutral-950/75 border border-rose-300/40 rounded p-2 sm:p-2 text-center flex flex-col items-center justify-center w-full">
               <p class="md:text-lg text-rose-200 font-semibold mb-1">DERROTAS</p>
               <p class="md:text-xl text-rose-200 font-bold flex items-center justify-center">
                 {{ user?.losses || 0 }}
@@ -127,7 +127,7 @@ onUnmounted(() => {
           </div>
         </div>
         <!-- ELO MÁS BAJO -->
-        <div class="bg-neutral-950/75 border border-rose-300/40 rounded-lg px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center">
+        <div class="bg-neutral-950/75 border border-rose-300/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center">
           <p class="md:text-xl text-rose-200 font-semibold mb-1">ELO MÁS BAJO</p>
           <p class="text-lg md:text-2xl text-rose-200 font-bold flex flex-wrap items-center justify-center">
             <img :src="`/images/lol/${lowest?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
@@ -135,14 +135,14 @@ onUnmounted(() => {
           </p>
         </div>
         <!-- RACHA -->
-        <div class="bg-neutral-950/75 border border-slate-400/40 rounded-lg px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center">
+        <div class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center">
           <p class="md:text-xl font-semibold mb-1">RACHA</p>
           <p class="text-lg md:text-2xl font-bold flex flex-wrap items-center justify-center">
             <span :class="streak < 0 ? 'text-rose-400' : 'text-green-400'">{{ streak < 0 ? `-${Math.abs(streak)}` : `+${streak}` }}</span>
           </p>
         </div>
         <!-- COUNTDOWN FIN DE TEMPORADA -->
-        <div class="bg-neutral-950/75 border border-slate-400/40 rounded-lg px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center md:col-span-2">
+        <div class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center md:col-span-2">
           <p class="md:text-xl text-emerald-100 font-semibold mb-1">FIN DE TEMPORADA</p>
           <p class="text-lg md:text-2xl text-green-300/50 font-bold flex flex-wrap items-center justify-center">
             <span v-if="countdown">
