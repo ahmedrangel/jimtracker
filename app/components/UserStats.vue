@@ -146,10 +146,10 @@ onUnmounted(() => {
           <p class="md:text-xl text-emerald-100 font-semibold mb-1">FIN DE TEMPORADA</p>
           <p class="text-lg md:text-2xl text-green-300/50 font-bold flex flex-wrap items-center justify-center">
             <span v-if="countdown">
-              <span class="text-emerald-300">{{ countdown.days }}</span>d
-              <span class="text-emerald-300">{{ countdown.hours }}</span>h
-              <span class="text-emerald-300">{{ countdown.minutes }}</span>m
-              <span class="text-emerald-300">{{ countdown.seconds }}</span>s
+              <span class="text-emerald-200">{{ countdown.days }}</span>d
+              <span class="text-emerald-200">{{ countdown.hours }}</span>h
+              <span class="text-emerald-200">{{ countdown.minutes }}</span>m
+              <span class="text-emerald-200">{{ countdown.seconds }}</span>s
             </span>
           </p>
         </div>
