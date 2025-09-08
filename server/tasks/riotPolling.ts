@@ -33,7 +33,7 @@ export default defineTask({
 
     const dataToInsert = [];
     const snapshot = [];
-    let userData;
+    let userData = {};
 
     if (lastMatchData.response.length) {
       for (const match of lastMatchData.response) {
@@ -43,6 +43,10 @@ export default defineTask({
         const matchData = await lol.MatchV5.get(match, Constants.RegionGroups.AMERICAS);
         const matchResponse = matchData.response;
         const participant = matchResponse.info.participants.find(p => p.puuid === constants.riotPuuid);
+        userData = {
+          gameName: participant!.riotIdGameName,
+          tagLine: participant!.riotIdTagline
+        };
         dataToInsert.push({
           match_id: matchResponse.metadata.matchId,
           puuid: constants.riotPuuid,
@@ -58,8 +62,8 @@ export default defineTask({
         });
       }
       if (dataToInsert.length) {
-        const user = await fetchUserData(config);
-        userData = user;
+        const user = await fetchRankedData(config);
+        userData = { ...userData, ...user };
         if (user.division && user.tier) {
           for (const entry of dataToInsert.toReversed()) {
             snapshot.push({

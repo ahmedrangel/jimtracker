@@ -3,9 +3,12 @@ import type { ErrorCode } from "~~/server/utils/errors";
 declare global {
   type ErrorCode = typeof ErrorCode;
 
-  interface UserLeague extends RankInfo {
+  interface RankedData extends RankInfo {
     wins: number;
     losses: number;
+  }
+
+  interface UserLeague extends RankedData {
     gameName?: string;
     tagLine?: string;
   }
