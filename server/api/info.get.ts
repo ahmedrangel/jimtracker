@@ -112,7 +112,7 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
         asc(tables.history.snapshot_lp)
       ).limit(1).get(),
 
-    // Recent Matches (últimas 100 partidas)
+    // Recent Matches (últimas 200 partidas)
     DB.select({
       match_id: tables.history.match_id,
       assists: tables.history.assists,
@@ -135,7 +135,7 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
         )
       )
       .orderBy(desc(tables.history.date))
-      .limit(100)
+      .limit(200)
       .all() as Promise<History[]>,
 
     // Most Played champion and calculated KDA average

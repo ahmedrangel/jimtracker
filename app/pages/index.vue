@@ -86,7 +86,7 @@ useHead({
         :class="tab === 'match' ? 'bg-neutral-950/90 border-neutral-800/90': 'bg-neutral-800 border-neutral-700/70 hover:bg-neutral-900/90'"
         @click="tab = 'match'"
       >
-        Últimas 100 partidas
+        Últimas 200 partidas
       </button>
       <button
         class="px-4 py-2 rounded text-white font-semibold border-2"
