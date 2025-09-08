@@ -56,7 +56,7 @@ const chartData = computed((): ChartData<"line"> => ({
           const value = ctx.p0.parsed.y;
           const rank = valueToTier(value);
           const tier = LEAGUE_TIERS.find(t => t.name === rank.tier);
-          return tier?.color ? `${tier.color}0d` : "#3B82F6";
+          return tier?.color ? `${tier.color}1d` : "#3B82F6";
         }
       }
     }
@@ -89,7 +89,7 @@ const chartOptions = computed((): ChartOptions<"line"> => ({
   scales: {
     x: {
       grid: {
-        color: "rgba(148, 163, 184, 0.2)"
+        color: "rgba(148, 163, 184, 0.15)"
       },
       ticks: {
         color: "#fff",
@@ -103,10 +103,20 @@ const chartOptions = computed((): ChartOptions<"line"> => ({
       min: Math.floor(visibleRange.value.min / 100) * 100, // Redondear al múltiplo de 100 más cercano
       max: Math.ceil(visibleRange.value.max / 100) * 100, // Redondear al múltiplo de 100 más cercano
       grid: {
-        color: "rgba(148, 163, 184, 0.2)"
+        color: (ctx) => {
+          const value = Number(ctx.tick.value);
+          const rank = valueToTier(value);
+          const tier = LEAGUE_TIERS.find(t => t.name === rank.tier);
+          return tier?.color ? `${tier.color}33` : "rgba(148, 163, 184, 0.2)";
+        }
       },
       ticks: {
-        color: "#fff",
+        color: (ctx) => {
+          const value = Number(ctx.tick.value);
+          const rank = valueToTier(value);
+          const tier = LEAGUE_TIERS.find(t => t.name === rank.tier);
+          return tier?.color || "#fff";
+        },
         font: {
           size: 12,
           family: "Arial, sans-serif"
