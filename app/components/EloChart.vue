@@ -41,8 +41,8 @@ const chartData = computed((): ChartData<"line"> => ({
       }),
       pointBorderColor: "#ffffff77",
       pointBorderWidth: 1,
-      pointRadius: 3,
-      pointHoverRadius: 12,
+      pointRadius: 2,
+      pointHoverRadius: 8,
       pointHoverBorderColor: "#ffffffaa",
       pointHoverBorderWidth: 2,
       segment: {
