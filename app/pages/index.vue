@@ -105,7 +105,11 @@ useHead({
       </div>
     </div>
     <div class="text-center text-sm text-slate-300">
-      <span>Creado con ❤️ por <NuxtLink href="https://github.com/ahmedrangel" target="_blank" external class="text-emerald-300 font-semibold hover:underline">Ahmed Rangel</NuxtLink></span>
+      <span>
+        <NuxtLink href="https://github.com/ahmedrangel/jimtracker" target="_blank" external class="text-emerald-300 font-semibold hover:underline">Creado</NuxtLink>
+        con ❤️ por
+        <NuxtLink href="https://github.com/ahmedrangel" target="_blank" external class="text-emerald-300 font-semibold hover:underline">Ahmed Rangel</NuxtLink>
+      </span>
     </div>
   </main>
 </template>
