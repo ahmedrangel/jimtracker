@@ -7,14 +7,12 @@ const props = defineProps<{
   champions?: { id: string, name: string }[];
   history?: History[];
 }>();
-// Sacar la racha positiva o negativa del history, contando desde el final del array
 const streak = computed(() => {
-  const history = props.history?.filter(h => !h.is_remake)?.sort((a, b) => a.date - b.date) || [];
-  // Obtener la cantidad de victorias o derrotas consecutivas desde el final del array
+  const history = props.history?.filter(h => !h.is_remake)?.sort((a, b) => b.date - a.date) || [];
   if (!props.history || props.history.length === 0) return 0;
   let count = 0;
-  const lastResult = history[history.length - 1]?.result;
-  for (let i = history.length - 1; i >= 0; i--) {
+  const lastResult = history[0]?.result;
+  for (let i = 0; i < history.length; i++) {
     if (history[i]?.result === lastResult) {
       count++;
     }
