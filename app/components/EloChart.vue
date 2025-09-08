@@ -138,7 +138,9 @@ const chartOptions = computed((): ChartOptions<"line"> => ({
 
 <template>
   <div class="chart-container">
-    <Line :data="chartData" :options="chartOptions" />
+    <ClientOnly>
+      <Line :data="chartData" :options="chartOptions" />
+    </ClientOnly>
     <TooltipChart :type="type" :style="tooltipState?.style" :content="tooltipState?.content" />
   </div>
 </template>
