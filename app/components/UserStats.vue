@@ -120,7 +120,7 @@ onUnmounted(() => {
           </p>
         </div>
         <!-- WINRATE, VICTORIAS, DERROTAS -->
-        <div class="flex flex-col gap-2 md:gap-4 col-span-2 md:col-span-1">
+        <div class="flex flex-col gap-2 md:gap-2 col-span-2 md:col-span-1">
           <!-- WINRATE -->
           <div class="bg-neutral-950/75 border border-purple-300/40 rounded p-2 sm:p-2 text-center flex flex-col items-center justify-center">
             <p class="md:text-lg text-purple-200 font-semibold ">WINRATE</p>
@@ -129,7 +129,7 @@ onUnmounted(() => {
             </p>
           </div>
           <!-- VICTORIAS -->
-          <div class="flex items-center justify-center gap-2 md:gap-4">
+          <div class="flex items-center justify-center gap-2 md:gap-2">
             <div class="bg-neutral-950/75 border border-blue-300/40 rounded p-2 sm:p-2 text-center flex flex-col items-center justify-center w-full">
               <p class="md:text-lg text-blue-200 font-semibold ">VICTORIAS</p>
               <p class="md:text-xl text-blue-200 font-bold flex items-center justify-center">
