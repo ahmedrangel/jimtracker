@@ -7,7 +7,6 @@ const props = defineProps<{
   champions?: { id: string, name: string }[];
   history?: History[];
 }>();
-// Sacar la racha positiva o negativa del history, contando desde el final del array
 const streak = computed(() => {
   const history = props.history?.filter(h => !h.is_remake)?.toSorted((a, b) => b.date - a.date) || [];
   if (!props.history || props.history.length === 0) return 0;
