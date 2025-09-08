@@ -66,6 +66,18 @@ onUnmounted(() => {
     </div>
     <div class="space-y-4 mb-5">
       <div class="grid grid-cols-2 gap-2 md:gap-4">
+        <!-- COUNTDOWN FIN DE TEMPORADA -->
+        <div class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center col-span-2 md:col-span-1">
+          <p class="md:text-xl text-emerald-100 font-semibold">FIN DE TEMPORADA</p>
+          <p class="text-lg md:text-2xl text-green-300/50 font-bold flex flex-wrap items-center justify-center">
+            <span v-if="countdown">
+              <span class="text-emerald-200">{{ countdown.days }}</span>d
+              <span class="text-emerald-200">{{ countdown.hours }}</span>h
+              <span class="text-emerald-200">{{ countdown.minutes }}</span>m
+              <span class="text-emerald-200">{{ countdown.seconds }}</span>s
+            </span>
+          </p>
+        </div>
         <!-- ELO ACTUAL -->
         <div class="text-center bg-neutral-950/75 border border-slate-400/40 flex flex-col items-center justify-center px-2 py-2 sm:px-4 sm:py-4 rounded">
           <p class="md:text-xl font-semibold">ELO ACTUAL</p>
@@ -81,18 +93,6 @@ onUnmounted(() => {
           <p class="md:text-xl font-semibold">RACHA</p>
           <p class="text-lg md:text-2xl font-bold flex flex-wrap items-center justify-center">
             <span :class="streak < 0 ? 'text-rose-400' : 'text-green-400'">{{ streak < 0 ? `-${Math.abs(streak)}` : `+${streak}` }}</span>
-          </p>
-        </div>
-        <!-- COUNTDOWN FIN DE TEMPORADA -->
-        <div class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center col-span-2 md:col-span-1">
-          <p class="md:text-xl text-emerald-100 font-semibold">FIN DE TEMPORADA</p>
-          <p class="text-lg md:text-2xl text-green-300/50 font-bold flex flex-wrap items-center justify-center">
-            <span v-if="countdown">
-              <span class="text-emerald-200">{{ countdown.days }}</span>d
-              <span class="text-emerald-200">{{ countdown.hours }}</span>h
-              <span class="text-emerald-200">{{ countdown.minutes }}</span>m
-              <span class="text-emerald-200">{{ countdown.seconds }}</span>s
-            </span>
           </p>
         </div>
         <!-- MÁS JUGADO -->
