@@ -85,7 +85,7 @@ const chartOptions = computed((): ChartOptions<"line"> => ({
   scales: {
     x: {
       grid: {
-        color: "rgba(148, 163, 184, 0.15)"
+        color: "rgba(148, 163, 184, 0.1)"
       },
       ticks: {
         color: "#fff",
