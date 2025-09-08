@@ -68,6 +68,7 @@ const tooltipState = ref();
 const chartOptions = computed((): ChartOptions<"line"> => ({
   responsive: true,
   maintainAspectRatio: false,
+  devicePixelRatio: window.devicePixelRatio + 0.5,
   interaction: {
     mode: "nearest",
     intersect: false
@@ -110,7 +111,7 @@ const chartOptions = computed((): ChartOptions<"line"> => ({
           size: 12,
           family: "Arial, sans-serif"
         },
-        callback: function (value: string | number) {
+        callback: (value: string | number) => {
           const numValue = Number(value);
           // Solo mostrar etiquetas en valores exactos de divisiones (múltiplos de 100)
           if (numValue % 100 !== 0) return "";
