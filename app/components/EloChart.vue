@@ -33,13 +33,13 @@ const chartData = computed((): ChartData<"line"> => ({
       data: computedChartHistory.value.data.map(d => d.value),
       borderWidth: 2,
       fill: true,
-      tension: 0.15,
+      tension: props.type === "daily" ? 0.15 : 0.25,
       pointBackgroundColor: computedChartHistory.value.data.map((d) => {
         const rank = valueToTier(d.value);
         const tier = LEAGUE_TIERS.find(t => t.name === rank.tier);
         return tier?.color || "#3B82F6";
       }),
-      pointRadius: 3,
+      pointRadius: 2,
       pointHoverRadius: 8,
       segment: {
         borderColor: (ctx) => {
