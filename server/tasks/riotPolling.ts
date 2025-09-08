@@ -85,11 +85,11 @@ export default defineTask({
     const currentInfo = await storage.getItem<UserInfo>("info");
     if (currentInfo) {
       const liveData = await fetchLiveData(config);
-      if (!userData && (liveData.isIngame !== currentInfo.isIngame)) {
+      if (!Object.keys(userData).length && (liveData.isIngame !== currentInfo.isIngame)) {
         const user = { ...currentInfo, ...liveData };
         await storage.setItem<UserInfo>("info", user);
       }
-      else if (userData) {
+      else if (Object.keys(userData).length) {
         const user = { ...currentInfo, ...userData, ...liveData };
         await storage.setItem<UserInfo>("info", user);
       }
