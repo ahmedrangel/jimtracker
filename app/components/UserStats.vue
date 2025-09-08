@@ -8,7 +8,7 @@ const props = defineProps<{
   history?: History[];
 }>();
 const streak = computed(() => {
-  const history = props.history?.filter(h => !h.is_remake)?.sort((a, b) => b.date - a.date) || [];
+  const history = props.history?.filter(h => !h.is_remake)?.toSorted((a, b) => b.date - a.date) || [];
   if (!props.history || props.history.length === 0) return 0;
   let count = 0;
   const lastResult = history[0]?.result;
