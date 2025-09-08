@@ -52,7 +52,7 @@ const chartData = computed((): ChartData<"line"> => ({
           const value = ctx.p0.parsed.y;
           const rank = valueToTier(value);
           const tier = LEAGUE_TIERS.find(t => t.name === rank.tier);
-          return tier?.color ? `${tier.color}1d` : "#3B82F6";
+          return tier?.color ? `${tier.color}1a` : "#3B82F6";
         }
       }
     }
