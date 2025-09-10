@@ -2,7 +2,7 @@
 import { formatDistanceToNowStrict } from "date-fns";
 import { es } from "date-fns/locale";
 
-const { data } = await useFetch<InfoResponse>("/api/info");
+const { data } = await useFetch("/api/info");
 const { data: champions } = await useFetch("/api/champions");
 
 const tab = ref("elo");

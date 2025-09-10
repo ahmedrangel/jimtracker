@@ -31,12 +31,12 @@ declare global {
     is_remake: number;
     result: number;
     champion_id: number;
-    is_surrender: number;
+    is_surrender?: number;
     date: number;
     duration: number;
   }
 
-  interface History extends Omit<MatchData, "puuid">, RankInfo {}
+  interface HistoryData extends Omit<MatchData, "puuid">, RankInfo {}
 
   interface RankInfo {
     tier?: string | null;
@@ -56,15 +56,15 @@ declare global {
 
   interface InfoResponse {
     user?: UserInfo;
-    history?: History[];
-    recent?: History[];
+    history?: HistoryData[];
+    recent?: HistoryData[];
     highest?: RankInfo;
     lowest?: RankInfo;
     mostPlayed?: MostPlayed[];
     highestWinRate?: any;
   }
 
-  interface ChartMatchData extends History {
+  interface ChartMatchData extends HistoryData {
     value: number;
     champion: string;
   }

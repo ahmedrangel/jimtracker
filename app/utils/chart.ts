@@ -94,7 +94,7 @@ export const calculateChartVisibleRange = (data: ChartXData[]) => {
   };
 };
 
-export const processChartData = (data: History[], champions: { id: string, name: string }[], type: "daily" | "match") => {
+export const processChartData = (data: HistoryData[], champions: { id: string, name: string }[], type: "daily" | "match") => {
   const stats = data;
 
   if (!stats?.length) return { labels: [], data: [] };

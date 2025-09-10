@@ -4,7 +4,7 @@ import { Line } from "vue-chartjs";
 
 const props = defineProps<{
   type: "daily" | "match";
-  history?: History[];
+  history?: HistoryData[];
   champions?: { id: string, name: string }[];
 }>();
 

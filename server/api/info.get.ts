@@ -36,7 +36,7 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
           isNotNull(tables.history.snapshot_division),
           isNotNull(tables.history.snapshot_tier)
         )
-      ).orderBy(desc(tables.history.date)).all() as Promise<History[]>,
+      ).orderBy(desc(tables.history.date)).all(),
 
     // Highest
     DB.select({
@@ -136,7 +136,7 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
       )
       .orderBy(desc(tables.history.date))
       .limit(200)
-      .all() as Promise<History[]>,
+      .all(),
 
     // Most Played champion and calculated KDA average
     DB.select({

@@ -5,7 +5,7 @@ const props = defineProps<{
   lowest?: RankInfo;
   mostPlayed?: MostPlayed[];
   champions?: { id: string, name: string }[];
-  history?: History[];
+  history?: HistoryData[];
 }>();
 const streak = computed(() => {
   const history = props.history?.filter(h => !h.is_remake)?.toSorted((a, b) => b.date - a.date) || [];
