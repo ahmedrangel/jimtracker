@@ -11,25 +11,36 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const files = await readFormData(event);
-  const file = files.get("file") as File;
+  const body = await readValidatedBody(event, z.object({
+    url: z.string().url().optional()
+  }).parse);
 
-  if (!file) {
+  let blob: File | Blob;
+
+  if (body.url) {
+    blob = await $fetch(body.url, { responseType: "blob" });
+  }
+  else {
+    const files = await readFormData(event);
+    blob = files.get("file") as File;
+  }
+
+  if (!blob) {
     return createError({
       statusCode: 400,
       message: "File not found"
     });
   }
 
-  ensureBlob(file, {
+  ensureBlob(blob, {
     types: ["image"],
     maxSize: "16MB"
   });
 
   const uuid = randomUUID();
 
-  return hubBlob().put(uuid, file, {
+  return hubBlob().put(uuid, blob, {
     prefix: "gallery",
-    contentType: file.type
+    contentType: blob.type
   });
 });

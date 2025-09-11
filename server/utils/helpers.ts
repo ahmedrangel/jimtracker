@@ -1,6 +1,8 @@
 import { Constants, LolApi, RiotApi } from "twisted";
 import type { RuntimeConfig } from "nuxt/schema";
 
+export { z } from "zod";
+
 export const fetchRankedData = async (config: RuntimeConfig): Promise<RankedData> => {
   const lol = new LolApi(config.riot.apiKey);
   const leagueData = await lol.League.byPUUID(constants.riotPuuid, Constants.Regions.LAT_NORTH);
