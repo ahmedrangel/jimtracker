@@ -9,5 +9,6 @@ export default defineCachedEventHandler(async () => {
   maxAge: 86400, // 1 day
   group: "api",
   name: "gallery",
-  getKey: () => "all"
+  getKey: () => "all",
+  shouldBypassCache: () => !!import.meta.dev
 });

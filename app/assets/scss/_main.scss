@@ -1,1 +1,8 @@
-/* main.css */
+.scale-on-hover {
+  transition: transform .2s ease-in-out
+}
+
+.scale-on-hover:hover {
+  box-shadow: 0 10px 10px #00000026!important;
+  transform: scale(1.05)
+}
