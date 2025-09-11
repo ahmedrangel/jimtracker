@@ -5,6 +5,12 @@
   "main": "dist/server/index.mjs",
   "compatibility_flags": ["nodejs_compat"],
   "observability": { "enabled": true },
+  "routes": [
+    {
+      "pattern": "jimtracker.com",
+      "custom_domain": true
+    }
+  ],
   "assets": {
     "binding": "ASSETS",
     "directory": "dist/public"
@@ -20,6 +26,12 @@
       "binding": "DB",
       "database_name": "jimtracker",
       "database_id": "75c837f6-0eb0-4028-8d3b-f1303ab5c7c2"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "BLOB",
+      "bucket_name": "jimrising"
     }
   ],
   "triggers": {

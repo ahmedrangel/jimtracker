@@ -42,6 +42,7 @@
     "@nuxtjs/sitemap": "^7.4.3",
     "@twurple/api": "^7.4.0",
     "@twurple/auth": "^7.4.0",
+    "@types/node": "^24.3.1",
     "chart.js": "^4.5.0",
     "date-fns": "^4.1.0",
     "drizzle-kit": "^0.31.4",

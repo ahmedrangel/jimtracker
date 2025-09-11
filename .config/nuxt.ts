@@ -71,7 +71,8 @@ export default defineNuxtConfig({
       twitch: {
         secretKey: ""
       }
-    }
+    },
+    cdnToken: ""
   },
 
   colorMode: {
@@ -140,6 +141,7 @@ export default defineNuxtConfig({
   hub: {
     cache: true,
     workers: true,
-    database: true
+    database: true,
+    blob: true
   }
 });
