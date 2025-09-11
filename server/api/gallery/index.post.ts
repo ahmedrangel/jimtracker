@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
   let blob: File | Blob;
 
   if (body.url) {
-    blob = await $fetch(body.url, { responseType: "blob" });
+    blob = await $fetch<Blob>(body.url, { responseType: "blob" });
   }
   else {
     const files = await readFormData(event);
