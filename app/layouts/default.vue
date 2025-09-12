@@ -1,6 +1,6 @@
 <template>
   <div id="layout">
-    <nav class="flex md:fixed md:z-10 md:end-0 items-center rounded md:me-4 md:mt-4 justify-between bg-white/3 backdrop-blur px-6 py-2 border border-white/5 shadow-lg shadow-black/20">
+    <nav class="flex md:fixed md:z-10 md:shadow md:end-0 items-center rounded md:me-4 md:mt-4 justify-between bg-white/3 backdrop-blur px-6 py-2 border border-white/5 shadow-lg shadow-black/20">
       <div />
       <div class="flex items-center gap-2">
         <NuxtLink to="/" class="nav-link border border-white/0 font-semibold px-3 py-1 rounded hover:bg-white/5 hover:backdrop-blur transition-colors duration-200">Tracker</NuxtLink>
