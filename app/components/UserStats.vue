@@ -56,14 +56,6 @@ onUnmounted(() => {
 
 <template>
   <div class="md:place-items-center">
-    <div class="text-center mb-5">
-      <div class="flex justify-center gap-1 mb-5">
-        <NuxtLink v-for="(social, index) in socials" :key="index" external target="_blank" :to="social.url" class="bg-neutral-950/75 border border-slate-400/40 p-2 rounded hover:bg-neutral-900" :title="social.title">
-          <Icon :name="social.icon" size="20" />
-        </NuxtLink>
-      </div>
-      <h2 class="text-2xl font-semibold">EST JimRising <span class="text-slate-400">#LANNN</span></h2>
-    </div>
     <div class="space-y-4 mb-5">
       <div class="grid grid-cols-2 gap-2 md:gap-4">
         <!-- COUNTDOWN FIN DE TEMPORADA -->
