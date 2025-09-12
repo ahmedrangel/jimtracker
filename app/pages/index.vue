@@ -51,14 +51,14 @@ useHead({
 
 <template>
   <main>
-    <div class="flex items-center justify-center">
+    <div class="flex items-center justify-center mb-4">
       <div class="rounded aspect-square flex items-center justify-center w-26 h-26 md:w-32 md:h-32">
         <img src="/images/jimrsng.png" class="max-w-full max-h-full object-contain">
       </div>
     </div>
-    <div class="text-center mb-5">
-      <h2 class="text-2xl font-semibold mb-5">EST JimRising <span class="text-slate-400">#LANNN</span></h2>
-      <div class="flex justify-center gap-1 mb-5">
+    <div class="text-center mb-4">
+      <h2 class="text-2xl font-semibold mb-4">EST JimRising <span class="text-slate-400">#LANNN</span></h2>
+      <div class="flex justify-center gap-1 mb-4">
         <NuxtLink v-for="(social, index) in socials" :key="index" external target="_blank" :to="social.url" class="bg-neutral-950/75 border border-slate-400/40 p-2 rounded hover:bg-neutral-900" :title="social.title">
           <Icon :name="social.icon" size="20" />
         </NuxtLink>
