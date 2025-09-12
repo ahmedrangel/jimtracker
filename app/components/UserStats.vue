@@ -59,7 +59,7 @@ onUnmounted(() => {
     <div class="space-y-4 mb-5">
       <div class="grid grid-cols-2 gap-2 md:gap-4">
         <!-- COUNTDOWN FIN DE TEMPORADA -->
-        <div class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center col-span-2 md:col-span-1 md:min-w-[225px]">
+        <div class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center col-span-2 md:col-span-1 md:min-w-[230px]">
           <p class="md:text-xl text-emerald-100 font-semibold">FIN DE TEMPORADA</p>
           <p class="text-lg md:text-2xl text-green-300/50 font-bold flex flex-wrap items-center justify-center">
             <span v-if="countdown">
