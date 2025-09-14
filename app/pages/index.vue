@@ -17,11 +17,6 @@ watch(tab, () => {
   localStorage.setItem("preferred-tab", tab.value);
 });
 
-onMounted(() => {
-  const savedTab = localStorage.getItem("preferred-tab") || "elo";
-  if (savedTab === "match" || savedTab === "elo") tab.value = savedTab;
-});
-
 useSeoMeta({
   title: SITE.title,
   ogTitle: SITE.title,
@@ -59,6 +54,8 @@ const canUpdate = computed(() => secondsSinceUpdate.value >= updateCooldown);
 const secondsToAvailable = computed(() => Math.max(0, updateCooldown - secondsSinceUpdate.value));
 
 onMounted(() => {
+  const savedTab = localStorage.getItem("preferred-tab") || "elo";
+  if (savedTab === "match" || savedTab === "elo") tab.value = savedTab;
   intervalId = window.setInterval(() => {
     now.value = Date.now();
   }, 500);
