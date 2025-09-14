@@ -146,7 +146,12 @@ const updateInfo = async () => {
     </div>
     <EloChart :history="tab === 'elo' ? data?.history : data?.recent" :champions="champions" :type="tab === 'elo' ? 'daily' : 'match'" />
     <div v-if="data?.user?.updatedAt" class="text-xs my-2 flex flex-col">
-      <span class="text-end mb-2">Última actualización: <span class="text-yellow-300">{{ formatDistanceToNowStrict(new Date(data?.user?.updatedAt), { addSuffix: true, locale: es }) }}</span></span>
+      <span class="text-end mb-2">
+        Última actualización:
+        <ClientOnly>
+          <span class="text-yellow-300">{{ formatDistanceToNowStrict(new Date(lastUpdate), { addSuffix: true, locale: es }) }}</span>
+        </ClientOnly>
+      </span>
       <div class="flex items-center justify-center gap-1">
         <Icon name="ph:info-bold" size="20" class="text-blue-400" />
         <span class="text-slate-300">Los datos históricos de elo solo considera las partidas registradas a partir del 19 de agosto de 2025, fecha en la que se inició la recopilación de información de las partidas.</span>
