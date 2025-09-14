@@ -117,7 +117,7 @@ const updateInfo = async () => {
     <!-- Botón de actualizar -->
     <div class="flex md:justify-end mb-4">
       <button
-        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded flex items-center gap-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-3 py-2 rounded flex items-center gap-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
         :disabled="!canUpdate"
         @click="updateInfo"
       >
