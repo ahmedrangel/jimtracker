@@ -2,9 +2,9 @@
 const props = defineProps<{
   user?: UserInfo;
 }>();
-const isLiveTwitch = props?.user?.isLiveTwitch;
-const isLiveKick = props?.user?.isLiveKick;
-const isIngame = props?.user?.isIngame;
+const isLiveTwitch = computed(() => props?.user?.isLiveTwitch);
+const isLiveKick = computed(() => props?.user?.isLiveKick);
+const isIngame = computed(() => props?.user?.isIngame);
 const twitch = socials.find(s => s.id === "twitch")!;
 const kick = socials.find(s => s.id === "kick")!;
 </script>
