@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed, onMounted, onUnmounted, ref } from "vue";
 import { formatDistanceToNowStrict } from "date-fns";
 import { es } from "date-fns/locale";
 
@@ -47,6 +48,31 @@ useHead({
     })
   }]
 });
+
+const updateCooldown = 120; // segundos
+const now = ref(Date.now());
+let intervalId: number | undefined;
+
+const lastUpdate = computed(() => data.value?.user?.updatedAt ? new Date(data.value.user.updatedAt).getTime() : 0);
+const secondsSinceUpdate = computed(() => Math.floor((now.value - lastUpdate.value) / 1000));
+const canUpdate = computed(() => secondsSinceUpdate.value >= updateCooldown);
+const secondsToAvailable = computed(() => Math.max(0, updateCooldown - secondsSinceUpdate.value));
+
+onMounted(() => {
+  intervalId = window.setInterval(() => {
+    now.value = Date.now();
+  }, 500);
+});
+onUnmounted(() => {
+  if (intervalId) clearInterval(intervalId);
+});
+
+const updateInfo = async () => {
+  if (!canUpdate.value) return;
+  const newData = await $fetch("/api/update", { method: "POST" });
+  if (newData) data.value = newData;
+  now.value = Date.now();
+};
 </script>
 
 <template>
@@ -88,6 +114,18 @@ useHead({
       </NuxtLink>
     </div>
     <UserStats :user="data?.user" :highest="data?.highest" :lowest="data?.lowest" :champions="champions" :most-played="data?.mostPlayed" :history="data?.recent" />
+    <!-- Botón de actualizar -->
+    <div class="flex md:justify-end mb-4">
+      <button
+        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded flex items-center gap-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+        :disabled="!canUpdate"
+        @click="updateInfo"
+      >
+        <Icon name="ph:arrow-clockwise-bold" size="20" />
+        <span v-if="canUpdate">Actualizar</span>
+        <span v-else>Disponible en: <ClientOnly>{{ secondsToAvailable }}s</ClientOnly></span>
+      </button>
+    </div>
     <div class="tabs flex gap-2 justify-center sm:justify-end mb-2">
       <button
         class="px-4 py-2 rounded text-white font-semibold border-2"

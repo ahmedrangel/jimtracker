@@ -6,11 +6,7 @@ export default defineTask({
     description: "Poll Riot API for updates"
   },
   async run (): Promise<{
-    result: {
-      success: boolean;
-      data?: MatchData[];
-      snapshot?: RankInfo;
-    };
+    result: UserInfo | null;
   }> {
     const config = useRuntimeConfig();
     const DB = useDB();
@@ -88,19 +84,17 @@ export default defineTask({
       if (!Object.keys(userData).length && (liveData.isIngame !== currentInfo.isIngame)) {
         const user = { ...currentInfo, ...liveData };
         await storage.setItem<UserInfo>("info", user);
+        return { result: user };
       }
       else if (Object.keys(userData).length) {
         const user = { ...currentInfo, ...userData, ...liveData };
         await storage.setItem<UserInfo>("info", user);
+        return { result: user };
+      }
+      else {
+        return { result: currentInfo };
       }
     }
-
-    return {
-      result: {
-        success: true,
-        data: dataToInsert,
-        snapshot: snapshot?.[0]
-      }
-    };
+    return { result: null };
   }
 });
