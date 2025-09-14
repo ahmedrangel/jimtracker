@@ -115,17 +115,19 @@ const updateInfo = async () => {
     </div>
     <UserStats :user="data?.user" :highest="data?.highest" :lowest="data?.lowest" :champions="champions" :most-played="data?.mostPlayed" :history="data?.recent" />
     <!-- Botón de actualizar -->
-    <div class="flex md:justify-end mb-4">
-      <button
-        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-3 py-2 rounded flex items-center gap-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
-        :disabled="!canUpdate"
-        @click="updateInfo"
-      >
-        <Icon name="ph:arrow-clockwise-bold" size="20" />
-        <span v-if="canUpdate">Actualizar</span>
-        <span v-else>Disponible en: <ClientOnly>{{ secondsToAvailable }}s</ClientOnly></span>
-      </button>
-    </div>
+    <ClientOnly>
+      <div class="flex md:justify-end mb-4">
+        <button
+          class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-3 py-2 rounded flex items-center gap-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+          :disabled="!canUpdate"
+          @click="updateInfo"
+        >
+          <Icon name="ph:arrow-clockwise-bold" size="20" />
+          <span v-if="canUpdate">Actualizar</span>
+          <span v-else>Disponible en: {{ secondsToAvailable }}s</span>
+        </button>
+      </div>
+    </ClientOnly>
     <div class="tabs flex gap-2 justify-center sm:justify-end mb-2">
       <button
         class="px-4 py-2 rounded text-white font-semibold border-2"
