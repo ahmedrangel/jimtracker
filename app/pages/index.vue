@@ -82,7 +82,7 @@ const updateInfo = async () => {
       <span class="text-end mb-2">
         Última actualización:
         <ClientOnly>
-          <span class="text-yellow-300">{{ formatDistanceStrict(now, new Date(lastUpdate), { addSuffix: true, locale: es }) }}</span>
+          <span class="text-yellow-300">{{ formatDistanceStrict(new Date(lastUpdate), now, { addSuffix: true, locale: es }) }}</span>
         </ClientOnly>
       </span>
       <div class="flex items-center justify-center gap-1">
