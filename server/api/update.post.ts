@@ -1,4 +1,4 @@
-export default defineEventHandler(async (): Promise<InfoResponse> => {
+export default defineEventHandler(async (event): Promise<InfoResponse> => {
   const now = Date.now();
   const checkInfo = await useStorage("cache").getItem<UserInfo>("info");
   const dbInfo = await getDBInfo();
@@ -9,8 +9,10 @@ export default defineEventHandler(async (): Promise<InfoResponse> => {
       ...dbInfo
     };
   }
+  const config = useRuntimeConfig(event);
   const riotPolling = await runTask<UserInfo>("riotPolling");
-  if (riotPolling?.result) await useStorage("cache").setItem("info", { ...riotPolling.result, updatedAt: now });
-  const info = { ...riotPolling.result!, updatedAt: now };
+  const rankedData = await fetchRankedData(config);
+  if (riotPolling?.result) await useStorage("cache").setItem("info", { ...riotPolling.result, ...rankedData, updatedAt: now });
+  const info = { ...riotPolling.result!, ...rankedData, updatedAt: now };
   return { user: info, ...dbInfo };
 });
