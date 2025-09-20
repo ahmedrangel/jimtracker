@@ -5,6 +5,8 @@ const props = defineProps<{
 const isLiveTwitch = computed(() => props?.user?.isLiveTwitch);
 const isLiveKick = computed(() => props?.user?.isLiveKick);
 const isIngame = computed(() => props?.user?.isIngame);
+const gameName = computed(() => props?.user?.gameName);
+const tagLine = computed(() => props?.user?.tagLine);
 const twitch = socials.find(s => s.id === "twitch")!;
 const kick = socials.find(s => s.id === "kick")!;
 </script>
@@ -16,7 +18,7 @@ const kick = socials.find(s => s.id === "kick")!;
     </div>
   </div>
   <div class="text-center mb-4">
-    <h2 class="text-2xl font-semibold mb-4">EST JimRising <span class="text-slate-400">#LANNN</span></h2>
+    <h2 v-if="gameName && tagLine" class="text-2xl font-semibold mb-4">{{ gameName }} <span class="text-slate-400">#{{ tagLine }}</span></h2>
     <div class="flex justify-center gap-1 mb-4">
       <NuxtLink v-for="(social, index) in socials" :key="index" external target="_blank" :to="social.url" class="bg-neutral-950/75 border border-slate-400/40 p-2 rounded hover:bg-neutral-900" :title="social.title">
         <Icon :name="social.icon" size="20" />
