@@ -10,9 +10,12 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
   }
   const config = useRuntimeConfig(event);
   const riotPolling = await runTask<UserInfo>("riotPolling");
-  const rankedData = await fetchRankedData(config);
+  const [rankedData, userData] = await Promise.all([
+    fetchRankedData(config),
+    fetchUserData(config)
+  ]);
   const dbInfo = await getDBInfo();
-  if (riotPolling?.result) await useStorage("cache").setItem("info", { ...riotPolling.result, ...rankedData, updatedAt: now });
-  const info = { ...riotPolling.result!, ...rankedData, updatedAt: now };
+  if (riotPolling?.result) await useStorage("cache").setItem("info", { ...riotPolling.result, ...rankedData, ...userData, updatedAt: now });
+  const info = { ...riotPolling.result!, ...rankedData, ...userData, updatedAt: now };
   return { user: info, ...dbInfo };
 });
