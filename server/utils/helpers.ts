@@ -34,18 +34,6 @@ export const fetchUserData = async (config: RuntimeConfig): Promise<UserLeague> 
   };
 };
 
-export const fetchLiveData = async (config: RuntimeConfig): Promise<LiveInfo> => {
-  const lol = new LolApi(config.riot.apiKey);
-  const [spectatorData] = await Promise.all([
-    lol.SpectatorV5.activeGame(constants.riotPuuid, Constants.Regions.LAT_NORTH).catch(() => null)
-  ]);
-
-  return {
-    updatedAt: Date.now(),
-    isIngame: Boolean(spectatorData?.response?.gameQueueConfigId === 420)
-  };
-};
-
 export const getDBInfo = async () => {
   const DB = useDB();
   const [history, highest, lowest, recent, mostPlayed] = await Promise.all([

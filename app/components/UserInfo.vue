@@ -4,7 +4,6 @@ const props = defineProps<{
 }>();
 const isLiveTwitch = computed(() => props?.user?.isLiveTwitch);
 const isLiveKick = computed(() => props?.user?.isLiveKick);
-const isIngame = computed(() => props?.user?.isIngame);
 const gameName = computed(() => props?.user?.gameName);
 const tagLine = computed(() => props?.user?.tagLine);
 const twitch = socials.find(s => s.id === "twitch")!;
@@ -38,13 +37,6 @@ const kick = socials.find(s => s.id === "kick")!;
         <div class="absolute -z-10 inset-0 rounded shadow-lg" :class="isLiveKick ? 'bg-gradient-to-r from-green-700 via-green-600 to-green-700 animate-pulse shadow-green-500/50' : 'bg-green-100/70'" />
         <Icon name="simple-icons:kick" size="22" />
         <span>{{ isLiveKick ? 'En vivo' : 'Offline' }}</span>
-      </span>
-    </NuxtLink>
-    <NuxtLink :to="`https://op.gg/es/lol/summoners/lan/${user?.gameName}-${user?.tagLine}/ingame`" target="_blank" external :class="{ 'pointer-events-none': !isIngame }">
-      <span class="relative text-sm px-3 py-2 rounded font-bold flex items-center justify-center gap-1" :class="isIngame ? 'text-white' : 'text-black/70'">
-        <div class="absolute -z-10 inset-0 rounded shadow-lg" :class="isIngame ? 'bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 animate-pulse shadow-blue-500/50' : 'bg-blue-100/70'" />
-        <Icon name="simple-icons:leagueoflegends" size="22" />
-        <span>{{ isIngame ? 'En partida' : 'Fuera de partida' }}</span>
       </span>
     </NuxtLink>
   </div>

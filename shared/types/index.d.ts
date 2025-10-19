@@ -17,7 +17,6 @@ declare global {
     updatedAt: number;
     isLiveTwitch?: boolean;
     isLiveKick?: boolean;
-    isIngame?: boolean;
   }
 
   interface UserInfo extends UserLeague, LiveInfo {}
