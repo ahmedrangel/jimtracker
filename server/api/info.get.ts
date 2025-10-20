@@ -4,10 +4,11 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
   const storage = useStorage("cache");
   let info = (await storage.getItem<UserInfo>("info")) || undefined;
   if (!info) {
-    const [userData] = await Promise.all([
-      fetchUserData(config)
+    const [userData, liveData] = await Promise.all([
+      fetchUserData(config),
+      fetchLiveData(config)
     ]);
-    info = { ...userData, updatedAt: Date.now() };
+    info = { ...userData, ...liveData };
     await storage.setItem<UserInfo>("info", info);
   }
 
