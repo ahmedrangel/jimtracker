@@ -49,7 +49,7 @@ export const fetchLiveData = async (config: RuntimeConfig): Promise<LiveInfo> =>
 export const getDBInfo = async () => {
   const DB = useDB();
   const [history, highest, lowest, recent, mostPlayed] = await Promise.all([
-    // History (últimos 30 días)
+    // History (últimos 60 días)
     DB.select({
       match_id: tables.history.match_id,
       assists: tables.history.assists,
@@ -66,7 +66,7 @@ export const getDBInfo = async () => {
     }).from(tables.history)
       .where(
         and(
-          gte(tables.history.date, Date.now() - 30 * 24 * 60 * 60 * 1000),
+          gte(tables.history.date, Date.now() - 60 * 24 * 60 * 60 * 1000),
           eq(tables.history.puuid, constants.riotPuuid),
           isNotNull(tables.history.snapshot_division),
           isNotNull(tables.history.snapshot_tier)

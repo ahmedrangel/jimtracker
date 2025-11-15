@@ -29,7 +29,7 @@ onMounted(() => {
       :class="tab === 'elo' ? 'bg-neutral-950/90 border-neutral-700/90': 'bg-neutral-800 border-neutral-700/70 hover:bg-neutral-900/90'"
       @click="tab = 'elo'"
     >
-      Últimos 30 días
+      Últimos 60 días
     </button>
   </div>
   <EloChart :history="tab === 'elo' ? data?.history : data?.recent" :champions="champions" :type="tab === 'elo' ? 'daily' : 'match'" />
