@@ -44,13 +44,13 @@ const chartData = computed((): ChartData<"line"> => ({
       segment: {
         borderColor: (ctx) => {
           const value = ctx.p0.parsed.y;
-          const rank = valueToTier(value);
+          const rank = valueToTier(value || 0);
           const tier = LEAGUE_TIERS.find(t => t.name === rank.tier);
           return tier?.color || "#3B82F6";
         },
         backgroundColor: (ctx) => {
           const value = ctx.p0.parsed.y;
-          const rank = valueToTier(value);
+          const rank = valueToTier(value || 0);
           const tier = LEAGUE_TIERS.find(t => t.name === rank.tier);
           return tier?.color ? `${tier.color}1a` : "#3B82F6";
         }
