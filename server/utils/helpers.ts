@@ -48,8 +48,23 @@ export const fetchLiveData = async (config: RuntimeConfig): Promise<LiveInfo> =>
 
 export const getDBInfo = async () => {
   const DB = useDB();
-  const [history, highest, lowest, recent, mostPlayed] = await Promise.all([
-    // History (últimos 60 días)
+  const countResult = await DB.select({
+    count: sql<number>`COUNT(*)`
+  }).from(tables.history)
+    .where(
+      and(
+        gte(tables.history.date, Date.now() - historyGraphConfig.daysLimit * 24 * 60 * 60 * 1000),
+        eq(tables.history.puuid, constants.riotPuuid),
+        isNotNull(tables.history.snapshot_division),
+        isNotNull(tables.history.snapshot_tier)
+      )
+    ).get();
+
+  const matchesInDays = countResult?.count || 0;
+  const dynamicLimit = Math.max(matchesInDays, historyGraphConfig.matchLimit);
+
+  const [history, highest, lowest, mostPlayed] = await Promise.all([
+    // History
     DB.select({
       match_id: tables.history.match_id,
       assists: tables.history.assists,
@@ -66,12 +81,14 @@ export const getDBInfo = async () => {
     }).from(tables.history)
       .where(
         and(
-          gte(tables.history.date, Date.now() - 60 * 24 * 60 * 60 * 1000),
           eq(tables.history.puuid, constants.riotPuuid),
           isNotNull(tables.history.snapshot_division),
           isNotNull(tables.history.snapshot_tier)
         )
-      ).orderBy(desc(tables.history.date)).all(),
+      )
+      .orderBy(desc(tables.history.date))
+      .limit(Math.ceil(dynamicLimit))
+      .all(),
 
     // Highest
     DB.select({
@@ -147,32 +164,6 @@ export const getDBInfo = async () => {
         asc(tables.history.snapshot_lp)
       ).limit(1).get(),
 
-    // Recent Matches (últimas 200 partidas)
-    DB.select({
-      match_id: tables.history.match_id,
-      assists: tables.history.assists,
-      kills: tables.history.kills,
-      deaths: tables.history.deaths,
-      champion_id: tables.history.champion_id,
-      date: tables.history.date,
-      result: tables.history.result,
-      is_remake: tables.history.is_remake,
-      division: tables.history.snapshot_division,
-      tier: tables.history.snapshot_tier,
-      lp: tables.history.snapshot_lp,
-      duration: tables.history.duration
-    }).from(tables.history)
-      .where(
-        and(
-          eq(tables.history.puuid, constants.riotPuuid),
-          isNotNull(tables.history.snapshot_division),
-          isNotNull(tables.history.snapshot_tier)
-        )
-      )
-      .orderBy(desc(tables.history.date))
-      .limit(200)
-      .all(),
-
     // Most Played champion and calculated KDA average
     DB.select({
       champion_id: tables.history.champion_id,
@@ -190,5 +181,11 @@ export const getDBInfo = async () => {
       .limit(4)
       .all()
   ]);
-  return { history, highest, lowest, recent, mostPlayed };
+
+  return {
+    history,
+    highest,
+    lowest,
+    mostPlayed
+  };
 };
