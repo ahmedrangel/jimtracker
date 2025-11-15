@@ -49,7 +49,7 @@ export const fetchLiveData = async (config: RuntimeConfig): Promise<LiveInfo> =>
 export const getDBInfo = async () => {
   const DB = useDB();
   const countResult = await DB.select({
-    count: sql<number>`COUNT(*)`
+    count: count(tables.history.match_id)
   }).from(tables.history)
     .where(
       and(
