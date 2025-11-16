@@ -47,8 +47,6 @@ export const fetchLiveData = async (config: RuntimeConfig): Promise<LiveInfo> =>
 };
 
 export const getDBInfo = async () => {
-  const currentYear = new Date().getFullYear();
-  const currentSeason = parseInt(currentYear.toString().slice(2)) - 10; // Seasons started in 2010
   const DB = useDB();
   const countResult = await DB.select({
     count: count(tables.history.match_id)
@@ -86,8 +84,7 @@ export const getDBInfo = async () => {
         and(
           eq(tables.history.puuid, constants.riotPuuid),
           isNotNull(tables.history.snapshot_division),
-          isNotNull(tables.history.snapshot_tier),
-          eq(tables.history.season, currentSeason)
+          isNotNull(tables.history.snapshot_tier)
         )
       )
       .orderBy(desc(tables.history.date))
