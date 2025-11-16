@@ -82,14 +82,15 @@ export const polling = async (puuid: string, key: string) => {
       const user = { ...currentInfo, ...liveData };
       await Promise.all([
         storage.setItem<UserInfo>(key, currentInfo),
-        storage.setItem<LiveInfo>(`live:${key}`, liveData)
+        storage.setItem<LiveInfo>(`live:${key}`, { ...currentLiveInfo, ...liveData })
       ]);
       return { result: user };
     }
     else if (Object.keys(userData).length) {
-      const user = { ...currentInfo, ...userData, ...liveData };
+      const user = { ...currentInfo, ...userData, ...currentLiveInfo, ...liveData };
       await Promise.all([
-        storage.setItem<UserInfo>(key, user)
+        storage.setItem<UserInfo>(key, user),
+        storage.setItem<LiveInfo>(`live:${key}`, { ...currentLiveInfo, ...liveData })
       ]);
       return { result: user };
     }
