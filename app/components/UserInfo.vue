@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   user?: UserInfo;
+  showSoloboom?: boolean;
 }>();
 const isLiveTwitch = computed(() => props?.user?.isLiveTwitch);
 const isLiveKick = computed(() => props?.user?.isLiveKick);
@@ -13,9 +14,19 @@ const kick = socials.find(s => s.id === "kick")!;
 
 <template>
   <div class="flex items-center justify-center mb-4">
-    <div class="rounded aspect-square flex items-center justify-center w-26 h-26 md:w-32 md:h-32">
+    <div v-if="!showSoloboom" class="rounded aspect-square justify-items-center w-26 h-26 md:w-32 md:h-32">
       <img src="/images/jimrsng.png" class="max-w-full max-h-full object-contain">
     </div>
+    <template v-else>
+      <div class="rounded aspect-square justify-items-center w-26 h-26 md:w-32 md:h-32">
+        <img src="/images/jimrsng.png" class="max-w-full max-h-full object-contain">
+      </div>
+      <NuxtLink to="https://soloboom.net/leaderboard" external target="_blank">
+        <div class="rounded aspect-square justify-items-center w-26 h-26 md:w-32 md:h-32">
+          <img src="/images/soloboom2025.webp" class="max-w-full max-h-full object-contain">
+        </div>
+      </NuxtLink>
+    </template>
   </div>
   <div class="text-center mb-4">
     <h2 v-if="gameName && tagLine" class="text-2xl font-semibold mb-4">{{ gameName }} <span class="text-slate-400">#{{ tagLine }}</span></h2>

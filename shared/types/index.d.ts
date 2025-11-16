@@ -11,16 +11,18 @@ declare global {
   interface UserLeague extends RankedData {
     gameName?: string;
     tagLine?: string;
+    updatedAt: number;
   }
 
   interface LiveInfo {
-    updatedAt: number;
     isLiveTwitch?: boolean;
     isLiveKick?: boolean;
     isIngame?: boolean;
   }
 
-  interface UserInfo extends UserLeague, LiveInfo {}
+  interface UserInfo extends UserLeague, LiveInfo {
+    soloboomRank?: number;
+  }
 
   interface MatchData {
     match_id: string;

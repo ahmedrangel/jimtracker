@@ -3,7 +3,9 @@ import { computed, onMounted, onUnmounted, ref } from "vue";
 import { formatDistanceStrict } from "date-fns";
 import { es } from "date-fns/locale";
 
-const { data } = await useFetch("/api/info");
+const { data } = await useFetch("/api/info", {
+  query: { soloboom: true }
+});
 const { data: champions } = await useFetch("/api/champions");
 
 useSeoMeta({
@@ -20,7 +22,7 @@ useSeoMeta({
 
 useHead({
   link: [
-    { rel: "canonical", href: SITE.url }
+    { rel: "canonical", href: `${SITE.url}/season/2025/soloboom` }
   ],
   script: [{
     type: "application/ld+json",
@@ -53,7 +55,7 @@ onUnmounted(() => {
 
 const updateInfo = async () => {
   if (!canUpdate.value) return;
-  const newData = await $fetch("/api/update", { method: "POST" });
+  const newData = await $fetch("/api/update", { method: "POST", query: { soloboom: true } });
   if (newData) data.value = newData;
   now.value = Date.now();
 };
@@ -61,8 +63,8 @@ const updateInfo = async () => {
 
 <template>
   <main>
-    <UserInfo :user="data?.user" />
-    <UserStats :user="data?.user" :highest="data?.highest" :lowest="data?.lowest" :champions="champions" :most-played="data?.mostPlayed" :history="data?.history" show-countdown />
+    <UserInfo :user="data?.user" show-soloboom />
+    <UserStats :user="data?.user" :highest="data?.highest" :lowest="data?.lowest" :champions="champions" :most-played="data?.mostPlayed" :history="data?.history" show-soloboom-rank />
     <!-- Botón de Actualizar -->
     <ClientOnly>
       <div class="flex md:justify-end mb-4">

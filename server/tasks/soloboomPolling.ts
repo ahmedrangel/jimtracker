@@ -2,12 +2,12 @@ import { polling } from "../utils/polling";
 
 export default defineTask({
   meta: {
-    name: "riotPolling",
+    name: "soloboomPolling",
     description: "Poll Riot API for updates"
   },
   async run (): Promise<{
     result: UserInfo | null;
   }> {
-    return polling(constants.riotPuuid, "info");
+    return polling(constants.soloboomPuuids[2025], "info-soloboom");
   }
 });

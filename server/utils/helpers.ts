@@ -3,9 +3,9 @@ import type { RuntimeConfig } from "nuxt/schema";
 
 export { z } from "zod";
 
-export const fetchRankedData = async (config: RuntimeConfig): Promise<RankedData> => {
+export const fetchRankedData = async (config: RuntimeConfig, puuid: string): Promise<RankedData> => {
   const lol = new LolApi(config.riot.apiKey);
-  const leagueData = await lol.League.byPUUID(constants.riotPuuid, Constants.Regions.LAT_NORTH);
+  const leagueData = await lol.League.byPUUID(puuid, Constants.Regions.LAT_NORTH);
   const rankedData = leagueData.response.find(entry => entry.queueType === Constants.Queues.RANKED_SOLO_5x5);
   return {
     wins: rankedData?.wins || 0,
@@ -16,11 +16,11 @@ export const fetchRankedData = async (config: RuntimeConfig): Promise<RankedData
   };
 };
 
-export const fetchUserData = async (config: RuntimeConfig): Promise<UserLeague> => {
+export const fetchUserData = async (config: RuntimeConfig, puuid: string): Promise<UserLeague> => {
   const riot = new RiotApi(config.riot.apiKey);
   const [accountData, rankedData] = await Promise.all([
-    riot.Account.getByPUUID(constants.riotPuuid, Constants.RegionGroups.AMERICAS),
-    fetchRankedData(config)
+    riot.Account.getByPUUID(puuid, Constants.RegionGroups.AMERICAS),
+    fetchRankedData(config, puuid)
   ]);
 
   return {
@@ -30,23 +30,23 @@ export const fetchUserData = async (config: RuntimeConfig): Promise<UserLeague> 
     tagLine: accountData.response.tagLine,
     division: rankedData?.division,
     tier: rankedData?.tier,
-    lp: rankedData?.lp
+    lp: rankedData?.lp,
+    updatedAt: Date.now()
   };
 };
 
-export const fetchLiveData = async (config: RuntimeConfig): Promise<LiveInfo> => {
+export const fetchLiveData = async (config: RuntimeConfig, puuid: string): Promise<LiveInfo> => {
   const lol = new LolApi(config.riot.apiKey);
   const [spectatorData] = await Promise.all([
-    lol.SpectatorV5.activeGame(constants.riotPuuid, Constants.Regions.LAT_NORTH).catch(() => null)
+    lol.SpectatorV5.activeGame(puuid, Constants.Regions.LAT_NORTH).catch(() => null)
   ]);
 
   return {
-    updatedAt: Date.now(),
     isIngame: Boolean(spectatorData?.response?.gameQueueConfigId === 420)
   };
 };
 
-export const getDBInfo = async () => {
+export const getDBInfo = async (puuid: string) => {
   const DB = useDB();
   const countResult = await DB.select({
     count: count(tables.history.match_id)
@@ -54,7 +54,7 @@ export const getDBInfo = async () => {
     .where(
       and(
         gte(tables.history.date, Date.now() - historyGraphConfig.daysLimit * 24 * 60 * 60 * 1000),
-        eq(tables.history.puuid, constants.riotPuuid),
+        eq(tables.history.puuid, puuid),
         isNotNull(tables.history.snapshot_division),
         isNotNull(tables.history.snapshot_tier)
       )
@@ -82,7 +82,7 @@ export const getDBInfo = async () => {
     }).from(tables.history)
       .where(
         and(
-          eq(tables.history.puuid, constants.riotPuuid),
+          eq(tables.history.puuid, puuid),
           isNotNull(tables.history.snapshot_division),
           isNotNull(tables.history.snapshot_tier)
         )
@@ -99,7 +99,7 @@ export const getDBInfo = async () => {
     }).from(tables.history)
       .where(
         and(
-          eq(tables.history.puuid, constants.riotPuuid),
+          eq(tables.history.puuid, puuid),
           isNotNull(tables.history.snapshot_division),
           isNotNull(tables.history.snapshot_tier)
         )
@@ -136,7 +136,7 @@ export const getDBInfo = async () => {
     }).from(tables.history)
       .where(
         and(
-          eq(tables.history.puuid, constants.riotPuuid),
+          eq(tables.history.puuid, puuid),
           isNotNull(tables.history.snapshot_division),
           isNotNull(tables.history.snapshot_tier)
         )
@@ -175,7 +175,7 @@ export const getDBInfo = async () => {
       deaths: sql<number>`AVG(${tables.history.deaths})`,
       assists: sql<number>`AVG(${tables.history.assists})`
     }).from(tables.history)
-      .where(and(eq(tables.history.puuid, constants.riotPuuid), eq(tables.history.is_remake, 0)))
+      .where(and(eq(tables.history.puuid, puuid), eq(tables.history.is_remake, 0)))
       .groupBy(tables.history.champion_id)
       .having(gte(sql`count`, 5)) // Al menos 5 partidas jugadas con el campeón
       .orderBy(desc(sql`count`))

@@ -100,7 +100,7 @@ export default defineNuxtConfig({
       tasks: true
     },
     scheduledTasks: {
-      "*/10 * * * *": ["riotPolling"]
+      "*/10 * * * *": ["multiPolling"]
     }
   },
 

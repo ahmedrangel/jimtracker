@@ -9,10 +9,10 @@ export default defineEventHandler(async (event) => {
     console.info(`Received kick webhook: User ${broadcaster.user_id}, isLive: ${is_live}, eventType: ${kickEventType}`);
     if (broadcaster.user_id === constants.kickId && kickEventType === "livestream.status.updated") {
       const storage = useStorage("cache");
-      const info = await storage.getItem<UserInfo>("info");
+      const info = await storage.getItem<LiveInfo>("live-info");
       if (!info) return;
-      const data = { ...info, isLiveKick: Boolean(is_live), updatedAt: Date.now() };
-      await storage.setItem<UserInfo>("info", data);
+      const data = { ...info, isLiveKick: Boolean(is_live) };
+      await storage.setItem<LiveInfo>("live-info", data);
     }
   };
 

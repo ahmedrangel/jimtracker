@@ -6,6 +6,8 @@ const props = defineProps<{
   mostPlayed?: MostPlayed[];
   champions?: { id: string, name: string }[];
   history?: HistoryData[];
+  showCountdown?: boolean;
+  showSoloboomRank?: boolean;
 }>();
 const streak = computed(() => {
   const history = props.history?.filter(h => !h.is_remake)?.toSorted((a, b) => b.date - a.date) || [];
@@ -46,8 +48,10 @@ const updateCountdown = () => {
 };
 
 onMounted(() => {
-  updateCountdown();
-  intervalId = window.setInterval(updateCountdown, 500);
+  if (props.showCountdown) {
+    updateCountdown();
+    intervalId = window.setInterval(updateCountdown, 500);
+  }
 });
 onUnmounted(() => {
   if (intervalId) clearInterval(intervalId);
@@ -59,7 +63,7 @@ onUnmounted(() => {
     <div class="space-y-4 mb-5">
       <div class="grid grid-cols-2 gap-2 md:gap-4">
         <!-- COUNTDOWN FIN DE TEMPORADA -->
-        <div class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center col-span-2 md:col-span-1 md:min-w-[230px]">
+        <div v-if="showCountdown" class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center col-span-2 md:col-span-1 md:min-w-[230px]">
           <p class="md:text-xl text-emerald-100 font-semibold">FIN DE TEMPORADA</p>
           <p class="text-lg md:text-2xl text-green-300/50 font-bold flex flex-wrap items-center justify-center">
             <span v-if="countdown">
@@ -70,12 +74,19 @@ onUnmounted(() => {
             </span>
           </p>
         </div>
+        <!-- SOLOBOOM RANK -->
+        <div v-if="showSoloboomRank" class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center col-span-2 md:col-span-1">
+          <p class="md:text-xl text-emerald-100 font-semibold">SOLOBOOM RANK</p>
+          <p class="text-lg md:text-2xl text-green-300/50 font-bold flex flex-wrap items-center justify-center">
+            <span class="text-emerald-200">{{ user?.soloboomRank || "" }}</span>
+          </p>
+        </div>
         <!-- ELO ACTUAL -->
         <div class="text-center bg-neutral-950/75 border border-slate-400/40 flex flex-col items-center justify-center px-2 py-2 sm:px-4 sm:py-4 rounded">
           <p class="md:text-xl font-semibold">ELO ACTUAL</p>
           <p class="text-lg md:text-2xl font-bold flex flex-wrap items-center justify-center">
             <img :src="`/images/lol/${user?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
-            <span v-if="user">
+            <span v-if="user && user.tier">
               {{ user.division }} · {{ user.lp }} LP
             </span>
           </p>
@@ -88,7 +99,7 @@ onUnmounted(() => {
           </p>
         </div>
         <!-- MÁS JUGADO -->
-        <div v-if="mostPlayed?.length" class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center col-span-2 md:col-span-3 md:place-self-center">
+        <div class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center col-span-2 md:col-span-3">
           <p class="md:text-xl font-semibold mb-2">MÁS JUGADO</p>
           <div class="flex items-center justify-center gap-2 md:gap-4">
             <div v-for="champ in mostPlayed" :key="champ.champion_id" class="flex flex-col items-center gap-3">

@@ -1,21 +1,26 @@
 export default defineEventHandler(async (event): Promise<InfoResponse> => {
   const now = Date.now();
-  const checkInfo = await useStorage("cache").getItem<UserInfo>("info");
+  const query = getQuery(event);
+  const soloboom = query.soloboom === "true";
+  const puuid = soloboom ? constants.soloboomPuuids[2025] : constants.riotPuuid;
+  const key = soloboom ? "info-soloboom" : "info";
+  const pollingKey = soloboom ? "soloboomPolling" : "riotPolling";
+  const checkInfo = await useStorage("cache").getItem<UserInfo>(key);
   if (checkInfo && (now - checkInfo.updatedAt < 2 * 60 * 1000)) {
-    const dbInfo = await getDBInfo();
+    const dbInfo = await getDBInfo(puuid);
     return {
       user: checkInfo,
       ...dbInfo
     };
   }
   const config = useRuntimeConfig(event);
-  const riotPolling = await runTask<UserInfo>("riotPolling");
+  const pollingData = await runTask<UserInfo>(pollingKey);
   const [rankedData, userData] = await Promise.all([
-    fetchRankedData(config),
-    fetchUserData(config)
+    fetchRankedData(config, puuid),
+    fetchUserData(config, puuid)
   ]);
-  const dbInfo = await getDBInfo();
-  if (riotPolling?.result) await useStorage("cache").setItem("info", { ...riotPolling.result, ...rankedData, ...userData, updatedAt: now });
-  const info = { ...riotPolling.result!, ...rankedData, ...userData, updatedAt: now };
+  const dbInfo = await getDBInfo(puuid);
+  if (pollingData?.result) await useStorage("cache").setItem(key, { ...pollingData.result, ...rankedData, ...userData, updatedAt: now });
+  const info = { ...pollingData.result!, ...rankedData, ...userData, updatedAt: now };
   return { user: info, ...dbInfo };
 });
