@@ -15,5 +15,6 @@ export const history = sqliteTable("history", {
   date: integer().notNull(),
   snapshot_tier: text(),
   snapshot_division: text(),
-  snapshot_lp: integer()
+  snapshot_lp: integer(),
+  season: integer().notNull().default(0)
 });

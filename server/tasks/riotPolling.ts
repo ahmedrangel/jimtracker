@@ -54,7 +54,8 @@ export default defineTask({
           champion_id: participant!.championId,
           is_surrender: participant?.gameEndedInSurrender || participant?.gameEndedInEarlySurrender ? 1 : 0,
           date: matchResponse.info.gameStartTimestamp + (matchResponse.info.gameDuration * 1000),
-          duration: matchResponse.info.gameDuration * 1000
+          duration: matchResponse.info.gameDuration * 1000,
+          season: parseInt(matchResponse.info?.gameVersion?.split(".")?.[0] || "0")
         });
       }
       if (dataToInsert.length) {
