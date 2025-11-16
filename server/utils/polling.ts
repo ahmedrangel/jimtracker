@@ -79,7 +79,7 @@ export const polling = async (puuid: string, key: string) => {
   if (currentInfo) {
     const liveData = await fetchLiveData(config, puuid);
     if (!Object.keys(userData).length && (liveData.isIngame !== currentLiveInfo?.isIngame)) {
-      const user = { ...currentInfo };
+      const user = { ...currentInfo, ...liveData };
       await Promise.all([
         storage.setItem<UserInfo>(key, currentInfo),
         storage.setItem<LiveInfo>(`live:${key}`, liveData)
@@ -87,14 +87,14 @@ export const polling = async (puuid: string, key: string) => {
       return { result: user };
     }
     else if (Object.keys(userData).length) {
-      const user = { ...currentInfo, ...userData };
+      const user = { ...currentInfo, ...userData, ...liveData };
       await Promise.all([
         storage.setItem<UserInfo>(key, user)
       ]);
       return { result: user };
     }
     else {
-      return { result: currentInfo };
+      return { result: { ...currentInfo, ...liveData } };
     }
   }
   return { result: null };
