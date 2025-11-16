@@ -9,7 +9,7 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
   const key = soloboom ? "info-soloboom" : "info";
   const storage = useStorage("cache");
   let leagueInfo = await storage.getItem<UserLeague>(key);
-  let liveInfo = await storage.getItem<LiveInfo>("live-info");
+  let liveInfo = await storage.getItem<LiveInfo>(`live:${key}`);
   if (!leagueInfo || !liveInfo) {
     const [userData, liveData] = await Promise.all([
       fetchUserData(config, puuid),
@@ -19,7 +19,7 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
     liveInfo = { ...liveData };
     await Promise.all([
       storage.setItem<UserLeague>(key, userData),
-      storage.setItem<LiveInfo>("live-info", liveInfo)
+      storage.setItem<LiveInfo>(`live:${key}`, liveInfo)
     ]);
   }
 

@@ -7,7 +7,7 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
   const pollingKey = soloboom ? "soloboomPolling" : "riotPolling";
   const [checkInfo, liveInfo] = await Promise.all([
     useStorage("cache").getItem<UserInfo>(key),
-    useStorage("cache").getItem<LiveInfo>("live-info")
+    useStorage("cache").getItem<LiveInfo>(`live:${key}`)
   ]);
   if (checkInfo && (now - checkInfo.updatedAt < 2 * 60 * 1000)) {
     const dbInfo = await getDBInfo(puuid);

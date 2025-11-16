@@ -72,17 +72,25 @@ export const polling = async (puuid: string, key: string) => {
     }
   }
 
-  const currentInfo = await storage.getItem<UserInfo>(key);
+  const [currentInfo, currentLiveInfo] = await Promise.all([
+    storage.getItem<UserInfo>(key),
+    storage.getItem<LiveInfo>(`live:${key}`)
+  ]);
   if (currentInfo) {
     const liveData = await fetchLiveData(config, puuid);
-    if (!Object.keys(userData).length && (liveData.isIngame !== currentInfo.isIngame)) {
-      const user = { ...currentInfo, ...liveData };
-      await storage.setItem<UserInfo>(key, user);
+    if (!Object.keys(userData).length && (liveData.isIngame !== currentLiveInfo?.isIngame)) {
+      const user = { ...currentInfo };
+      await Promise.all([
+        storage.setItem<UserInfo>(key, currentInfo),
+        storage.setItem<LiveInfo>(`live:${key}`, liveData)
+      ]);
       return { result: user };
     }
     else if (Object.keys(userData).length) {
-      const user = { ...currentInfo, ...userData, ...liveData };
-      await storage.setItem<UserInfo>(key, user);
+      const user = { ...currentInfo, ...userData };
+      await Promise.all([
+        storage.setItem<UserInfo>(key, user)
+      ]);
       return { result: user };
     }
     else {
