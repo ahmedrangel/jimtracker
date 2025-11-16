@@ -79,7 +79,7 @@ const updateInfo = async () => {
         </button>
       </div>
     </ClientOnly>
-    <ChartHandler :data="data" :champions="champions" />
+    <ChartHandlerSoloBoom :data="data" :champions="champions" />
     <div v-if="data?.user?.updatedAt" class="text-xs my-2 flex flex-col">
       <span class="text-end mb-2">
         Última actualización:
@@ -87,10 +87,6 @@ const updateInfo = async () => {
           <span class="text-yellow-300">{{ formatDistanceStrict(new Date(lastUpdate), now, { addSuffix: true, locale: es }) }}</span>
         </ClientOnly>
       </span>
-      <div class="flex items-center justify-center gap-1">
-        <Icon name="ph:info-bold" size="20" class="text-blue-400" />
-        <span class="text-slate-300">Los datos históricos de elo solo considera las partidas registradas a partir del 19 de agosto de 2025, fecha en la que se inició la recopilación de información de las partidas.</span>
-      </div>
     </div>
   </main>
 </template>
