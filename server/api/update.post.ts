@@ -18,12 +18,12 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
   }
   const config = useRuntimeConfig(event);
   const pollingData = await runTask<UserInfo>(pollingKey);
-  const [rankedData, userData] = await Promise.all([
+  const [rankedData, liveData] = await Promise.all([
     fetchRankedData(config, puuid),
-    fetchUserData(config, puuid)
+    fetchLiveData(config, puuid)
   ]);
   const dbInfo = await getDBInfo(puuid);
-  if (pollingData?.result) await useStorage("cache").setItem(key, { ...pollingData.result, ...rankedData, ...userData, updatedAt: now });
-  const info = { ...pollingData.result!, ...rankedData, ...userData, ...liveInfo, updatedAt: now };
+  if (pollingData?.result) await useStorage("cache").setItem(key, { ...pollingData.result, ...rankedData, ...liveData, updatedAt: now });
+  const info = { ...pollingData.result!, ...rankedData, ...liveData, ...liveInfo, updatedAt: now };
   return { user: info, ...dbInfo };
 });
