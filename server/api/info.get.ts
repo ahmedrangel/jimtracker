@@ -34,7 +34,7 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
       info.soloboomRank = soloBoomRankData.rank ? parseInt(soloBoomRankData.rank) : undefined;
     }
     else {
-      const soloboomScrape = await $fetch<string>("https://soloboom.net/leaderboard", { responseType: "text" });
+      const soloboomScrape = await $fetch<string>("https://soloboom.net/leaderboard", { responseType: "text", timeout: 5000 });
       const html = load(soloboomScrape);
       const row = html(`td:contains(${info.gameName}-#${info.tagLine})`).parent();
       const soloboomRank = row.find("td").eq(0).text().trim();
