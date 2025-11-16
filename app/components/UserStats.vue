@@ -23,7 +23,7 @@ const streak = computed(() => {
   return lastResult ? count : -count;
 });
 
-const endOfSeasonDate = "2025-12-10T23:59:59-06:00";
+const endOfSeasonDate = "2026-01-07T23:59:59-06:00";
 const endOfSeasonTimestamp = new Date(endOfSeasonDate).getTime();
 
 const countdown = ref({
