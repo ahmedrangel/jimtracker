@@ -34,13 +34,15 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
       info.soloboomRank = soloBoomRankData.rank ? parseInt(soloBoomRankData.rank) : undefined;
     }
     else {
-      const soloboomScrape = await $fetch<string>("https://soloboom.net/leaderboard", { responseType: "text", timeout: 5000 });
-      const html = load(soloboomScrape);
-      const row = html(`td:contains(${info.gameName}-#${info.tagLine})`).parent();
-      const soloboomRank = row.find("td").eq(0).text().trim();
-      const updatedAt = Date.now();
-      await storage.setItem<{ rank: string, updatedAt: number }>("soloboom-rank", { rank: soloboomRank || "", updatedAt });
-      info.soloboomRank = soloboomRank ? parseInt(soloboomRank) : undefined;
+      const soloboomScrape = await $fetch<string>("https://soloboom.net/leaderboard", { responseType: "text", timeout: 5000 }).catch(() => null);
+      if (soloboomScrape) {
+        const html = load(soloboomScrape);
+        const row = html(`td:contains(${info.gameName}-#${info.tagLine})`).parent();
+        const soloboomRank = row.find("td").eq(0).text().trim();
+        const updatedAt = Date.now();
+        await storage.setItem<{ rank: string, updatedAt: number }>("soloboom-rank", { rank: soloboomRank || "", updatedAt });
+        info.soloboomRank = soloboomRank ? parseInt(soloboomRank) : undefined;
+      }
     }
   }
 
