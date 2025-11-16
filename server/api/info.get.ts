@@ -1,5 +1,3 @@
-import { load } from "cheerio";
-
 export default defineEventHandler(async (event): Promise<InfoResponse> => {
   // if (import.meta.dev) return $fetch<InfoResponse>(`${SITE.url}/api/info`);
   const config = useRuntimeConfig(event);
@@ -26,25 +24,6 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
   const info: UserInfo = { ...leagueInfo!, ...liveInfo! };
 
   const dbInfo = await getDBInfo(puuid);
-
-  if (soloboom) {
-    const soloBoomRankData = await storage.getItem<{ rank: string, updatedAt: number }>("soloboom-rank");
-    const now = Date.now();
-    if (soloBoomRankData && (now - soloBoomRankData.updatedAt < 5 * 60 * 1000)) { // 5 minutes
-      info.soloboomRank = soloBoomRankData.rank ? parseInt(soloBoomRankData.rank) : undefined;
-    }
-    else {
-      const soloboomScrape = await $fetch<string>("https://soloboom.net/leaderboard", { responseType: "text", timeout: 5000 }).catch(() => null);
-      if (soloboomScrape) {
-        const html = load(soloboomScrape);
-        const row = html(`td:contains(${info.gameName}-#${info.tagLine})`).parent();
-        const soloboomRank = row.find("td").eq(0).text().trim();
-        const updatedAt = Date.now();
-        await storage.setItem<{ rank: string, updatedAt: number }>("soloboom-rank", { rank: soloboomRank || "", updatedAt });
-        info.soloboomRank = soloboomRank ? parseInt(soloboomRank) : undefined;
-      }
-    }
-  }
 
   return {
     user: info,

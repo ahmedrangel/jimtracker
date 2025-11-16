@@ -20,9 +20,7 @@ declare global {
     isIngame?: boolean;
   }
 
-  interface UserInfo extends UserLeague, LiveInfo {
-    soloboomRank?: number;
-  }
+  interface UserInfo extends UserLeague, LiveInfo {}
 
   interface MatchData {
     match_id: string;
