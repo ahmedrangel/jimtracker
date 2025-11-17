@@ -161,7 +161,7 @@ export const getDBInfo = async (puuid: string) => {
         asc(tables.history.snapshot_lp)
       ).limit(1).get(),
 
-    // Most Played champion and calculated KDA average
+    // Most Played champion
     DB.select({
       champion_id: tables.history.champion_id,
       count: sql<number>`COUNT(${tables.history.match_id}) as count`,
@@ -173,8 +173,8 @@ export const getDBInfo = async (puuid: string) => {
     }).from(tables.history)
       .where(and(eq(tables.history.puuid, puuid), eq(tables.history.is_remake, 0)))
       .groupBy(tables.history.champion_id)
-      .having(gte(sql`count`, 1)) // Al menos 5 partidas jugadas con el campeón
-      .orderBy(desc(sql`count`))
+      .having(gte(sql`count`, 1)) // Al menos 1 partida jugada con el campeón
+      .orderBy(desc(sql`count`), desc(sql`SUM(CASE WHEN ${tables.history.result} = 1 THEN 1 ELSE 0 END)`), desc(sql`(AVG(${tables.history.kills}) + AVG(${tables.history.assists})) / CASE WHEN AVG(${tables.history.deaths}) = 0 THEN 1 ELSE AVG(${tables.history.deaths}) END`))
       .limit(4)
       .all()
   ]);
