@@ -38,7 +38,7 @@ export const polling = async (puuid: string, key: string) => {
       };
       dataToInsert.push({
         match_id: matchResponse.metadata.matchId,
-        puuid: constants.riotPuuid,
+        puuid,
         kills: participant?.kills || 0,
         deaths: participant?.deaths || 0,
         assists: participant?.assists || 0,
@@ -54,20 +54,18 @@ export const polling = async (puuid: string, key: string) => {
     if (dataToInsert.length) {
       const user = await fetchRankedData(config, puuid);
       userData = { ...userData, ...user };
-      if (user.division && user.tier) {
-        for (const entry of dataToInsert.toReversed()) {
-          snapshot.push({
-            division: user.division,
-            tier: user.tier,
-            lp: user.lp
-          });
-          await DB.insert(tables.history).values({
-            ...entry,
-            snapshot_division: user.division,
-            snapshot_tier: user.tier,
-            snapshot_lp: user.lp
-          }).onConflictDoNothing().run();
-        }
+      for (const entry of dataToInsert.toReversed()) {
+        snapshot.push({
+          division: user.division,
+          tier: user.tier,
+          lp: user.lp
+        });
+        await DB.insert(tables.history).values({
+          ...entry,
+          snapshot_division: user.division,
+          snapshot_tier: user.tier,
+          snapshot_lp: user.lp
+        }).onConflictDoNothing().run();
       }
     }
   }
