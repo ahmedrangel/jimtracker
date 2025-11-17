@@ -48,6 +48,7 @@ const updateCountdown = () => {
 };
 
 const soloboomRank = ref<string>("");
+const loadingSoloboom = ref<boolean>(false);
 
 onMounted(async () => {
   if (props.showCountdown) {
@@ -55,8 +56,10 @@ onMounted(async () => {
     intervalId = window.setInterval(updateCountdown, 500);
   }
   if (props.showSoloboomRank) {
+    loadingSoloboom.value = true;
     const soloBoomData = await $fetch("/api/soloboom");
     soloboomRank.value = soloBoomData?.rank || "";
+    loadingSoloboom.value = false;
   }
 });
 onUnmounted(() => {
@@ -84,7 +87,8 @@ onUnmounted(() => {
         <div v-if="showSoloboomRank" class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center col-span-2 md:col-span-1">
           <p class="md:text-xl text-emerald-100 font-semibold">SOLOBOOM RANK</p>
           <p class="text-lg md:text-2xl text-green-300/50 font-bold flex flex-wrap items-center justify-center">
-            <span class="text-emerald-200">{{ soloboomRank }}</span>
+            <span v-if="!loadingSoloboom" class="text-emerald-200">{{ soloboomRank }}</span>
+            <span v-else class="text-emerald-200 mt-2"><Icon name="eos-icons:loading" /></span>
           </p>
         </div>
         <!-- ELO ACTUAL -->
