@@ -3,14 +3,14 @@ defineProps<{
   data?: InfoResponse;
   champions?: { id: string, name: string }[];
 }>();
-const tab = ref("elo");
+const tab = ref("match");
 
 watch(tab, () => {
   localStorage.setItem("preferred-tab", tab.value);
 });
 
 onMounted(() => {
-  const savedTab = localStorage.getItem("preferred-tab") || "elo";
+  const savedTab = localStorage.getItem("preferred-tab") || "match";
   if (savedTab === "match" || savedTab === "elo") tab.value = savedTab;
 });
 </script>
