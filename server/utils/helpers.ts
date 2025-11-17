@@ -54,9 +54,7 @@ export const getDBInfo = async (puuid: string) => {
     .where(
       and(
         gte(tables.history.date, Date.now() - historyGraphConfig.daysLimit * 24 * 60 * 60 * 1000),
-        eq(tables.history.puuid, puuid),
-        isNotNull(tables.history.snapshot_division),
-        isNotNull(tables.history.snapshot_tier)
+        eq(tables.history.puuid, puuid)
       )
     ).get();
 
@@ -175,7 +173,7 @@ export const getDBInfo = async (puuid: string) => {
     }).from(tables.history)
       .where(and(eq(tables.history.puuid, puuid), eq(tables.history.is_remake, 0)))
       .groupBy(tables.history.champion_id)
-      .having(gte(sql`count`, 5)) // Al menos 5 partidas jugadas con el campeón
+      .having(gte(sql`count`, 1)) // Al menos 5 partidas jugadas con el campeón
       .orderBy(desc(sql`count`))
       .limit(4)
       .all()
