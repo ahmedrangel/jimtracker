@@ -20,7 +20,7 @@ ChartJS.register(
 );
 
 const computedChartHistory = computed((): ChartLabelsAndData => {
-  return processChartData(props.history || [], props.champions || [], props.type);
+  return processChartData(props.history?.filter(h => h.tier && h.division) || [], props.champions || [], props.type);
 });
 
 const visibleRange = computed(() => calculateChartVisibleRange(computedChartHistory.value.data));

@@ -82,9 +82,7 @@ export const getDBInfo = async (puuid: string) => {
     }).from(tables.history)
       .where(
         and(
-          eq(tables.history.puuid, puuid),
-          isNotNull(tables.history.snapshot_division),
-          isNotNull(tables.history.snapshot_tier)
+          eq(tables.history.puuid, puuid)
         )
       )
       .orderBy(desc(tables.history.date))
