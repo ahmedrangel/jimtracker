@@ -120,9 +120,9 @@ onUnmounted(() => {
             </div>
           </div>
         </div>
-        <!-- ELO MÁS ALTO -->
+        <!-- ELO MÁXIMO -->
         <div class="bg-neutral-950/75 border border-blue-300/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center col-span-2 md:col-span-1">
-          <p class="md:text-xl text-blue-200 font-semibold ">ELO MÁS ALTO</p>
+          <p class="md:text-xl text-blue-200 font-semibold ">ELO MÁXIMO</p>
           <p class="text-lg md:text-2xl text-blue-200 font-bold flex flex-wrap items-center justify-center">
             <img :src="`/images/lol/${highest?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
             <span v-if="highest?.tier">{{ highest.division }} · {{ highest.lp }} LP</span>
@@ -154,9 +154,9 @@ onUnmounted(() => {
             </div>
           </div>
         </div>
-        <!-- ELO MÁS BAJO -->
+        <!-- ELO MÍNIMO -->
         <div class="bg-neutral-950/75 border border-rose-300/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center col-span-2 md:col-span-1">
-          <p class="md:text-xl text-rose-200 font-semibold ">ELO MÁS BAJO</p>
+          <p class="md:text-xl text-rose-200 font-semibold ">ELO MÍNIMO</p>
           <p class="text-lg md:text-2xl text-rose-200 font-bold flex flex-wrap items-center justify-center">
             <img :src="`/images/lol/${lowest?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
             <span v-if="lowest?.tier">{{ lowest.division }} · {{ lowest.lp }} LP</span>
