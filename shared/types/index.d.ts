@@ -14,13 +14,16 @@ declare global {
     updatedAt: number;
   }
 
-  interface LiveInfo {
-    isLiveTwitch?: boolean;
-    isLiveKick?: boolean;
+  interface LiveGame {
     isIngame?: boolean;
   }
 
-  interface UserInfo extends UserLeague, LiveInfo {}
+  interface LiveStreamInfo {
+    isLiveTwitch?: boolean;
+    isLiveKick?: boolean;
+  }
+
+  interface UserInfo extends UserLeague, LiveGame, LiveStreamInfo {}
 
   interface MatchData {
     match_id: string;

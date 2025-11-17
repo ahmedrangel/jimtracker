@@ -13,11 +13,11 @@ export default defineEventHandler(async (event) => {
     const { type, condition } = subscription;
     if (["stream.online", "stream.offline"].includes(type) && condition?.broadcaster_user_id === constants.twitchId.toString()) {
       const storage = useStorage("cache");
-      const info = await storage.getItem<LiveInfo>("live-info");
+      const info = await storage.getItem<LiveStreamInfo>("live-info");
       if (!info) return;
       const isLive = type === "stream.online";
       const data = { ...info, isLiveTwitch: isLive };
-      await storage.setItem<LiveInfo>("live-info", data);
+      await storage.setItem<LiveStreamInfo>("live-info", data);
     }
   };
 

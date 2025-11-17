@@ -6,22 +6,25 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
   const puuid = soloboom ? constants.soloboomPuuids[2025] : constants.riotPuuid;
   const key = soloboom ? "info-soloboom" : "info";
   const storage = useStorage("cache");
-  let leagueInfo = await storage.getItem<UserLeague>(key);
-  let liveInfo = await storage.getItem<LiveInfo>(`live:${key}`);
+  let [leagueInfo, liveGame] = await Promise.all([
+    storage.getItem<UserLeague>(key),
+    storage.getItem<LiveGame>(`live:${key}`)
+  ]);
+  const liveInfo = await storage.getItem<LiveStreamInfo>("live-info");
   if (!leagueInfo || !liveInfo) {
     const [userData, liveData] = await Promise.all([
       fetchUserData(config, puuid),
       fetchLiveData(config, puuid)
     ]);
     leagueInfo = { ...userData };
-    liveInfo = { ...liveData };
+    liveGame = { ...liveData };
     await Promise.all([
       storage.setItem<UserLeague>(key, userData),
-      storage.setItem<LiveInfo>(`live:${key}`, liveInfo)
+      storage.setItem<LiveGame>(`live:${key}`, liveGame)
     ]);
   }
 
-  const info: UserInfo = { ...leagueInfo!, ...liveInfo! };
+  const info: UserInfo = { ...leagueInfo!, ...liveGame!, ...liveInfo! };
 
   const dbInfo = await getDBInfo(puuid);
 

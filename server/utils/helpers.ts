@@ -35,7 +35,7 @@ export const fetchUserData = async (config: RuntimeConfig, puuid: string): Promi
   };
 };
 
-export const fetchLiveData = async (config: RuntimeConfig, puuid: string): Promise<LiveInfo> => {
+export const fetchLiveData = async (config: RuntimeConfig, puuid: string): Promise<LiveGame> => {
   const lol = new LolApi(config.riot.apiKey);
   const [spectatorData] = await Promise.all([
     lol.SpectatorV5.activeGame(puuid, Constants.Regions.LAT_NORTH).catch(() => null)

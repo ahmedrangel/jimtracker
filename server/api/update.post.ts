@@ -5,9 +5,9 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
   const puuid = soloboom ? constants.soloboomPuuids[2025] : constants.riotPuuid;
   const key = soloboom ? "info-soloboom" : "info";
   const pollingKey = soloboom ? "soloboomPolling" : "riotPolling";
-  const [checkInfo, liveInfo] = await Promise.all([
+  const [checkInfo, liveGame] = await Promise.all([
     useStorage("cache").getItem<UserInfo>(key),
-    useStorage("cache").getItem<LiveInfo>(`live:${key}`)
+    useStorage("cache").getItem<LiveGame>(`live:${key}`)
   ]);
   if (checkInfo && (now - checkInfo.updatedAt < 2 * 60 * 1000)) {
     const dbInfo = await getDBInfo(puuid);
@@ -23,6 +23,6 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
   ]);
   const dbInfo = await getDBInfo(puuid);
   if (pollingData?.result) await useStorage("cache").setItem(key, { ...pollingData.result, ...userData, updatedAt: now });
-  const info = { ...pollingData.result!, ...userData, ...liveInfo, updatedAt: now };
+  const info = { ...pollingData.result!, ...userData, ...liveGame, updatedAt: now };
   return { user: info, ...dbInfo };
 });
