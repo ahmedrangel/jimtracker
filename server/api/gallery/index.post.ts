@@ -11,18 +11,24 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const body = await readValidatedBody(event, z.object({
-    url: z.string().url().optional()
-  }).parse);
-
+  const contentType = getHeader(event, "content-type") || "";
   let blob: File | Blob;
 
-  if (body.url) {
+  if (contentType.includes("application/json")) {
+    const body = await readValidatedBody(event, z.object({
+      url: z.string().url()
+    }).parse);
     blob = await $fetch<Blob>(body.url, { responseType: "blob" });
   }
-  else {
+  else if (contentType.includes("multipart/form-data")) {
     const files = await readFormData(event);
     blob = files.get("file") as File;
+  }
+  else {
+    return createError({
+      statusCode: 400,
+      message: "Content type must be application/json or multipart/form-data"
+    });
   }
 
   if (!blob) {
