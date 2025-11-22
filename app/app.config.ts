@@ -8,7 +8,7 @@ export default defineAppConfig({
       variants: {
         fullscreen: {
           false: {
-            content: "w-[calc(100vw-1rem)] max-w-lg rounded-lg shadow-lg"
+            content: "w-[fit-content] max-w-[100vw]"
           }
         }
       }

@@ -22,7 +22,7 @@ const openImageId = ref<string | null>(null);
       </div>
       <template #content>
         <div class="relative">
-          <img v-if="openImageId" :src="`${SITE.cdn}/gallery/${openImageId}`" class="max-w-full max-h-[90vh] mx-auto rounded-lg">
+          <img v-if="openImageId" :src="`${SITE.cdn}/gallery/${openImageId}`" class="rounded-lg min-w-[50vh] max-h-[90vh]">
           <Icon name="tabler:x" class="absolute top-2 end-2 w-8 h-8 cursor-pointer text-neutral-200 hover:text-neutral-300 bg-neutral-900/70 hover:bg-neutral-900 rounded p-1.5" @click="openImageId = null; showModal = false;" />
         </div>
       </template>
