@@ -47,10 +47,13 @@ const updateCountdown = () => {
   countdown.value = { days, hours, minutes, seconds };
 };
 
-const { data: soloBoomData, pending: loadingSoloboom } = useFetch("/api/soloboom", {
+const { data: soloBoomData, pending: loadingSoloboom, execute } = await useFetch("/api/soloboom", {
   lazy: true,
-  default: () => (null)
+  default: () => (null),
+  immediate: false
 });
+
+if (props.showSoloboomRank) await execute();
 
 onMounted(() => {
   if (props.showCountdown) {
