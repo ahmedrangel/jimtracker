@@ -17,7 +17,7 @@ export default defineCachedEventHandler(async () => {
     rank: soloboomRank
   };
 }, {
-  maxAge: 5 * 60 * 1000, // 5 minutes
+  maxAge: 5 * 60, // 5 minutes
   swr: false,
   getKey: () => "rank",
   group: "api",
