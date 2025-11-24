@@ -5,7 +5,7 @@ export default defineCachedEventHandler(async () => {
   const info = await storage.getItem<UserLeague>("info-soloboom");
   if (!info) {
     throw createError({ statusCode: 404, statusMessage: "SoloBoom info not found", fatal: true });
-  };
+  }
   const soloboomScrape = await $fetch<string>("https://soloboom.net/leaderboard", { responseType: "text", timeout: 5000 }).catch(() => null);
   if (!soloboomScrape) {
     throw createError({ statusCode: 503, statusMessage: "SoloBoom leaderboard is currently unavailable", fatal: true });
