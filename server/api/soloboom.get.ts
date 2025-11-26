@@ -6,7 +6,16 @@ export default defineCachedEventHandler(async () => {
   if (!info) {
     throw createError({ statusCode: 404, statusMessage: "SoloBoom info not found", fatal: true });
   }
-  const soloboomScrape = await $fetch<string>("https://soloboom.net/leaderboard", { responseType: "text", timeout: 5000 }).catch(() => null);
+  const soloboomScrape = await $fetch<string>("https://soloboom.net/leaderboard", {
+    headers: {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+      "sec-fetch-dest": "document",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-site": "same-origin"
+    },
+    responseType: "text",
+    timeout: 5000
+  }).catch(() => null);
   if (!soloboomScrape) {
     throw createError({ statusCode: 503, statusMessage: "SoloBoom leaderboard is currently unavailable", fatal: true });
   }
