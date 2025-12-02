@@ -49,10 +49,22 @@ const updateCountdown = () => {
 
 const { data: soloBoomData, pending: loadingSoloboom, execute } = useLazyFetch("/api/soloboom", {
   default: () => (null),
-  immediate: false
+  immediate: false,
+  onResponseError ({ response }) {
+    console.warn("SoloBoom API error:", response.status, response._data);
+  },
+  onRequestError (error) {
+    console.warn("SoloBoom request error:", error);
+  }
 });
 
-if (props.showSoloboomRank) execute();
+if (props.showSoloboomRank) {
+  execute().catch((err) => {
+    console.warn("Failed to fetch soloboom data:", err);
+  }).finally(() => {
+    loadingSoloboom.value = false;
+  });
+}
 
 onMounted(() => {
   if (props.showCountdown) {
@@ -85,8 +97,8 @@ onUnmounted(() => {
         <div v-if="showSoloboomRank" class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center col-span-2 md:col-span-1">
           <p class="md:text-xl text-emerald-100 font-semibold">SOLOBOOM RANK</p>
           <p class="text-lg md:text-2xl text-green-300/50 font-bold flex flex-wrap items-center justify-center">
-            <span v-if="!loadingSoloboom" class="text-emerald-200">{{ soloBoomData?.rank || "" }}</span>
-            <span v-else class="text-emerald-200 mt-2"><Icon name="eos-icons:loading" /></span>
+            <span v-if="loadingSoloboom" class="text-emerald-200 mt-2"><Icon name="eos-icons:loading" /></span>
+            <span v-else class="text-emerald-200">{{ soloBoomData?.rank || "N/A" }}</span>
           </p>
         </div>
         <!-- ELO ACTUAL -->
