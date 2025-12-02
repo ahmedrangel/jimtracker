@@ -14,7 +14,7 @@ export default defineCachedEventHandler(async () => {
       "sec-fetch-site": "same-origin"
     },
     responseType: "text",
-    timeout: 5000
+    timeout: 10000
   }).catch(() => null);
   if (!soloboomScrape) {
     throw createError({ statusCode: 503, statusMessage: "SoloBoom leaderboard is currently unavailable", fatal: true });
