@@ -47,29 +47,18 @@ const updateCountdown = () => {
   countdown.value = { days, hours, minutes, seconds };
 };
 
-const { data: soloBoomData, pending: loadingSoloboom, execute } = useLazyFetch("/api/soloboom", {
+const { data: soloBoomData, pending: loadingSoloboom, refresh } = useLazyFetch("/api/soloboom", {
   default: () => (null),
-  immediate: false,
-  onResponseError ({ response }) {
-    console.warn("SoloBoom API error:", response.status, response._data);
-  },
-  onRequestError (error) {
-    console.warn("SoloBoom request error:", error);
-  }
+  immediate: false
 });
-
-if (props.showSoloboomRank) {
-  execute().catch((err) => {
-    console.warn("Failed to fetch soloboom data:", err);
-  }).finally(() => {
-    loadingSoloboom.value = false;
-  });
-}
 
 onMounted(() => {
   if (props.showCountdown) {
     updateCountdown();
     intervalId = window.setInterval(updateCountdown, 500);
+  }
+  if (props.showSoloboomRank) {
+    refresh();
   }
 });
 onUnmounted(() => {
