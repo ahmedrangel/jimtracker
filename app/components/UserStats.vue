@@ -47,7 +47,7 @@ const updateCountdown = () => {
   countdown.value = { days, hours, minutes, seconds };
 };
 
-const { data: soloBoomData, pending: loadingSoloboom, execute } = useLazyFetch("/api/soloboom?v=1", {
+const { data: soloBoomData, pending: loadingSoloboom, execute } = useLazyFetch("/api/soloboom", {
   default: () => (null),
   immediate: false
 });
