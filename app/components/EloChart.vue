@@ -128,8 +128,7 @@ const chartOptions = computed((): ChartOptions<"line"> => ({
           }
           return display;
         },
-        stepSize: 100,
-        maxTicksLimit: 15
+        stepSize: 100
       }
     }
   }
