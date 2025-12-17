@@ -101,6 +101,7 @@ export const processChartData = (data: HistoryData[], champions: { id: string, n
 
   if (type === "daily") {
     const firstMatch = stats[stats.length - 1]!;
+    const lastMatch = stats[0]!;
 
     // Stats por día
     const matchPerDay = new Map<string, typeof stats>();
@@ -112,6 +113,7 @@ export const processChartData = (data: HistoryData[], champions: { id: string, n
     }
 
     const firstMatchDate = new Date(firstMatch.date);
+    const lastMatchDate = new Date(lastMatch.date);
     const today = new Date();
     today.setHours(23, 59, 59, 999);
 
@@ -122,7 +124,9 @@ export const processChartData = (data: HistoryData[], champions: { id: string, n
       const dateKey = format(d, "yyyy-MM-dd");
       const dayLabel = format(d, "dd MMM", { locale: es });
 
-      chartLabels.push(dayLabel);
+      if (lastMatchDate >= d) {
+        chartLabels.push(dayLabel);
+      }
 
       const dayMatches = matchPerDay.get(dateKey)?.sort((a, b) => a.date - b.date) || [];
       if (dayMatches.length) {
