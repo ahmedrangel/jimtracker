@@ -57,6 +57,13 @@
       "when": 1763259082519,
       "tag": "0007_mighty_lily_hollister",
       "breakpoints": false
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1767666435281,
+      "tag": "0008_wooden_mandroid",
+      "breakpoints": false
     }
   ]
 }

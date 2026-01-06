@@ -9,8 +9,8 @@ export default defineTask({
     result?: (UserInfo | null)[];
   }> {
     const multiPolling = await Promise.all([
-      polling(constants.riotPuuid, "info"),
-      polling(constants.soloboomPuuids[2025], "info-soloboom")
+      polling(constants.riotPuuid, "info")
+      // polling(constants.soloboomPuuids[2025], "info-soloboom")
     ]);
     return { result: multiPolling.map(item => item.result) };
   }

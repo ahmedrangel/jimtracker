@@ -64,7 +64,9 @@ export const polling = async (puuid: string, key: string) => {
           ...entry,
           snapshot_division: user.division,
           snapshot_tier: user.tier,
-          snapshot_lp: user.lp
+          snapshot_lp: user.lp,
+          snapshot_wins: user.wins,
+          snapshot_losses: user.losses
         }).onConflictDoNothing().run();
       }
     }
