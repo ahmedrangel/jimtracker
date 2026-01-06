@@ -1,7 +1,15 @@
 import { SITE } from "../shared/utils/site";
 
 export default defineNuxtConfig({
-  compatibilityDate: "2025-08-19",
+
+  modules: [
+    "@nuxt/ui",
+    "@nuxt/eslint",
+    "@nuxt/icon",
+    "@nuxtjs/sitemap",
+    "@nuxthub/core",
+    "nuxt-webhook-validators"
+  ],
   // future: { compatibilityVersion: 4 },
   devtools: { enabled: true },
   app: {
@@ -39,25 +47,11 @@ export default defineNuxtConfig({
     "~/assets/scss/app.scss"
   ],
 
-  modules: [
-    "@nuxt/ui",
-    "@nuxt/eslint",
-    "@nuxt/icon",
-    "@nuxtjs/sitemap",
-    "@nuxthub/core",
-    "nuxt-webhook-validators"
-  ],
+  site: { url: SITE.url },
 
-  icon: {
-    mode: "svg",
-    clientBundle: { scan: true, sizeLimitKb: 2048 }
-  },
-
-  eslint: {
-    config: {
-      autoInit: false,
-      stylistic: true
-    }
+  colorMode: {
+    preference: "dark",
+    fallback: "dark"
   },
 
   runtimeConfig: {
@@ -76,12 +70,17 @@ export default defineNuxtConfig({
     cdnToken: ""
   },
 
-  colorMode: {
-    preference: "dark",
-    fallback: "dark"
+  routeRules: {
+    "/api/_nuxt_icon/**": { cache: { maxAge: 1.577e+7 } }
   },
 
-  site: { url: SITE.url },
+  features: {
+    inlineStyles: false
+  },
+
+  experimental: {
+    typedPages: true
+  }, compatibilityDate: "2025-08-19",
 
   nitro: {
     prerender: {
@@ -104,29 +103,11 @@ export default defineNuxtConfig({
     }
   },
 
-  sitemap: {
-    discoverImages: false,
-    urls: [
-      { loc: "/", priority: 1 }
-    ],
-    defaults: { priority: 0.8, lastmod: new Date().toISOString() },
-    xslColumns: [
-      { label: "URL", width: "65%" },
-      { label: "Priority", select: "sitemap:priority", width: "12.5%" },
-      { label: "Last Modified", select: "sitemap:lastmod", width: "35%" }
-    ]
-  },
-
-  routeRules: {
-    "/api/_nuxt_icon/**": { cache: { maxAge: 1.577e+7 } }
-  },
-
-  features: {
-    inlineStyles: false
-  },
-
-  experimental: {
-    typedPages: true
+  hub: {
+    cache: true,
+    workers: true,
+    database: true,
+    blob: true
   },
 
   vite: {
@@ -139,10 +120,28 @@ export default defineNuxtConfig({
     }
   },
 
-  hub: {
-    cache: true,
-    workers: true,
-    database: true,
-    blob: true
+  eslint: {
+    config: {
+      autoInit: false,
+      stylistic: true
+    }
+  },
+
+  icon: {
+    mode: "svg",
+    clientBundle: { scan: true, sizeLimitKb: 2048 }
+  },
+
+  sitemap: {
+    discoverImages: false,
+    urls: [
+      { loc: "/", priority: 1 }
+    ],
+    defaults: { priority: 0.8, lastmod: new Date().toISOString() },
+    xslColumns: [
+      { label: "URL", width: "65%" },
+      { label: "Priority", select: "sitemap:priority", width: "12.5%" },
+      { label: "Last Modified", select: "sitemap:lastmod", width: "35%" }
+    ]
   }
 });
