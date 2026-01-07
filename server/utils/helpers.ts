@@ -49,17 +49,17 @@ export const fetchLiveData = async (config: RuntimeConfig, puuid: string): Promi
 export const getStreakCount = (history: HistoryData[]) => {
   history = history?.filter(h => !h.is_remake)?.toSorted((a, b) => b?.date - a?.date) || [];
   if (!history || history.length === 0) return 0;
-  let count = 0;
+  let streakCount = 0;
   const lastResult = history[0]?.result;
   for (let i = 0; i < history.length; i++) {
     if (history[i]?.result === lastResult) {
-      count++;
+      streakCount++;
     }
     else {
       break;
     }
   }
-  return lastResult ? count : -count;
+  return lastResult ? streakCount : -streakCount;
 };
 
 export const getDBInfo = async (puuid: string) => {
