@@ -63,7 +63,7 @@ declare global {
     highest?: RankInfo;
     lowest?: RankInfo;
     mostPlayed?: MostPlayed[];
-    streak: number;
+    highestWinRate?: any;
   }
 
   interface ChartMatchData extends HistoryData {
