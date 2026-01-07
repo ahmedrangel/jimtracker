@@ -64,7 +64,7 @@ const updateInfo = async () => {
 <template>
   <main>
     <UserInfo :user="data?.user" show-soloboom />
-    <UserStats :user="data?.user" :highest="data?.highest" :lowest="data?.lowest" :champions="champions" :most-played="data?.mostPlayed" :history="data?.history" show-soloboom-rank />
+    <UserStats :user="data?.user" :highest="data?.highest" :lowest="data?.lowest" :champions="champions" :most-played="data?.mostPlayed" :history="data?.history" :streak="data!.streak" show-soloboom-rank />
     <!-- Botón de Actualizar -->
     <ClientOnly>
       <div class="flex md:justify-end mb-4">

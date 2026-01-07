@@ -6,24 +6,10 @@ const props = defineProps<{
   mostPlayed?: MostPlayed[];
   champions?: { id: string, name: string }[];
   history?: HistoryData[];
+  streak: number;
   showCountdown?: boolean;
   showSoloboomRank?: boolean;
 }>();
-const streak = computed(() => {
-  const history = props.history?.filter(h => !h.is_remake)?.toSorted((a, b) => b.date - a.date) || [];
-  if (!props.history || props.history.length === 0) return 0;
-  let count = 0;
-  const lastResult = history[0]?.result;
-  for (let i = 0; i < history.length; i++) {
-    if (history[i]?.result === lastResult) {
-      count++;
-    }
-    else {
-      break;
-    }
-  }
-  return lastResult ? count : -count;
-});
 
 const endOfSeasonDate = "2026-01-07T23:59:59-06:00";
 const endOfSeasonTimestamp = new Date(endOfSeasonDate).getTime();

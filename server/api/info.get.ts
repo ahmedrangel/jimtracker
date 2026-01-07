@@ -1,9 +1,10 @@
 export default defineEventHandler(async (event): Promise<InfoResponse> => {
-  // if (import.meta.dev) return $fetch<InfoResponse>(`${SITE.url}/api/info`);
+  // if (import.meta.dev) return $fetch<InfoResponse>(`${SITE.url}/api/info?soloboom=true`);
   const config = useRuntimeConfig(event);
   const query = getQuery(event);
   const soloboom = query.soloboom === "true";
-  const puuid = soloboom ? constants.soloboomPuuids[2025] : constants.riotPuuid;
+  const year = query.year ? Number(query.year) : new Date().getFullYear();
+  const puuid = soloboom ? constants.soloboomPuuids[year as keyof typeof constants.soloboomPuuids] : constants.riotPuuid;
   const key = soloboom ? "info-soloboom" : "info";
   const storage = useStorage("cache");
   let [leagueInfo, liveGame] = await Promise.all([
@@ -26,7 +27,7 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
 
   const info: UserInfo = { ...leagueInfo!, ...liveGame!, ...liveInfo! };
 
-  const dbInfo = await getDBInfo(puuid);
+  const dbInfo = await getDBInfo(puuid, year);
 
   return {
     user: info,
