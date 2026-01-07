@@ -46,6 +46,22 @@ export const fetchLiveData = async (config: RuntimeConfig, puuid: string): Promi
   };
 };
 
+export const getStreakCount = (history: HistoryData[]) => {
+  history = history?.filter(h => !h.is_remake)?.toSorted((a, b) => b?.date - a?.date) || [];
+  if (!history || history.length === 0) return 0;
+  let count = 0;
+  const lastResult = history[0]?.result;
+  for (let i = 0; i < history.length; i++) {
+    if (history[i]?.result === lastResult) {
+      count++;
+    }
+    else {
+      break;
+    }
+  }
+  return lastResult ? count : -count;
+};
+
 export const getDBInfo = async (puuid: string) => {
   const DB = useDB();
   const countResult = await DB.select({
@@ -179,10 +195,13 @@ export const getDBInfo = async (puuid: string) => {
       .all()
   ]);
 
+  const streak = getStreakCount(history);
+
   return {
     history,
     highest,
     lowest,
-    mostPlayed
+    mostPlayed,
+    streak
   };
 };

@@ -1,29 +1,10 @@
 <script setup lang="ts">
 const props = defineProps<{
-  user?: UserInfo;
-  highest?: RankInfo;
-  lowest?: RankInfo;
-  mostPlayed?: MostPlayed[];
+  data: InfoResponse;
   champions?: { id: string, name: string }[];
-  history?: HistoryData[];
   showCountdown?: boolean;
   showSoloboomRank?: boolean;
 }>();
-const streak = computed(() => {
-  const history = props.history?.filter(h => !h.is_remake)?.toSorted((a, b) => b.date - a.date) || [];
-  if (!props.history || props.history.length === 0) return 0;
-  let count = 0;
-  const lastResult = history[0]?.result;
-  for (let i = 0; i < history.length; i++) {
-    if (history[i]?.result === lastResult) {
-      count++;
-    }
-    else {
-      break;
-    }
-  }
-  return lastResult ? count : -count;
-});
 
 const endOfSeasonDate = "2026-01-07T23:59:59-06:00";
 const endOfSeasonTimestamp = new Date(endOfSeasonDate).getTime();
@@ -94,9 +75,9 @@ onUnmounted(() => {
         <div class="text-center bg-neutral-950/75 border border-slate-400/40 flex flex-col items-center justify-center px-2 py-2 sm:px-4 sm:py-4 rounded">
           <p class="md:text-xl font-semibold">ELO ACTUAL</p>
           <p class="text-lg md:text-2xl font-bold flex flex-wrap items-center justify-center">
-            <img :src="`/images/lol/${user?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
-            <span v-if="user && user.tier">
-              {{ user.division }} · {{ user.lp }} LP
+            <img :src="`/images/lol/${data?.user?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
+            <span v-if="data?.user && data.user.tier">
+              {{ data.user.division }} · {{ data.user.lp }} LP
             </span>
           </p>
         </div>
@@ -104,14 +85,14 @@ onUnmounted(() => {
         <div class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center">
           <p class="md:text-xl font-semibold">RACHA</p>
           <p class="text-lg md:text-2xl font-bold flex flex-wrap items-center justify-center">
-            <span :class="streak < 0 ? 'text-rose-400' : 'text-green-400'">{{ streak < 0 ? `-${Math.abs(streak)}` : `+${streak}` }}</span>
+            <span :class="data.streak < 0 ? 'text-rose-400' : 'text-green-400'">{{ data.streak < 0 ? `-${Math.abs(data.streak)}` : `+${data.streak}` }}</span>
           </p>
         </div>
         <!-- MÁS JUGADO -->
         <div class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center col-span-2 md:col-span-3">
           <p class="md:text-xl font-semibold mb-2">MÁS JUGADO</p>
           <div class="flex items-center justify-center gap-2 md:gap-4">
-            <div v-for="champ in mostPlayed" :key="champ.champion_id" class="flex flex-col items-center gap-3">
+            <div v-for="champ in data.mostPlayed" :key="champ.champion_id" class="flex flex-col items-center gap-3">
               <img :src="getChampionIcon(champ.champion_id)" class="w-12 h-12" :alt="String(champ.champion_id)" :title="champions?.find(c => c.id === String(champ.champion_id))!.name">
               <span class="text-xs md:text-base text-slate-400 font-semibold leading-none">
                 <span class="text-blue-400">{{ champ.wins }}</span>V · <span class="text-rose-400">{{ champ.losses }}</span>D (<span class="text-slate-100">{{ champ.count }}</span>)
@@ -127,8 +108,8 @@ onUnmounted(() => {
         <div class="bg-neutral-950/75 border border-blue-300/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center col-span-2 md:col-span-1">
           <p class="md:text-xl text-blue-200 font-semibold ">ELO MÁXIMO</p>
           <p class="text-lg md:text-2xl text-blue-200 font-bold flex flex-wrap items-center justify-center">
-            <img :src="`/images/lol/${highest?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
-            <span v-if="highest?.tier">{{ highest.division }} · {{ highest.lp }} LP</span>
+            <img :src="`/images/lol/${data?.highest?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
+            <span v-if="data?.highest?.tier">{{ data.highest.division }} · {{ data.highest.lp }} LP</span>
           </p>
         </div>
         <!-- WINRATE, VICTORIAS, DERROTAS -->
@@ -137,7 +118,7 @@ onUnmounted(() => {
           <div class="bg-neutral-950/75 border border-purple-300/40 rounded p-2 sm:p-2 text-center flex flex-col items-center justify-center">
             <p class="md:text-lg text-purple-200 font-semibold ">WINRATE</p>
             <p class="md:text-xl text-purple-200 font-bold flex flex-wrap items-center justify-center">
-              {{ (user && user.wins && user.losses ? (user.wins / (user.wins + user.losses) * 100).toFixed(2) : "0.00") }}%
+              {{ (data?.user && data.user.wins && data.user.losses ? (data.user.wins / (data.user.wins + data.user.losses) * 100).toFixed(2) : "0.00") }}%
             </p>
           </div>
           <!-- VICTORIAS -->
@@ -145,14 +126,14 @@ onUnmounted(() => {
             <div class="bg-neutral-950/75 border border-blue-300/40 rounded p-2 sm:p-2 text-center flex flex-col items-center justify-center w-full">
               <p class="md:text-lg text-blue-200 font-semibold ">VICTORIAS</p>
               <p class="md:text-xl text-blue-200 font-bold flex items-center justify-center">
-                {{ user?.wins || 0 }}
+                {{ data?.user?.wins || 0 }}
               </p>
             </div>
             <!-- DERROTAS -->
             <div class="bg-neutral-950/75 border border-rose-300/40 rounded p-2 sm:p-2 text-center flex flex-col items-center justify-center w-full">
               <p class="md:text-lg text-rose-200 font-semibold ">DERROTAS</p>
               <p class="md:text-xl text-rose-200 font-bold flex items-center justify-center">
-                {{ user?.losses || 0 }}
+                {{ data?.user?.losses || 0 }}
               </p>
             </div>
           </div>
@@ -161,8 +142,8 @@ onUnmounted(() => {
         <div class="bg-neutral-950/75 border border-rose-300/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center col-span-2 md:col-span-1">
           <p class="md:text-xl text-rose-200 font-semibold ">ELO MÍNIMO</p>
           <p class="text-lg md:text-2xl text-rose-200 font-bold flex flex-wrap items-center justify-center">
-            <img :src="`/images/lol/${lowest?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
-            <span v-if="lowest?.tier">{{ lowest.division }} · {{ lowest.lp }} LP</span>
+            <img :src="`/images/lol/${data?.lowest?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
+            <span v-if="data?.lowest?.tier">{{ data.lowest.division }} · {{ data.lowest.lp }} LP</span>
           </p>
         </div>
       </div>
