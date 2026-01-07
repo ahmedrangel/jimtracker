@@ -46,8 +46,25 @@ export const fetchLiveData = async (config: RuntimeConfig, puuid: string): Promi
   };
 };
 
+export const getStreakCount = (history: HistoryData[]) => {
+  history = history?.filter(h => !h.is_remake)?.toSorted((a, b) => b?.date - a?.date) || [];
+  if (!history || history.length === 0) return 0;
+  let count = 0;
+  const lastResult = history[0]?.result;
+  for (let i = 0; i < history.length; i++) {
+    if (history[i]?.result === lastResult) {
+      count++;
+    }
+    else {
+      break;
+    }
+  }
+  return lastResult ? count : -count;
+};
+
 export const getDBInfo = async (puuid: string) => {
   const DB = useDB();
+  // const season = year - 2010; // Temporada (2025 -> 15)
   const countResult = await DB.select({
     count: count(tables.history.match_id)
   }).from(tables.history)
@@ -55,6 +72,7 @@ export const getDBInfo = async (puuid: string) => {
       and(
         gte(tables.history.date, Date.now() - historyGraphConfig.daysLimit * 24 * 60 * 60 * 1000),
         eq(tables.history.puuid, puuid)
+        // eq(tables.history.season, season) // Temporada (2025 -> 15)
       )
     ).get();
 
@@ -81,6 +99,7 @@ export const getDBInfo = async (puuid: string) => {
       .where(
         and(
           eq(tables.history.puuid, puuid)
+          // eq(tables.history.season, season)
         )
       )
       .orderBy(desc(tables.history.date))
@@ -96,6 +115,7 @@ export const getDBInfo = async (puuid: string) => {
       .where(
         and(
           eq(tables.history.puuid, puuid),
+          // eq(tables.history.season, season),
           isNotNull(tables.history.snapshot_division),
           isNotNull(tables.history.snapshot_tier)
         )
@@ -133,6 +153,7 @@ export const getDBInfo = async (puuid: string) => {
       .where(
         and(
           eq(tables.history.puuid, puuid),
+          // eq(tables.history.season, season),
           isNotNull(tables.history.snapshot_division),
           isNotNull(tables.history.snapshot_tier)
         )
@@ -171,7 +192,11 @@ export const getDBInfo = async (puuid: string) => {
       deaths: sql<number>`AVG(${tables.history.deaths})`,
       assists: sql<number>`AVG(${tables.history.assists})`
     }).from(tables.history)
-      .where(and(eq(tables.history.puuid, puuid), eq(tables.history.is_remake, 0)))
+      .where(and(
+        eq(tables.history.puuid, puuid),
+        eq(tables.history.is_remake, 0)
+        // eq(tables.history.season, season)
+      ))
       .groupBy(tables.history.champion_id)
       .having(gte(sql`count`, 1)) // Al menos 1 partida jugada con el campeón
       .orderBy(desc(sql`count`), desc(sql`SUM(CASE WHEN ${tables.history.result} = 1 THEN 1 ELSE 0 END)`), desc(sql`(AVG(${tables.history.kills}) + AVG(${tables.history.assists})) / CASE WHEN AVG(${tables.history.deaths}) = 0 THEN 1 ELSE AVG(${tables.history.deaths}) END`))
@@ -179,10 +204,13 @@ export const getDBInfo = async (puuid: string) => {
       .all()
   ]);
 
+  const streak = getStreakCount(history);
+
   return {
     history,
     highest,
     lowest,
-    mostPlayed
+    mostPlayed,
+    streak
   };
 };
