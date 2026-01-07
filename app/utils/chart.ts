@@ -114,6 +114,7 @@ export const processChartData = (data: HistoryData[], champions: { id: string, n
 
     const firstMatchDate = new Date(firstMatch.date);
     const lastMatchDate = new Date(lastMatch.date);
+    lastMatchDate.setHours(23, 59, 59, 999);
     const today = new Date();
     today.setHours(23, 59, 59, 999);
 
