@@ -1,15 +1,29 @@
+import { LolApi } from "twisted";
+
 export default defineEventHandler(async (event): Promise<InfoResponse> => {
   const now = Date.now();
   const query = getQuery(event);
   const soloboom = query.soloboom === "true";
   const puuid = soloboom ? constants.soloboomPuuids[2025] : constants.riotPuuid;
+  const storage = useStorage("cache");
   const key = soloboom ? "info-soloboom" : "info";
   const pollingKey = soloboom ? "soloboomPolling" : "riotPolling";
   const [checkInfo] = await Promise.all([
-    useStorage("cache").getItem<UserInfo>(key)
+    storage.getItem<UserInfo>(key)
   ]);
+
+  let [currentSeason] = await Promise.all([
+    storage.getItem<number>("current-season")
+  ]);
+
+  if (!currentSeason) {
+    const lol = new LolApi();
+    const versionData = await lol.DataDragon.getVersions();
+    currentSeason = parseInt(versionData[0].split(".")[0]);
+    await storage.setItem("current-season", currentSeason);
+  }
   if (checkInfo && (now - checkInfo.updatedAt < 2 * 60 * 1000)) {
-    const dbInfo = await getDBInfo(puuid);
+    const dbInfo = await getDBInfo(puuid, currentSeason);
     return {
       user: checkInfo,
       ...dbInfo
@@ -20,11 +34,11 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
   const [userData] = await Promise.all([
     fetchUserData(config, puuid)
   ]);
-  const dbInfo = await getDBInfo(puuid);
-  if (pollingData?.result) await useStorage("cache").setItem(key, { ...pollingData.result, ...userData, updatedAt: now });
+  const dbInfo = await getDBInfo(puuid, currentSeason);
+  if (pollingData?.result) await storage.setItem(key, { ...pollingData.result, ...userData, updatedAt: now });
   const [liveGame, liveStreamInfo] = await Promise.all([
-    useStorage("cache").getItem<LiveGame>(`live:${key}`),
-    useStorage("cache").getItem<LiveStreamInfo>("live-info")
+    storage.getItem<LiveGame>(`live:${key}`),
+    storage.getItem<LiveStreamInfo>("live-info")
   ]);
   const info = { ...pollingData.result!, ...userData, ...liveStreamInfo, ...liveGame, updatedAt: now };
   return { user: info, ...dbInfo };

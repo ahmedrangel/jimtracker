@@ -1,12 +1,36 @@
+<script setup lang="ts">
+import type { DropdownMenuItem } from "@nuxt/ui";
+
+const trackers: DropdownMenuItem[] = [
+  {
+    label: "2026",
+    to: "/"
+  },
+  {
+    label: "2025",
+    to: "/season/2025"
+  }
+];
+
+const solobooms: DropdownMenuItem[] = [
+  {
+    label: "2025",
+    to: "/season/2025/soloboom"
+  }
+];
+</script>
+
 <template>
   <div id="layout">
-    <nav class="flex md:fixed md:z-10 md:shadow md:end-0 items-center rounded md:me-4 md:mt-4 justify-between bg-white/3 backdrop-blur px-3 py-2 border border-white/5 shadow-lg shadow-black/20">
+    <nav class="flex items-center rounded justify-between bg-white/3 backdrop-blur px-3 py-2 border border-white/5 shadow-lg shadow-black/20">
       <div />
-      <div class="flex md:flex-col items-center gap-2">
-        <NuxtLink to="/" class="nav-link border border-white/0 font-semibold px-3 py-1 rounded hover:bg-white/5 hover:backdrop-blur transition-colors duration-200">Tracker</NuxtLink>
-        <NuxtLink to="/season/2025/soloboom" class="nav-link bg-orange-400/5 hover:bg-orange-400/20 border border-orange-400/30 font-bold px-4 py-2 rounded-lg text-white shadow-lg shadow-orange-400/50">
-          SoloBoom
-        </NuxtLink>
+      <div class="flex items-center gap-2">
+        <UDropdownMenu :items="trackers" :modal="false">
+          <UButton label="Tracker" color="neutral" variant="outline" icon="i-lucide-menu" />
+        </UDropdownMenu>
+        <UDropdownMenu :items="solobooms" :modal="false">
+          <UButton label="SoloBoom" color="neutral" variant="outline" icon="i-lucide-menu" />
+        </UDropdownMenu>
         <NuxtLink to="/gallery" class="nav-link border border-white/0 font-semibold px-3 py-1 rounded hover:bg-white/5 hover:backdrop-blur transition-colors duration-200">Gallery</NuxtLink>
       </div>
     </nav>

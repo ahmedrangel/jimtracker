@@ -62,7 +62,7 @@ export const getStreakCount = (history: HistoryData[]) => {
   return lastResult ? streakCount : -streakCount;
 };
 
-export const getDBInfo = async (puuid: string) => {
+export const getDBInfo = async (puuid: string, season: number) => {
   const DB = useDB();
   const countResult = await DB.select({
     count: count(tables.history.match_id)
@@ -70,7 +70,8 @@ export const getDBInfo = async (puuid: string) => {
     .where(
       and(
         gte(tables.history.date, Date.now() - historyGraphConfig.daysLimit * 24 * 60 * 60 * 1000),
-        eq(tables.history.puuid, puuid)
+        eq(tables.history.puuid, puuid),
+        eq(tables.history.season, season)
       )
     ).get();
 
@@ -96,7 +97,8 @@ export const getDBInfo = async (puuid: string) => {
     }).from(tables.history)
       .where(
         and(
-          eq(tables.history.puuid, puuid)
+          eq(tables.history.puuid, puuid),
+          eq(tables.history.season, season)
         )
       )
       .orderBy(desc(tables.history.date))
@@ -112,6 +114,7 @@ export const getDBInfo = async (puuid: string) => {
       .where(
         and(
           eq(tables.history.puuid, puuid),
+          eq(tables.history.season, season),
           isNotNull(tables.history.snapshot_division),
           isNotNull(tables.history.snapshot_tier)
         )
@@ -149,6 +152,7 @@ export const getDBInfo = async (puuid: string) => {
       .where(
         and(
           eq(tables.history.puuid, puuid),
+          eq(tables.history.season, season),
           isNotNull(tables.history.snapshot_division),
           isNotNull(tables.history.snapshot_tier)
         )
@@ -187,7 +191,7 @@ export const getDBInfo = async (puuid: string) => {
       deaths: sql<number>`AVG(${tables.history.deaths})`,
       assists: sql<number>`AVG(${tables.history.assists})`
     }).from(tables.history)
-      .where(and(eq(tables.history.puuid, puuid), eq(tables.history.is_remake, 0)))
+      .where(and(eq(tables.history.puuid, puuid), eq(tables.history.season, season), eq(tables.history.is_remake, 0)))
       .groupBy(tables.history.champion_id)
       .having(gte(sql`count`, 1)) // Al menos 1 partida jugada con el campeón
       .orderBy(desc(sql`count`), desc(sql`SUM(CASE WHEN ${tables.history.result} = 1 THEN 1 ELSE 0 END)`), desc(sql`(AVG(${tables.history.kills}) + AVG(${tables.history.assists})) / CASE WHEN AVG(${tables.history.deaths}) = 0 THEN 1 ELSE AVG(${tables.history.deaths}) END`))

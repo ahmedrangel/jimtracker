@@ -1,17 +1,26 @@
+import { LolApi } from "twisted";
+
 export default defineEventHandler(async (event): Promise<InfoResponse> => {
   // if (import.meta.dev) return $fetch<InfoResponse>(`${SITE.url}/api/info`);
   const config = useRuntimeConfig(event);
   const query = getQuery(event);
   const soloboom = query.soloboom === "true";
   const puuid = soloboom ? constants.soloboomPuuids[2025] : constants.riotPuuid;
-  const key = soloboom ? "info-soloboom" : "info";
+  const key = soloboom ? "info-soloboom" : `info${query.season ? `-${query.season}` : ""}`;
   const storage = useStorage("cache");
-  let [leagueInfo, liveGame] = await Promise.all([
+  let [leagueInfo, liveGame, currentSeason] = await Promise.all([
     storage.getItem<UserLeague>(key),
-    storage.getItem<LiveGame>(`live:${key}`)
+    storage.getItem<LiveGame>(`live:${key}`),
+    storage.getItem<number>("current-season")
   ]);
+  if (!currentSeason) {
+    const lol = new LolApi();
+    const versionData = await lol.DataDragon.getVersions();
+    currentSeason = parseInt(versionData[0].split(".")[0]);
+    await storage.setItem("current-season", currentSeason);
+  }
   const liveInfo = await storage.getItem<LiveStreamInfo>("live-info");
-  if (!leagueInfo || !liveInfo) {
+  if (!leagueInfo) {
     const [userData, liveData] = await Promise.all([
       fetchUserData(config, puuid),
       fetchLiveData(config, puuid)
@@ -26,7 +35,7 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
 
   const info: UserInfo = { ...leagueInfo!, ...liveGame!, ...liveInfo! };
 
-  const dbInfo = await getDBInfo(puuid);
+  const dbInfo = await getDBInfo(puuid, query.season ? Number(query.season) : currentSeason);
 
   return {
     user: info,

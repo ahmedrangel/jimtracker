@@ -4,6 +4,7 @@ const props = defineProps<{
   champions?: { id: string, name: string }[];
   showCountdown?: boolean;
   showSoloboomRank?: boolean;
+  old?: boolean;
 }>();
 
 const endOfSeasonDate = "2026-01-07T23:59:59-06:00";
@@ -52,7 +53,7 @@ onUnmounted(() => {
     <div class="space-y-4 mb-5">
       <div class="grid grid-cols-2 gap-2 md:gap-4">
         <!-- COUNTDOWN FIN DE TEMPORADA -->
-        <div v-if="showCountdown" class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center col-span-2 md:col-span-1 md:min-w-[230px]">
+        <div v-if="showCountdown && !old" class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center col-span-2 md:col-span-1 md:min-w-[230px]">
           <p class="md:text-xl text-emerald-100 font-semibold">FIN DE TEMPORADA</p>
           <p class="text-lg md:text-2xl text-green-300/50 font-bold flex flex-wrap items-center justify-center">
             <span v-if="countdown">
@@ -72,7 +73,7 @@ onUnmounted(() => {
           </p>
         </div>
         <!-- ELO ACTUAL -->
-        <div class="text-center bg-neutral-950/75 border border-slate-400/40 flex flex-col items-center justify-center px-2 py-2 sm:px-4 sm:py-4 rounded">
+        <div v-if="!old" class="text-center bg-neutral-950/75 border border-slate-400/40 flex flex-col items-center justify-center px-2 py-2 sm:px-4 sm:py-4 rounded">
           <p class="md:text-xl font-semibold">ELO ACTUAL</p>
           <p class="text-lg md:text-2xl font-bold flex flex-wrap items-center justify-center">
             <img :src="`/images/lol/${data?.user?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
@@ -82,7 +83,7 @@ onUnmounted(() => {
           </p>
         </div>
         <!-- RACHA -->
-        <div class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center">
+        <div v-if="!old" class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center">
           <p class="md:text-xl font-semibold">RACHA</p>
           <p class="text-lg md:text-2xl font-bold flex flex-wrap items-center justify-center">
             <span :class="data.streak < 0 ? 'text-rose-400' : 'text-green-400'">{{ data.streak < 0 ? `-${Math.abs(data.streak)}` : `+${data.streak}` }}</span>
