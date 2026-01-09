@@ -67,7 +67,7 @@ const updateInfo = async () => {
 
 <template>
   <main>
-    <UserInfo :user="data?.user" />
+    <UserInfo :user="data?.user" :old="year ? true : false" />
     <UserStats v-if="data" :data="data" :champions="champions" show-countdown :old="year ? true : false" />
     <ClientOnly v-if="!year">
       <div class="flex md:justify-end mb-4">

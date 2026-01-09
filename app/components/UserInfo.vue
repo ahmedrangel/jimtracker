@@ -2,6 +2,7 @@
 const props = defineProps<{
   user?: UserInfo;
   showSoloboom?: boolean;
+  old?: boolean;
 }>();
 const isLiveTwitch = computed(() => props?.user?.isLiveTwitch);
 const isLiveKick = computed(() => props?.user?.isLiveKick);
@@ -36,7 +37,7 @@ const kick = socials.find(s => s.id === "kick")!;
       </NuxtLink>
     </div>
   </div>
-  <div class="text-center flex flex-wrap items-center justify-center my-5 gap-2">
+  <div v-if="!old" class="text-center flex flex-wrap items-center justify-center my-5 gap-2">
     <NuxtLink :to="twitch.url" target="_blank" external>
       <span class="relative text-sm px-3 py-2 rounded font-bold flex items-center justify-center gap-1" :class="isLiveTwitch ? 'text-white' : 'text-black/70'">
         <div class="absolute -z-10 inset-0 rounded shadow-lg" :class="isLiveTwitch ? 'bg-linear-to-r from-purple-600 via-purple-500 to-purple-600 animate-pulse shadow-purple-500/50' : 'bg-purple-100/70'" />
