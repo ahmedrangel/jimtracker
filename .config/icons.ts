@@ -1,0 +1,20 @@
+export default [
+  "simple-icons:twitch",
+  "simple-icons:kick",
+  "simple-icons:x",
+  "simple-icons:instagram",
+  "simple-icons:tiktok",
+  "simple-icons:facebook",
+  "simple-icons:youtube",
+  "simple-icons:twitch",
+  "simple-icons:kick",
+  "simple-icons:leagueoflegends",
+  "lucide:menu",
+  "ph:arrow-clockwise-bold",
+  "ph:info-bold",
+  "tabler:caret-up-filled",
+  "tabler:caret-down-filled",
+  "tabler:caret-up-down-filled",
+  "tabler:x",
+  "eos-icons:loading"
+];
