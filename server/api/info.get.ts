@@ -35,7 +35,11 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
 
   const info: UserInfo = { ...leagueInfo!, ...liveGame!, ...liveInfo! };
 
-  const dbInfo = await getDBInfo(puuid, query.season ? Number(query.season) : currentSeason);
+  const dbInfo = await getDBInfo({
+    puuid,
+    season: query.season ? Number(query.season) : currentSeason,
+    fullHistory: query.season ? false : true
+  });
 
   return {
     user: info,

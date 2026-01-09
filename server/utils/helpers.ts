@@ -62,7 +62,8 @@ export const getStreakCount = (history: HistoryData[]) => {
   return lastResult ? streakCount : -streakCount;
 };
 
-export const getDBInfo = async (puuid: string, season: number) => {
+export const getDBInfo = async (options: { puuid: string, season: number, fullHistory?: boolean }) => {
+  const { puuid, season, fullHistory } = options;
   const DB = useDB();
   const countResult = await DB.select({
     count: count(tables.history.match_id)
@@ -100,7 +101,7 @@ export const getDBInfo = async (puuid: string, season: number) => {
       .where(
         and(
           eq(tables.history.puuid, puuid),
-          eq(tables.history.season, season)
+          fullHistory ? sql`1=1` : eq(tables.history.season, season)
         )
       )
       .orderBy(desc(tables.history.date))

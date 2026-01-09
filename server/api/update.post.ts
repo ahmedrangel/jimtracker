@@ -12,18 +12,18 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
     storage.getItem<UserInfo>(key)
   ]);
 
-  let [currentSeason] = await Promise.all([
+  let [season] = await Promise.all([
     storage.getItem<number>("current-season")
   ]);
 
-  if (!currentSeason) {
+  if (!season) {
     const lol = new LolApi();
     const versionData = await lol.DataDragon.getVersions();
-    currentSeason = parseInt(versionData[0].split(".")[0]);
-    await storage.setItem("current-season", currentSeason);
+    season = parseInt(versionData[0].split(".")[0]);
+    await storage.setItem("current-season", season);
   }
   if (checkInfo && (now - checkInfo.updatedAt < 2 * 60 * 1000)) {
-    const dbInfo = await getDBInfo(puuid, currentSeason);
+    const dbInfo = await getDBInfo({ puuid, season });
     return {
       user: checkInfo,
       ...dbInfo
@@ -34,7 +34,7 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
   const [userData] = await Promise.all([
     fetchUserData(config, puuid)
   ]);
-  const dbInfo = await getDBInfo(puuid, currentSeason);
+  const dbInfo = await getDBInfo({ puuid, season });
   if (pollingData?.result) await storage.setItem(key, { ...pollingData.result, ...userData, updatedAt: now });
   const [liveGame, liveStreamInfo] = await Promise.all([
     storage.getItem<LiveGame>(`live:${key}`),
