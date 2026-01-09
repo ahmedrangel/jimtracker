@@ -93,7 +93,9 @@ export const getDBInfo = async (puuid: string, season: number) => {
       tier: tables.history.snapshot_tier,
       lp: tables.history.snapshot_lp,
       duration: tables.history.duration,
-      season: tables.history.season
+      season: tables.history.season,
+      snapshot_wins: tables.history.snapshot_wins,
+      snapshot_losses: tables.history.snapshot_losses
     }).from(tables.history)
       .where(
         and(

@@ -37,6 +37,8 @@ declare global {
     is_surrender?: number;
     date: number;
     duration: number;
+    snapshot_wins: number;
+    snapshot_losses: number;
   }
 
   interface HistoryData extends Omit<MatchData, "puuid">, RankInfo {}

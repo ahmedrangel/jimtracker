@@ -119,7 +119,7 @@ onUnmounted(() => {
           <div class="bg-neutral-950/75 border border-purple-300/40 rounded p-2 sm:p-2 text-center flex flex-col items-center justify-center">
             <p class="md:text-lg text-purple-200 font-semibold ">WINRATE</p>
             <p class="md:text-xl text-purple-200 font-bold flex flex-wrap items-center justify-center">
-              {{ (data?.user && data.user.wins && data.user.losses ? (data.user.wins / (data.user.wins + data.user.losses) * 100).toFixed(2) : "0.00") }}%
+              {{ (data?.history?.[0]?.snapshot_wins || 0 && data.history?.[0]?.snapshot_losses ? (data.history[0].snapshot_wins / (data.history[0].snapshot_wins + data.history[0].snapshot_losses) * 100).toFixed(2) : "0.00") }}%
             </p>
           </div>
           <!-- VICTORIAS -->
@@ -127,14 +127,14 @@ onUnmounted(() => {
             <div class="bg-neutral-950/75 border border-blue-300/40 rounded p-2 sm:p-2 text-center flex flex-col items-center justify-center w-full">
               <p class="md:text-lg text-blue-200 font-semibold ">VICTORIAS</p>
               <p class="md:text-xl text-blue-200 font-bold flex items-center justify-center">
-                {{ data?.user?.wins || 0 }}
+                {{ data?.history?.[0]?.snapshot_wins || 0 }}
               </p>
             </div>
             <!-- DERROTAS -->
             <div class="bg-neutral-950/75 border border-rose-300/40 rounded p-2 sm:p-2 text-center flex flex-col items-center justify-center w-full">
               <p class="md:text-lg text-rose-200 font-semibold ">DERROTAS</p>
               <p class="md:text-xl text-rose-200 font-bold flex items-center justify-center">
-                {{ data?.user?.losses || 0 }}
+                {{ data?.history?.[0]?.snapshot_losses || 0 }}
               </p>
             </div>
           </div>
