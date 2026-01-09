@@ -34,6 +34,7 @@
     "twitch:subscribe": "node scripts/subscribe/twitch.ts"
   },
   "devDependencies": {
+    "@iconify-json/lucide": "^1.2.83",
     "@iconify-json/ph": "^1.2.2",
     "@iconify-json/simple-icons": "^1.2.61",
     "@iconify-json/tabler": "^1.2.23",
