@@ -15,15 +15,15 @@ const kick = socials.find(s => s.id === "kick")!;
 
 <template>
   <div class="flex items-center justify-center">
-    <div v-if="!showSoloboom" class="rounded aspect-square justify-items-center w-26 h-26 md:w-32 md:h-32">
+    <div v-if="!showSoloboom" class="rounded aspect-square flex items-center justify-center w-26 h-26 md:w-32 md:h-32">
       <img src="/images/jimrsng.png" class="max-w-full max-h-full object-contain">
     </div>
     <template v-else>
-      <div class="rounded aspect-square justify-items-center w-26 h-26 md:w-32 md:h-32">
+      <div class="rounded aspect-square flex items-center justify-center w-26 h-26 md:w-32 md:h-32">
         <img src="/images/jimrsng.png" class="max-w-full max-h-full object-contain">
       </div>
       <NuxtLink to="https://soloboom.net/leaderboard" external target="_blank">
-        <div class="rounded aspect-square justify-items-center w-26 h-26 md:w-32 md:h-32">
+        <div class="rounded aspect-square flex items-center justify-center w-26 h-26 md:w-32 md:h-32">
           <img src="/images/soloboom2025.webp" class="max-w-full max-h-full object-contain">
         </div>
       </NuxtLink>
