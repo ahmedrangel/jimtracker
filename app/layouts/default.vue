@@ -34,15 +34,19 @@ const solobooms: DropdownMenuItem[] = [
         <NuxtLink to="/gallery" class="nav-link border border-white/0 font-semibold px-3 py-1 rounded hover:bg-white/5 hover:backdrop-blur transition-colors duration-200">Gallery</NuxtLink>
       </div>
     </nav>
-    <div class="lg:container mx-auto py-5 px-2">
-      <slot />
-      <footer class="text-center text-sm text-slate-300">
-        <span>
-          <NuxtLink href="https://github.com/ahmedrangel/jimtracker" target="_blank" external class="text-emerald-300 font-semibold hover:underline">Creado</NuxtLink>
-          con ❤️ por
-          <NuxtLink href="https://github.com/ahmedrangel" target="_blank" external class="text-emerald-300 font-semibold hover:underline">Ahmed Rangel</NuxtLink>
-        </span>
-      </footer>
+    <div class="relative">
+      <img class="absolute top-0 start-0 w-40 md:w-60 p-2" src="/images/corner.png">
+      <img class="absolute top-0 end-0 w-40 md:w-60 p-2 rotate-y-180" src="/images/corner.png">
+      <div class="lg:container mx-auto py-5 px-2">
+        <slot />
+        <footer class="text-center text-sm text-slate-300">
+          <span>
+            <NuxtLink href="https://github.com/ahmedrangel/jimtracker" target="_blank" external class="text-emerald-300 font-semibold hover:underline">Creado</NuxtLink>
+            con ❤️ por
+            <NuxtLink href="https://github.com/ahmedrangel" target="_blank" external class="text-emerald-300 font-semibold hover:underline">Ahmed Rangel</NuxtLink>
+          </span>
+        </footer>
+      </div>
     </div>
   </div>
 </template>
