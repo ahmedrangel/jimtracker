@@ -30,7 +30,7 @@ const kick = socials.find(s => s.id === "kick")!;
     </template>
   </div>
   <div class="flex items-center justify-center my-1 px-3">
-    <img src="/images/divider.png" class="h-4">
+    <img src="/images/divider.png" class="h-4 pointer-events-none select-none">
   </div>
   <div class="text-center mb-4">
     <h2 v-if="gameName && tagLine" class="text-2xl font-semibold mb-4">{{ gameName }} <span class="text-slate-400">#{{ tagLine }}</span></h2>
@@ -64,6 +64,6 @@ const kick = socials.find(s => s.id === "kick")!;
     </NuxtLink>
   </div>
   <div class="flex items-center justify-center my-4 px-3">
-    <img src="/images/divider.png" class="h-4">
+    <img src="/images/divider.png" class="h-4 pointer-events-none select-none">
   </div>
 </template>

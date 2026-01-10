@@ -35,8 +35,8 @@ const solobooms: DropdownMenuItem[] = [
       </div>
     </nav>
     <div class="relative">
-      <img class="absolute top-0 start-0 w-40 md:w-60 p-2" src="/images/corner.png">
-      <img class="absolute top-0 end-0 w-40 md:w-60 p-2 rotate-y-180" src="/images/corner.png">
+      <img class="absolute top-0 start-0 w-40 md:w-60 p-2 pointer-events-none select-none" src="/images/corner.png">
+      <img class="absolute top-0 end-0 w-40 md:w-60 p-2 rotate-y-180 pointer-events-none select-none" src="/images/corner.png">
       <div class="lg:container mx-auto py-5 px-2">
         <slot />
         <footer class="text-center text-sm text-slate-300">
