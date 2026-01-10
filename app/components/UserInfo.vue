@@ -14,7 +14,7 @@ const kick = socials.find(s => s.id === "kick")!;
 </script>
 
 <template>
-  <div class="flex items-center justify-center mb-4">
+  <div class="flex items-center justify-center">
     <div v-if="!showSoloboom" class="rounded aspect-square justify-items-center w-26 h-26 md:w-32 md:h-32">
       <img src="/images/jimrsng.png" class="max-w-full max-h-full object-contain">
     </div>
@@ -29,6 +29,9 @@ const kick = socials.find(s => s.id === "kick")!;
       </NuxtLink>
     </template>
   </div>
+  <div class="flex items-center justify-center my-1 px-3">
+    <img src="/images/divider.png" class="h-4">
+  </div>
   <div class="text-center mb-4">
     <h2 v-if="gameName && tagLine" class="text-2xl font-semibold mb-4">{{ gameName }} <span class="text-slate-400">#{{ tagLine }}</span></h2>
     <div class="flex justify-center gap-1 mb-4">
@@ -37,7 +40,7 @@ const kick = socials.find(s => s.id === "kick")!;
       </NuxtLink>
     </div>
   </div>
-  <div v-if="!old" class="text-center flex flex-wrap items-center justify-center my-5 gap-2">
+  <div v-if="!old" class="text-center flex flex-wrap items-center justify-center mt-4 gap-2">
     <NuxtLink :to="twitch.url" target="_blank" external>
       <span class="relative text-sm px-3 py-2 rounded font-bold flex items-center justify-center gap-1" :class="isLiveTwitch ? 'text-white' : 'text-black/70'">
         <div class="absolute -z-10 inset-0 rounded shadow-lg" :class="isLiveTwitch ? 'bg-linear-to-r from-purple-600 via-purple-500 to-purple-600 animate-pulse shadow-purple-500/50' : 'bg-purple-100/70'" />
@@ -59,5 +62,8 @@ const kick = socials.find(s => s.id === "kick")!;
         <span>{{ isIngame ? 'En partida' : 'Fuera de partida' }}</span>
       </span>
     </NuxtLink>
+  </div>
+  <div class="flex items-center justify-center my-4 px-3">
+    <img src="/images/divider.png" class="h-4">
   </div>
 </template>
