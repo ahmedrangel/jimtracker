@@ -30,7 +30,7 @@ export default defineNuxtConfig({
         { rel: "icon", type: "image/png", sizes: "192x192", href: "/web-app-manifest-192x192.png" },
         { rel: "icon", type: "image/png", sizes: "96x96", href: "/favicon-96x96.png" },
         { rel: "manifest", href: "/site.webmanifest" },
-        { rel: "preconnect", href: "https://raw.communitydragon.org" },
+        { rel: "preconnect", href: "https://cdn.communitydragon.org" },
         { rel: "preconnect", href: SITE.cdn }
       ],
       meta: [
