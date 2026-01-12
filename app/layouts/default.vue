@@ -32,7 +32,7 @@ const solobooms: DropdownMenuItem[] = [
           <UButton label="SoloBoom" color="neutral" variant="outline" icon="i-lucide-menu" />
         </UDropdownMenu>
         <NuxtLink to="/gallery" class="nav-link border border-white/10 font-semibold px-3 py-1 rounded hover:bg-white/5 hover:backdrop-blur transition-colors duration-200">Gallery</NuxtLink>
-        <NuxtLink to="https://comunidad.jimtracker.com" target="_blank" external class="nav-link border border-white/10 font-semibold px-3 py-1 rounded hover:bg-white/5 hover:backdrop-blur transition-colors duration-200">Leaderboard Comunidad</NuxtLink>
+        <NuxtLink to="https://comunidad.jimtracker.com" target="_blank" external class="nav-link border border-white/10 font-semibold px-3 py-1 rounded hover:bg-white/5 hover:backdrop-blur transition-colors duration-200">Comunidad</NuxtLink>
       </div>
     </nav>
     <div class="relative">
