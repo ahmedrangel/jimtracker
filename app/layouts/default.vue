@@ -24,7 +24,7 @@ const solobooms: DropdownMenuItem[] = [
   <div id="layout">
     <nav class="flex items-center rounded justify-between bg-white/3 backdrop-blur px-3 py-2 border border-white/5 shadow-lg shadow-black/20">
       <div />
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2 flex-wrap">
         <UDropdownMenu :items="trackers" :modal="false">
           <UButton label="Tracker" color="neutral" variant="outline" icon="i-lucide-menu" />
         </UDropdownMenu>
