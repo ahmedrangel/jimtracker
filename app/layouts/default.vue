@@ -24,12 +24,12 @@ const solobooms: DropdownMenuItem[] = [
   <div id="layout">
     <nav class="flex items-center rounded justify-between bg-white/3 backdrop-blur px-3 py-2 border border-white/5 shadow-lg shadow-black/20">
       <div />
-      <div class="flex items-center gap-2 flex-wrap">
-        <UDropdownMenu :items="trackers" :modal="false">
-          <UButton label="Tracker" color="neutral" variant="outline" icon="i-lucide-menu" />
+      <div class="flex items-center gap-2 flex-wrap text-sm">
+        <UDropdownMenu :items="trackers" :modal="false" class="bg-transparent hover:bg-white/5 border border-white/10 font-semibold px-3 py-1 rounded transition-colors duration-200">
+          <UButton label="Tracker" color="neutral" variant="ghost" icon="i-lucide-menu" />
         </UDropdownMenu>
-        <UDropdownMenu :items="solobooms" :modal="false">
-          <UButton label="SoloBoom" color="neutral" variant="outline" icon="i-lucide-menu" />
+        <UDropdownMenu :items="solobooms" :modal="false" class="bg-transparent hover:bg-white/5 border border-white/10 font-semibold px-3 py-1 rounded transition-colors duration-200">
+          <UButton label="SoloBoom" color="neutral" variant="ghost" icon="i-lucide-menu" />
         </UDropdownMenu>
         <NuxtLink to="/gallery" class="nav-link border border-white/10 font-semibold px-3 py-1 rounded hover:bg-white/5 hover:backdrop-blur transition-colors duration-200">Gallery</NuxtLink>
         <NuxtLink to="https://comunidad.jimtracker.com" target="_blank" external class="nav-link border border-white/10 font-semibold px-3 py-1 rounded hover:bg-white/5 hover:backdrop-blur transition-colors duration-200">Comunidad</NuxtLink>
