@@ -4,6 +4,7 @@ import { es } from "date-fns/locale";
 
 const props = defineProps<{
   year?: number;
+  soloboom?: boolean;
 }>();
 
 const season = props.year ? props.year - 2010 : undefined;

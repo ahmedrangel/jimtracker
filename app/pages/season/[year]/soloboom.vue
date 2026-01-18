@@ -3,8 +3,12 @@ import { computed, onMounted, onUnmounted, ref } from "vue";
 import { formatDistanceStrict } from "date-fns";
 import { es } from "date-fns/locale";
 
+const { params } = useRoute("season-year");
+
+const season = params.year ? Number(params.year) - 2010 : undefined;
+
 const { data } = await useFetch("/api/info", {
-  query: { soloboom: true }
+  query: { season, soloboom: true }
 });
 const { data: champions } = await useFetch("/api/champions");
 
@@ -59,14 +63,19 @@ const updateInfo = async () => {
   if (newData) data.value = newData;
   now.value = Date.now();
 };
+
+const old = computed(() => {
+  const currentYear = new Date().getFullYear();
+  return currentYear > Number(params.year);
+});
 </script>
 
 <template>
   <main>
-    <UserInfo :user="data?.user" show-soloboom />
-    <UserStats v-if="data" :data="data" :champions="champions" show-soloboom-rank />
+    <UserInfo :user="data?.user" show-soloboom :old="true" />
+    <UserStats v-if="data" :data="data" :champions="champions" :show-soloboom-rank="old ? false : true" :old="old" />
     <!-- Botón de Actualizar -->
-    <ClientOnly>
+    <ClientOnly v-if="!old">
       <div class="flex md:justify-end mb-4">
         <button
           class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-3 py-2 rounded flex items-center gap-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
@@ -80,7 +89,7 @@ const updateInfo = async () => {
       </div>
     </ClientOnly>
     <ChartHandlerSoloBoom :data="data" :champions="champions" />
-    <div v-if="data?.user?.updatedAt" class="text-xs my-2 flex flex-col">
+    <div v-if="data?.user?.updatedAt && !old" class="text-xs my-2 flex flex-col">
       <span class="text-end mb-2">
         Última actualización:
         <ClientOnly>
