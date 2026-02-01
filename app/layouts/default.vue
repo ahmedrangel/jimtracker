@@ -26,10 +26,10 @@ const solobooms: DropdownMenuItem[] = [
       <div />
       <div class="flex items-center gap-2 flex-wrap text-sm">
         <UDropdownMenu :items="trackers" :modal="false" class="bg-transparent hover:bg-white/5 border border-white/10 font-semibold px-3 py-1 rounded transition-colors duration-200">
-          <UButton label="Tracker" color="neutral" variant="ghost" icon="i-lucide-menu" />
+          <UButton label="Tracker" color="neutral" variant="ghost" trailing-icon="lucide:chevron-down" />
         </UDropdownMenu>
         <UDropdownMenu :items="solobooms" :modal="false" class="bg-transparent hover:bg-white/5 border border-white/10 font-semibold px-3 py-1 rounded transition-colors duration-200">
-          <UButton label="SoloBoom" color="neutral" variant="ghost" icon="i-lucide-menu" />
+          <UButton label="SoloBoom" color="neutral" variant="ghost" trailing-icon="lucide:chevron-down" />
         </UDropdownMenu>
         <NuxtLink to="/gallery" class="nav-link border border-white/10 font-semibold px-3 py-1 rounded hover:bg-white/5 hover:backdrop-blur transition-colors duration-200">Gallery</NuxtLink>
         <NuxtLink to="https://comunidad.jimtracker.com" class="nav-link border border-white/10 font-semibold px-3 py-1 rounded hover:bg-white/5 hover:backdrop-blur transition-colors duration-200">Comunidad</NuxtLink>

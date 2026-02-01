@@ -16,5 +16,6 @@ export default [
   "tabler:caret-down-filled",
   "tabler:caret-up-down-filled",
   "tabler:x",
-  "eos-icons:loading"
+  "eos-icons:loading",
+  "lucide:chevron-down"
 ];
