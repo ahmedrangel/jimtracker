@@ -53,7 +53,7 @@ onUnmounted(() => {
     <div class="space-y-4 mb-5">
       <div class="grid grid-cols-2 gap-2 md:gap-4">
         <!-- COUNTDOWN FIN DE TEMPORADA -->
-        <div v-if="showCountdown && !old" class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center col-span-2 md:col-span-1 md:min-w-[230px]">
+        <div v-if="showCountdown && !old" class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center col-span-2 md:col-span-1 md:min-w-57.5">
           <p class="md:text-xl text-emerald-100 font-semibold">FIN DE TEMPORADA</p>
           <p class="text-lg md:text-2xl text-green-300/50 font-bold flex flex-wrap items-center justify-center">
             <span v-if="countdown">
@@ -106,7 +106,7 @@ onUnmounted(() => {
           </div>
         </div>
         <!-- ELO MÁXIMO -->
-        <div class="bg-neutral-950/75 border border-blue-300/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center col-span-2 md:col-span-1">
+        <div class="bg-neutral-950/75 border border-blue-300/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center col-span-2 md:col-span-1 md:min-w-57.5">
           <p class="md:text-xl text-blue-200 font-semibold ">ELO MÁXIMO</p>
           <p class="text-lg md:text-2xl text-blue-200 font-bold flex flex-wrap items-center justify-center">
             <img :src="`/images/lol/${data?.highest?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
@@ -140,7 +140,7 @@ onUnmounted(() => {
           </div>
         </div>
         <!-- ELO MÍNIMO -->
-        <div class="bg-neutral-950/75 border border-rose-300/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center col-span-2 md:col-span-1">
+        <div class="bg-neutral-950/75 border border-rose-300/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex flex-col items-center justify-center col-span-2 md:col-span-1 md:min-w-57.5">
           <p class="md:text-xl text-rose-200 font-semibold ">ELO MÍNIMO</p>
           <p class="text-lg md:text-2xl text-rose-200 font-bold flex flex-wrap items-center justify-center">
             <img :src="`/images/lol/${data?.lowest?.tier?.toLowerCase() || 'unranked'}.png`" class="w-12 h-12 md:w-16 md:h-16">
