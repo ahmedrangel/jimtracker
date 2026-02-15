@@ -40,7 +40,7 @@
     "@iconify-json/simple-icons": "^1.2.61",
     "@iconify-json/tabler": "^1.2.23",
     "@nuxt/eslint": "^1.11.0",
-    "@nuxt/ui": "^4.2.1",
+    "@nuxt/ui": "^4.4.0",
     "@nuxthub/core": "^0.9.1",
     "@nuxtjs/sitemap": "^7.4.8",
     "@twurple/api": "^8.0.2",
@@ -62,7 +62,7 @@
     "typescript": "^5.9.3",
     "vue-chartjs": "^5.3.3",
     "vue-tsc": "^3.1.6",
-    "wrangler": "^4.53.0",
+    "wrangler": "^4.65.0",
     "zod": "^4.1.13"
   },
   "packageManager": "pnpm@10.24.0"

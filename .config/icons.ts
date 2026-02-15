@@ -15,7 +15,9 @@ export default [
   "tabler:caret-up-filled",
   "tabler:caret-down-filled",
   "tabler:caret-up-down-filled",
-  "tabler:x",
   "eos-icons:loading",
-  "lucide:chevron-down"
+  "lucide:chevron-down",
+  "lucide:search",
+  "lucide:x",
+  "lucide:check"
 ];

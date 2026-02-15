@@ -1,0 +1,2066 @@
+[
+  {
+    "champion": "Aatrox",
+    "championId": 266,
+    "date": "2026-01-10",
+    "support": false,
+    "kda": [
+      3,
+      5,
+      10
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Ahri",
+    "championId": 103,
+    "date": "2026-01-10",
+    "support": false,
+    "kda": [
+      19,
+      31,
+      19
+    ],
+    "tries": 3
+  },
+  {
+    "champion": "Akali",
+    "championId": 84,
+    "date": "2026-01-10",
+    "support": false,
+    "kda": [
+      41,
+      39,
+      18
+    ],
+    "tries": 5
+  },
+  {
+    "champion": "Akshan",
+    "championId": 166,
+    "date": "2026-01-10",
+    "support": false,
+    "kda": [
+      7,
+      18,
+      5
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Alistar",
+    "championId": 12,
+    "date": "2026-01-10",
+    "support": true,
+    "kda": [
+      2,
+      17,
+      33
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Ambessa",
+    "championId": 799,
+    "date": "2026-01-11",
+    "support": false,
+    "kda": [
+      0,
+      1,
+      3
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Amumu",
+    "championId": 32,
+    "date": "2026-01-11",
+    "support": false,
+    "kda": [
+      10,
+      4,
+      8
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Anivia",
+    "championId": 34,
+    "date": "2026-01-11",
+    "support": false,
+    "kda": [
+      12,
+      31,
+      22
+    ],
+    "tries": 3
+  },
+  {
+    "champion": "Annie",
+    "championId": 1,
+    "date": "2026-01-11",
+    "support": false,
+    "kda": [
+      49,
+      48,
+      39
+    ],
+    "tries": 5
+  },
+  {
+    "champion": "Aphelios",
+    "championId": 523,
+    "date": "2026-01-12",
+    "support": false,
+    "kda": [
+      37,
+      49,
+      25
+    ],
+    "tries": 4
+  },
+  {
+    "champion": "Ashe",
+    "championId": 22,
+    "date": "2026-01-12",
+    "support": false,
+    "kda": [
+      38,
+      50,
+      21
+    ],
+    "tries": 4
+  },
+  {
+    "champion": "Aurelion Sol",
+    "championId": 136,
+    "date": "2026-01-12",
+    "support": false,
+    "kda": [
+      28,
+      26,
+      28
+    ],
+    "tries": 3
+  },
+  {
+    "champion": "Aurora",
+    "championId": 893,
+    "date": "2026-01-12",
+    "support": false,
+    "kda": [
+      21,
+      25,
+      29
+    ],
+    "tries": 3
+  },
+  {
+    "champion": "Azir",
+    "championId": 268,
+    "date": "2026-01-13",
+    "support": false,
+    "kda": [
+      18,
+      21,
+      10
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Bardo",
+    "championId": 432,
+    "date": "2026-01-13",
+    "support": true,
+    "kda": [
+      11,
+      9,
+      19
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Bel'Veth",
+    "championId": 200,
+    "date": "2026-01-13",
+    "support": false,
+    "kda": [
+      10,
+      7,
+      14
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Blitzcrank",
+    "championId": 53,
+    "date": "2026-01-13",
+    "support": false,
+    "kda": [
+      5,
+      3,
+      11
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Brand",
+    "championId": 63,
+    "date": "2026-01-13",
+    "support": true,
+    "kda": [
+      14,
+      21,
+      16
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Braum",
+    "championId": 201,
+    "date": "2026-01-13",
+    "support": true,
+    "kda": [
+      2,
+      1,
+      7
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Briar",
+    "championId": 233,
+    "date": "2026-01-13",
+    "support": false,
+    "kda": [
+      13,
+      8,
+      10
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Caitlyn",
+    "championId": 51,
+    "date": "2026-01-14",
+    "support": false,
+    "kda": [
+      18,
+      7,
+      6
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Camille",
+    "championId": 164,
+    "date": "2026-01-14",
+    "support": false,
+    "kda": [
+      34,
+      40,
+      18
+    ],
+    "tries": 5
+  },
+  {
+    "champion": "Cassiopeia",
+    "championId": 69,
+    "date": "2026-01-14",
+    "support": false,
+    "kda": [
+      5,
+      2,
+      2
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Cho'Gath",
+    "championId": 31,
+    "date": "2026-01-14",
+    "support": false,
+    "kda": [
+      26,
+      24,
+      11
+    ],
+    "tries": 4
+  },
+  {
+    "champion": "Corki",
+    "championId": 42,
+    "date": "2026-01-15",
+    "support": false,
+    "kda": [
+      24,
+      24,
+      18
+    ],
+    "tries": 3
+  },
+  {
+    "champion": "Darius",
+    "championId": 122,
+    "date": "2026-01-15",
+    "support": false,
+    "kda": [
+      2,
+      1,
+      1
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Diana",
+    "championId": 131,
+    "date": "2026-01-15",
+    "support": false,
+    "kda": [
+      8,
+      2,
+      6
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Dr. Mundo",
+    "championId": 36,
+    "date": "2026-01-15",
+    "support": false,
+    "kda": [
+      8,
+      3,
+      6
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Draven",
+    "championId": 119,
+    "date": "2026-01-15",
+    "support": false,
+    "kda": [
+      32,
+      20,
+      17
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Ekko",
+    "championId": 245,
+    "date": "2026-01-15",
+    "support": false,
+    "kda": [
+      25,
+      10,
+      14
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Elise",
+    "championId": 60,
+    "date": "2026-01-16",
+    "support": false,
+    "kda": [
+      32,
+      16,
+      21
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Evelynn",
+    "championId": 28,
+    "date": "2026-01-16",
+    "support": false,
+    "kda": [
+      17,
+      2,
+      8
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Ezreal",
+    "championId": 81,
+    "date": "2026-01-16",
+    "support": false,
+    "kda": [
+      13,
+      11,
+      12
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Fiddlesticks",
+    "championId": 9,
+    "date": "2026-01-16",
+    "support": false,
+    "kda": [
+      7,
+      0,
+      15
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Fiora",
+    "championId": 114,
+    "date": "2026-01-16",
+    "support": false,
+    "kda": [
+      14,
+      19,
+      9
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Fizz",
+    "championId": 105,
+    "date": "2026-01-16",
+    "support": false,
+    "kda": [
+      7,
+      9,
+      4
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Galio",
+    "championId": 3,
+    "date": "2026-01-16",
+    "support": false,
+    "kda": [
+      14,
+      1,
+      11
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Gangplank",
+    "championId": 41,
+    "date": "2026-01-16",
+    "support": false,
+    "kda": [
+      11,
+      8,
+      12
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Garen",
+    "championId": 86,
+    "date": "2026-01-16",
+    "support": false,
+    "kda": [
+      12,
+      6,
+      7
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Gnar",
+    "championId": 150,
+    "date": "2026-01-16",
+    "support": false,
+    "kda": [
+      13,
+      4,
+      4
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Gragas",
+    "championId": 79,
+    "date": "2026-01-17",
+    "support": false,
+    "kda": [
+      11,
+      4,
+      8
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Graves",
+    "championId": 104,
+    "date": "2026-01-17",
+    "support": false,
+    "kda": [
+      6,
+      4,
+      6
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Gwen",
+    "championId": 887,
+    "date": "2026-01-17",
+    "support": false,
+    "kda": [
+      17,
+      11,
+      9
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Hecarim",
+    "championId": 120,
+    "date": "2026-01-17",
+    "support": false,
+    "kda": [
+      37,
+      49,
+      51
+    ],
+    "tries": 6
+  },
+  {
+    "champion": "Heimerdinger",
+    "championId": 74,
+    "date": "2026-01-18",
+    "support": false,
+    "kda": [
+      22,
+      44,
+      25
+    ],
+    "tries": 4
+  },
+  {
+    "champion": "Hwei",
+    "championId": 910,
+    "date": "2026-01-18",
+    "support": false,
+    "kda": [
+      6,
+      15,
+      8
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Illaoi",
+    "championId": 420,
+    "date": "2026-01-18",
+    "support": false,
+    "kda": [
+      12,
+      8,
+      9
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Irelia",
+    "championId": 39,
+    "date": "2026-01-19",
+    "support": false,
+    "kda": [
+      24,
+      47,
+      11
+    ],
+    "tries": 5
+  },
+  {
+    "champion": "Ivern",
+    "championId": 427,
+    "date": "2026-01-19",
+    "support": false,
+    "kda": [
+      3,
+      6,
+      8
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Janna",
+    "championId": 40,
+    "date": "2026-01-19",
+    "support": false,
+    "kda": [
+      4,
+      20,
+      22
+    ],
+    "tries": 3
+  },
+  {
+    "champion": "Jarvan IV",
+    "championId": 59,
+    "date": "2026-01-19",
+    "support": false,
+    "kda": [
+      51,
+      43,
+      56
+    ],
+    "tries": 4
+  },
+  {
+    "champion": "Jax",
+    "championId": 24,
+    "date": "2026-01-19",
+    "support": false,
+    "kda": [
+      19,
+      6,
+      9
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Jayce",
+    "championId": 126,
+    "date": "2026-01-20",
+    "support": false,
+    "kda": [
+      21,
+      32,
+      34
+    ],
+    "tries": 3
+  },
+  {
+    "champion": "Jhin",
+    "championId": 202,
+    "date": "2026-01-20",
+    "support": false,
+    "kda": [
+      17,
+      5,
+      19
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Jinx",
+    "championId": 222,
+    "date": "2026-01-20",
+    "support": false,
+    "kda": [
+      10,
+      14,
+      5
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "K'Sante",
+    "championId": 897,
+    "date": "2026-01-20",
+    "support": false,
+    "kda": [
+      15,
+      17,
+      18
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Kai'Sa",
+    "championId": 145,
+    "date": "2026-01-20",
+    "support": false,
+    "kda": [
+      11,
+      5,
+      10
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Kalista",
+    "championId": 429,
+    "date": "2026-01-20",
+    "support": false,
+    "kda": [
+      33,
+      30,
+      11
+    ],
+    "tries": 3
+  },
+  {
+    "champion": "Karma",
+    "championId": 43,
+    "date": "2026-01-20",
+    "support": false,
+    "kda": [
+      4,
+      13,
+      20
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Karthus",
+    "championId": 30,
+    "date": "2026-01-21",
+    "support": false,
+    "kda": [
+      14,
+      10,
+      12
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Kassadin",
+    "championId": 38,
+    "date": "2026-01-21",
+    "support": false,
+    "kda": [
+      14,
+      19,
+      11
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Katarina",
+    "championId": 55,
+    "date": "2026-01-21",
+    "support": false,
+    "kda": [
+      10,
+      7,
+      9
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Kayle",
+    "championId": 10,
+    "date": "2026-01-21",
+    "support": false,
+    "kda": [
+      8,
+      8,
+      5
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Kayn",
+    "championId": 141,
+    "date": "2026-01-21",
+    "support": false,
+    "kda": [
+      8,
+      10,
+      9
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Kennen",
+    "championId": 85,
+    "date": "2026-01-21",
+    "support": false,
+    "kda": [
+      16,
+      33,
+      15
+    ],
+    "tries": 3
+  },
+  {
+    "champion": "Kha'Zix",
+    "championId": 121,
+    "date": "2026-01-22",
+    "support": false,
+    "kda": [
+      15,
+      5,
+      6
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Kindred",
+    "championId": 203,
+    "date": "2026-01-22",
+    "support": false,
+    "kda": [
+      3,
+      5,
+      8
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Kled",
+    "championId": 240,
+    "date": "2026-01-22",
+    "support": false,
+    "kda": [
+      6,
+      22,
+      9
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Kog'Maw",
+    "championId": 96,
+    "date": "2026-01-22",
+    "support": false,
+    "kda": [
+      21,
+      17,
+      6
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "LeBlanc",
+    "championId": 7,
+    "date": "2026-01-23",
+    "support": false,
+    "kda": [
+      10,
+      19,
+      14
+    ],
+    "tries": 3
+  },
+  {
+    "champion": "Lee Sin",
+    "championId": 64,
+    "date": "2026-01-24",
+    "support": false,
+    "kda": [
+      39,
+      38,
+      31
+    ],
+    "tries": 4
+  },
+  {
+    "champion": "Leona",
+    "championId": 89,
+    "date": "2026-01-24",
+    "support": true,
+    "kda": [
+      9,
+      23,
+      54
+    ],
+    "tries": 3
+  },
+  {
+    "champion": "Lillia",
+    "championId": 876,
+    "date": "2026-01-24",
+    "support": false,
+    "kda": [
+      16,
+      20,
+      15
+    ],
+    "tries": 3
+  },
+  {
+    "champion": "Lissandra",
+    "championId": 127,
+    "date": "2026-01-24",
+    "support": false,
+    "kda": [
+      10,
+      9,
+      15
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Lucian",
+    "championId": 236,
+    "date": "2026-01-24",
+    "support": false,
+    "kda": [
+      12,
+      1,
+      2
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Lulu",
+    "championId": 117,
+    "date": "2026-01-24",
+    "support": true,
+    "kda": [
+      1,
+      17,
+      33
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Lux",
+    "championId": 99,
+    "date": "2026-01-25",
+    "support": false,
+    "kda": [
+      6,
+      3,
+      11
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Malphite",
+    "championId": 54,
+    "date": "2026-01-25",
+    "support": false,
+    "kda": [
+      33,
+      23,
+      27
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Malzahar",
+    "championId": 90,
+    "date": "2026-01-25",
+    "support": false,
+    "kda": [
+      11,
+      7,
+      7
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Maokai",
+    "championId": 57,
+    "date": "2026-01-25",
+    "support": false,
+    "kda": [
+      9,
+      15,
+      34
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Maestro Yi",
+    "championId": 11,
+    "date": "2026-01-25",
+    "support": false,
+    "kda": [
+      7,
+      4,
+      6
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Mel",
+    "championId": 800,
+    "date": "2026-01-26",
+    "support": false,
+    "kda": [
+      42,
+      31,
+      13
+    ],
+    "tries": 4
+  },
+  {
+    "champion": "Milio",
+    "championId": 902,
+    "date": "2026-01-26",
+    "support": true,
+    "kda": [
+      4,
+      17,
+      39
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Miss Fortune",
+    "championId": 21,
+    "date": "2026-01-26",
+    "support": false,
+    "kda": [
+      16,
+      6,
+      5
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Mordekaiser",
+    "championId": 82,
+    "date": "2026-01-26",
+    "support": false,
+    "kda": [
+      9,
+      3,
+      6
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Morgana",
+    "championId": 25,
+    "date": "2026-01-27",
+    "support": false,
+    "kda": [
+      7,
+      3,
+      16
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Naafiri",
+    "championId": 950,
+    "date": "2026-01-27",
+    "support": false,
+    "kda": [
+      23,
+      27,
+      9
+    ],
+    "tries": 3
+  },
+  {
+    "champion": "Nami",
+    "championId": 267,
+    "date": "2026-01-27",
+    "support": true,
+    "kda": [
+      32,
+      91,
+      88
+    ],
+    "tries": 10
+  },
+  {
+    "champion": "Nasus",
+    "championId": 75,
+    "date": "2026-01-28",
+    "support": false,
+    "kda": [
+      9,
+      5,
+      6
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Nautilus",
+    "championId": 111,
+    "date": "2026-01-28",
+    "support": false,
+    "kda": [
+      4,
+      9,
+      15
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Neeko",
+    "championId": 518,
+    "date": "2026-01-28",
+    "support": false,
+    "kda": [
+      16,
+      19,
+      19
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Nidalee",
+    "championId": 76,
+    "date": "2026-01-28",
+    "support": false,
+    "kda": [
+      30,
+      38,
+      24
+    ],
+    "tries": 6
+  },
+  {
+    "champion": "Nilah",
+    "championId": 895,
+    "date": "2026-01-29",
+    "support": false,
+    "kda": [
+      33,
+      15,
+      7
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Nocturne",
+    "championId": 56,
+    "date": "2026-01-29",
+    "support": false,
+    "kda": [
+      2,
+      1,
+      5
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Nunu y Willump",
+    "championId": 20,
+    "date": "2026-01-29",
+    "support": false,
+    "kda": [
+      8,
+      4,
+      18
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Olaf",
+    "championId": 2,
+    "date": "2026-01-29",
+    "support": false,
+    "kda": [
+      17,
+      15,
+      19
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Orianna",
+    "championId": 61,
+    "date": "2026-01-29",
+    "support": false,
+    "kda": [
+      16,
+      2,
+      6
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Ornn",
+    "championId": 516,
+    "date": "2026-01-29",
+    "support": false,
+    "kda": [
+      16,
+      28,
+      32
+    ],
+    "tries": 4
+  },
+  {
+    "champion": "Pantheon",
+    "championId": 80,
+    "date": "2026-01-30",
+    "support": true,
+    "kda": [
+      21,
+      24,
+      15
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Poppy",
+    "championId": 78,
+    "date": "2026-01-30",
+    "support": false,
+    "kda": [
+      12,
+      18,
+      5
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Pyke",
+    "championId": 555,
+    "date": "2026-01-30",
+    "support": false,
+    "kda": [
+      33,
+      29,
+      24
+    ],
+    "tries": 4
+  },
+  {
+    "champion": "Qiyana",
+    "championId": 246,
+    "date": "2026-01-30",
+    "support": false,
+    "kda": [
+      9,
+      23,
+      27
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Quinn",
+    "championId": 133,
+    "date": "2026-01-30",
+    "support": false,
+    "kda": [
+      17,
+      19,
+      13
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Rakan",
+    "championId": 497,
+    "date": "2026-01-31",
+    "support": true,
+    "kda": [
+      11,
+      40,
+      80
+    ],
+    "tries": 6
+  },
+  {
+    "champion": "Rammus",
+    "championId": 33,
+    "date": "2026-01-31",
+    "support": false,
+    "kda": [
+      6,
+      7,
+      20
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Rek'Sai",
+    "championId": 421,
+    "date": "2026-01-31",
+    "support": false,
+    "kda": [
+      25,
+      30,
+      30
+    ],
+    "tries": 3
+  },
+  {
+    "champion": "Rell",
+    "championId": 526,
+    "date": "2026-02-01",
+    "support": true,
+    "kda": [
+      17,
+      62,
+      123
+    ],
+    "tries": 6
+  },
+  {
+    "champion": "Renata Glasc",
+    "championId": 888,
+    "date": "2026-02-01",
+    "support": true,
+    "kda": [
+      1,
+      8,
+      17
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Renekton",
+    "championId": 58,
+    "date": "2026-02-01",
+    "support": false,
+    "kda": [
+      50,
+      23,
+      24
+    ],
+    "tries": 3
+  },
+  {
+    "champion": "Rengar",
+    "championId": 107,
+    "date": "2026-02-02",
+    "support": false,
+    "kda": [
+      37,
+      17,
+      12
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Riven",
+    "championId": 92,
+    "date": "2026-02-02",
+    "support": false,
+    "kda": [
+      14,
+      2,
+      13
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Rumble",
+    "championId": 68,
+    "date": "2026-02-02",
+    "support": false,
+    "kda": [
+      24,
+      15,
+      12
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Ryze",
+    "championId": 13,
+    "date": "2026-02-02",
+    "support": false,
+    "kda": [
+      11,
+      5,
+      3
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Samira",
+    "championId": 360,
+    "date": "2026-02-02",
+    "support": false,
+    "kda": [
+      12,
+      13,
+      12
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Sejuani",
+    "championId": 113,
+    "date": "2026-02-02",
+    "support": false,
+    "kda": [
+      9,
+      9,
+      16
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Senna",
+    "championId": 235,
+    "date": "2026-02-02",
+    "support": false,
+    "kda": [
+      7,
+      19,
+      20
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Seraphine",
+    "championId": 147,
+    "date": "2026-02-02",
+    "support": false,
+    "kda": [
+      2,
+      6,
+      3
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Sett",
+    "championId": 875,
+    "date": "2026-02-03",
+    "support": false,
+    "kda": [
+      20,
+      18,
+      13
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Shaco",
+    "championId": 35,
+    "date": "2026-02-03",
+    "support": false,
+    "kda": [
+      4,
+      3,
+      6
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Shen",
+    "championId": 98,
+    "date": "2026-02-04",
+    "support": false,
+    "kda": [
+      36,
+      32,
+      62
+    ],
+    "tries": 5
+  },
+  {
+    "champion": "Shyvana",
+    "championId": 102,
+    "date": "2026-02-04",
+    "support": false,
+    "kda": [
+      24,
+      23,
+      21
+    ],
+    "tries": 3
+  },
+  {
+    "champion": "Singed",
+    "championId": 27,
+    "date": "2026-02-05",
+    "support": false,
+    "kda": [
+      13,
+      1,
+      21
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Sion",
+    "championId": 14,
+    "date": "2026-02-05",
+    "support": false,
+    "kda": [
+      2,
+      7,
+      8
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Sivir",
+    "championId": 15,
+    "date": "2026-02-05",
+    "support": false,
+    "kda": [
+      3,
+      8,
+      3
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Skarner",
+    "championId": 72,
+    "date": "2026-02-05",
+    "support": false,
+    "kda": [
+      3,
+      2,
+      12
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Smolder",
+    "championId": 901,
+    "date": "2026-02-05",
+    "support": false,
+    "kda": [
+      14,
+      28,
+      24
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Sona",
+    "championId": 37,
+    "date": "2026-02-05",
+    "support": true,
+    "kda": [
+      6,
+      4,
+      9
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Soraka",
+    "championId": 16,
+    "date": "2026-02-05",
+    "support": true,
+    "kda": [
+      2,
+      6,
+      17
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Swain",
+    "championId": 50,
+    "date": "2026-02-05",
+    "support": false,
+    "kda": [
+      4,
+      3,
+      10
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Sylas",
+    "championId": 517,
+    "date": "2026-02-06",
+    "support": false,
+    "kda": [
+      28,
+      22,
+      15
+    ],
+    "tries": 3
+  },
+  {
+    "champion": "Syndra",
+    "championId": 134,
+    "date": "2026-02-06",
+    "support": false,
+    "kda": [
+      58,
+      37,
+      17
+    ],
+    "tries": 4
+  },
+  {
+    "champion": "Tahm Kench",
+    "championId": 223,
+    "date": "2026-02-06",
+    "support": false,
+    "kda": [
+      14,
+      9,
+      8
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Taliyah",
+    "championId": 163,
+    "date": "2026-02-06",
+    "support": false,
+    "kda": [
+      17,
+      18,
+      18
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Talon",
+    "championId": 91,
+    "date": "2026-02-07",
+    "support": false,
+    "kda": [
+      3,
+      9,
+      20
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Taric",
+    "championId": 44,
+    "date": "2026-02-07",
+    "support": true,
+    "kda": [
+      2,
+      14,
+      25
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Teemo",
+    "championId": 17,
+    "date": "2026-02-07",
+    "support": false,
+    "kda": [
+      4,
+      12,
+      6
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Thresh",
+    "championId": 412,
+    "date": "2026-02-07",
+    "support": true,
+    "kda": [
+      3,
+      5,
+      22
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Tristana",
+    "championId": 18,
+    "date": "2026-02-07",
+    "support": false,
+    "kda": [
+      9,
+      13,
+      10
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Trundle",
+    "championId": 48,
+    "date": "2026-02-07",
+    "support": false,
+    "kda": [
+      5,
+      6,
+      7
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Tryndamere",
+    "championId": 23,
+    "date": "2026-02-07",
+    "support": false,
+    "kda": [
+      5,
+      1,
+      4
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Twisted Fate",
+    "championId": 4,
+    "date": "2026-02-07",
+    "support": false,
+    "kda": [
+      8,
+      6,
+      8
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Twitch",
+    "championId": 29,
+    "date": "2026-02-07",
+    "support": false,
+    "kda": [
+      7,
+      1,
+      3
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Udyr",
+    "championId": 77,
+    "date": "2026-02-07",
+    "support": false,
+    "kda": [
+      18,
+      12,
+      26
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Urgot",
+    "championId": 6,
+    "date": "2026-02-07",
+    "support": false,
+    "kda": [
+      2,
+      3,
+      8
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Varus",
+    "championId": 110,
+    "date": "2026-02-08",
+    "support": false,
+    "kda": [
+      5,
+      7,
+      2
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Vayne",
+    "championId": 67,
+    "date": "2026-02-08",
+    "support": false,
+    "kda": [
+      17,
+      3,
+      3
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Veigar",
+    "championId": 45,
+    "date": "2026-02-08",
+    "support": false,
+    "kda": [
+      15,
+      20,
+      10
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Vel'Koz",
+    "championId": 161,
+    "date": "2026-02-08",
+    "support": false,
+    "kda": [
+      23,
+      37,
+      39
+    ],
+    "tries": 3
+  },
+  {
+    "champion": "Vex",
+    "championId": 711,
+    "date": "2026-02-09",
+    "support": false,
+    "kda": [
+      12,
+      11,
+      3
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Vi",
+    "championId": 254,
+    "date": "2026-02-09",
+    "support": false,
+    "kda": [
+      21,
+      5,
+      17
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Viego",
+    "championId": 234,
+    "date": "2026-02-09",
+    "support": false,
+    "kda": [
+      11,
+      4,
+      10
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Viktor",
+    "championId": 112,
+    "date": "2026-02-09",
+    "support": false,
+    "kda": [
+      19,
+      20,
+      14
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Vladimir",
+    "championId": 8,
+    "date": "2026-02-10",
+    "support": false,
+    "kda": [
+      32,
+      66,
+      39
+    ],
+    "tries": 6
+  },
+  {
+    "champion": "Volibear",
+    "championId": 106,
+    "date": "2026-02-10",
+    "support": false,
+    "kda": [
+      18,
+      10,
+      11
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Warwick",
+    "championId": 19,
+    "date": "2026-02-10",
+    "support": false,
+    "kda": [
+      12,
+      10,
+      11
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Wukong",
+    "championId": 62,
+    "date": "2026-02-10",
+    "support": false,
+    "kda": [
+      15,
+      8,
+      5
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Xayah",
+    "championId": 498,
+    "date": "2026-02-10",
+    "support": false,
+    "kda": [
+      13,
+      24,
+      22
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Xerath",
+    "championId": 101,
+    "date": "2026-02-10",
+    "support": true,
+    "kda": [
+      3,
+      6,
+      10
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Xin Zhao",
+    "championId": 5,
+    "date": "2026-02-10",
+    "support": false,
+    "kda": [
+      16,
+      17,
+      16
+    ],
+    "tries": 3
+  },
+  {
+    "champion": "Yasuo",
+    "championId": 157,
+    "date": "2026-02-12",
+    "support": false,
+    "kda": [
+      31,
+      56,
+      26
+    ],
+    "tries": 5
+  },
+  {
+    "champion": "Yone",
+    "championId": 777,
+    "date": "2026-02-12",
+    "support": false,
+    "kda": [
+      27,
+      24,
+      11
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Yorick",
+    "championId": 83,
+    "date": "2026-02-12",
+    "support": false,
+    "kda": [
+      8,
+      14,
+      18
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Yunara",
+    "championId": 804,
+    "date": "2026-02-12",
+    "support": false,
+    "kda": [
+      18,
+      23,
+      12
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Yuumi",
+    "championId": 350,
+    "date": "2026-02-12",
+    "support": true,
+    "kda": [
+      2,
+      12,
+      33
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Zaahen",
+    "championId": 904,
+    "date": "2026-02-12",
+    "support": false,
+    "kda": [
+      10,
+      4,
+      11
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Zac",
+    "championId": 154,
+    "date": "2026-02-13",
+    "support": false,
+    "kda": [
+      15,
+      27,
+      29
+    ],
+    "tries": 3
+  },
+  {
+    "champion": "Zed",
+    "championId": 238,
+    "date": "2026-02-13",
+    "support": false,
+    "kda": [
+      10,
+      12,
+      5
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Zeri",
+    "championId": 221,
+    "date": "2026-02-13",
+    "support": false,
+    "kda": [
+      6,
+      26,
+      11
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Ziggs",
+    "championId": 115,
+    "date": "2026-02-13",
+    "support": false,
+    "kda": [
+      16,
+      22,
+      15
+    ],
+    "tries": 2
+  },
+  {
+    "champion": "Zilean",
+    "championId": 26,
+    "date": "2026-02-13",
+    "support": true,
+    "kda": [
+      8,
+      25,
+      46
+    ],
+    "tries": 3
+  },
+  {
+    "champion": "Zoe",
+    "championId": 142,
+    "date": "2026-02-13",
+    "support": false,
+    "kda": [
+      11,
+      7,
+      19
+    ],
+    "tries": 1
+  },
+  {
+    "champion": "Zyra",
+    "championId": 143,
+    "date": "2026-02-13",
+    "support": false,
+    "kda": [
+      6,
+      2,
+      15
+    ],
+    "tries": 1
+  }
+]

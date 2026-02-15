@@ -60,19 +60,15 @@
 .list-move,
 .list-enter-active,
 .list-leave-active {
-  transition: all 0.5s ease;
+  transition: transform 0.5s ease, top 0.5s ease, left 0.5s ease, width 0.5s ease;
 }
 
 .list-enter-from,
 .list-leave-to {
   opacity: 0;
-  transform: translateY(30px);
+  transform: scale(0.8);
 }
 
 .list-leave-active {
   position: absolute;
-  width: 0%;
-  left: 50%;
-  top: 100%;
-  transform: translateY(100%);
 }
