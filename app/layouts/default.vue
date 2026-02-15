@@ -57,7 +57,7 @@ const pages: NavigationMenuItem[] = [
       title="JimTracker"
       toggle-side="left"
       :ui="{
-        root: 'lg:h-auto',
+        root: 'lg:h-auto relative',
         container: 'lg:px-3 lg:py-2 mx-0 max-w-full',
         title: 'lg:hidden block',
         center: 'md:flex',
