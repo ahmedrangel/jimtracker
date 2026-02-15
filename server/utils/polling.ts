@@ -2,10 +2,9 @@ import { Constants, LolApi } from "twisted";
 
 export const polling = async (puuid: string, key: string) => {
   const config = useRuntimeConfig();
-  const DB = useDB();
   const storage = useStorage("cache");
 
-  const latestSavedMatch = await DB.select({
+  const latestSavedMatch = await db.select({
     match_id: tables.history.match_id,
     date: tables.history.date
   }).from(tables.history).orderBy(desc(tables.history.date)).limit(1).all();
@@ -60,7 +59,7 @@ export const polling = async (puuid: string, key: string) => {
           tier: user.tier,
           lp: user.lp
         });
-        await DB.insert(tables.history).values({
+        await db.insert(tables.history).values({
           ...entry,
           snapshot_division: user.division,
           snapshot_tier: user.tier,

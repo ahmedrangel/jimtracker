@@ -1,5 +1,5 @@
 export default defineCachedEventHandler(async () => {
-  const images = await hubBlob().list({ prefix: "gallery" });
+  const images = await blob.list({ prefix: "gallery" });
 
   return images.blobs.sort((a, b) => {
     return a.uploadedAt.getTime() - b.uploadedAt.getTime();

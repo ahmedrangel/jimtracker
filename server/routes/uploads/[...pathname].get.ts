@@ -6,5 +6,5 @@ export default defineEventHandler(async (event) => {
   const { pathname } = getRouterParams(event);
 
   // cache when https://github.com/nitrojs/nitro/issues/2932 is solved
-  return hubBlob().serve(event, pathname!);
+  return blob.serve(event, pathname!);
 });

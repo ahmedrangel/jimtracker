@@ -16,8 +16,8 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
   if (!currentSeason) {
     const lol = new LolApi();
     const versionData = await lol.DataDragon.getVersions();
-    currentSeason = parseInt(versionData[0].split(".")[0]);
-    await storage.setItem("current-season", currentSeason);
+    currentSeason = Number(versionData?.[0]?.split(".")?.[0] || 0);
+    if (currentSeason) await storage.setItem("current-season", currentSeason);
   }
   const liveInfo = await storage.getItem<LiveStreamInfo>("live-info");
   if (!leagueInfo) {

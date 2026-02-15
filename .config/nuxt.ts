@@ -106,8 +106,10 @@ export default defineNuxtConfig({
 
   hub: {
     cache: true,
-    workers: true,
-    database: true,
+    db: {
+      dialect: "sqlite",
+      casing: "snake_case"
+    },
     blob: true
   },
 

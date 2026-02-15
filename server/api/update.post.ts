@@ -19,8 +19,8 @@ export default defineEventHandler(async (event): Promise<InfoResponse> => {
   if (!season) {
     const lol = new LolApi();
     const versionData = await lol.DataDragon.getVersions();
-    season = parseInt(versionData[0].split(".")[0]);
-    await storage.setItem("current-season", season);
+    season = Number(versionData?.[0]?.split(".")?.[0] || 0);
+    if (season) await storage.setItem("current-season", season);
   }
   if (checkInfo && (now - checkInfo.updatedAt < 2 * 60 * 1000)) {
     const dbInfo = await getDBInfo({ puuid, season });

@@ -64,8 +64,7 @@ export const getStreakCount = (history: HistoryData[]) => {
 
 export const getDBInfo = async (options: { puuid: string, season: number, fullHistory?: boolean }) => {
   const { puuid, season, fullHistory } = options;
-  const DB = useDB();
-  const countResult = await DB.select({
+  const countResult = await db.select({
     count: count(tables.history.match_id)
   }).from(tables.history)
     .where(
@@ -81,7 +80,7 @@ export const getDBInfo = async (options: { puuid: string, season: number, fullHi
 
   const [history, highest, lowest, mostPlayed] = await Promise.all([
     // History
-    DB.select({
+    db.select({
       match_id: tables.history.match_id,
       assists: tables.history.assists,
       kills: tables.history.kills,
@@ -109,7 +108,7 @@ export const getDBInfo = async (options: { puuid: string, season: number, fullHi
       .all(),
 
     // Highest
-    DB.select({
+    db.select({
       tier: tables.history.snapshot_tier,
       division: tables.history.snapshot_division,
       lp: tables.history.snapshot_lp
@@ -147,7 +146,7 @@ export const getDBInfo = async (options: { puuid: string, season: number, fullHi
       ).limit(1).get(),
 
     // Lowest
-    DB.select({
+    db.select({
       tier: tables.history.snapshot_tier,
       division: tables.history.snapshot_division,
       lp: tables.history.snapshot_lp
@@ -185,7 +184,7 @@ export const getDBInfo = async (options: { puuid: string, season: number, fullHi
       ).limit(1).get(),
 
     // Most Played champion
-    DB.select({
+    db.select({
       champion_id: tables.history.champion_id,
       count: sql<number>`COUNT(${tables.history.match_id}) as count`,
       wins: sql<number>`SUM(CASE WHEN ${tables.history.result} = 1 THEN 1 ELSE 0 END)`,
