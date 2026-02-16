@@ -108,7 +108,11 @@ function getChip (value: string) {
         </p>
       </div>
     </div>
-    <USeparator class="py-4" :ui="{ border: 'border-slate-400/40' }" />
+    <USeparator
+      class="py-4"
+      :ui="{ border: 'border-slate-400/40', avatar: 'bg-transparent' }"
+      :avatar="{ src: '/images/jimrsng.png', size: 'md' }"
+    />
     <div class="flex flex-col md:flex-row justify-center gap-2">
       <div v-for="category in categories" :key="category.label" class="text-center px-12 py-6 bg-neutral-950/75 border border-slate-400/40 rounded">
         <div :class="['text-xl font-bold mb-1', category.headerClass]">
