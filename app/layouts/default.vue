@@ -53,12 +53,12 @@ const pages: NavigationMenuItem[] = [
 <template>
   <div id="layout">
     <UHeader
-      class="bg-white/3 backdrop-blur shadow-lg shadow-black/20"
+      class="border-0 backdrop-blur-sm border-b border-default/75 bg-elevated/20 shadow-sm"
       title="JimTracker"
       toggle-side="left"
       :ui="{
         root: 'lg:h-auto relative',
-        container: 'lg:px-3 lg:py-2 mx-0 max-w-full',
+        container: 'lg:px-3 lg:py-1 mx-0 max-w-full',
         title: 'lg:hidden block',
         center: 'md:flex',
         right: 'hidden',
@@ -68,26 +68,34 @@ const pages: NavigationMenuItem[] = [
         :items="pages"
         color="neutral"
         :ui="{
-          childList: 'grid-cols-1',
           list: 'gap-2',
-          link: 'text-body data-[state=open]:hover:before:bg-white/5 hover:before:bg-white/5 before:border before:border-white/10 font-semibold px-3 before:rounded before:transition-colors before:duration-200',
-          item: 'py-0',
+          link: 'text-md hover:before:bg-accented/50 data-active:before:bg-accented/75 before:border before:border-accented/50 before:bg-elevated/20 p-0',
         }"
       >
+        <template #item="{ item }">
+          <span class="text-md px-3 py-1 w-full h-full">{{ item.label }}</span>
+        </template>
         <template
           v-for="page in pages.filter((p) => p.slot)"
           :key="page.slot"
           #[page.slot!]="{ item }: { item: NavigationMenuItem & { items?: DropdownMenuItem[] } }"
         >
           <UDropdownMenu :content="item.content" :items="item.items" :modal="false">
-            <UButton :label="item.label" color="neutral" variant="link" trailing-icon="lucide:chevron-down" class="text-body p-0" />
+            <UButton
+              :label="item.label"
+              trailing-icon="lucide:chevron-down"
+              variant="link"
+              color="neutral"
+              :ui="{
+                base: 'text-md px-3 py-1 w-full h-full',
+              }"
+            />
           </UDropdownMenu>
         </template>
       </UNavigationMenu>
       <template #body>
         <UNavigationMenu
           :items="pages.map(page => ({ ...page, children: page.items }))"
-          color="neutral"
           orientation="vertical"
           class="-mx-2.5"
         />
