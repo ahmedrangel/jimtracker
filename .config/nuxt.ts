@@ -72,10 +72,7 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    "/api/_nuxt_icon/**": { cache: { maxAge: 1.577e+7 } },
-    "/season/2026/reto-one-by-one": { prerender: true },
-    "/season/2025": { prerender: true },
-    "/season/2025/soloboom": { prerender: true }
+    "/api/_nuxt_icon/**": { cache: { maxAge: 1.577e+7 } }
   },
 
   features: {
