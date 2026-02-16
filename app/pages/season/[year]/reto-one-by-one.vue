@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import type { ChipProps, SelectItem } from "@nuxt/ui";
-import challengeData from "~/assets/json/one-by-one-challenge.json";
+import challengeJson from "~/assets/json/one-by-one-challenge.json";
+
+const { params } = useRoute("season-year");
+
+if (Number(params.year) !== challengeJson.year) {
+  throw createError({ statusCode: 404 });
+}
+
+const challengeData = challengeJson.data;
 
 const categories = computed(() => [
   {
