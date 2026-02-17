@@ -11,6 +11,11 @@ export default defineNuxtConfig({
     "@nuxthub/core",
     "nuxt-webhook-validators"
   ],
+  $production: {
+    nitro: {
+      preset: "cloudflare-module"
+    }
+  },
   // future: { compatibilityVersion: 4 },
   devtools: { enabled: true },
   app: {
@@ -72,7 +77,9 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    "/api/_nuxt_icon/**": { cache: { maxAge: 1.577e+7 } }
+    "/api/_nuxt_icon/**": { cache: { maxAge: 1.577e+7 } },
+    "/season/2025/soloboom": { prerender: true },
+    "/season/2025": { prerender: true }
   },
 
   features: {

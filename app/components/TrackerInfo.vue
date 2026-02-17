@@ -8,10 +8,13 @@ const props = defineProps<{
 }>();
 
 const season = props.year ? props.year - 2010 : undefined;
-const { data } = await useFetch("/api/info", {
+
+const apiPath = Number(props.year) < new Date().getFullYear() ? SITE.url : "";
+
+const { data } = await useFetch(`${apiPath}/api/info`, {
   query: { season }
 });
-const { data: champions } = await useFetch("/api/champions");
+const { data: champions } = await useFetch(`${apiPath}/api/champions`);
 
 useSeoMeta({
   title: SITE.title,

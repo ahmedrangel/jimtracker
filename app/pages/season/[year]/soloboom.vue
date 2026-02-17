@@ -7,10 +7,12 @@ const { params } = useRoute("season-year");
 
 const season = params.year ? Number(params.year) - 2010 : undefined;
 
-const { data } = await useFetch("/api/info", {
+const apiPath = Number(params.year) < new Date().getFullYear() ? SITE.url : "";
+
+const { data } = await useFetch(`${apiPath}/api/info`, {
   query: { season, soloboom: true }
 });
-const { data: champions } = await useFetch("/api/champions");
+const { data: champions } = await useFetch(`${apiPath}/api/champions`);
 
 useSeoMeta({
   title: SITE.title,
@@ -26,7 +28,7 @@ useSeoMeta({
 
 useHead({
   link: [
-    { rel: "canonical", href: `${SITE.url}/season/2025/soloboom` }
+    { rel: "canonical", href: `${SITE.url}/season/${params.year}/soloboom` }
   ],
   script: [{
     type: "application/ld+json",
