@@ -22,8 +22,8 @@ const openImageId = ref<string | null>(null);
       </div>
       <template #content>
         <div v-if="openImageId" class="relative">
-          <img :src="`${SITE.cdn}/gallery/${openImageId}`" class="rounded-lg max-h-[90vh] max-w-[90vw] sm:min-w-[600px] md:min-w-[700px]">
-          <Icon name="lucide:x" class="absolute top-2 end-2 w-8 h-8 text-neutral-200 hover:text-neutral-300 bg-rose-700/70 hover:bg-rose-700 border border-rose-800 rounded p-1.5 shadow" @click="openImageId = null; showModal = false;" />
+          <img :src="`${SITE.cdn}/gallery/${openImageId}`" class="rounded-lg max-h-[90vh] max-w-[90vw] sm:min-w-150 md:min-w-175">
+          <Icon name="lucide:x" class="absolute top-2 end-2 w-8 h-8 text-neutral-200 hover:text-neutral-300 bg-rose-700/60 hover:bg-rose-700/90 border border-rose-800/90 rounded p-1.5 shadow transition-all duratino-300 ease-in-out" @click="openImageId = null; showModal = false;" />
         </div>
       </template>
     </UModal>
