@@ -31,14 +31,14 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  if (!blob) {
+  if (!blobFile) {
     return createError({
       statusCode: 400,
       message: "File not found"
     });
   }
 
-  ensureBlob(blob, {
+  ensureBlob(blobFile, {
     types: ["image"],
     maxSize: "16MB"
   });

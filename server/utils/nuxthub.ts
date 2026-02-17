@@ -1,2 +1,2 @@
 export { db } from "@nuxthub/db";
-export { blob } from "@nuxthub/blob";
+export { blob, ensureBlob } from "@nuxthub/blob";
