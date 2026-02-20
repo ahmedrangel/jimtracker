@@ -23,5 +23,6 @@ export default [
   "lucide:arrow-right",
   "lucide:calendar",
   "ph:prohibit-inset-bold",
-  "lucide:arrow-down"
+  "lucide:arrow-down",
+  "tabler:circle-filled"
 ];

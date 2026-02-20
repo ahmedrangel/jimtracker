@@ -121,7 +121,7 @@ const lpChangeClass = (value: number) => {
     <div class="space-y-4">
       <h1 class="text-4xl font-bold text-center">Reto Nami</h1>
       <p class="text-center md:text-balance text-lg">
-        Este reto consistía en jugar principalmente con Nami y completar el ascenso manteniendo un recorrido de partidas,
+        Este reto consistía en subir una liga completa jugando principalmente con Nami y completar el ascenso manteniendo un recorrido de partidas,
         incluyendo excepciones por baneos y partidas de pickeo libre después de ganar una con Nami.
       </p>
       <div class="flex flex-col md:flex-row items-center justify-center gap-2">
@@ -178,11 +178,11 @@ const lpChangeClass = (value: number) => {
         </div>
 
         <div>
-          <div class="flex flex-col md:flex-row flex-wrap items-center gap-2 md:gap-3">
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 grid-cols-1 gap-2 md:gap-3">
             <template v-for="(match, index) in group.matches" :key="`${match.date}-${match.originalIndex}`">
-              <div class="flex flex-col md:flex-row items-center gap-2 md:gap-3 w-full md:w-auto">
+              <div class="flex md:flex-row flex-col items-center gap-2 w-full">
                 <article
-                  class="flex items-center border border-slate-400/40 rounded bg-black/20 w-full md:w-auto"
+                  class="flex items-center border border-slate-400/40 rounded bg-black/20 w-full"
                   :class="{
                     'border-s-4 border-s-blue-400': match.result === 'win',
                     'border-s-4 border-s-red-400': match.result === 'loss',
@@ -222,20 +222,64 @@ const lpChangeClass = (value: number) => {
 
                 <div v-if="index < group.matches.length - 1" class="relative">
                   <div v-if="group.matches[index + 1]?.isNamiBan" class="absolute md:-top-6 top-0 md:right-0 -right-6">
-                    <img v-if="group.matches[index + 1]!.championId === 267 || group.matches[index + 1]!.championId === 161" :src="getChampionImage(267)" alt="Nami" class="size-5 rounded-sm border-2 border-slate-400/40">
-                    <Icon name="ph:prohibit-inset-bold" class="absolute -bottom-1 translate-x-1/2 right-2.5 text-red-400 size-3" />
+                    <UPopover mode="hover">
+                      <UButton variant="link" class="p-0">
+                        <img v-if="group.matches[index + 1]!.championId === 267 || group.matches[index + 1]!.championId === 161" :src="getChampionImage(267)" alt="Nami" class="size-5 rounded-sm border-2 border-slate-400/40">
+                        <Icon
+                          name="ph:prohibit-inset-bold"
+                          class="absolute bottom-0 translate-x-1/2 right-2.5 text-red-400 size-3"
+                          size="0.75rem"
+                        />
+                      </UButton>
+                      <template #content>
+                        <div class="text-sm p-2">
+                          Banearon a Nami, utiliza Vel'Koz para la siguiente partida.
+                        </div>
+                      </template>
+                    </UPopover>
                   </div>
                   <div v-else-if="group.matches[index + 1]?.isFreePick" class="absolute md:-top-6 top-0 md:right-0 -right-6">
-                    <Icon name="lol:fill" class="text-orange-300 size-5" />
+                    <UPopover mode="hover">
+                      <UButton variant="link" class="p-0">
+                        <Icon
+                          name="lol:fill"
+                          class="text-orange-300"
+                          size="1.25rem"
+                        />
+                      </UButton>
+                      <template #content>
+                        <div class="text-sm p-2">
+                          Siguiente partida de pickeo libre
+                        </div>
+                      </template>
+                    </UPopover>
                   </div>
                   <Icon
                     name="lucide:arrow-right"
-                    class="text-slate-500 size-5 shrink-0 hidden md:block"
+                    class="text-slate-500 shrink-0 hidden md:block"
+                    size="1.25rem"
                   />
                   <Icon
                     name="lucide:arrow-down"
-                    class="text-slate-500 size-5 shrink-0 md:hidden"
+                    class="text-slate-500 shrink-0 md:hidden"
+                    size="1.25rem"
                   />
+                </div>
+                <div v-else-if="index === group.matches.length - 1" class="flex items-center gap-2">
+                  <UPopover mode="hover">
+                    <UButton variant="link" class="p-0">
+                      <Icon
+                        name="tabler:circle-filled"
+                        class="text-slate-400"
+                        size="1.25rem"
+                      />
+                    </UButton>
+                    <template #content>
+                      <div class="text-sm p-2">
+                        Fin del día
+                      </div>
+                    </template>
+                  </UPopover>
                 </div>
               </div>
             </template>
