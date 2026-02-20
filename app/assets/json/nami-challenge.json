@@ -127,7 +127,8 @@
     "isNamiBan": false,
     "isFreePick": true,
     "date": "14/02/2026",
-    "result": "win"
+    "result": "win",
+    "lcs": true
   },
   {
     "champion": "Rengar",
@@ -140,7 +141,8 @@
     "isNamiBan": false,
     "isFreePick": true,
     "date": "14/02/2026",
-    "result": "loss"
+    "result": "loss",
+    "lcs": true
   },
   {
     "champion": "Yone",
@@ -153,7 +155,8 @@
     "isNamiBan": false,
     "isFreePick": true,
     "date": "14/02/2026",
-    "result": "win"
+    "result": "win",
+    "lcs": true
   },
   {
     "champion": "Fiora",
@@ -166,7 +169,8 @@
     "isNamiBan": false,
     "isFreePick": true,
     "date": "14/02/2026",
-    "result": "loss"
+    "result": "loss",
+    "lcs": true
   },
   {
     "champion": "Jinx",
@@ -179,7 +183,8 @@
     "isNamiBan": false,
     "isFreePick": true,
     "date": "14/02/2026",
-    "result": "loss"
+    "result": "loss",
+    "lcs": true
   },
   {
     "champion": "Nami",

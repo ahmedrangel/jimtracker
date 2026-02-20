@@ -212,7 +212,19 @@ const lpChangeClass = (value: number) => {
                 </article>
 
                 <div v-if="index < group.matches.length - 1" class="relative">
-                  <div v-if="group.matches[index + 1]?.isNamiBan" class="absolute md:-top-6 top-0 md:right-0 -right-6">
+                  <div v-if="group.matches[index + 1]?.lcs" class="absolute md:-top-6 top-0 md:right-0 -right-6">
+                    <UPopover mode="hover">
+                      <UButton variant="link" class="p-0">
+                        <img src="/images/lol/lcs-logo.png" alt="LCS" class="size-5" width="32" height="32">
+                      </UButton>
+                      <template #content>
+                        <div class="text-sm p-2">
+                          La siguiente partida no cuenta dentro de las reglas del reto, ya que Jim fue hosteado por la LCS
+                        </div>
+                      </template>
+                    </UPopover>
+                  </div>
+                  <div v-else-if="group.matches[index + 1]?.isNamiBan" class="absolute md:-top-6 top-0 md:right-0 -right-6">
                     <UPopover
                       v-if="group.matches[index + 1]!.championId === 267 || group.matches[index + 1]!.championId === 161"
                       mode="hover"
