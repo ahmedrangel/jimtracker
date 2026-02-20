@@ -89,7 +89,9 @@ export default defineNuxtConfig({
 
   experimental: {
     typedPages: true
-  }, compatibilityDate: "2025-08-19",
+  },
+
+  compatibilityDate: "2025-08-19",
 
   nitro: {
     prerender: {
@@ -141,7 +143,10 @@ export default defineNuxtConfig({
   icon: {
     mode: "svg",
     provider: "none",
-    clientBundle: { icons }
+    clientBundle: { icons },
+    customCollections: [
+      { prefix: "lol", dir: "./app/assets/icons/lol" }
+    ]
   },
 
   sitemap: {

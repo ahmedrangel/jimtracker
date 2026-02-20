@@ -36,6 +36,10 @@ const pages: NavigationMenuItem[] = [
       {
         label: "One by One",
         to: "/season/2026/reto-one-by-one"
+      },
+      {
+        label: "Reto Nami",
+        to: "/season/2026/reto-nami"
       }
     ] satisfies DropdownMenuItem[]
   },

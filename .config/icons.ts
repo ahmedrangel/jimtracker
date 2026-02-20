@@ -19,5 +19,9 @@ export default [
   "lucide:chevron-down",
   "lucide:search",
   "lucide:x",
-  "lucide:check"
+  "lucide:check",
+  "lucide:arrow-right",
+  "lucide:calendar",
+  "ph:prohibit-inset-bold",
+  "lucide:arrow-down"
 ];
