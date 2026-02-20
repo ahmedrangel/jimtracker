@@ -184,9 +184,9 @@ const lpChangeClass = (value: number) => {
                 <article
                   class="flex items-center border border-slate-400/40 rounded bg-black/20 w-full md:w-auto"
                   :class="{
-                    'border-s-4 border-s-blue-400': match.lpChange > 0,
-                    'border-s-4 border-s-red-400': match.lpChange < 0,
-                    'border-s-4 border-s-slate-400': match.lpChange === 0,
+                    'border-s-4 border-s-blue-400': match.result === 'win',
+                    'border-s-4 border-s-red-400': match.result === 'loss',
+                    'border-s-4 border-s-slate-400': match.result === 'remake',
                   }"
                 >
                   <div class="ps-4 py-4">
@@ -199,6 +199,7 @@ const lpChangeClass = (value: number) => {
                     <div class="text-sm font-semibold flex items-center gap-1">
                       <span class="text-slate-400">{{ match.lpChange > 0 ? `+${match.lpChange}` : match.lpChange }} LP</span>
                       <Icon v-if="match.lpChange !== 0" :class="lpChangeClass(match.lpChange)" :name="match.lpChange > 0 ? 'tabler:caret-up-filled' : 'tabler:caret-down-filled'" />
+                      <span v-if="match.result === 'remake'" class="text-xs text-gray-500">({{ match.result }})</span>
                     </div>
                   </div>
 

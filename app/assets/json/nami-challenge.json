@@ -9,7 +9,8 @@
     "lpChange": 22,
     "isNamiBan": false,
     "isFreePick": true,
-    "date": "17/02/2026"
+    "date": "17/02/2026",
+    "result": "win"
   },
   {
     "champion": "Diana",
@@ -21,7 +22,8 @@
     "lpChange": 20,
     "isNamiBan": false,
     "isFreePick": true,
-    "date": "16/02/2026"
+    "date": "16/02/2026",
+    "result": "win"
   },
   {
     "champion": "Fiora",
@@ -33,7 +35,8 @@
     "lpChange": -21,
     "isNamiBan": false,
     "isFreePick": true,
-    "date": "14/02/2026"
+    "date": "14/02/2026",
+    "result": "win"
   },
   {
     "champion": "Jhin",
@@ -45,7 +48,8 @@
     "lpChange": -19,
     "isNamiBan": false,
     "isFreePick": true,
-    "date": "16/02/2026"
+    "date": "16/02/2026",
+    "result": "win"
   },
   {
     "champion": "Jinx",
@@ -57,7 +61,8 @@
     "lpChange": -22,
     "isNamiBan": false,
     "isFreePick": true,
-    "date": "14/02/2026"
+    "date": "14/02/2026",
+    "result": "win"
   },
   {
     "champion": "Jinx",
@@ -69,7 +74,8 @@
     "lpChange": 22,
     "isNamiBan": false,
     "isFreePick": true,
-    "date": "17/02/2026"
+    "date": "17/02/2026",
+    "result": "win"
   },
   {
     "champion": "Jinx",
@@ -81,7 +87,8 @@
     "lpChange": -20,
     "isNamiBan": false,
     "isFreePick": true,
-    "date": "18/02/2026"
+    "date": "18/02/2026",
+    "result": "win"
   },
   {
     "champion": "Kha'Zix",
@@ -93,7 +100,8 @@
     "lpChange": 21,
     "isNamiBan": false,
     "isFreePick": true,
-    "date": "17/02/2026"
+    "date": "17/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -105,7 +113,8 @@
     "lpChange": 20,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "14/02/2026"
+    "date": "14/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -117,7 +126,8 @@
     "lpChange": -20,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "14/02/2026"
+    "date": "14/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -129,7 +139,8 @@
     "lpChange": -20,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "14/02/2026"
+    "date": "14/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -141,7 +152,8 @@
     "lpChange": -21,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "14/02/2026"
+    "date": "14/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -153,7 +165,8 @@
     "lpChange": -21,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "14/02/2026"
+    "date": "14/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -165,7 +178,8 @@
     "lpChange": -21,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "14/02/2026"
+    "date": "14/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -177,7 +191,8 @@
     "lpChange": -22,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "14/02/2026"
+    "date": "14/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -189,7 +204,8 @@
     "lpChange": 18,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "14/02/2026"
+    "date": "14/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -201,7 +217,8 @@
     "lpChange": 18,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "14/02/2026"
+    "date": "14/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -213,7 +230,8 @@
     "lpChange": -21,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "15/02/2026"
+    "date": "15/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -225,7 +243,8 @@
     "lpChange": 19,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "15/02/2026"
+    "date": "15/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -237,7 +256,8 @@
     "lpChange": 19,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "15/02/2026"
+    "date": "15/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -249,7 +269,8 @@
     "lpChange": 19,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "15/02/2026"
+    "date": "15/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -261,7 +282,8 @@
     "lpChange": 20,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "15/02/2026"
+    "date": "15/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -273,7 +295,8 @@
     "lpChange": 0,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "16/02/2026"
+    "date": "16/02/2026",
+    "result": "remake"
   },
   {
     "champion": "Nami",
@@ -285,7 +308,8 @@
     "lpChange": 20,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "16/02/2026"
+    "date": "16/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -297,7 +321,8 @@
     "lpChange": 20,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "16/02/2026"
+    "date": "16/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -309,7 +334,8 @@
     "lpChange": -20,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "16/02/2026"
+    "date": "16/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -321,7 +347,8 @@
     "lpChange": 20,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "16/02/2026"
+    "date": "16/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -333,7 +360,8 @@
     "lpChange": 21,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "16/02/2026"
+    "date": "16/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -345,7 +373,8 @@
     "lpChange": 21,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "17/02/2026"
+    "date": "17/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -357,7 +386,8 @@
     "lpChange": 21,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "17/02/2026"
+    "date": "17/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -369,7 +399,8 @@
     "lpChange": -18,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "17/02/2026"
+    "date": "17/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -381,7 +412,8 @@
     "lpChange": 21,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "17/02/2026"
+    "date": "17/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -393,7 +425,8 @@
     "lpChange": -18,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "17/02/2026"
+    "date": "17/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -405,7 +438,8 @@
     "lpChange": 22,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "17/02/2026"
+    "date": "17/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -417,7 +451,8 @@
     "lpChange": -18,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "18/02/2026"
+    "date": "18/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -429,7 +464,8 @@
     "lpChange": -11,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "18/02/2026"
+    "date": "18/02/2026",
+    "result": "loss"
   },
   {
     "champion": "Nami",
@@ -441,7 +477,8 @@
     "lpChange": 0,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "18/02/2026"
+    "date": "18/02/2026",
+    "result": "loss"
   },
   {
     "champion": "Nami",
@@ -453,7 +490,8 @@
     "lpChange": 21,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "18/02/2026"
+    "date": "18/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -465,7 +503,8 @@
     "lpChange": 20,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "19/02/2026"
+    "date": "19/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -477,7 +516,8 @@
     "lpChange": 21,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "19/02/2026"
+    "date": "19/02/2026",
+    "result": "win"
   },
   {
     "champion": "Nami",
@@ -489,7 +529,8 @@
     "lpChange": 21,
     "isNamiBan": false,
     "isFreePick": false,
-    "date": "19/02/2026"
+    "date": "19/02/2026",
+    "result": "win"
   },
   {
     "champion": "Orianna",
@@ -501,7 +542,8 @@
     "lpChange": -19,
     "isNamiBan": false,
     "isFreePick": true,
-    "date": "16/02/2026"
+    "date": "16/02/2026",
+    "result": "win"
   },
   {
     "champion": "Pantheon",
@@ -513,7 +555,8 @@
     "lpChange": -21,
     "isNamiBan": false,
     "isFreePick": true,
-    "date": "15/02/2026"
+    "date": "15/02/2026",
+    "result": "win"
   },
   {
     "champion": "Pantheon",
@@ -525,7 +568,8 @@
     "lpChange": 0,
     "isNamiBan": false,
     "isFreePick": true,
-    "date": "16/02/2026"
+    "date": "16/02/2026",
+    "result": "remake"
   },
   {
     "champion": "Rengar",
@@ -537,7 +581,8 @@
     "lpChange": 19,
     "isNamiBan": false,
     "isFreePick": true,
-    "date": "14/02/2026"
+    "date": "14/02/2026",
+    "result": "win"
   },
   {
     "champion": "Rengar",
@@ -549,7 +594,8 @@
     "lpChange": -10,
     "isNamiBan": false,
     "isFreePick": true,
-    "date": "14/02/2026"
+    "date": "14/02/2026",
+    "result": "win"
   },
   {
     "champion": "Syndra",
@@ -561,7 +607,8 @@
     "lpChange": 20,
     "isNamiBan": false,
     "isFreePick": true,
-    "date": "16/02/2026"
+    "date": "16/02/2026",
+    "result": "win"
   },
   {
     "champion": "Vel'Koz",
@@ -573,7 +620,8 @@
     "lpChange": -20,
     "isNamiBan": true,
     "isFreePick": false,
-    "date": "16/02/2026"
+    "date": "16/02/2026",
+    "result": "win"
   },
   {
     "champion": "Vel'Koz",
@@ -585,7 +633,8 @@
     "lpChange": 21,
     "isNamiBan": true,
     "isFreePick": false,
-    "date": "17/02/2026"
+    "date": "17/02/2026",
+    "result": "win"
   },
   {
     "champion": "Viego",
@@ -597,7 +646,8 @@
     "lpChange": 18,
     "isNamiBan": false,
     "isFreePick": true,
-    "date": "14/02/2026"
+    "date": "14/02/2026",
+    "result": "win"
   },
   {
     "champion": "Viego",
@@ -609,7 +659,8 @@
     "lpChange": 19,
     "isNamiBan": false,
     "isFreePick": true,
-    "date": "15/02/2026"
+    "date": "15/02/2026",
+    "result": "win"
   },
   {
     "champion": "Viego",
@@ -621,7 +672,8 @@
     "lpChange": 19,
     "isNamiBan": false,
     "isFreePick": true,
-    "date": "15/02/2026"
+    "date": "15/02/2026",
+    "result": "win"
   },
   {
     "champion": "Viego",
@@ -633,7 +685,8 @@
     "lpChange": 20,
     "isNamiBan": false,
     "isFreePick": true,
-    "date": "16/02/2026"
+    "date": "16/02/2026",
+    "result": "win"
   },
   {
     "champion": "Viego",
@@ -645,7 +698,8 @@
     "lpChange": 22,
     "isNamiBan": false,
     "isFreePick": true,
-    "date": "17/02/2026"
+    "date": "17/02/2026",
+    "result": "win"
   },
   {
     "champion": "Viego",
@@ -657,7 +711,8 @@
     "lpChange": 22,
     "isNamiBan": false,
     "isFreePick": true,
-    "date": "18/02/2026"
+    "date": "18/02/2026",
+    "result": "win"
   },
   {
     "champion": "Viego",
@@ -669,7 +724,8 @@
     "lpChange": 21,
     "isNamiBan": false,
     "isFreePick": true,
-    "date": "19/02/2026"
+    "date": "19/02/2026",
+    "result": "win"
   },
   {
     "champion": "Warwick",
@@ -681,7 +737,8 @@
     "lpChange": -21,
     "isNamiBan": false,
     "isFreePick": true,
-    "date": "15/02/2026"
+    "date": "15/02/2026",
+    "result": "win"
   },
   {
     "champion": "Yone",
@@ -693,7 +750,8 @@
     "lpChange": 19,
     "isNamiBan": false,
     "isFreePick": true,
-    "date": "14/02/2026"
+    "date": "14/02/2026",
+    "result": "win"
   },
   {
     "champion": "Yone",
@@ -705,6 +763,7 @@
     "lpChange": 21,
     "isNamiBan": false,
     "isFreePick": true,
-    "date": "19/02/2026"
+    "date": "19/02/2026",
+    "result": "win"
   }
 ]
