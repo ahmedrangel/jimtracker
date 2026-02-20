@@ -169,7 +169,7 @@ const lpChangeClass = (value: number) => {
     </div>
 
     <div v-else class="space-y-6">
-      <section v-for="group in groupedJourney" :key="group.date" class="space-y-2 border border-slate-400/40 bg-neutral-950/75 rounded p-4">
+      <section v-for="(group, groupIndex) in groupedJourney" :key="group.date" class="space-y-2 border border-slate-400/40 bg-neutral-950/75 rounded p-4">
         <div class="flex items-center gap-2">
           <Icon name="lucide:calendar" class="text-muted" />
           <h2 class="text-sm md:text-base text-muted">
@@ -222,12 +222,15 @@ const lpChangeClass = (value: number) => {
 
                 <div v-if="index < group.matches.length - 1" class="relative">
                   <div v-if="group.matches[index + 1]?.isNamiBan" class="absolute md:-top-6 top-0 md:right-0 -right-6">
-                    <UPopover mode="hover">
+                    <UPopover
+                      v-if="group.matches[index + 1]!.championId === 267 || group.matches[index + 1]!.championId === 161"
+                      mode="hover"
+                    >
                       <UButton variant="link" class="p-0">
-                        <img v-if="group.matches[index + 1]!.championId === 267 || group.matches[index + 1]!.championId === 161" :src="getChampionImage(267)" alt="Nami" class="size-5 rounded-sm border-2 border-slate-400/40">
+                        <img :src="getChampionImage(267)" alt="Nami" class="size-5 rounded-sm border-2 border-slate-400/40">
                         <Icon
                           name="ph:prohibit-inset-bold"
-                          class="absolute bottom-0 translate-x-1/2 right-2.5 text-red-400 size-3"
+                          class="absolute bottom-0 translate-x-1/2 right-2.5 text-red-400"
                           size="0.75rem"
                         />
                       </UButton>
@@ -265,7 +268,43 @@ const lpChangeClass = (value: number) => {
                     size="1.25rem"
                   />
                 </div>
-                <div v-else-if="index === group.matches.length - 1" class="flex items-center gap-2">
+                <div v-else-if="index === group.matches.length - 1" class="flex items-center gap-2 relative">
+                  <div
+                    v-if="groupedJourney[groupIndex + 1]?.matches[0]?.championId === 161"
+                    class="absolute md:-top-6 top-0 md:right-0 -right-6"
+                  >
+                    <UPopover mode="hover">
+                      <UButton variant="link" class="p-0">
+                        <img :src="getChampionImage(267)" alt="Nami" class="size-5 rounded-sm border-2 border-slate-400/40">
+                        <Icon
+                          name="ph:prohibit-inset-bold"
+                          class="absolute bottom-0 translate-x-1/2 right-2.5 text-red-400"
+                          size="0.75rem"
+                        />
+                      </UButton>
+                      <template #content>
+                        <div class="text-sm p-2">
+                          Banearon a Nami, utiliza Vel'Koz para la siguiente partida.
+                        </div>
+                      </template>
+                    </UPopover>
+                  </div>
+                  <div v-else-if="groupedJourney[groupIndex + 1]?.matches[0]?.isFreePick" class="absolute md:-top-6 top-0 md:right-0 -right-6">
+                    <UPopover mode="hover">
+                      <UButton variant="link" class="p-0">
+                        <Icon
+                          name="lol:fill"
+                          class="text-orange-300"
+                          size="1.25rem"
+                        />
+                      </UButton>
+                      <template #content>
+                        <div class="text-sm p-2">
+                          Siguiente partida de pickeo libre
+                        </div>
+                      </template>
+                    </UPopover>
+                  </div>
                   <UPopover mode="hover">
                     <UButton variant="link" class="p-0">
                       <Icon
