@@ -1,109 +1,5 @@
 [
   {
-    "champion": "Briar",
-    "championId": 233,
-    "rango": "Oro",
-    "division": "I",
-    "lp": 35,
-    "score": "20/6/17",
-    "lpChange": 22,
-    "isNamiBan": false,
-    "isFreePick": true,
-    "date": "17/02/2026",
-    "result": "win"
-  },
-  {
-    "champion": "Diana",
-    "championId": 131,
-    "rango": "Oro",
-    "division": "II",
-    "lp": 27,
-    "score": "20/9/7",
-    "lpChange": 20,
-    "isNamiBan": false,
-    "isFreePick": true,
-    "date": "16/02/2026",
-    "result": "win"
-  },
-  {
-    "champion": "Fiora",
-    "championId": 114,
-    "rango": "Oro",
-    "division": "III",
-    "lp": 39,
-    "score": "7/9/5",
-    "lpChange": -21,
-    "isNamiBan": false,
-    "isFreePick": true,
-    "date": "14/02/2026",
-    "result": "win"
-  },
-  {
-    "champion": "Jhin",
-    "championId": 202,
-    "rango": "Oro",
-    "division": "II",
-    "lp": 28,
-    "score": "1/4/4",
-    "lpChange": -19,
-    "isNamiBan": false,
-    "isFreePick": true,
-    "date": "16/02/2026",
-    "result": "win"
-  },
-  {
-    "champion": "Jinx",
-    "championId": 222,
-    "rango": "Oro",
-    "division": "III",
-    "lp": 17,
-    "score": "5/13/6",
-    "lpChange": -22,
-    "isNamiBan": false,
-    "isFreePick": true,
-    "date": "14/02/2026",
-    "result": "win"
-  },
-  {
-    "champion": "Jinx",
-    "championId": 222,
-    "rango": "Oro",
-    "division": "I",
-    "lp": 60,
-    "score": "15/9/12",
-    "lpChange": 22,
-    "isNamiBan": false,
-    "isFreePick": true,
-    "date": "17/02/2026",
-    "result": "win"
-  },
-  {
-    "champion": "Jinx",
-    "championId": 222,
-    "rango": "Platino",
-    "division": "IV",
-    "lp": 1,
-    "score": "13/17/13",
-    "lpChange": -20,
-    "isNamiBan": false,
-    "isFreePick": true,
-    "date": "18/02/2026",
-    "result": "win"
-  },
-  {
-    "champion": "Kha'Zix",
-    "championId": 121,
-    "rango": "Oro",
-    "division": "II",
-    "lp": 92,
-    "score": "16/5/7",
-    "lpChange": 21,
-    "isNamiBan": false,
-    "isFreePick": true,
-    "date": "17/02/2026",
-    "result": "win"
-  },
-  {
     "champion": "Nami",
     "championId": 267,
     "rango": "Oro",
@@ -127,7 +23,7 @@
     "isNamiBan": false,
     "isFreePick": false,
     "date": "14/02/2026",
-    "result": "win"
+    "result": "loss"
   },
   {
     "champion": "Nami",
@@ -140,7 +36,7 @@
     "isNamiBan": false,
     "isFreePick": false,
     "date": "14/02/2026",
-    "result": "win"
+    "result": "loss"
   },
   {
     "champion": "Nami",
@@ -153,7 +49,7 @@
     "isNamiBan": false,
     "isFreePick": false,
     "date": "14/02/2026",
-    "result": "win"
+    "result": "loss"
   },
   {
     "champion": "Nami",
@@ -166,7 +62,7 @@
     "isNamiBan": false,
     "isFreePick": false,
     "date": "14/02/2026",
-    "result": "win"
+    "result": "loss"
   },
   {
     "champion": "Nami",
@@ -179,7 +75,7 @@
     "isNamiBan": false,
     "isFreePick": false,
     "date": "14/02/2026",
-    "result": "win"
+    "result": "loss"
   },
   {
     "champion": "Nami",
@@ -192,7 +88,7 @@
     "isNamiBan": false,
     "isFreePick": false,
     "date": "14/02/2026",
-    "result": "win"
+    "result": "loss"
   },
   {
     "champion": "Nami",
@@ -208,6 +104,84 @@
     "result": "win"
   },
   {
+    "champion": "Viego",
+    "championId": 234,
+    "rango": "Oro",
+    "division": "III",
+    "lp": 32,
+    "score": "17/5/6",
+    "lpChange": 18,
+    "isNamiBan": false,
+    "isFreePick": true,
+    "date": "14/02/2026",
+    "result": "win"
+  },
+  {
+    "champion": "Rengar",
+    "championId": 107,
+    "rango": "Oro",
+    "division": "III",
+    "lp": 51,
+    "score": "4/4/4",
+    "lpChange": 19,
+    "isNamiBan": false,
+    "isFreePick": true,
+    "date": "14/02/2026",
+    "result": "win"
+  },
+  {
+    "champion": "Rengar",
+    "championId": 107,
+    "rango": "Oro",
+    "division": "III",
+    "lp": 41,
+    "score": "3/10/6",
+    "lpChange": -10,
+    "isNamiBan": false,
+    "isFreePick": true,
+    "date": "14/02/2026",
+    "result": "loss"
+  },
+  {
+    "champion": "Yone",
+    "championId": 777,
+    "rango": "Oro",
+    "division": "III",
+    "lp": 60,
+    "score": "14/12/12",
+    "lpChange": 19,
+    "isNamiBan": false,
+    "isFreePick": true,
+    "date": "14/02/2026",
+    "result": "win"
+  },
+  {
+    "champion": "Fiora",
+    "championId": 114,
+    "rango": "Oro",
+    "division": "III",
+    "lp": 39,
+    "score": "7/9/5",
+    "lpChange": -21,
+    "isNamiBan": false,
+    "isFreePick": true,
+    "date": "14/02/2026",
+    "result": "loss"
+  },
+  {
+    "champion": "Jinx",
+    "championId": 222,
+    "rango": "Oro",
+    "division": "III",
+    "lp": 17,
+    "score": "5/13/6",
+    "lpChange": -22,
+    "isNamiBan": false,
+    "isFreePick": true,
+    "date": "14/02/2026",
+    "result": "loss"
+  },
+  {
     "champion": "Nami",
     "championId": 267,
     "rango": "Oro",
@@ -221,6 +195,19 @@
     "result": "win"
   },
   {
+    "champion": "Viego",
+    "championId": 234,
+    "rango": "Oro",
+    "division": "III",
+    "lp": 54,
+    "score": "6/3/3",
+    "lpChange": 19,
+    "isNamiBan": false,
+    "isFreePick": true,
+    "date": "15/02/2026",
+    "result": "win"
+  },
+  {
     "champion": "Nami",
     "championId": 267,
     "rango": "Oro",
@@ -231,7 +218,7 @@
     "isNamiBan": false,
     "isFreePick": false,
     "date": "15/02/2026",
-    "result": "win"
+    "result": "loss"
   },
   {
     "champion": "Nami",
@@ -247,6 +234,19 @@
     "result": "win"
   },
   {
+    "champion": "Pantheon",
+    "championId": 80,
+    "rango": "Oro",
+    "division": "III",
+    "lp": 31,
+    "score": "10/151/7",
+    "lpChange": -21,
+    "isNamiBan": false,
+    "isFreePick": true,
+    "date": "15/02/2026",
+    "result": "loss"
+  },
+  {
     "champion": "Nami",
     "championId": 267,
     "rango": "Oro",
@@ -258,6 +258,19 @@
     "isFreePick": false,
     "date": "15/02/2026",
     "result": "win"
+  },
+  {
+    "champion": "Warwick",
+    "championId": 19,
+    "rango": "Oro",
+    "division": "III",
+    "lp": 29,
+    "score": "9/12/4",
+    "lpChange": -21,
+    "isNamiBan": false,
+    "isFreePick": true,
+    "date": "15/02/2026",
+    "result": "loss"
   },
   {
     "champion": "Nami",
@@ -273,6 +286,19 @@
     "result": "win"
   },
   {
+    "champion": "Viego",
+    "championId": 234,
+    "rango": "Oro",
+    "division": "III",
+    "lp": 67,
+    "score": "18/11/7",
+    "lpChange": 19,
+    "isNamiBan": false,
+    "isFreePick": true,
+    "date": "15/02/2026",
+    "result": "win"
+  },
+  {
     "champion": "Nami",
     "championId": 267,
     "rango": "Oro",
@@ -284,6 +310,32 @@
     "isFreePick": false,
     "date": "15/02/2026",
     "result": "win"
+  },
+  {
+    "champion": "Syndra",
+    "championId": 134,
+    "rango": "Oro",
+    "division": "II",
+    "lp": 7,
+    "score": "9/16/18",
+    "lpChange": 20,
+    "isNamiBan": false,
+    "isFreePick": true,
+    "date": "16/02/2026",
+    "result": "win"
+  },
+  {
+    "champion": "Vel'Koz",
+    "championId": 161,
+    "rango": "Oro",
+    "division": "III",
+    "lp": 87,
+    "score": "2/11/8",
+    "lpChange": -20,
+    "isNamiBan": true,
+    "isFreePick": false,
+    "date": "16/02/2026",
+    "result": "loss"
   },
   {
     "champion": "Nami",
@@ -312,6 +364,19 @@
     "result": "win"
   },
   {
+    "champion": "Diana",
+    "championId": 131,
+    "rango": "Oro",
+    "division": "II",
+    "lp": 27,
+    "score": "20/9/7",
+    "lpChange": 20,
+    "isNamiBan": false,
+    "isFreePick": true,
+    "date": "16/02/2026",
+    "result": "win"
+  },
+  {
     "champion": "Nami",
     "championId": 267,
     "rango": "Oro",
@@ -325,6 +390,32 @@
     "result": "win"
   },
   {
+    "champion": "Pantheon",
+    "championId": 80,
+    "rango": "Oro",
+    "division": "II",
+    "lp": 47,
+    "score": "0/0/0",
+    "lpChange": 0,
+    "isNamiBan": false,
+    "isFreePick": true,
+    "date": "16/02/2026",
+    "result": "remake"
+  },
+  {
+    "champion": "Jhin",
+    "championId": 202,
+    "rango": "Oro",
+    "division": "II",
+    "lp": 28,
+    "score": "1/4/4",
+    "lpChange": -19,
+    "isNamiBan": false,
+    "isFreePick": true,
+    "date": "16/02/2026",
+    "result": "loss"
+  },
+  {
     "champion": "Nami",
     "championId": 267,
     "rango": "Oro",
@@ -335,7 +426,7 @@
     "isNamiBan": false,
     "isFreePick": false,
     "date": "16/02/2026",
-    "result": "win"
+    "result": "loss"
   },
   {
     "champion": "Nami",
@@ -347,6 +438,19 @@
     "lpChange": 20,
     "isNamiBan": false,
     "isFreePick": false,
+    "date": "16/02/2026",
+    "result": "win"
+  },
+  {
+    "champion": "Viego",
+    "championId": 234,
+    "rango": "Oro",
+    "division": "II",
+    "lp": 48,
+    "score": "23/7/5",
+    "lpChange": 20,
+    "isNamiBan": false,
+    "isFreePick": true,
     "date": "16/02/2026",
     "result": "win"
   },
@@ -364,6 +468,19 @@
     "result": "win"
   },
   {
+    "champion": "Orianna",
+    "championId": 61,
+    "rango": "Oro",
+    "division": "II",
+    "lp": 50,
+    "score": "8/12/11",
+    "lpChange": -19,
+    "isNamiBan": false,
+    "isFreePick": true,
+    "date": "16/02/2026",
+    "result": "loss"
+  },
+  {
     "champion": "Nami",
     "championId": 267,
     "rango": "Oro",
@@ -373,6 +490,19 @@
     "lpChange": 21,
     "isNamiBan": false,
     "isFreePick": false,
+    "date": "17/02/2026",
+    "result": "win"
+  },
+  {
+    "champion": "Kha'Zix",
+    "championId": 121,
+    "rango": "Oro",
+    "division": "II",
+    "lp": 92,
+    "score": "16/5/7",
+    "lpChange": 21,
+    "isNamiBan": false,
+    "isFreePick": true,
     "date": "17/02/2026",
     "result": "win"
   },
@@ -390,6 +520,19 @@
     "result": "win"
   },
   {
+    "champion": "Briar",
+    "championId": 233,
+    "rango": "Oro",
+    "division": "I",
+    "lp": 35,
+    "score": "20/6/17",
+    "lpChange": 22,
+    "isNamiBan": false,
+    "isFreePick": true,
+    "date": "17/02/2026",
+    "result": "win"
+  },
+  {
     "champion": "Nami",
     "championId": 267,
     "rango": "Oro",
@@ -400,7 +543,7 @@
     "isNamiBan": false,
     "isFreePick": false,
     "date": "17/02/2026",
-    "result": "win"
+    "result": "loss"
   },
   {
     "champion": "Nami",
@@ -416,6 +559,19 @@
     "result": "win"
   },
   {
+    "champion": "Jinx",
+    "championId": 222,
+    "rango": "Oro",
+    "division": "I",
+    "lp": 60,
+    "score": "15/9/12",
+    "lpChange": 22,
+    "isNamiBan": false,
+    "isFreePick": true,
+    "date": "17/02/2026",
+    "result": "win"
+  },
+  {
     "champion": "Nami",
     "championId": 267,
     "rango": "Oro",
@@ -425,6 +581,32 @@
     "lpChange": -18,
     "isNamiBan": false,
     "isFreePick": false,
+    "date": "17/02/2026",
+    "result": "loss"
+  },
+  {
+    "champion": "Vel'Koz",
+    "championId": 161,
+    "rango": "Oro",
+    "division": "I",
+    "lp": 63,
+    "score": "1/14/13",
+    "lpChange": 21,
+    "isNamiBan": true,
+    "isFreePick": false,
+    "date": "17/02/2026",
+    "result": "win"
+  },
+  {
+    "champion": "Viego",
+    "championId": 234,
+    "rango": "Oro",
+    "division": "I",
+    "lp": 85,
+    "score": "2/1/0",
+    "lpChange": 22,
+    "isNamiBan": false,
+    "isFreePick": true,
     "date": "17/02/2026",
     "result": "win"
   },
@@ -442,6 +624,19 @@
     "result": "win"
   },
   {
+    "champion": "Viego",
+    "championId": 234,
+    "rango": "Platino",
+    "division": "IV",
+    "lp": 29,
+    "score": "15/6/6",
+    "lpChange": 22,
+    "isNamiBan": false,
+    "isFreePick": true,
+    "date": "18/02/2026",
+    "result": "win"
+  },
+  {
     "champion": "Nami",
     "championId": 267,
     "rango": "Platino",
@@ -452,7 +647,7 @@
     "isNamiBan": false,
     "isFreePick": false,
     "date": "18/02/2026",
-    "result": "win"
+    "result": "loss"
   },
   {
     "champion": "Nami",
@@ -494,6 +689,19 @@
     "result": "win"
   },
   {
+    "champion": "Jinx",
+    "championId": 222,
+    "rango": "Platino",
+    "division": "IV",
+    "lp": 1,
+    "score": "13/17/13",
+    "lpChange": -20,
+    "isNamiBan": false,
+    "isFreePick": true,
+    "date": "18/02/2026",
+    "result": "loss"
+  },
+  {
     "champion": "Nami",
     "championId": 267,
     "rango": "Platino",
@@ -503,6 +711,19 @@
     "lpChange": 20,
     "isNamiBan": false,
     "isFreePick": false,
+    "date": "19/02/2026",
+    "result": "win"
+  },
+  {
+    "champion": "Viego",
+    "championId": 234,
+    "rango": "Platino",
+    "division": "IV",
+    "lp": 42,
+    "score": "22/2/1",
+    "lpChange": 21,
+    "isNamiBan": false,
+    "isFreePick": true,
     "date": "19/02/2026",
     "result": "win"
   },
@@ -520,240 +741,6 @@
     "result": "win"
   },
   {
-    "champion": "Nami",
-    "championId": 267,
-    "rango": "Platino",
-    "division": "III",
-    "lp": 5,
-    "score": "3/3/14",
-    "lpChange": 21,
-    "isNamiBan": false,
-    "isFreePick": false,
-    "date": "19/02/2026",
-    "result": "win"
-  },
-  {
-    "champion": "Orianna",
-    "championId": 61,
-    "rango": "Oro",
-    "division": "II",
-    "lp": 50,
-    "score": "8/12/11",
-    "lpChange": -19,
-    "isNamiBan": false,
-    "isFreePick": true,
-    "date": "16/02/2026",
-    "result": "win"
-  },
-  {
-    "champion": "Pantheon",
-    "championId": 80,
-    "rango": "Oro",
-    "division": "III",
-    "lp": 31,
-    "score": "10/151/7",
-    "lpChange": -21,
-    "isNamiBan": false,
-    "isFreePick": true,
-    "date": "15/02/2026",
-    "result": "win"
-  },
-  {
-    "champion": "Pantheon",
-    "championId": 80,
-    "rango": "Oro",
-    "division": "II",
-    "lp": 47,
-    "score": "0/0/0",
-    "lpChange": 0,
-    "isNamiBan": false,
-    "isFreePick": true,
-    "date": "16/02/2026",
-    "result": "remake"
-  },
-  {
-    "champion": "Rengar",
-    "championId": 107,
-    "rango": "Oro",
-    "division": "III",
-    "lp": 51,
-    "score": "4/4/4",
-    "lpChange": 19,
-    "isNamiBan": false,
-    "isFreePick": true,
-    "date": "14/02/2026",
-    "result": "win"
-  },
-  {
-    "champion": "Rengar",
-    "championId": 107,
-    "rango": "Oro",
-    "division": "III",
-    "lp": 41,
-    "score": "3/10/6",
-    "lpChange": -10,
-    "isNamiBan": false,
-    "isFreePick": true,
-    "date": "14/02/2026",
-    "result": "win"
-  },
-  {
-    "champion": "Syndra",
-    "championId": 134,
-    "rango": "Oro",
-    "division": "II",
-    "lp": 7,
-    "score": "9/16/18",
-    "lpChange": 20,
-    "isNamiBan": false,
-    "isFreePick": true,
-    "date": "16/02/2026",
-    "result": "win"
-  },
-  {
-    "champion": "Vel'Koz",
-    "championId": 161,
-    "rango": "Oro",
-    "division": "III",
-    "lp": 87,
-    "score": "2/11/8",
-    "lpChange": -20,
-    "isNamiBan": true,
-    "isFreePick": false,
-    "date": "16/02/2026",
-    "result": "win"
-  },
-  {
-    "champion": "Vel'Koz",
-    "championId": 161,
-    "rango": "Oro",
-    "division": "I",
-    "lp": 63,
-    "score": "1/14/13",
-    "lpChange": 21,
-    "isNamiBan": true,
-    "isFreePick": false,
-    "date": "17/02/2026",
-    "result": "win"
-  },
-  {
-    "champion": "Viego",
-    "championId": 234,
-    "rango": "Oro",
-    "division": "III",
-    "lp": 32,
-    "score": "17/5/6",
-    "lpChange": 18,
-    "isNamiBan": false,
-    "isFreePick": true,
-    "date": "14/02/2026",
-    "result": "win"
-  },
-  {
-    "champion": "Viego",
-    "championId": 234,
-    "rango": "Oro",
-    "division": "III",
-    "lp": 54,
-    "score": "6/3/3",
-    "lpChange": 19,
-    "isNamiBan": false,
-    "isFreePick": true,
-    "date": "15/02/2026",
-    "result": "win"
-  },
-  {
-    "champion": "Viego",
-    "championId": 234,
-    "rango": "Oro",
-    "division": "III",
-    "lp": 67,
-    "score": "18/11/7",
-    "lpChange": 19,
-    "isNamiBan": false,
-    "isFreePick": true,
-    "date": "15/02/2026",
-    "result": "win"
-  },
-  {
-    "champion": "Viego",
-    "championId": 234,
-    "rango": "Oro",
-    "division": "II",
-    "lp": 48,
-    "score": "23/7/5",
-    "lpChange": 20,
-    "isNamiBan": false,
-    "isFreePick": true,
-    "date": "16/02/2026",
-    "result": "win"
-  },
-  {
-    "champion": "Viego",
-    "championId": 234,
-    "rango": "Oro",
-    "division": "I",
-    "lp": 85,
-    "score": "2/1/0",
-    "lpChange": 22,
-    "isNamiBan": false,
-    "isFreePick": true,
-    "date": "17/02/2026",
-    "result": "win"
-  },
-  {
-    "champion": "Viego",
-    "championId": 234,
-    "rango": "Platino",
-    "division": "IV",
-    "lp": 29,
-    "score": "15/6/6",
-    "lpChange": 22,
-    "isNamiBan": false,
-    "isFreePick": true,
-    "date": "18/02/2026",
-    "result": "win"
-  },
-  {
-    "champion": "Viego",
-    "championId": 234,
-    "rango": "Platino",
-    "division": "IV",
-    "lp": 42,
-    "score": "22/2/1",
-    "lpChange": 21,
-    "isNamiBan": false,
-    "isFreePick": true,
-    "date": "19/02/2026",
-    "result": "win"
-  },
-  {
-    "champion": "Warwick",
-    "championId": 19,
-    "rango": "Oro",
-    "division": "III",
-    "lp": 29,
-    "score": "9/12/4",
-    "lpChange": -21,
-    "isNamiBan": false,
-    "isFreePick": true,
-    "date": "15/02/2026",
-    "result": "win"
-  },
-  {
-    "champion": "Yone",
-    "championId": 777,
-    "rango": "Oro",
-    "division": "III",
-    "lp": 60,
-    "score": "14/12/12",
-    "lpChange": 19,
-    "isNamiBan": false,
-    "isFreePick": true,
-    "date": "14/02/2026",
-    "result": "win"
-  },
-  {
     "champion": "Yone",
     "championId": 777,
     "rango": "Platino",
@@ -763,6 +750,19 @@
     "lpChange": 21,
     "isNamiBan": false,
     "isFreePick": true,
+    "date": "19/02/2026",
+    "result": "win"
+  },
+  {
+    "champion": "Nami",
+    "championId": 267,
+    "rango": "Platino",
+    "division": "III",
+    "lp": 5,
+    "score": "3/3/14",
+    "lpChange": 21,
+    "isNamiBan": false,
+    "isFreePick": false,
     "date": "19/02/2026",
     "result": "win"
   }
