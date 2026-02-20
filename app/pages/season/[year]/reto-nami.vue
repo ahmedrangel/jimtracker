@@ -72,15 +72,6 @@ const journeyData = computed<JourneyMatch[]>(() => {
         challengeType: getChallengeType(match),
         kda: parseScore(match.score)
       };
-    })
-    .sort((a, b) => {
-      const byDate = a.parsedDate.getTime() - b.parsedDate.getTime();
-      if (byDate !== 0) return byDate;
-
-      const byRank = rankPoints(a) - rankPoints(b);
-      if (byRank !== 0) return byRank;
-
-      return a.originalIndex - b.originalIndex;
     });
 });
 
