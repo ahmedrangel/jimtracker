@@ -151,7 +151,7 @@ const lpChangeClass = (value: number) => {
       </div>
       <div class="text-center px-4 py-4 bg-neutral-950/75 border border-slate-400/40 rounded">
         <div class="text-xl font-bold text-amber-300">{{ stats.freeGames }}</div>
-        <div class="text-sm text-gray-400">Free pick</div>
+        <div class="text-sm text-gray-400">Pickeo libre</div>
       </div>
     </div>
 
