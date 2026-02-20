@@ -187,7 +187,7 @@ const lpChangeClass = (value: number) => {
                   <div class="ps-4 pe-4 xl:pe-16 py-4 me-auto">
                     <div class="font-semibold text-muted text-sm">{{ match.champion }}</div>
                     <div class="font-bold leading-none">{{ match.score }}</div>
-                    <div class="text-sm font-semibold flex items-center gap-1">
+                    <div class="text-sm font-semibold flex items-center gap-1 text-nowrap">
                       <span class="text-slate-400">{{ match.lpChange > 0 ? `+${match.lpChange}` : match.lpChange }} LP</span>
                       <Icon v-if="match.lpChange !== 0" :class="lpChangeClass(match.lpChange)" :name="match.lpChange > 0 ? 'tabler:caret-up-filled' : 'tabler:caret-down-filled'" />
                       <span v-if="match.result === 'remake'" class="text-xs text-gray-500">({{ match.result }})</span>
