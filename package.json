@@ -10,12 +10,16 @@
     "email": "ahmedrangel@outlook.com",
     "url": "https://ahmedrangel.com"
   },
-  "homepage": "https://github.com/ahmedrangel/jimtracker",
+  "contributors": [
+    "Ahmed Rangel <ahmedrangel@outlook.com>",
+    "Yizack Rangel <yizackr@gmail.com>"
+  ],
+  "homepage": "https://github.com/JimRsng/jimtracker",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ahmedrangel/jimtracker.git"
+    "url": "git+https://github.com/JimRsng/jimtracker.git"
   },
-  "bugs": "https://github.com/ahmedrangel/jimtracker/issues",
+  "bugs": "https://github.com/JimRsng/jimtracker/issues",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev --port=5173 --public",
