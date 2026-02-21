@@ -49,6 +49,7 @@ const lastUpdate = computed(() => data.value?.user?.updatedAt ? new Date(data.va
 const secondsSinceUpdate = computed(() => Math.floor((now.value - lastUpdate.value) / 1000));
 const canUpdate = computed(() => secondsSinceUpdate.value >= updateCooldown);
 const secondsToAvailable = computed(() => Math.max(0, updateCooldown - secondsSinceUpdate.value));
+const isUpdating = ref(false);
 
 onMounted(() => {
   intervalId = window.setInterval(() => {
@@ -61,9 +62,11 @@ onUnmounted(() => {
 
 const updateInfo = async () => {
   if (!canUpdate.value) return;
+  isUpdating.value = true;
   const newData = await $fetch("/api/update", { method: "POST", query: { soloboom: true } });
   if (newData) data.value = newData;
   now.value = Date.now();
+  isUpdating.value = false;
 };
 
 const old = computed(() => {
@@ -79,15 +82,18 @@ const old = computed(() => {
     <!-- Botón de Actualizar -->
     <ClientOnly v-if="!old">
       <div class="flex md:justify-end mb-4">
-        <button
-          class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-3 py-2 rounded flex items-center gap-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
-          :disabled="!canUpdate"
+        <UButton
+          class="font-semibold px-3 py-2 rounded flex items-center gap-2 cursor-pointer"
+          variant="solid"
+          color="neutral"
+          :disabled="!canUpdate || isUpdating"
+          :loading="isUpdating"
           @click="updateInfo"
         >
-          <Icon name="ph:arrow-clockwise-bold" size="20" />
-          <span v-if="canUpdate">Actualizar</span>
-          <span v-else>Disponible en: {{ secondsToAvailable }}s</span>
-        </button>
+          <Icon v-if="!isUpdating" name="ph:arrow-clockwise-bold" size="20" />
+          <span v-if="canUpdate">{{ isUpdating ? "Actualizando..." : "Actualizar" }}</span>
+          <span v-else>Disponible en <ClientOnly>{{ secondsToAvailable }}s</ClientOnly></span>
+        </UButton>
       </div>
     </ClientOnly>
     <ChartHandlerSoloBoom :data="data" :champions="champions" />
