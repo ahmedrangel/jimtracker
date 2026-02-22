@@ -33,6 +33,8 @@ NUXT_CDN_TOKEN=
 - **Task Scheduling**: [Cloudflare Cron Triggers](https://developers.cloudflare.com/workers/configuration/cron-triggers/).
 - **APIs**:
   - [twisted](https://github.com/Sansossio/twisted): Riot Games API wrapper.
+  - [twurple](https://github.com/twurple/twurple): Twitch API wrapper.
+  - [kient](https://kient.pages.dev): Kick API wrapper.
 - **Webhook Events**:
   - [Twitch Webhook Events](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/).
   - [Kick Webhook Events](https://docs.kick.com/events/event-types).
