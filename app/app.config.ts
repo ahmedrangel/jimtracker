@@ -12,6 +12,12 @@ export default defineAppConfig({
           }
         }
       }
+    },
+    popover: {
+      slots: {
+        arrow: "fill-current",
+        content: "py-2 px-3"
+      }
     }
   }
 });

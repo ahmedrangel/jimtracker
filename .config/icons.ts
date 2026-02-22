@@ -25,5 +25,6 @@ export default [
   "ph:prohibit-inset-bold",
   "lucide:arrow-down",
   "tabler:circle-filled",
-  "lucide:loader-circle"
+  "lucide:loader-circle",
+  "simple-icons:github"
 ];
