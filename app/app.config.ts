@@ -8,7 +8,7 @@ export default defineAppConfig({
       variants: {
         fullscreen: {
           false: {
-            content: "w-[fit-content] max-w-[100vw] ring-0"
+            content: "w-fit max-w-screen ring-0"
           }
         }
       }
@@ -16,7 +16,7 @@ export default defineAppConfig({
     popover: {
       slots: {
         arrow: "fill-current",
-        content: "py-2 px-3"
+        content: "py-2 px-3 max-w-[91dvw] sm:max-w-dvw"
       }
     }
   }
