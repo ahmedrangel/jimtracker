@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { formatDistanceStrict } from "date-fns";
+import { es } from "date-fns/locale";
+
 const props = defineProps<{
   user?: UserInfo;
   showSoloboom?: boolean;
@@ -11,6 +14,8 @@ const gameName = computed(() => props?.user?.gameName);
 const tagLine = computed(() => props?.user?.tagLine);
 const twitch = socials.find(s => s.id === "twitch")!;
 const kick = socials.find(s => s.id === "kick")!;
+
+const latestHaircut = new Date(2026, 0, 7, 0, 0, 0, 0).getTime();
 </script>
 
 <template>
@@ -62,6 +67,12 @@ const kick = socials.find(s => s.id === "kick")!;
         <span>{{ isIngame ? 'En partida' : 'Fuera de partida' }}</span>
       </span>
     </NuxtLink>
+  </div>
+  <div v-if="!old && !showSoloboom" class="flex items-center justify-center pt-4">
+    <div class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center">
+      <span>Último corte de pelo:</span>&nbsp;
+      <span class="text-purple-200">{{ formatDistanceStrict(latestHaircut, Date.now(), { addSuffix: true, locale: es, unit: "day" }) }}</span>
+    </div>
   </div>
   <div class="flex items-center justify-center my-4 px-3">
     <img src="/images/divider.png" class="h-4 pointer-events-none select-none">
