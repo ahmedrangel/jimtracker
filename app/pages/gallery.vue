@@ -23,7 +23,7 @@ const galleryURL = computed(() => window ? withQuery(`${window.location.origin}/
   <main>
     <div class="columns-2 gap-4 sm:columns-3 md:columns-5 sm:gap-8">
       <template v-for="(id, index) of images" :key="index">
-        <UModal v-if="id" v-model:open="showModal[id]">
+        <UModal v-if="id" v-model:open="showModal[id]" :content="{ onOpenAutoFocus: (e) => e.preventDefault() }">
           <img
             label="Open"
             :src="`${SITE.cdn}/gallery/${id}`"
