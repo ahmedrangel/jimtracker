@@ -11,12 +11,10 @@ const openImageId = ref<string | null>(null);
 const { query } = useRoute();
 const { img } = query as { img?: string };
 
-onMounted(() => {
-  if (img) {
-    openImageId.value = img;
-    showModal.value[img] = true;
-  }
-});
+if (img) {
+  openImageId.value = img;
+  showModal.value[img] = true;
+}
 
 const galleryURL = computed(() => window ? withQuery(`${window.location.origin}/gallery`, { img: openImageId.value }) : "");
 </script>
