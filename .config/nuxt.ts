@@ -61,6 +61,13 @@ export default defineNuxtConfig({
     fallback: "dark"
   },
 
+  ui: {
+    colors: {
+      neutral: "neutral",
+      primary: "green"
+    }
+  },
+
   runtimeConfig: {
     riot: {
       apiKey: ""
@@ -162,12 +169,5 @@ export default defineNuxtConfig({
       { label: "Priority", select: "sitemap:priority", width: "12.5%" },
       { label: "Last Modified", select: "sitemap:lastmod", width: "35%" }
     ]
-  },
-
-  ui: {
-    colors: {
-      neutral: "neutral",
-      primary: "green"
-    }
   }
 });
