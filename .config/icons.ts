@@ -27,5 +27,7 @@ export default [
   "tabler:circle-filled",
   "lucide:loader-circle",
   "simple-icons:github",
-  "ph:scissors"
+  "ph:scissors",
+  "lucide:copy-check",
+  "lucide:copy"
 ];
