@@ -5,6 +5,7 @@ export default defineNuxtConfig({
 
   modules: [
     "@nuxt/ui",
+    "nuxt-ui-colors-no-inline",
     "@nuxt/eslint",
     "@nuxt/icon",
     "@nuxtjs/sitemap",
@@ -161,5 +162,12 @@ export default defineNuxtConfig({
       { label: "Priority", select: "sitemap:priority", width: "12.5%" },
       { label: "Last Modified", select: "sitemap:lastmod", width: "35%" }
     ]
+  },
+
+  ui: {
+    colors: {
+      neutral: "neutral",
+      primary: "green"
+    }
   }
 });
