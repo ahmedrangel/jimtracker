@@ -71,7 +71,7 @@ const latestHaircut = new Date(2026, 0, 7, 0, 0, 0, 0).getTime();
   <div v-if="!old && !showSoloboom" class="flex items-center justify-center pt-4">
     <div class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex items-center gap-1">
       <Icon name="ph:scissors" size="20" class="text-purple-200 -rotate-90" />
-      <div>
+      <div class="flex gap-1">
         <span>Último corte de pelo:</span>
         <span class="text-purple-200">{{ formatDistanceStrict(latestHaircut, Date.now(), { addSuffix: true, locale: es, unit: "day" }) }}</span>
       </div>
