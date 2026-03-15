@@ -26,5 +26,6 @@ export default [
   "lucide:arrow-down",
   "tabler:circle-filled",
   "lucide:loader-circle",
-  "simple-icons:github"
+  "simple-icons:github",
+  "ph:scissors"
 ];
