@@ -9,6 +9,26 @@
   background-color: var(--ui-color-neutral-950);
 }
 
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: var(--ui-color-neutral-900);
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 0 solid transparent;
+  background-clip: content-box;
+  background-color: var(--ui-color-neutral-200);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--ui-color-neutral-100);
+}
+
 html, body {
   background: linear-gradient(rgb(0 0 0 / 95%), rgb(9 28 172 / 45%), rgb(8 14 31 / 70%), rgb(0 0 0 / 195%)), url("/images/background.jpg");
   background-size: cover;

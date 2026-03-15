@@ -197,7 +197,7 @@ export const getDBInfo = async (options: { puuid: string, season: number, fullHi
       .groupBy(tables.history.champion_id)
       .having(gte(sql`count`, 1)) // Al menos 1 partida jugada con el campeón
       .orderBy(desc(sql`count`), desc(sql`SUM(CASE WHEN ${tables.history.result} = 1 THEN 1 ELSE 0 END)`), desc(sql`(AVG(${tables.history.kills}) + AVG(${tables.history.assists})) / CASE WHEN AVG(${tables.history.deaths}) = 0 THEN 1 ELSE AVG(${tables.history.deaths}) END`))
-      .limit(4)
+      .limit(12)
       .all()
   ]);
 

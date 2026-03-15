@@ -92,15 +92,16 @@ onUnmounted(() => {
         <!-- MÁS JUGADO -->
         <div class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center col-span-2 md:col-span-3">
           <p class="md:text-xl font-semibold mb-2">MÁS JUGADO</p>
-          <div class="flex items-center justify-center gap-2 md:gap-4">
+          <div class="flex items-center justify-start gap-6 md:gap-12 overflow-y-hidden max-w-180 pb-4">
             <div v-for="champ in data.mostPlayed" :key="champ.champion_id" class="flex flex-col items-center gap-3">
               <img :src="getChampionIcon(champ.champion_id)" class="w-12 h-12" :alt="String(champ.champion_id)" :title="champions?.find(c => c.id === String(champ.champion_id))!.name">
-              <span class="text-xs md:text-base text-slate-400 font-semibold leading-none">
-                <span class="text-blue-400">{{ champ.wins }}</span>V · <span class="text-rose-400">{{ champ.losses }}</span>D (<span class="text-slate-100">{{ champ.count }}</span>)
+              <span class="text-xs md:text-base text-slate-400 font-semibold leading-none text-nowrap">
+                <span class="text-blue-400 text-nowrap">{{ champ.wins }}</span>V · <span class="text-rose-400">{{ champ.losses }}</span>D (<span class="text-slate-100">{{ champ.count }}</span>)
               </span>
-              <span class="text-xs md:text-base text-slate-100 font-semibold leading-none">{{ ((champ.wins / champ.count) * 100).toFixed(1) }}% WR</span>
-              <span class="text-xs text-slate-400 font-semibold leading-none">
-                <span class="text-blue-400">{{ champ.kills.toFixed(0) }}</span> / <span class="text-rose-400">{{ champ.deaths.toFixed(0) }}</span> / <span class="text-yellow-200">{{ champ.assists.toFixed(0) }}</span> (<span class="text-slate-100">{{ champ.deaths > 0 ? ((Number(champ.kills.toFixed(0)) + Number(champ.assists.toFixed(0))) / (Number(champ.deaths.toFixed(0)))).toFixed(2) : "Perfect" }}</span> KDA)
+              <span class="text-xs md:text-base text-slate-100 font-semibold leading-none text-nowrap">{{ ((champ.wins / champ.count) * 100).toFixed(1) }}% WR</span>
+              <span class="text-xs text-slate-400 font-semibold leading-none flex flex-col gap-2">
+                <span class="text-nowrap"><span class="text-blue-400">{{ champ.kills.toFixed(0) }}</span> / <span class="text-rose-400">{{ champ.deaths.toFixed(0) }}</span> / <span class="text-yellow-200">{{ champ.assists.toFixed(0) }}</span></span>
+                <span class="text-nowrap">(<span class="text-slate-100">{{ champ.deaths > 0 ? ((Number(champ.kills.toFixed(0)) + Number(champ.assists.toFixed(0))) / (Number(champ.deaths.toFixed(0)))).toFixed(2) : "Perfect" }}</span> KDA)</span>
               </span>
             </div>
           </div>
