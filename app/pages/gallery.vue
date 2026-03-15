@@ -35,7 +35,7 @@ const galleryURL = computed(() => window ? withQuery(`${window.location.origin}/
               <img :src="`${SITE.cdn}/gallery/${openImageId}`" class="max-h-[90vh] max-w-[90vw] sm:min-w-150 md:min-w-175">
               <Icon name="lucide:x" class="absolute top-2 right-2 w-8 h-8 text-neutral-200 hover:text-neutral-300 bg-rose-700/60 hover:bg-rose-700/90 border border-rose-800/90 rounded p-1.5 shadow transition-all duratino-300 ease-in-out" @click="openImageId = null; showModal[id] = false;" />
             </div>
-            <UInput :value="galleryURL" class="w-full font-mono" :ui="{ trailing: 'pr-0.5', base: 'rounded-t-none ring-0' }" readonly>
+            <UInput :value="galleryURL" class="w-full font-mono" sie="sm" :ui="{ trailing: 'pr-0.5', base: 'rounded-t-none ring-0' }" readonly>
               <template #trailing>
                 <CopyButton :value="galleryURL" />
               </template>
