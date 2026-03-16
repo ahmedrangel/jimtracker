@@ -6,17 +6,15 @@ const { data: images } = await useFetch("/api/gallery", {
 });
 
 const showModal = ref<Record<string, boolean>>({});
-const openImageId = ref<string | null>(null);
 
 const { query } = useRoute();
 const { img } = query as { img?: string };
 
 if (img) {
-  openImageId.value = img;
   showModal.value[img] = true;
 }
 
-const galleryURL = computed(() => window ? withQuery(`${window.location.origin}/gallery`, { img: openImageId.value }) : "");
+const getGalleryURL = (id: string) => withQuery(`${window.location.origin}/gallery`, { img: id });
 </script>
 
 <template>
@@ -28,16 +26,15 @@ const galleryURL = computed(() => window ? withQuery(`${window.location.origin}/
             label="Open"
             :src="`${SITE.cdn}/gallery/${id}`"
             class="rounded-lg mb-4 cursor-pointer scale-on-hover"
-            @click="openImageId = id;"
           >
           <template #content>
-            <div v-if="openImageId" class="relative">
-              <img :src="`${SITE.cdn}/gallery/${openImageId}`" class="max-h-[90vh] max-w-[90vw] sm:min-w-150 md:min-w-175">
-              <Icon name="lucide:x" class="absolute top-2 right-2 w-8 h-8 text-neutral-200 hover:text-neutral-300 bg-rose-700/60 hover:bg-rose-700/90 border border-rose-800/90 rounded p-1.5 shadow transition-all duratino-300 ease-in-out" @click="openImageId = null; showModal[id] = false;" />
+            <div class="relative">
+              <img :src="`${SITE.cdn}/gallery/${id}`" class="max-h-[90vh] max-w-[90vw] sm:min-w-150 md:min-w-175">
+              <Icon name="lucide:x" class="absolute top-2 right-2 w-8 h-8 text-neutral-200 hover:text-neutral-300 bg-rose-700/60 hover:bg-rose-700/90 border border-rose-800/90 rounded p-1.5 shadow transition-all duratino-300 ease-in-out" @click="showModal[id] = false;" />
             </div>
-            <UInput :value="galleryURL" class="w-full font-mono" size="sm" :ui="{ trailing: 'pr-0.5', base: 'rounded-t-none ring-0' }" readonly>
+            <UInput :value="getGalleryURL(id)" class="w-full font-mono" size="sm" :ui="{ trailing: 'pr-0.5', base: 'rounded-t-none ring-0' }" readonly>
               <template #trailing>
-                <CopyButton :value="galleryURL" />
+                <CopyButton :value="getGalleryURL(id)" />
               </template>
             </UInput>
           </template>
