@@ -6,7 +6,9 @@ export const polling = async (puuid: string, key: string) => {
 
   const latestSavedMatch = await db.select({
     match_id: tables.history.match_id,
-    date: tables.history.date
+    date: tables.history.date,
+    snapshot_wins: tables.history.snapshot_wins,
+    snapshot_losses: tables.history.snapshot_losses
   }).from(tables.history).orderBy(desc(tables.history.date)).limit(1).all();
 
   const latestMatchId = latestSavedMatch[0]?.match_id || null;
@@ -20,7 +22,6 @@ export const polling = async (puuid: string, key: string) => {
   });
 
   const dataToInsert = [];
-  const snapshot = [];
   let userData = {};
 
   if (lastMatchData.response.length) {
@@ -54,11 +55,10 @@ export const polling = async (puuid: string, key: string) => {
       const user = await fetchRankedData(config, puuid);
       userData = { ...userData, ...user };
       for (const entry of dataToInsert.toReversed()) {
-        snapshot.push({
-          division: user.division,
-          tier: user.tier,
-          lp: user.lp
-        });
+        // Si no es remake y el último match guardado tiene los mismos wins y losses, para evitar guardar ranked data que no se ha actualizado por motivos de cache o timing.
+        if (!entry.is_remake && latestSavedMatch?.[0] && user.wins === latestSavedMatch[0].snapshot_wins && user.losses === latestSavedMatch[0].snapshot_losses) {
+          continue;
+        }
         await db.insert(tables.history).values({
           ...entry,
           snapshot_division: user.division,
