@@ -12,7 +12,7 @@ export default defineAppConfig({
     popover: {
       slots: {
         arrow: "fill-current",
-        content: "py-2 px-3 max-w-[91dvw] sm:max-w-dvw"
+        content: "bg-neutral-950/95 py-2 px-3 max-w-[91dvw] sm:max-w-dvw"
       }
     }
   }

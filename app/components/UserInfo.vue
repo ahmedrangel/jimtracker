@@ -109,13 +109,21 @@ const formatReto = (text: string) => {
     </NuxtLink>
   </div>
   <div v-if="!old && !showSoloboom" class="flex items-center justify-center pt-4">
-    <div class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex items-center gap-1">
-      <Icon name="ph:scissors" size="20" class="text-purple-200 -rotate-90" />
-      <div class="flex gap-1">
-        <span>Último corte de pelo:</span>
-        <span class="text-purple-200">{{ formatDistanceStrict(latestHaircut, Date.now(), { addSuffix: true, locale: es, unit: "day" }) }}</span>
-      </div>
-    </div>
+    <UPopover :content="{ side: 'top', sideOffset: 0 }" mode="hover" arrow>
+      <UButton variant="link" color="neutral" class="p-0 text-default text-md font-normal cursor-help">
+        <div class="bg-neutral-950/75 border border-slate-400/40 rounded px-2 py-2 sm:px-4 sm:py-4 text-center flex items-center gap-1">
+          <Icon name="ph:scissors" size="20" class="text-purple-200 -rotate-90" />
+          <div class="flex gap-1">
+            <span>Último corte de pelo:</span>
+            <span class="text-purple-200">{{ formatDistanceStrict(latestHaircut, Date.now(), { addSuffix: true, locale: es, unit: "day" }) }}</span>
+          </div>
+        </div>
+      </UButton>
+      <template #content>
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <p v-html="formatReto('Si no llego a :master: no me corto el pelo')" />
+      </template>
+    </UPopover>
   </div>
   <div class="flex items-center justify-center my-4 px-3">
     <img src="/images/divider.png" class="h-4 pointer-events-none select-none">
