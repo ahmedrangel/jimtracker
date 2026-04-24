@@ -16,6 +16,46 @@ const twitch = socials.find(s => s.id === "twitch")!;
 const kick = socials.find(s => s.id === "kick")!;
 
 const latestHaircut = new Date(2026, 0, 7, 0, 0, 0, 0).getTime();
+
+const retosData = [
+  {
+    reto: "5000 USD si llego a :master: este año",
+    castigo: null
+  },
+  {
+    reto: "1000 USD si llego a :diamond: IV antes del 23 de Mayo",
+    castigo: null
+  },
+  {
+    reto: "600 USD si llego a :diamond:",
+    castigo: "Stream IRL"
+  },
+  {
+    reto: "100 subs si llego a :emerald: II antes de 100 partidas\nSOLO CON VAYNE, 50 subs si son más de 100 partidas",
+    castigo: null
+  },
+  {
+    reto: "50 subs si llego a :emerald: antes del 6 de Mayo",
+    castigo: "Me pinto el cabello"
+  }
+];
+
+const retosColumns = [
+  {
+    accessorKey: "reto",
+    header: "Reto"
+  },
+  {
+    accessorKey: "castigo",
+    header: "Castigo"
+  }
+];
+
+const formatReto = (text: string) => {
+  return text.replace(/:([\w]+):/g, (match, name) => {
+    return `<img src="/images/lol/${name.toLowerCase()}.png" class="inline-block w-10 h-10" alt="${name}" title="${LEAGUE_TIERS.find(t => t.id.toLowerCase() === name)?.id}" />`;
+  });
+};
 </script>
 
 <template>
@@ -82,33 +122,18 @@ const latestHaircut = new Date(2026, 0, 7, 0, 0, 0, 0).getTime();
   </div>
   <UTable
     class="bg-neutral-950/75 border border-slate-400/40 rounded max-w-190 mx-auto **:whitespace-pre-line"
-    :data="[
-      {
-        reto: '500 USD si llego a MASTER este año',
-        castigo: null
-      },
-      {
-        reto: '1000 USD si llego a D4 antes del 23 de Mayo',
-        castigo: null
-      },
-      {
-        reto: '600 USD si llego a DIAMANTE',
-        castigo: 'Stream IRL'
-      },
-      {
-        reto: '100 subs si llego a ESMERALDA 2 antes de 100 partidas.\nSOLO CON VAYNE, 50 subs si son más de 100 partidas',
-        castigo: null
-      },
-      {
-        reto: '50 subs si llego a ESMERALDA antes del 6 de Mayo',
-        castigo: 'Me pinto el cabello'
-      }
-    ]"
+    :data="retosData"
+    :columns="retosColumns"
     :ui="{
       th: 'text-center border-x border-default first:border-l-0 last:border-r-0',
-      td: 'text-default border-x border-default first:border-l-0 last:border-r-0',
+      td: 'text-default text-md border-x border-default first:border-l-0 last:border-r-0 py-2',
     }"
-  />
+  >
+    <template #reto-cell="{ row }">
+      <!-- eslint-disable-next-line vue/no-v-html -->
+      <p v-html="formatReto(row.original.reto)" />
+    </template>
+  </UTable>
   <div class="flex items-center justify-center my-4 px-3">
     <img src="/images/divider.png" class="h-4 pointer-events-none select-none">
   </div>
