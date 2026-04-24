@@ -80,4 +80,36 @@ const latestHaircut = new Date(2026, 0, 7, 0, 0, 0, 0).getTime();
   <div class="flex items-center justify-center my-4 px-3">
     <img src="/images/divider.png" class="h-4 pointer-events-none select-none">
   </div>
+  <UTable
+    class="bg-neutral-950/75 border border-slate-400/40 rounded max-w-190 mx-auto **:whitespace-pre-line"
+    :data="[
+      {
+        reto: '500 USD si llego a MASTER este año',
+        castigo: null
+      },
+      {
+        reto: '1000 USD si llego a D4 antes del 23 de Mayo',
+        castigo: null
+      },
+      {
+        reto: '600 USD si llego a DIAMANTE',
+        castigo: 'Stream IRL'
+      },
+      {
+        reto: '100 subs si llego a ESMERALDA 2 antes de 100 partidas.\nSOLO CON VAYNE, 50 subs si son más de 100 partidas',
+        castigo: null
+      },
+      {
+        reto: '50 subs si llego a ESMERALDA antes del 6 de Mayo',
+        castigo: 'Me pinto el cabello'
+      }
+    ]"
+    :ui="{
+      th: 'text-center border-x border-default first:border-l-0 last:border-r-0',
+      td: 'text-default border-x border-default first:border-l-0 last:border-r-0',
+    }"
+  />
+  <div class="flex items-center justify-center my-4 px-3">
+    <img src="/images/divider.png" class="h-4 pointer-events-none select-none">
+  </div>
 </template>
