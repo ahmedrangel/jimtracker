@@ -20,23 +20,28 @@ const latestHaircut = new Date(2026, 0, 7, 0, 0, 0, 0).getTime();
 const retosData = [
   {
     reto: "5000 USD si llego a :master: este año",
-    castigo: null
+    castigo: null,
+    usuario: null
   },
   {
     reto: "1000 USD si llego a :diamond: IV antes del 23 de Mayo",
-    castigo: null
+    castigo: "Jugar SC2 12 horas",
+    usuario: null
   },
   {
-    reto: "600 USD si llego a :diamond:",
-    castigo: "Stream IRL"
+    reto: "600 USD si llego a :diamond: III 50 LP antes del 15 de Junio",
+    castigo: "Stream IRL Jimenita",
+    usuario: "snuffygoat"
   },
   {
     reto: "100 subs si llego a :emerald: II antes de 100 partidas\nSOLO CON VAYNE, 50 subs si son más de 100 partidas",
-    castigo: null
+    castigo: null,
+    usuario: "zasckemb"
   },
   {
     reto: "50 subs si llego a :emerald: antes del 6 de Mayo",
-    castigo: "Me pinto el cabello"
+    castigo: "Me pinto el cabello",
+    usuario: "Hanamichix"
   }
 ];
 
@@ -48,6 +53,10 @@ const retosColumns = [
   {
     accessorKey: "castigo",
     header: "Castigo"
+  },
+  {
+    accessorKey: "usuario",
+    header: "Usuario"
   }
 ];
 
@@ -140,6 +149,9 @@ const formatReto = (text: string) => {
     <template #reto-cell="{ row }">
       <!-- eslint-disable-next-line vue/no-v-html -->
       <p v-html="formatReto(row.original.reto)" />
+    </template>
+    <template #usuario-cell="{ row }">
+      <NuxtLink v-if="row.original.usuario" class="hover:underline" :to="`https://www.twitch.tv/${row.original.usuario}`">{{ row.original.usuario }}</NuxtLink>
     </template>
   </UTable>
   <div class="flex items-center justify-center my-4 px-3">
