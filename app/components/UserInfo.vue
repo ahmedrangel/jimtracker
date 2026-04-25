@@ -21,12 +21,12 @@ const retosData = [
   {
     reto: "5000 USD si llego a :master: este año",
     castigo: null,
-    usuario: null
+    usuario: "snowbling"
   },
   {
     reto: "1000 USD si llego a :diamond: IV antes del 23 de Mayo",
     castigo: "Jugar SC2 12 horas",
-    usuario: null
+    usuario: "snowbling"
   },
   {
     reto: "600 USD si llego a :diamond: III 50 LP antes del 15 de Junio",
