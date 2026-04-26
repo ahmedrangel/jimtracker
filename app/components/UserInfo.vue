@@ -148,7 +148,7 @@ const formatReto = (text: string) => {
   >
     <template #reto-cell="{ row }">
       <!-- eslint-disable-next-line vue/no-v-html -->
-      <p :class="{ 'line-through': row.index === 3 }" v-html="formatReto(row.original.reto)" />
+      <p v-html="formatReto(row.original.reto)" />
     </template>
     <template #usuario-cell="{ row }">
       <NuxtLink v-if="row.original.usuario" class="hover:underline" :to="`https://www.twitch.tv/${row.original.usuario}`">{{ row.original.usuario }}</NuxtLink>
