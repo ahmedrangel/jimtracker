@@ -34,11 +34,6 @@ const retosData = [
     usuario: "snuffygoat"
   },
   {
-    reto: "100 subs si llego a :emerald: II antes de 100 partidas\nSOLO CON VAYNE, 50 subs si son más de 100 partidas",
-    castigo: null,
-    usuario: "zasckemb"
-  },
-  {
     reto: "50 subs si llego a :emerald: antes del 6 de Mayo",
     castigo: "Me pinto el cabello",
     usuario: "Hanamichix"
