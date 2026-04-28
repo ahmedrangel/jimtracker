@@ -21,22 +21,26 @@ const retosData = [
   {
     reto: "5000 USD si llego a :master: este año",
     castigo: null,
-    usuario: "snowbling"
+    usuario: "snowbling",
+    completado: false
   },
   {
     reto: "1000 USD si llego a :diamond: IV antes del 23 de Mayo",
     castigo: "Jugar SC2 12 horas",
-    usuario: "snowbling"
+    usuario: "snowbling",
+    completado: false
   },
   {
     reto: "600 USD si llego a :diamond: III 50 LP antes del 15 de Junio",
     castigo: "Stream IRL Jimenita",
-    usuario: "snuffygoat"
+    usuario: "snuffygoat",
+    completado: false
   },
   {
     reto: "50 subs si llego a :emerald: antes del 6 de Mayo",
     castigo: "Me pinto el cabello",
-    usuario: "Hanamichix"
+    usuario: "Hanamichix",
+    completado: true
   }
 ];
 
@@ -52,6 +56,10 @@ const retosColumns = [
   {
     accessorKey: "usuario",
     header: "Usuario"
+  },
+  {
+    accessorKey: "completado",
+    header: ""
   }
 ];
 
@@ -143,10 +151,17 @@ const formatReto = (text: string) => {
   >
     <template #reto-cell="{ row }">
       <!-- eslint-disable-next-line vue/no-v-html -->
-      <p v-html="formatReto(row.original.reto)" />
+      <p :class="{ 'line-through': row.original.completado }" v-html="formatReto(row.original.reto)" />
+    </template>
+    <template #castigo-cell="{ row }">
+      <p :class="{ 'line-through': row.original.completado }">{{ row.original.castigo }}</p>
     </template>
     <template #usuario-cell="{ row }">
       <NuxtLink v-if="row.original.usuario" class="hover:underline" :to="`https://www.twitch.tv/${row.original.usuario}`">{{ row.original.usuario }}</NuxtLink>
+    </template>
+    <template #completado-cell="{ row }">
+      <span v-if="row.original.completado" class="text-green-500 font-bold">✅</span>
+      <span v-else />
     </template>
   </UTable>
   <div class="flex items-center justify-center my-4 px-3">
