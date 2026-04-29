@@ -7,7 +7,7 @@ const props = defineProps<{
   old?: boolean;
 }>();
 
-const endOfSeasonDate = "2026-04-28T23:59:59-06:00";
+const endOfSeasonDate = "2026-07-28T23:59:59-06:00";
 const endOfSeasonTimestamp = new Date(endOfSeasonDate).getTime();
 
 const countdown = ref({
